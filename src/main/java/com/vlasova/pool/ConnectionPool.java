@@ -1,8 +1,6 @@
 package com.vlasova.pool;
 
-import com.vlasova.exception.ClosePoolException;
-import com.vlasova.exception.CreatePoolException;
-import com.vlasova.exception.InitiationPoolException;
+import com.vlasova.exception.*;
 
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -19,8 +17,9 @@ import org.apache.logging.log4j.Logger;
 
 public enum ConnectionPool {
     INSTANCE;
-    private Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+    private Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static final int DEFAULT_POOL_SIZE = 32;
+    private static final String DB_PROPERTIES_PATH = "src/main/resources/db.properties";
     private BlockingQueue<ProxyConnection> free;
     private Queue<ProxyConnection> given;
     private AtomicBoolean isExist;
@@ -31,7 +30,7 @@ public enum ConnectionPool {
         try {
             init();
         } catch (InitiationPoolException e) {
-            LOGGER.fatal(e);
+            logger.fatal(e);
             throw new CreatePoolException("Fail to initialize pool.", e);
         }
     }
@@ -45,7 +44,7 @@ public enum ConnectionPool {
                 getConnections();
                 isExist.set(true);
             } catch (Exception e) {
-                LOGGER.warn(e);
+                logger.warn("Fail to init pool",e);
                 throw new InitiationPoolException(e);
             }
         }
@@ -59,7 +58,7 @@ public enum ConnectionPool {
             given.offer(connection);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            LOGGER.warn(e);
+            logger.warn(e);
         }
         return connection;
     }
@@ -93,9 +92,9 @@ public enum ConnectionPool {
     private void initDBProperties() throws InitiationPoolException {
         properties = new Properties();
         try {
-            properties.load(this.getClass().getClassLoader().getResourceAsStream("src/main/resources/db.properties"));
+            properties.load(this.getClass().getClassLoader().getResourceAsStream(DB_PROPERTIES_PATH));
         } catch (IOException e) {
-            LOGGER.warn(e);
+            logger.warn(e);
             throw new InitiationPoolException("Failed to load DB properties", e);
         }
     }

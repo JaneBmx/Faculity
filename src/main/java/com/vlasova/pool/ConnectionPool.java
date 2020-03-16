@@ -1,6 +1,7 @@
 package com.vlasova.pool;
 
 import com.vlasova.exception.ClosePoolException;
+import com.vlasova.exception.CreatePoolException;
 import com.vlasova.exception.InitiationPoolException;
 
 import java.io.IOException;
@@ -13,8 +14,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public enum ConnectionPool {
     INSTANCE;
+    private Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final int DEFAULT_POOL_SIZE = 32;
     private BlockingQueue<ProxyConnection> free;
     private Queue<ProxyConnection> given;
@@ -22,12 +27,16 @@ public enum ConnectionPool {
     private Properties properties;
     private static final String URL = "";
 
-//    ConnectionPool() {
-//        free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-//        given = new ArrayDeque<>();
-//    }
+    ConnectionPool() {
+        try {
+            init();
+        } catch (InitiationPoolException e) {
+            LOGGER.fatal(e);
+            throw new CreatePoolException("Fail to initialize pool.", e);
+        }
+    }
 
-    public void init() throws InitiationPoolException {
+    private void init() throws InitiationPoolException {
         if (!isExist.get()) {
             free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
             given = new ArrayDeque<>();
@@ -36,12 +45,13 @@ public enum ConnectionPool {
                 getConnections();
                 isExist.set(true);
             } catch (Exception e) {
-                //TODO log
+                LOGGER.warn(e);
                 throw new InitiationPoolException(e);
             }
         }
     }
 
+    /* Get connection from connection pool*/
     public ProxyConnection getConnection() {
         ProxyConnection connection = null;
         try {
@@ -49,11 +59,12 @@ public enum ConnectionPool {
             given.offer(connection);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            //TODO log
+            LOGGER.warn(e);
         }
         return connection;
     }
 
+    /*Back connection to pool*/
     public void releaseConnection(ProxyConnection connection) {
         given.remove(connection);
         free.offer(connection);
@@ -70,7 +81,7 @@ public enum ConnectionPool {
                 throw new ClosePoolException("Failed to close pool");
             }
         }
-        //deregisterDrivers();
+        isExist.set(false);
     }
 
     private void getConnections() throws SQLException {
@@ -84,20 +95,8 @@ public enum ConnectionPool {
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("src/main/resources/db.properties"));
         } catch (IOException e) {
-            //TODO log
+            LOGGER.warn(e);
             throw new InitiationPoolException("Failed to load DB properties", e);
         }
     }
-//    private void deregisterDrivers() {
-//        DriverManager.deregisterDriver();
-////        Enumeration<Driver> drivers = DriverManager.getDrivers();
-////
-////        while (drivers.hasMoreElements()) {
-////            try {
-////                DriverManager.deregisterDriver(drivers.nextElement());
-////            } catch (SQLException e) {
-////                e.printStackTrace();
-////            }
-////        }
-//    }
 }

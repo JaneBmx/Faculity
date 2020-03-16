@@ -27,6 +27,8 @@ public enum ConnectionPool {
     private static final String URL = "";
 
     ConnectionPool() {
+        free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+        given = new ArrayDeque<>();
         try {
             init();
         } catch (InitiationPoolException e) {
@@ -37,20 +39,18 @@ public enum ConnectionPool {
 
     private void init() throws InitiationPoolException {
         if (!isExist.get()) {
-            free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-            given = new ArrayDeque<>();
             try {
                 initDBProperties();
-                getConnections();
+                fillPool();
                 isExist.set(true);
             } catch (Exception e) {
-                logger.warn("Fail to init pool",e);
+                logger.warn("Fail to init pool", e);
                 throw new InitiationPoolException(e);
             }
         }
     }
 
-    /* Get connection from connection pool*/
+    // Get connection from connection pool
     public ProxyConnection getConnection() {
         ProxyConnection connection = null;
         try {
@@ -63,7 +63,7 @@ public enum ConnectionPool {
         return connection;
     }
 
-    /*Back connection to pool*/
+    //Back connection to pool
     public void releaseConnection(ProxyConnection connection) {
         given.remove(connection);
         free.offer(connection);
@@ -83,7 +83,7 @@ public enum ConnectionPool {
         isExist.set(false);
     }
 
-    private void getConnections() throws SQLException {
+    private void fillPool() throws SQLException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             free.add(new ProxyConnection(DriverManager.getConnection(URL, properties)));
         }

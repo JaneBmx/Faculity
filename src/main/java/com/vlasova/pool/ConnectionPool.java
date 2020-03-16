@@ -1,5 +1,8 @@
 package com.vlasova.pool;
 
+import com.vlasova.exception.ClosePoolException;
+import com.vlasova.exception.InitiationPoolException;
+
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,32 +15,29 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public enum ConnectionPool {
     INSTANCE;
-
     private static final int DEFAULT_POOL_SIZE = 32;
-
     private BlockingQueue<ProxyConnection> free;
     private Queue<ProxyConnection> given;
     private AtomicBoolean isExist;
     private Properties properties;
     private static final String URL = "";
 
-    ConnectionPool() {
-        free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-        given = new ArrayDeque<>();
-    }
+//    ConnectionPool() {
+//        free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+//        given = new ArrayDeque<>();
+//    }
 
-    public void init() {
+    public void init() throws InitiationPoolException {
         if (!isExist.get()) {
+            free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
+            given = new ArrayDeque<>();
             try {
-                free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
-                given = new ArrayDeque<>();
-
                 initDBProperties();
-                getConnection();
+                getConnections();
                 isExist.set(true);
             } catch (Exception e) {
                 //TODO log
-                //own exc
+                throw new InitiationPoolException(e);
             }
         }
     }
@@ -59,17 +59,15 @@ public enum ConnectionPool {
         free.offer(connection);
     }
 
-    public void closePool() {
+    public void closePool() throws ClosePoolException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             try {
                 free.take().finalClose();
             } catch (SQLException e) {
-                e.printStackTrace();
-                //TODO own exc
+                throw new ClosePoolException(e);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                e.printStackTrace();
-                //TODO own exc
+                throw new ClosePoolException("Failed to close pool");
             }
         }
         //deregisterDrivers();
@@ -79,16 +77,15 @@ public enum ConnectionPool {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
             free.add(new ProxyConnection(DriverManager.getConnection(URL, properties)));
         }
-        isExist.set(true);
     }
 
-    private void initDBProperties() {
+    private void initDBProperties() throws InitiationPoolException {
         properties = new Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("src/main/resources/db.properties"));
         } catch (IOException e) {
             //TODO log
-            //own exc
+            throw new InitiationPoolException("Failed to load DB properties", e);
         }
     }
 //    private void deregisterDrivers() {

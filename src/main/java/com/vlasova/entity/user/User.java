@@ -1,4 +1,4 @@
-package com.vlasova.entity;
+package com.vlasova.entity.user;
 
 import java.util.Arrays;
 import java.util.Objects;

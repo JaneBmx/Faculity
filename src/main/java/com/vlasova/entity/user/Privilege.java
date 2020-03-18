@@ -1,4 +1,4 @@
-package com.vlasova.entity;
+package com.vlasova.entity.user;
 
 public enum Privilege {
     OLIMPIADNIK,

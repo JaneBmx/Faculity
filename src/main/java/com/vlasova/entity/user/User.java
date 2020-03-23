@@ -12,6 +12,7 @@ public class User {
     private String login;
     private char[] password;
     Privilege privilege;
+    GradeReport gradeReport;
 
     public User() {
     }
@@ -91,6 +92,14 @@ public class User {
         this.privilege = privilege;
     }
 
+    public GradeReport getGradeReport() {
+        return gradeReport;
+    }
+
+    public void setGradeReport(GradeReport gradeReport) {
+        this.gradeReport = gradeReport;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,14 +112,30 @@ public class User {
                 email.equals(user.email) &&
                 login.equals(user.login) &&
                 Arrays.equals(password, user.password) &&
-                privilege == user.privilege;
+                privilege == user.privilege &&
+                Objects.equals(gradeReport, user.gradeReport);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, role, name, surname, email, login, privilege);
+        int result = Objects.hash(id, role, name, surname, email, login, privilege, gradeReport);
         result = 31 * result + Arrays.hashCode(password);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", role=" + role +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password=" + Arrays.toString(password) +
+                ", privilege=" + privilege +
+                ", gradeReport=" + gradeReport +
+                '}';
     }
 }
 

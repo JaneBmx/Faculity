@@ -1,6 +1,7 @@
-package com.vlasova.repository;
+package com.vlasova.repository.user;
 
 import com.vlasova.entity.user.User;
+import com.vlasova.repository.Repository;
 import com.vlasova.specification.UserSpecification;
 
 import java.util.Set;

@@ -2,7 +2,7 @@ package com.vlasova.repository.faculity;
 
 import com.vlasova.entity.faculity.Faculity;
 import com.vlasova.repository.Repository;
-import com.vlasova.specification.FaculitySpecification;
+import com.vlasova.specification.faculity.FaculitySpecification;
 
 import java.util.Set;
 

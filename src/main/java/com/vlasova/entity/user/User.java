@@ -10,14 +10,14 @@ public class User {
     private String surname;
     private String email;
     private String login;
-    private char[] password;
+    private String password;
     Privilege privilege;
     GradeReport gradeReport;
 
     public User() {
     }
 
-    public User(int id, Role role, String name, String surname, String email, String login, char[] password, Privilege privilege) {
+    public User(int id, Role role, String name, String surname, String email, String login, String password, Privilege privilege) {
         this.id = id;
         this.role = role;
         this.name = name;
@@ -76,11 +76,11 @@ public class User {
         this.login = login;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -111,7 +111,7 @@ public class User {
                 surname.equals(user.surname) &&
                 email.equals(user.email) &&
                 login.equals(user.login) &&
-                Arrays.equals(password, user.password) &&
+                password.equals(user.password) &&
                 privilege == user.privilege &&
                 Objects.equals(gradeReport, user.gradeReport);
     }
@@ -119,7 +119,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = Objects.hash(id, role, name, surname, email, login, privilege, gradeReport);
-        result = 31 * result + Arrays.hashCode(password);
+        result = 31 * result + password.hashCode();
         return result;
     }
 
@@ -132,7 +132,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", login='" + login + '\'' +
-                ", password=" + Arrays.toString(password) +
+                ", password=" + password +
                 ", privilege=" + privilege +
                 ", gradeReport=" + gradeReport +
                 '}';

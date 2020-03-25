@@ -1,8 +1,7 @@
 package com.vlasova.repository.gradereport;
 
 import com.vlasova.entity.user.GradeReport;
-import com.vlasova.repository.faculity.FaculityRepositoryImpl;
-import com.vlasova.specification.GradereportSpecification;
+import com.vlasova.specification.gradereport.GradereportSpecification;
 
 import java.util.Set;
 

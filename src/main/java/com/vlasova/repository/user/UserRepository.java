@@ -2,7 +2,7 @@ package com.vlasova.repository.user;
 
 import com.vlasova.entity.user.User;
 import com.vlasova.repository.Repository;
-import com.vlasova.specification.UserSpecification;
+import com.vlasova.specification.user.UserSpecification;
 
 import java.util.Set;
 

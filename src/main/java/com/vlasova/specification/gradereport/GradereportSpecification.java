@@ -1,4 +1,4 @@
-package com.vlasova.specification;
+package com.vlasova.specification.gradereport;
 
 public interface GradereportSpecification {
 }

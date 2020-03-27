@@ -1,7 +1,7 @@
 package com.vlasova.repository.faculity;
 
-import com.vlasova.entity.faculity.Faculity;
-import com.vlasova.specification.faculity.FaculitySpecification;
+import com.vlasova.entity.faculity.Faculty;
+import com.vlasova.specification.faculity.FacultySpecification;
 
 import java.util.Set;
 
@@ -25,7 +25,7 @@ public class FaculityRepositoryImpl implements FaculityRepository {
 
 
     @Override
-    public void add(Faculity user) {
+    public void add(Faculty user) {
 
     }
 
@@ -35,12 +35,12 @@ public class FaculityRepositoryImpl implements FaculityRepository {
     }
 
     @Override
-    public void update(Faculity user) {
+    public void update(Faculty user) {
 
     }
 
     @Override
-    public Set<Faculity> query(FaculitySpecification specification) {
+    public Set<Faculty> query(FacultySpecification specification) {
         return null;
     }
 }

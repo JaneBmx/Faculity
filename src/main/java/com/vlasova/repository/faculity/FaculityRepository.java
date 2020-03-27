@@ -1,17 +1,17 @@
 package com.vlasova.repository.faculity;
 
-import com.vlasova.entity.faculity.Faculity;
+import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.repository.Repository;
-import com.vlasova.specification.faculity.FaculitySpecification;
+import com.vlasova.specification.faculity.FacultySpecification;
 
 import java.util.Set;
 
 public interface FaculityRepository extends Repository {
-    void add(Faculity user);
+    void add(Faculty user);
 
     void remove(int id);
 
-    void update(Faculity user);
+    void update(Faculty user);
 
-    Set<Faculity> query(FaculitySpecification specification);
+    Set<Faculty> query(FacultySpecification specification);
 }

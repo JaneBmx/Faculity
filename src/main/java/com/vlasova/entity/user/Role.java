@@ -2,8 +2,8 @@ package com.vlasova.entity.user;
 
 public enum Role {
     ADMIN(1),
-    PREPOD(2),
-    ABITUR(3), //USER
+    PROFESSOR(2),
+    ENROLLEE(3),
     GUEST(4);
     private int roleId;
 
@@ -20,9 +20,9 @@ public enum Role {
             case 1:
                 return ADMIN;
             case 2:
-                return PREPOD;
+                return PROFESSOR;
             case 3:
-                return ABITUR;
+                return ENROLLEE;
             default:
                 return GUEST;
         }

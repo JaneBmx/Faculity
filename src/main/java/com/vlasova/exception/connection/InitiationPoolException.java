@@ -1,4 +1,4 @@
-package com.vlasova.exception;
+package com.vlasova.exception.connection;
 
 public class InitiationPoolException extends Exception {
     public InitiationPoolException() {

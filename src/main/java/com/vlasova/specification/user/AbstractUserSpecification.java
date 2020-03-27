@@ -15,7 +15,7 @@ public abstract class AbstractUserSpecification {
     protected static final String EMAIL = "email";
     protected static final String LOGIN = "login";
     protected static final String PASSWORD = "password"; //TODO make more secure
-    protected static final String PRIVELEGE = "privelege";
+    protected static final String PRIVILEGE = "privilege";
     protected static final String GRADEREPORT = "gradereport";
     ResultSet resultSet;
     Set<User> users;

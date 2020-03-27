@@ -1,4 +1,4 @@
-package com.vlasova.exception;
+package com.vlasova.exception.connection;
 
 public class ClosePoolException extends Exception {
     public ClosePoolException() {

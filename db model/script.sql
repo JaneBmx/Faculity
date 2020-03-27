@@ -18,18 +18,18 @@ CREATE SCHEMA IF NOT EXISTS `Elective` DEFAULT CHARACTER SET utf8 ;
 USE `Elective` ;
 
 -- -----------------------------------------------------
--- Table `Elective`.`faculity`
+-- Table `Elective`.`faculty`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Elective`.`faculity` (
+CREATE TABLE IF NOT EXISTS `Elective`.`faculty` (
   `faculity_id` INT NOT NULL AUTO_INCREMENT,
   `faculity_name` VARCHAR(45) NOT NULL,
   `free_aducation_plan` INT NOT NULL DEFAULT 0,
   `paid_aducation_plan` INT NULL,
   PRIMARY KEY (`faculity_id`));
 
-CREATE UNIQUE INDEX `faculity_id_UNIQUE` ON `Elective`.`faculity` (`faculity_id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `faculity_id_UNIQUE` ON `Elective`.`faculty` (`faculity_id` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `title_UNIQUE` ON `Elective`.`faculity` (`faculity_name` ASC) VISIBLE;
+CREATE UNIQUE INDEX `title_UNIQUE` ON `Elective`.`faculty` (`faculity_name` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `Elective`.`subject2faculity` (
   `priority` INT NULL,
   CONSTRAINT `faculity_id`
     FOREIGN KEY (`faculity_id`)
-    REFERENCES `Elective`.`faculity` (`faculity_name`)
+    REFERENCES `Elective`.`faculty` (`faculity_name`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `subject_id`
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `Elective`.`user2faculity` (
     ON UPDATE NO ACTION,
   CONSTRAINT `faculity_id `
     FOREIGN KEY (`faculity_id`)
-    REFERENCES `Elective`.`faculity` (`faculity_id`)
+    REFERENCES `Elective`.`faculty` (`faculity_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -192,13 +192,13 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `Elective`.`faculity`
+-- Data for table `Elective`.`faculty`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `Elective`;
-INSERT INTO `Elective`.`faculity` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (01, 'Math', 10, 30);
-INSERT INTO `Elective`.`faculity` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (02, 'Physics', 5, 15);
-INSERT INTO `Elective`.`faculity` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (03, 'Geographic', 3, 6);
+INSERT INTO `Elective`.`faculty` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (01, 'Math', 10, 30);
+INSERT INTO `Elective`.`faculty` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (02, 'Physics', 5, 15);
+INSERT INTO `Elective`.`faculty` (`faculity_id`, `faculity_name`, `free_aducation_plan`, `paid_aducation_plan`) VALUES (03, 'Geographic', 3, 6);
 
 COMMIT;
 

@@ -1,7 +1,5 @@
 package com.vlasova.pool;
 
-import com.vlasova.exception.*;
-
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,6 +10,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.vlasova.exception.connection.ClosePoolException;
+import com.vlasova.exception.connection.CreatePoolException;
+import com.vlasova.exception.connection.InitiationPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,6 +1,5 @@
 package com.vlasova.entity.user;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class User {
@@ -15,17 +14,6 @@ public class User {
     GradeReport gradeReport;
 
     public User() {
-    }
-
-    public User(int id, Role role, String name, String surname, String email, String login, String password, Privilege privilege) {
-        this.id = id;
-        this.role = role;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.privilege = privilege;
     }
 
     public int getId() {

@@ -22,4 +22,23 @@ public enum Subject {
     public int getId() {
         return id;
     }
+
+    public static Subject getSubjectById(int id) {
+        switch (id) {
+            case 1:
+                return MATH;
+            case 2:
+                return PHYSICS;
+            case 3:
+                return GEOGRAPHY;
+            case 4:
+                return RUSSIAN;
+            case 5:
+                return ENGLISH;
+            case 6:
+                return CHEMISTRY;
+            default:
+                return null;
+        }
+    }
 }

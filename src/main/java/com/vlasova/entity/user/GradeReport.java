@@ -9,20 +9,12 @@ import java.util.Objects;
 public class GradeReport {
     private long id;
     private int userId;
-    private double attestatMark;
-    private final Map<Subject, Integer> marks = new HashMap<>();
+    private double certificateMark;
     private boolean isAccepted;
     private boolean isFree;
+    private final Map<Subject, Integer> marks = new HashMap<>();
 
     public GradeReport() {
-    }
-
-    public GradeReport(long id, int userId, double attestatMark, boolean isAccepted, boolean isFree) {
-        this.id = id;
-        this.userId = userId;
-        this.attestatMark = attestatMark;
-        this.isAccepted = isAccepted;
-        this.isFree = isFree;
     }
 
     public long getId() {
@@ -41,12 +33,12 @@ public class GradeReport {
         this.userId = userId;
     }
 
-    public double getAttestatMark() {
-        return attestatMark;
+    public double getCertificateMark() {
+        return certificateMark;
     }
 
-    public void setAttestatMark(double attestatMark) {
-        this.attestatMark = attestatMark;
+    public void setCertificateMark(double certificateMark) {
+        this.certificateMark = certificateMark;
     }
 
     public Map<Subject, Integer> getMarks() {
@@ -80,7 +72,7 @@ public class GradeReport {
         GradeReport that = (GradeReport) o;
         return id == that.id &&
                 userId == that.userId &&
-                Double.compare(that.attestatMark, attestatMark) == 0 &&
+                Double.compare(that.certificateMark, certificateMark) == 0 &&
                 isAccepted == that.isAccepted &&
                 isFree == that.isFree &&
                 Objects.equals(marks, that.marks);
@@ -88,7 +80,7 @@ public class GradeReport {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, attestatMark, marks, isAccepted, isFree);
+        return Objects.hash(id, userId, certificateMark, marks, isAccepted, isFree);
     }
 
     @Override
@@ -96,7 +88,7 @@ public class GradeReport {
         return "GradeReport{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", attestat=" + attestatMark +
+                ", certificate=" + certificateMark +
                 ", marks=" + marks +
                 ", isAccepted=" + isAccepted +
                 ", isFree=" + isFree +

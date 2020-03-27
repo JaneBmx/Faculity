@@ -1,6 +1,7 @@
 package com.vlasova.specification.user;
 
 import com.vlasova.entity.user.User;
+import com.vlasova.exception.specification.QueryException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
 
@@ -20,7 +21,7 @@ public class FindUserByLoginAndPassword extends AbstractUserSpecification implem
     }
 
     @Override
-    public Set<User> query() {
+    public Set<User> query() throws QueryException {
         users = new HashSet<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND)) {
@@ -28,12 +29,12 @@ public class FindUserByLoginAndPassword extends AbstractUserSpecification implem
                 preparedStatement.setString(1, userLogin);
                 preparedStatement.setString(2, userPassword);
                 resultSet = preparedStatement.executeQuery();
-            }
-            while (resultSet.next()) {
-                users.add(createUser());
+                while (resultSet.next()) {
+                    users.add(createUser());
+                }
             }
         } catch (SQLException e) {
-            //TODO throw own exception
+            throw new QueryException(e);
         } finally {
             closeResultSet();
         }

@@ -1,7 +1,7 @@
 package com.vlasova.repository.gradereport;
 
 import com.vlasova.entity.user.GradeReport;
-import com.vlasova.specification.gradereport.GradereportSpecification;
+import com.vlasova.specification.gradereport.GradeReportSpecification;
 
 import java.util.Set;
 
@@ -39,7 +39,7 @@ public class GradereportRepositoryImpl implements GradereportRepository {
     }
 
     @Override
-    public Set<GradeReport> query(GradereportSpecification specification) {
+    public Set<GradeReport> query(GradeReportSpecification specification) {
         return null;
     }
 }

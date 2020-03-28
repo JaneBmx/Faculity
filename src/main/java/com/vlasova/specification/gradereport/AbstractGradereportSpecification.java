@@ -39,7 +39,7 @@ public abstract class AbstractGradeReportSpecification {
                 gradeReport.setUserId(resultSet.getInt(USER_ID));
                 gradeReport.setAccepted(resultSet.getBoolean(IS_ACCEPTED));
                 gradeReport.setFree(resultSet.getBoolean(IS_FREE));
-                gradeReport.setCertificateMark(resultSet.getDouble(CERTIFICATE));
+                gradeReport.setCertificate(resultSet.getDouble(CERTIFICATE));
 
                 //TODO add smth with map marks
             } catch (SQLException e) {

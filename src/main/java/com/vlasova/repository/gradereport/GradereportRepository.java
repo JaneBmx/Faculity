@@ -1,16 +1,17 @@
 package com.vlasova.repository.gradereport;
-
 import com.vlasova.entity.user.GradeReport;
+import com.vlasova.entity.user.User;
+import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.specification.gradereport.GradeReportSpecification;
 
 import java.util.Set;
 
-public interface GradereportRepository {
-    void add(GradeReport user);
+public interface GradeReportRepository {
+    void add(User user) throws RepositoryException;
 
-    void remove(int id);
+    void remove(User user) throws RepositoryException;
 
-    void update(GradeReport user);
+    void update(User user, GradeReport gradeReport) throws RepositoryException;
 
-    Set<GradeReport> query(GradeReportSpecification specification);
+    Set<GradeReport> query(GradeReportSpecification specification) throws RepositoryException;
 }

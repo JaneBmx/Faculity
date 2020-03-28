@@ -14,6 +14,10 @@ public enum Privilege {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static Privilege getPrivilegeById(int id) {
         switch (id) {
             case 1:

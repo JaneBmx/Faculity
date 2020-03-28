@@ -7,9 +7,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class GradeReport {
-    private long id;
-    private int userId;
-    private double certificateMark;
+    private int id;
+    private double certificate;
     private boolean isAccepted;
     private boolean isFree;
     private final Map<Subject, Integer> marks = new HashMap<>();
@@ -17,28 +16,20 @@ public class GradeReport {
     public GradeReport() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public double getCertificate() {
+        return certificate;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public double getCertificateMark() {
-        return certificateMark;
-    }
-
-    public void setCertificateMark(double certificateMark) {
-        this.certificateMark = certificateMark;
+    public void setCertificate(double certificate) {
+        this.certificate = certificate;
     }
 
     public Map<Subject, Integer> getMarks() {
@@ -71,8 +62,7 @@ public class GradeReport {
         if (o == null || getClass() != o.getClass()) return false;
         GradeReport that = (GradeReport) o;
         return id == that.id &&
-                userId == that.userId &&
-                Double.compare(that.certificateMark, certificateMark) == 0 &&
+                Double.compare(that.certificate, certificate) == 0 &&
                 isAccepted == that.isAccepted &&
                 isFree == that.isFree &&
                 Objects.equals(marks, that.marks);
@@ -80,15 +70,14 @@ public class GradeReport {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, certificateMark, marks, isAccepted, isFree);
+        return Objects.hash(id, certificate, marks, isAccepted, isFree);
     }
 
     @Override
     public String toString() {
         return "GradeReport{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", certificate=" + certificateMark +
+                ", certificate=" + certificate +
                 ", marks=" + marks +
                 ", isAccepted=" + isAccepted +
                 ", isFree=" + isFree +

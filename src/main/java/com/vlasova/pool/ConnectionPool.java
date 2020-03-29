@@ -1,9 +1,11 @@
 package com.vlasova.pool;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
@@ -19,17 +21,23 @@ import org.apache.logging.log4j.Logger;
 public enum ConnectionPool {
     INSTANCE;
     private Logger logger = LogManager.getLogger(ConnectionPool.class);
+    private static final String URL = "jdbc:mysql://localhost:3306/faculty";
+    private static final String PROPERTY_PATH = "src/main/resources/db.properties";
     private static final int DEFAULT_POOL_SIZE = 32;
-    private static final String DB_PROPERTIES_PATH = "src/main/resources/db.properties";
     private BlockingQueue<ProxyConnection> free;
     private Queue<ProxyConnection> given;
-    private AtomicBoolean isExist;
+    private AtomicBoolean isExist = new AtomicBoolean(false);
     private Properties properties;
-    private static final String URL = "";
 
-    ConnectionPool() {
+    private ConnectionPool() {
         free = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         given = new ArrayDeque<>();
+        try {
+            initDBProperties();
+        } catch (InitiationPoolException e) {
+            logger.fatal(e);
+            throw new CreatePoolException("Fail to initialise property.", e);
+        }
         try {
             init();
         } catch (InitiationPoolException e) {
@@ -41,17 +49,15 @@ public enum ConnectionPool {
     private void init() throws InitiationPoolException {
         if (!isExist.get()) {
             try {
-                initDBProperties();
                 fillPool();
                 isExist.set(true);
             } catch (Exception e) {
-                logger.warn("Fail to init pool", e);
+                logger.warn("Fail to fill pool.", e);
                 throw new InitiationPoolException(e);
             }
         }
     }
 
-    // Get connection from connection pool
     public ProxyConnection getConnection() {
         ProxyConnection connection = null;
         try {
@@ -64,10 +70,13 @@ public enum ConnectionPool {
         return connection;
     }
 
-    //Back connection to pool
     public void releaseConnection(ProxyConnection connection) {
-        given.remove(connection);
-        free.offer(connection);
+        if (connection != null) {
+            given.remove(connection);
+            if (!free.offer(connection)) {
+                logger.warn("Fail to return connection in pool.");
+            }
+        }
     }
 
     public void closePool() throws ClosePoolException {
@@ -77,6 +86,7 @@ public enum ConnectionPool {
             } catch (SQLException e) {
                 throw new ClosePoolException(e);
             } catch (InterruptedException e) {
+                logger.warn(e);
                 Thread.currentThread().interrupt();
                 throw new ClosePoolException("Failed to close pool");
             }
@@ -91,12 +101,16 @@ public enum ConnectionPool {
     }
 
     private void initDBProperties() throws InitiationPoolException {
-        properties = new Properties();
-        try {
-            properties.load(this.getClass().getClassLoader().getResourceAsStream(DB_PROPERTIES_PATH));
+        try (FileInputStream inputStream = new FileInputStream(PROPERTY_PATH)) {
+            properties = new Properties();
+            properties.load(Objects.requireNonNull(inputStream));
+            Class.forName(properties.getProperty("driver"));
+        } catch (ClassNotFoundException e) {
+            logger.warn(e);
+            throw new InitiationPoolException("Failed to initialize properties.", e);
         } catch (IOException e) {
             logger.warn(e);
-            throw new InitiationPoolException("Failed to load DB properties", e);
+            throw new InitiationPoolException("Failed to load properties.", e);
         }
     }
 }

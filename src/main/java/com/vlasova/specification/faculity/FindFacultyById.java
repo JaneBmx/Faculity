@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyById extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND = "SELECT * FROM Faculity WHERE faculity_id = ?";
+    private static final String FIND = "SELECT * FROM faculties WHERE faculty_id = ?";
     private int facultyId;
 
     public FindFacultyById(int id) {

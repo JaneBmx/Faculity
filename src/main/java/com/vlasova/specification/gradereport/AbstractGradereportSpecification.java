@@ -1,13 +1,16 @@
 package com.vlasova.specification.gradereport;
 
 import com.vlasova.entity.user.GradeReport;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 
 public abstract class AbstractGradeReportSpecification {
-    private static final String ID = "gradereport_id";
+    private static Logger logger= LogManager.getLogger(AbstractGradeReportSpecification.class);
+    private static final String ID = "grade_report_id";
     private static final String USER_ID = "user_id";
     private static final String CERTIFICATE = "certificate";
     private static final String IS_ACCEPTED = "is_accepted";
@@ -25,7 +28,7 @@ public abstract class AbstractGradeReportSpecification {
             try {
                 resultSet.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.warn(e);
             }
         }
     }
@@ -36,14 +39,13 @@ public abstract class AbstractGradeReportSpecification {
             gradeReport = new GradeReport();
             try {
                 gradeReport.setId(resultSet.getInt(ID));
-                gradeReport.setUserId(resultSet.getInt(USER_ID));
+                gradeReport.setId(resultSet.getInt(USER_ID));
                 gradeReport.setAccepted(resultSet.getBoolean(IS_ACCEPTED));
                 gradeReport.setFree(resultSet.getBoolean(IS_FREE));
                 gradeReport.setCertificate(resultSet.getDouble(CERTIFICATE));
-
                 //TODO add smth with map marks
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.warn(e);
             }
         }
         return gradeReport;

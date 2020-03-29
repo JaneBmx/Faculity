@@ -1,10 +1,7 @@
 package com.vlasova.specification.faculity;
 
 import com.vlasova.entity.faculity.Faculty;
-import com.vlasova.exception.specification.QueryException;
+import com.vlasova.specification.Specification;
 
-import java.util.Set;
-
-public interface FacultySpecification {
-    Set<Faculty> query() throws QueryException;
+public interface FacultySpecification extends Specification<Faculty> {
 }

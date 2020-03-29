@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindUserByRole extends AbstractUserSpecification implements UserSpecification {
-    private static final String FIND = "SELECT * FROM Users WHERE user_id = ?";
+    private static final String FIND = "SELECT * FROM users WHERE user_id = ?";
     private Role role;
 
     public FindUserByRole(Role role) {

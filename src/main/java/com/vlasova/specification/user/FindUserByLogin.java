@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindUserByLogin extends AbstractUserSpecification implements UserSpecification {
-    private static final String FIND = "SELECT * FROM Users WHERE login = ?";
+    private static final String FIND = "SELECT * FROM users WHERE login = ?";
     private String userLogin;
 
     public FindUserByLogin(String userLogin) {

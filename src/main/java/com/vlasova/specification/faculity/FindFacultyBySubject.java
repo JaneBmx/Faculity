@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyBySubject extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND = "SELECT * FROM Faculity INNER JOIN Subject USING(subject2faculity) WHERE subject_id = ?";
+    private static final String FIND = "SELECT * FROM faculties INNER JOIN subjects USING(subject2faculity) WHERE subject_id = ?";
     private Set<Subject> subjects;
 
     public FindFacultyBySubject(Set<Subject> subjects) {

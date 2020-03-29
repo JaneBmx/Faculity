@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindGradeReportByFaculty extends AbstractGradeReportSpecification implements GradeReportSpecification {
-    private static final String FIND = "SELECT * FROM gradereport WHERE faculity_id = ?";
+    private static final String FIND = "SELECT * FROM gradereports WHERE faculity_id = ?";
     private int id;
 
     public FindGradeReportByFaculty(int id) {

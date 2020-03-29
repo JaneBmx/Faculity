@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyByFreePaid extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND = "SELECT * FROM Faculity WHERE free_aducation_plan IS NOT NULL";
+    private static final String FIND = "SELECT * FROM faculties WHERE free_accept_plan IS NOT NULL";
 
     @Override
     public Set<Faculty> query() throws QueryException {

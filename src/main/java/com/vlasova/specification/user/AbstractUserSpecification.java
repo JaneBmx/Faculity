@@ -1,5 +1,6 @@
 package com.vlasova.specification.user;
 
+import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import org.apache.logging.log4j.LogManager;
@@ -12,13 +13,13 @@ import java.util.Set;
 public abstract class AbstractUserSpecification {
     private static Logger logger = LogManager.getLogger(AbstractUserSpecification.class);
     protected static final String ID = "user_id";
-    protected static final String ROLE = "role";
-    protected static final String NAME = "name";
-    protected static final String SURNAME = "surname";
-    protected static final String EMAIL = "email";
-    protected static final String LOGIN = "login";
-    protected static final String PASSWORD = "password"; //TODO make more secure
-    protected static final String PRIVILEGE = "privilege";
+    protected static final String ROLE = "user_role";
+    protected static final String NAME = "user_name";
+    protected static final String SURNAME = "user_surname";
+    protected static final String EMAIL = "user_email";
+    protected static final String LOGIN = "user_login";
+    protected static final String PASSWORD = "user_password";
+    protected static final String PRIVILEGE = "user_privilege";
     ResultSet resultSet;
     Set<User> users;
 
@@ -44,6 +45,7 @@ public abstract class AbstractUserSpecification {
                 user.setEmail(resultSet.getString(EMAIL));
                 user.setLogin(resultSet.getString(LOGIN));
                 user.setPassword(resultSet.getString(PASSWORD));
+                user.setPrivilege(Privilege.getPrivilegeById(resultSet.getInt(PRIVILEGE)));
             }
         } catch (SQLException e) {
             logger.warn(e);

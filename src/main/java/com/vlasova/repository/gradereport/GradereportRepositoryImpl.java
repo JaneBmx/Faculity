@@ -16,11 +16,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class GradeReportRepositoryImpl implements GradeReportRepository {
-    private static final String INSERT_GRADE_REPORT = "INSERT INTO  gradereports(user_id) VALUES (?)";
-    private static final String INSERT_SUBJECTS = "INSERT INTO graderepotr2subject (gradereport_id, subject_id, mark) VALUES(?,?,?)";
-    private static final String DELETE = "DELETE FROM gradereports WHERE user_id = ?";
-    private static final String DELETE_MARKS = "DELETE FROM gradereport2subject WHERE user_id = ?";
-    private static final String UPDATE = "UPDATE gradereports SET certificate = ?, isAccepted = ?, isFree = ? WHERE user_id = ?";
+    private static final String INSERT_GRADE_REPORT = "INSERT INTO  grade_reports(user_id, faculity_id) VALUES (?, ?)";
+    private static final String INSERT_SUBJECTS = "INSERT INTO grade_repotr2subject (user_id, subject_id, mark) VALUES(?,?,?)";
+    private static final String DELETE = "DELETE FROM grade_reports WHERE user_id = ?";
+    private static final String DELETE_MARKS = "DELETE FROM grade_report2subject WHERE user_id = ?";
+    private static final String UPDATE = "UPDATE grade_reports SET certificate = ?, isAccepted = ?, isFree = ? WHERE user_id = ?";
 
     private static class GradeReportRepositoryHolder {
         private static final GradeReportRepositoryImpl INSTANCE = new GradeReportRepositoryImpl();
@@ -40,6 +40,7 @@ public class GradeReportRepositoryImpl implements GradeReportRepository {
                  PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GRADE_REPORT)) {
                 if (preparedStatement != null) {
                     preparedStatement.setInt(1, user.getId());
+                    preparedStatement.setInt(2, user.getGradeReport().getFaculty().getId());
                     preparedStatement.executeUpdate();
                     addSubjectsMarks(user, connection);
                 }

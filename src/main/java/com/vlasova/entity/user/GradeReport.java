@@ -1,6 +1,6 @@
 package com.vlasova.entity.user;
 
-
+import com.vlasova.entity.faculity.Faculties;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 
@@ -14,6 +14,17 @@ public class GradeReport {
     private boolean isAccepted;
     private boolean isFree;
     private final Map<Subject, Integer> marks;
+    private Faculty faculty;
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        if (Faculties.FACULTIES.isExist(faculty)) {
+            this.faculty = faculty;
+        }
+    }
 
     public GradeReport() {
         marks = new HashMap<>();

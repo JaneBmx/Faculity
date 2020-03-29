@@ -2,12 +2,10 @@ package com.vlasova.pool;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayDeque;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -91,6 +89,7 @@ public enum ConnectionPool {
                 throw new ClosePoolException("Failed to close pool");
             }
         }
+        deregisterDrivers();
         isExist.set(false);
     }
 
@@ -111,6 +110,16 @@ public enum ConnectionPool {
         } catch (IOException e) {
             logger.warn(e);
             throw new InitiationPoolException("Failed to load properties.", e);
+        }
+    }
+    private void deregisterDrivers() {
+        Enumeration<Driver> drivers = DriverManager.getDrivers();
+        while (drivers.hasMoreElements()) {
+            try {
+                DriverManager.deregisterDriver(drivers.nextElement());
+            } catch (SQLException e) {
+                logger.warn(e);
+            }
         }
     }
 }

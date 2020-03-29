@@ -1,7 +1,7 @@
 package com.vlasova.entity.user;
 
 public enum Privilege {
-    NONE(0),
+    NONE(6),
     COLLEGE(1),
     FOREIGN(2),
     RED_DIPLOMA(3),

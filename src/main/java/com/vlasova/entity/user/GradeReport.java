@@ -1,5 +1,7 @@
 package com.vlasova.entity.user;
 
+
+import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 
 import java.util.HashMap;
@@ -11,9 +13,10 @@ public class GradeReport {
     private double certificate;
     private boolean isAccepted;
     private boolean isFree;
-    private final Map<Subject, Integer> marks = new HashMap<>();
+    private final Map<Subject, Integer> marks;
 
     public GradeReport() {
+        marks = new HashMap<>();
     }
 
     public int getId() {

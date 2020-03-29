@@ -2,13 +2,14 @@ package com.vlasova.entity.faculity;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Faculty {
     private int id;
     private String name;
     private int freeAcceptPlan;
     private int paidAcceptPlan;
-    private Map<Subject, Integer> subjects;
+    private Set<Subject> subjects;
 
     public Faculty() {
     }
@@ -45,11 +46,11 @@ public class Faculty {
         this.paidAcceptPlan = paidAcceptPlan;
     }
 
-    public Map<Subject, Integer> getSubjects() {
+    public Set<Subject> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Map<Subject, Integer> subjects) {
+    public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
 

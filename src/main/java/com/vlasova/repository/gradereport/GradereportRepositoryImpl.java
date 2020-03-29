@@ -11,6 +11,7 @@ import com.vlasova.specification.gradereport.GradeReportSpecification;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,15 +35,17 @@ public class GradeReportRepositoryImpl implements GradeReportRepository {
 
     @Override
     public void add(User user) throws RepositoryException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GRADE_REPORT)) {
-            if (preparedStatement != null && user != null) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeUpdate();
-                addSubjectsMarks(user, connection);
+        if (user != null) {
+            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GRADE_REPORT)) {
+                if (preparedStatement != null) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeUpdate();
+                    addSubjectsMarks(user, connection);
+                }
+            } catch (SQLException e) {
+                throw new RepositoryException(e);
             }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
         }
     }
 
@@ -63,40 +66,49 @@ public class GradeReportRepositoryImpl implements GradeReportRepository {
 
     @Override
     public void remove(User user) throws RepositoryException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-             PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
-            if (preparedStatement != null) {
-                preparedStatement.setInt(1, user.getId());
-                preparedStatement.executeQuery();
-                preparedStatement1.setInt(1, user.getId());
-                preparedStatement1.executeUpdate();
+        if (user != null) {
+            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+                 PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
+                if (preparedStatement != null) {
+                    preparedStatement.setInt(1, user.getId());
+                    preparedStatement.executeQuery();
+                    preparedStatement1.setInt(1, user.getId());
+                    preparedStatement1.executeUpdate();
+                }
+            } catch (SQLException e) {
+                throw new RepositoryException(e);
             }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
         }
     }
 
     @Override
     public void update(User user, GradeReport gradeReport) throws RepositoryException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-            preparedStatement.setDouble(1, user.getGradeReport().getCertificate());
-            preparedStatement.setBoolean(2, user.getGradeReport().isAccepted());
-            preparedStatement.setBoolean(3, user.getGradeReport().isFree());
-            preparedStatement.setInt(4, user.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
+        if (user != null && gradeReport != null) {
+            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
+                if (preparedStatement != null) {
+                    preparedStatement.setDouble(1, user.getGradeReport().getCertificate());
+                    preparedStatement.setBoolean(2, user.getGradeReport().isAccepted());
+                    preparedStatement.setBoolean(3, user.getGradeReport().isFree());
+                    preparedStatement.setInt(4, user.getId());
+                    preparedStatement.executeUpdate();
+                }
+            } catch (SQLException e) {
+                throw new RepositoryException(e);
+            }
         }
     }
 
     @Override
     public Set<GradeReport> query(GradeReportSpecification specification) throws RepositoryException {
-        try {
-            return specification.query();
-        } catch (QueryException e) {
-            throw new RepositoryException(e);
+        if (specification != null) {
+            try {
+                return specification.query();
+            } catch (QueryException e) {
+                throw new RepositoryException(e);
+            }
         }
+        return new HashSet<>();
     }
 }

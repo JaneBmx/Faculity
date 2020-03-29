@@ -9,6 +9,7 @@ import com.vlasova.specification.user.UserSpecification;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserRepositoryImpl implements UserRepository {
@@ -29,20 +30,22 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void add(User user) throws RepositoryException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
-            if (preparedStatement != null) {
-                preparedStatement.setInt(1, user.getRole().getRoleId());
-                preparedStatement.setString(2, user.getName());
-                preparedStatement.setString(3, user.getSurname());
-                preparedStatement.setString(4, user.getEmail());
-                preparedStatement.setString(5, user.getLogin());
-                preparedStatement.setString(6, user.getPassword());
-                preparedStatement.setInt(7, user.getPrivilege().getId());
-                preparedStatement.executeUpdate();
+        if (user != null) {
+            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT)) {
+                if (preparedStatement != null) {
+                    preparedStatement.setInt(1, user.getRole().getRoleId());
+                    preparedStatement.setString(2, user.getName());
+                    preparedStatement.setString(3, user.getSurname());
+                    preparedStatement.setString(4, user.getEmail());
+                    preparedStatement.setString(5, user.getLogin());
+                    preparedStatement.setString(6, user.getPassword());
+                    preparedStatement.setInt(7, user.getPrivilege().getId());
+                    preparedStatement.executeUpdate();
+                }
+            } catch (SQLException e) {
+                throw new RepositoryException(e);
             }
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
         }
     }
 
@@ -59,26 +62,31 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void update(User user) throws RepositoryException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
-            preparedStatement.setInt(1, user.getRole().getRoleId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getSurname());
-            preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setInt(6, user.getPrivilege().getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RepositoryException(e);
+        if (user != null) {
+            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
+                preparedStatement.setInt(1, user.getRole().getRoleId());
+                preparedStatement.setString(2, user.getName());
+                preparedStatement.setString(3, user.getSurname());
+                preparedStatement.setString(4, user.getEmail());
+                preparedStatement.setString(5, user.getPassword());
+                preparedStatement.setInt(6, user.getPrivilege().getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RepositoryException(e);
+            }
         }
     }
 
     @Override
     public Set<User> query(UserSpecification specification) throws RepositoryException {
-        try {
-            return specification.query();
-        } catch (QueryException e) {
-            throw new RepositoryException(e);
+        if (specification != null) {
+            try {
+                return specification.query();
+            } catch (QueryException e) {
+                throw new RepositoryException(e);
+            }
         }
+        return new HashSet<>();
     }
 }

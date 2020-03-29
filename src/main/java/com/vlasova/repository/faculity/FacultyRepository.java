@@ -8,8 +8,8 @@ import com.vlasova.specification.faculity.FacultySpecification;
 
 import java.util.Set;
 
-public interface FaculityRepository extends Repository {
-    void add(Faculty user);
+public interface FacultyRepository extends Repository {
+    void add(Faculty user) throws RepositoryException;
 
     void remove(int id) throws RepositoryException;
 

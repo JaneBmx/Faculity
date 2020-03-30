@@ -6,12 +6,18 @@ import com.vlasova.service.impl.GradeReportServiceImpl;
 import com.vlasova.service.impl.UserServiceImpl;
 
 public final class ServiceFactory {
-    private final FacultyService facultyService = new FacultyServiceImpl();
-    private final GradeReportService gradeReportService = new GradeReportServiceImpl();
-    private final UserService userService = new UserServiceImpl();
+    private final FacultyService facultyService ;
+    private final GradeReportService gradeReportService;
+    private final UserService userService;
 
     private static class Holder {
         private static final ServiceFactory INSTANCE = new ServiceFactory();
+    }
+
+    private ServiceFactory(){
+        facultyService  = FacultyServiceImpl.getInstance();
+        gradeReportService = GradeReportServiceImpl.getInstance();
+        userService  = UserServiceImpl.getInstance();
     }
 
     public static ServiceFactory getInstance() {

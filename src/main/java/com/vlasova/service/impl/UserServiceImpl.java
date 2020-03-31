@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User registration(String name, String surname, String email, String login, String password) throws ServiceException {
+
         User user = new User();
         try {
             user.setName(name);
@@ -78,8 +79,4 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
-
-
-
-
 }

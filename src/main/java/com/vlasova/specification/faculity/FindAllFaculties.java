@@ -10,8 +10,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FindFacultyByFreePaid extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND_FACULTY_BY_FREE_PAID = "SELECT * FROM faculties WHERE free_accept_plan IS NOT NULL";
+public class FindAllFaculties extends AbstractFacultySpecification implements FacultySpecification {
+    private static final String FIND_ALL_FACULTIES = "SELECT * FROM faculties";
 
     @Override
     public Set<Faculty> query() throws QueryException {
@@ -19,7 +19,7 @@ public class FindFacultyByFreePaid extends AbstractFacultySpecification implemen
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             if (statement != null) {
-                resultSet = statement.executeQuery(FIND_FACULTY_BY_FREE_PAID);
+                resultSet = statement.executeQuery(FIND_ALL_FACULTIES);
                 while (resultSet.next()) {
                     faculties.add(createFaculty());
                 }

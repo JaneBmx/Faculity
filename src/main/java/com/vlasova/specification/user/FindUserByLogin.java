@@ -30,7 +30,6 @@ public class FindUserByLogin extends AbstractUserSpecification implements UserSp
                     users.add(createUser());
                 }
             }
-
         } catch (SQLException e) {
             throw new QueryException(e);
         } finally {

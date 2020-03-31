@@ -1,6 +1,6 @@
-package com.vlasova.specification.faculity;
+package com.vlasova.specification.gradereport;
 
-import com.vlasova.entity.faculity.Faculty;
+import com.vlasova.entity.user.GradeReport;
 import com.vlasova.exception.specification.QueryException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
@@ -10,18 +10,18 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FindFacultyByFreePaid extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND_FACULTY_BY_FREE_PAID = "SELECT * FROM faculties WHERE free_accept_plan IS NOT NULL";
+public class FindAllGradeReports extends AbstractGradeReportSpecification implements GradeReportSpecification {
+    private static final String FIND_ALL_GRADE_REPORTS = "SELECT * FROM grade_reports";
 
     @Override
-    public Set<Faculty> query() throws QueryException {
-        faculties = new HashSet<>();
+    public Set<GradeReport> query() throws QueryException {
+        gradeReports = new HashSet<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             if (statement != null) {
-                resultSet = statement.executeQuery(FIND_FACULTY_BY_FREE_PAID);
+                resultSet = statement.executeQuery(FIND_ALL_GRADE_REPORTS);
                 while (resultSet.next()) {
-                    faculties.add(createFaculty());
+                    gradeReports.add(createGradeReport());
                 }
             }
         } catch (SQLException e) {
@@ -29,6 +29,6 @@ public class FindFacultyByFreePaid extends AbstractFacultySpecification implemen
         } finally {
             closeResultSet();
         }
-        return faculties;
+        return null;
     }
 }

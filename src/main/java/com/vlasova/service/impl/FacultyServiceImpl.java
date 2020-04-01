@@ -1,5 +1,6 @@
 package com.vlasova.service.impl;
 
+import com.vlasova.entity.faculity.Faculties;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.repository.RepositoryException;
@@ -12,7 +13,9 @@ import com.vlasova.specification.faculity.FindAllFaculties;
 import com.vlasova.specification.faculity.FindFacultyByFreePaid;
 import com.vlasova.specification.faculity.FindFacultyById;
 import com.vlasova.specification.faculity.FindFacultyBySubject;
-import com.vlasova.valodation.ServiceValidator;
+import com.vlasova.validation.FacultyValidator;
+
+import static com.vlasova.validation.FacultyValidator.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,13 +26,21 @@ public class FacultyServiceImpl implements FacultyService {
     private final FacultyRepository facultyRepository;
 
     //TODO add to Faculties!
+
     public FacultyServiceImpl() {
         facultyRepository = FacultyRepositoryImpl.getInstance();
     }
 
     public Set<Faculty> getAllFaculties() throws ServiceException {
         try {
-            return facultyRepository.query(new FindAllFaculties());
+            Set<Faculty> faculties = facultyRepository.query(new FindAllFaculties());
+
+            for (Faculty f : faculties) {
+                if (isValidFaculty(f)) {
+                    Faculties.FACULTIES.addFaculty(f);
+                }
+            }
+            return faculties;
         } catch (QueryException | RepositoryException e) {
             throw new ServiceException(e);
         }
@@ -71,7 +82,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     public void addFaculty(String name, int free, int paid, Subject... subjects) throws ServiceException {
-        if (ServiceValidator.isValidFaculty(name, free, paid, subjects)) {
+        if (FacultyValidator.isValidFaculty(name, free, paid, subjects)) {
             Faculty faculty = new Faculty();
             faculty.setName(name);
             faculty.setFreeAcceptPlan(free);

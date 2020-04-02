@@ -7,21 +7,32 @@ import com.vlasova.pool.ProxyConnection;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyByFreePaid extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND_FACULTY_BY_FREE_PAID = "SELECT * FROM faculties WHERE free_accept_plan IS NOT NULL";
+    /*
+     *Tested 02.04.20
+     */
+    private static final String FIND_FACULTY_BY_FREE_PAID =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE f.free_accept_plan > 0 " +
+                    "UNION " +
+                    "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE f.free_accept_plan > 0;";
 
     @Override
     public Set<Faculty> query() throws QueryException {
-        faculties = new HashSet<>();
+        faculties = new HashMap<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             if (statement != null) {
                 resultSet = statement.executeQuery(FIND_FACULTY_BY_FREE_PAID);
                 while (resultSet.next()) {
-                    faculties.add(createFaculty());
+                    faculties.putAll(createFaculty());
                 }
             }
         } catch (SQLException e) {
@@ -29,6 +40,7 @@ public class FindFacultyByFreePaid extends AbstractFacultySpecification implemen
         } finally {
             closeResultSet();
         }
-        return faculties;
+        faculties.remove(NON_EXIST_INDEX);
+        return new HashSet<>(faculties.values());
     }
 }

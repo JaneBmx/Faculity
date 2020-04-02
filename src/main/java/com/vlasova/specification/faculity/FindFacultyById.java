@@ -7,11 +7,22 @@ import com.vlasova.pool.ProxyConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyById extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND = "SELECT * FROM faculties WHERE faculty_id = ?";
+    /*
+     *Tested 02.04.20
+     */
+    private static final String FIND =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE f.faculty_id = ? " +
+                    "UNION " +
+                    "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE f.faculty_id = ?;";
     private int facultyId;
 
     public FindFacultyById(int id) {
@@ -20,14 +31,14 @@ public class FindFacultyById extends AbstractFacultySpecification implements Fac
 
     @Override
     public Set<Faculty> query() throws QueryException {
-        faculties = new HashSet<>();
+        faculties = new HashMap<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND);) {
             if (statement != null) {
                 statement.setInt(1, facultyId);
                 resultSet = statement.executeQuery();
                 while (resultSet.next()) {
-                    faculties.add(createFaculty());
+                    faculties.putAll(createFaculty());
                 }
             }
         } catch (SQLException e) {
@@ -35,6 +46,7 @@ public class FindFacultyById extends AbstractFacultySpecification implements Fac
         } finally {
             closeResultSet();
         }
-        return faculties;
+        faculties.remove(NON_EXIST_INDEX);
+        return new HashSet<>(faculties.values());
     }
 }

@@ -8,32 +8,37 @@ import com.vlasova.pool.ProxyConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class FindFacultyBySubject extends AbstractFacultySpecification implements FacultySpecification {
-    private static final String FIND = "SELECT * FROM faculties INNER JOIN subjects USING(subject2faculity) WHERE subject_id = ?";
-    private Set<Subject> subjects;
+    private static final String FIND =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE sf.subject_id " +
+                    "UNION " +
+                    "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE sf.subject_id = ?;";
+    //TODO rework this query
+    private Subject subject;
 
-    public FindFacultyBySubject(Set<Subject> subjects) {
-        this.subjects = subjects;
+    public FindFacultyBySubject(Subject subject) {
+        this.subject = subject;
     }
 
     @Override
     public Set<Faculty> query() throws QueryException {
-        faculties = new HashSet<>();
+        faculties = new HashMap<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND);) {
-            Set<Integer> ids = getSubjectsId();
-            int id = 0;
-            for (Integer in : ids) {
-                id = in;
-                if (statement != null) {
-                    statement.setInt(1, id);
-                    resultSet = statement.executeQuery();
-                    while (resultSet.next()) {
-                        faculties.add(createFaculty());
-                    }
+            if (statement != null) {
+                statement.setInt(1, subject.getId());
+                statement.setInt(2, subject.getId());
+                resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    faculties.putAll(createFaculty());
                 }
             }
         } catch (SQLException e) {
@@ -41,14 +46,7 @@ public class FindFacultyBySubject extends AbstractFacultySpecification implement
         } finally {
             closeResultSet();
         }
-        return faculties;
-    }
-
-    private Set<Integer> getSubjectsId() {
-        Set<Integer> subjectsId = new HashSet<>();
-        for (Subject sub : subjects) {
-            subjectsId.add(sub.getId());
-        }
-        return subjectsId;
+        faculties.remove(NON_EXIST_INDEX);
+        return new HashSet<>(faculties.values());
     }
 }

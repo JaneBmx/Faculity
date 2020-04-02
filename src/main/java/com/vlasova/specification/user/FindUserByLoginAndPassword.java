@@ -10,8 +10,13 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+ *
+ */
 public class FindUserByLoginAndPassword extends AbstractUserSpecification implements UserSpecification {
-    private static final String FIND = "SELECT * FROM users WHERE login = ? AND  password = ?";
+    private static final String FIND =
+            "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege " +
+                    "FROM users WHERE login = ? AND  password = ?";
     private String userLogin;
     private String userPassword;
 

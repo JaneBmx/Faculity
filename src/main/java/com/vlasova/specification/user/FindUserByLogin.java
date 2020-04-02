@@ -10,8 +10,16 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
+/*
+ *For verify the uniq of the user while creating new one
+ */
 public class FindUserByLogin extends AbstractUserSpecification implements UserSpecification {
-    private static final String FIND = "SELECT * FROM users WHERE login = ?";
+    /*
+     *02.04.20
+     */
+    private static final String FIND =
+            "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege " +
+                    "FROM users WHERE user_login = ?";
     private String userLogin;
 
     public FindUserByLogin(String userLogin) {

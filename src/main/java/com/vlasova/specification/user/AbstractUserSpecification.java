@@ -1,5 +1,6 @@
 package com.vlasova.specification.user;
 
+import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;

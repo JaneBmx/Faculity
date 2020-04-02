@@ -5,14 +5,16 @@ import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.specification.QueryException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.specification.user.UserSpecification;
-
+import com.vlasova.specification.Specification;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserRepositoryImpl implements UserRepository {
+    /*
+     *Tested 02.03.20
+     */
     private static final String INSERT = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password, user_privilege) VALUES(?,?,?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM users WHERE user_id = ?";
     private static final String UPDATE = "UPDATE users SET user_role_id = ?, user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_privilege =?";
@@ -28,6 +30,9 @@ public class UserRepositoryImpl implements UserRepository {
     private UserRepositoryImpl() {
     }
 
+    /*
+     *Add user in 'users'
+     */
     @Override
     public void add(User user) throws RepositoryException {
         if (user != null) {
@@ -49,17 +54,27 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    /*
+     *Remove user from 'users' by user.id
+     *Doesn't remove gradeReport, impossible to access it without 'user.id'
+     *Should use GradeReportRepository.remove for deleting 'user.gradeReport'
+     */
     @Override
-    public void remove(int id) throws RepositoryException {
+    public void remove(User user) throws RepositoryException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE);) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RepositoryException(e);
         }
     }
 
+    /*
+     *Update user at 'users' by user.id
+     *Doesn't update gradeReport, impossible to access it without 'user.id'
+     *Should use GradeReportRepository.update for deleting 'user.gradeReport'
+     */
     @Override
     public void update(User user) throws RepositoryException {
         if (user != null) {
@@ -78,8 +93,11 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    /*
+     *Accepts any 'User' specification
+     */
     @Override
-    public Set<User> query(UserSpecification specification) throws RepositoryException {
+    public Set<User> query(Specification<User> specification) throws RepositoryException {
         if (specification != null) {
             try {
                 return specification.query();

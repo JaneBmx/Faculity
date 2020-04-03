@@ -4,9 +4,19 @@ public enum Subject {
     MATH("Mathematics", 1),
     PHYSICS("Physics", 2),
     GEOGRAPHY("Geography", 3),
-    RUSSIAN("Russian language", 4),
-    ENGLISH("English language", 5),
-    CHEMISTRY("Chemistry", 6);
+    GEOLOGY("Geology", 4),
+    RUSSIAN("Russian", 5),
+    ENGLISH("English", 6),
+    DEUTCH("Deutch", 7),
+    SPANISH("Spanish", 8),
+    FRENCH("French", 9),
+    INFORMATICS("Informatics", 10),
+    HISTORY("History", 11),
+    ART("Art", 12),
+    CHEMISTRY("Chemistry", 13),
+    BIOLOGY("Biology", 14),
+    SOCIAL("Social", 15),
+    UNDEFINED("Undefined", 0);
     private String value;
     private int id;
 
@@ -24,21 +34,11 @@ public enum Subject {
     }
 
     public static Subject getSubjectById(int id) {
-        switch (id) {
-            case 1:
-                return MATH;
-            case 2:
-                return PHYSICS;
-            case 3:
-                return GEOGRAPHY;
-            case 4:
-                return RUSSIAN;
-            case 5:
-                return ENGLISH;
-            case 6:
-                return CHEMISTRY;
-            default:
-                return null;
+        for (Subject s : values()) {
+            if (s.getId() == id) {
+                return s;
+            }
         }
+        return UNDEFINED;
     }
 }

@@ -1,6 +1,5 @@
 package com.vlasova.entity.faculity;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 

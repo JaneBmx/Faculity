@@ -1,10 +1,7 @@
 package com.vlasova.entity.user;
 
-import com.vlasova.entity.faculity.Faculties;
-import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -13,21 +10,18 @@ public class GradeReport {
     private double certificate;
     private boolean isAccepted;
     private boolean isFree;
-    private final Map<Subject, Integer> marks;
-    private Faculty faculty;
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        if (Faculties.FACULTIES.isExist(faculty)) {
-            this.faculty = faculty;
-        }
-    }
+    private Map<Subject, Integer> marks;
+    private int facultyId;
 
     public GradeReport() {
-        marks = new HashMap<>();
+    }
+
+    public int getFaculty() {
+        return facultyId;
+    }
+
+    public void setFacultyId(int facultyId) {
+        this.facultyId = facultyId;
     }
 
     public int getId() {
@@ -50,8 +44,8 @@ public class GradeReport {
         return marks;
     }
 
-    public void addMarks(Subject subject, Integer mark) {
-        marks.put(subject, mark);
+    public void setMarks(Map<Subject, Integer> marks) {
+        this.marks = marks;
     }
 
     public boolean isAccepted() {

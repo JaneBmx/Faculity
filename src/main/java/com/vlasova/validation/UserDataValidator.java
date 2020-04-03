@@ -13,36 +13,55 @@ public class UserDataValidator {
     private static final String EMAIL_FORMAT = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
     private static final String LOGIN_FORMAT = "[a-zA-Z\\d]{4,40}";
 
-    private UserDataValidator() {
+    private static boolean isValidString(String string) {
+        return string != null && !string.isEmpty();
     }
 
     public static boolean isValidEmail(String email) {
-        pattern = Pattern.compile(EMAIL_FORMAT);
-        matcher = pattern.matcher(email);
-        return matcher.matches();
+        if (isValidString(email)) {
+            pattern = Pattern.compile(EMAIL_FORMAT);
+            matcher = pattern.matcher(email);
+            return matcher.matches();
+        }
+        return false;
     }
 
     public static boolean isValidLogin(String login) {
-        pattern = Pattern.compile(LOGIN_FORMAT);
-        matcher = pattern.matcher(login);
-        return matcher.matches();
+        if (isValidString(login)) {
+            pattern = Pattern.compile(LOGIN_FORMAT);
+            matcher = pattern.matcher(login);
+            return matcher.matches();
+        }
+        return false;
     }
 
     public static boolean isValidName(String name) {
-        pattern = Pattern.compile(NAME_FORMAT);
-        matcher = pattern.matcher(name);
-        return matcher.matches();
+        if (isValidString(name)) {
+            pattern = Pattern.compile(NAME_FORMAT);
+            matcher = pattern.matcher(name);
+            return matcher.matches();
+        }
+        return false;
     }
 
     public static boolean isValidPassword(String password) {
-        pattern = Pattern.compile(PASS_FORMAT);
-        matcher = pattern.matcher(password);
-        return matcher.matches();
+        if (isValidString(password)) {
+            pattern = Pattern.compile(PASS_FORMAT);
+            matcher = pattern.matcher(password);
+            return matcher.matches();
+        }
+        return false;
     }
 
     public static boolean isValidUser(User user) {
-        return isValidEmail(user.getEmail()) && isValidLogin(user.getLogin())
-                && isValidName(user.getName()) && isValidName(user.getSurname())
-                && isValidPassword(user.getPassword());
+        if(user != null){
+            return user.getRole()!=null
+                    &&isValidName(user.getName())
+                    &&isValidName(user.getSurname())
+                    &&isValidEmail(user.getEmail())
+                    &&isValidLogin(user.getLogin())
+                    &&isValidPassword(user.getPassword());
+        }
+        return false;
     }
 }

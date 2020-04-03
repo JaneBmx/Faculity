@@ -6,7 +6,7 @@ import com.vlasova.service.impl.GradeReportServiceImpl;
 import com.vlasova.service.impl.UserServiceImpl;
 
 public final class ServiceFactory {
-    private final FacultyService facultyService ;
+    //private final FacultyService facultyService ;
     private final GradeReportService gradeReportService;
     private final UserService userService;
 
@@ -15,7 +15,7 @@ public final class ServiceFactory {
     }
 
     private ServiceFactory(){
-        facultyService  = FacultyServiceImpl.getInstance();
+        //facultyService  = FacultyServiceImpl.getInstance();
         gradeReportService = GradeReportServiceImpl.getInstance();
         userService  = UserServiceImpl.getInstance();
     }
@@ -24,9 +24,9 @@ public final class ServiceFactory {
         return Holder.INSTANCE;
     }
 
-    public FacultyService getFacultyService() {
-        return facultyService;
-    }
+//    public FacultyService getFacultyService() {
+//        return facultyService;
+//    }
 
     public GradeReportService getGradeReportService() {
         return gradeReportService;

@@ -42,7 +42,7 @@ public class GradeReportRepositoryImpl implements GradeReportRepository {
                  PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GRADE_REPORT)) {
                 if (preparedStatement != null) {
                     preparedStatement.setInt(1, gradeReport.getId());
-                    preparedStatement.setInt(2, gradeReport.getFaculty().getId());
+                    preparedStatement.setInt(2, gradeReport.getFaculty());
                     preparedStatement.setDouble(3, gradeReport.getCertificate());
                     preparedStatement.executeUpdate();
                     addSubjectsMarks(gradeReport.getMarks(), gradeReport.getId(), connection);

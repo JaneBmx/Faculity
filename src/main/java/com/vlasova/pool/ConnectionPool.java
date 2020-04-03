@@ -112,6 +112,7 @@ public enum ConnectionPool {
             throw new InitiationPoolException("Failed to load properties.", e);
         }
     }
+
     private void deregisterDrivers() {
         Enumeration<Driver> drivers = DriverManager.getDrivers();
         while (drivers.hasMoreElements()) {

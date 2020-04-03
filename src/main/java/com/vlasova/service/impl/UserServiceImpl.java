@@ -1,5 +1,6 @@
 package com.vlasova.service.impl;
 
+import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.repository.RepositoryException;
@@ -19,7 +20,6 @@ import java.util.Set;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final UserService userService;
 
     private static class Holder {
         private static final UserServiceImpl INSTANCE = new UserServiceImpl();
@@ -30,14 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserServiceImpl() {
-        userService = UserServiceImpl.getInstance();
         userRepository = UserRepositoryImpl.getInstance();
     }
 
-    public void deleteUser(User user) throws ServiceException {
+    public void delete(User user) throws ServiceException {
         if (user != null) {
             try {
-                userRepository.remove(user.getId());
+                userRepository.remove(user);
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
@@ -45,37 +44,52 @@ public class UserServiceImpl implements UserService {
     }
 
     public User logIn(String login, String password) throws ServiceException {
-        try {
-            Set<User> users = userRepository.query(new FindUserByLoginAndPassword(login, password));
-            if (users.iterator().hasNext()) {
-                return users.iterator().next();
-            }
-        } catch (RepositoryException e) {
-            throw new ServiceException(e);
-        }
-        return null;
-    }
-
-    public User registration(String name, String surname, String email, String login, String password) throws ServiceException {
-        if (isValidEmail(email) && isValidLogin(login) && isValidName(name) && isValidName(surname) && isValidPassword(password)) {
-            User user = new User();
+        if (isValidLogin(login) && isValidPassword(password)) {
             try {
-                user.setName(name);
-                user.setSurname(surname);
-                user.setEmail(email);
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setRole(Role.ENROLLEE);
-                userRepository.add(user);
-                return user;
+                Set<User> users = userRepository.query(new FindUserByLoginAndPassword(login, password));
+                if (users.iterator().hasNext()) {
+                    return users.iterator().next();
+                }
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
         }
-        throw new ServiceException("Validate error.");
+        return null;
     }
 
-    public User getUser(int id) throws ServiceException {
+    /*
+     *Check is user exist by login,
+     * if not: create user, write to DB, get from DB(with id)
+     * (id needs for creating gradeReport later)
+     */
+    public User registration(String name, String surname, String email, String login, String password, Privilege privilege) throws ServiceException {
+        User user = null;
+        if (isValidName(name) && isValidName(surname) && isValidEmail(email) && isValidLogin(login) && isValidPassword(password)) {
+            try {
+                if (getUserByLogin(login) == null) {
+                    user = new User();
+                    user.setRole(Role.ENROLLEE);
+                    user.setName(name);
+                    user.setSurname(surname);
+                    user.setEmail(email);
+                    user.setLogin(login);
+                    user.setPassword(password);
+                    user.setPrivilege(privilege);
+                    userRepository.add(user);
+                    user = userRepository.query(new FindUserByLoginAndPassword(login, password)).iterator().next();
+                }
+            } catch (RepositoryException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return user;
+    }
+
+    /*
+     *For finding user by common id with GradeReport
+     * (for sending email if request accepted)
+     */
+    public User getUserById(int id) throws ServiceException {
         try {
             Set<User> users = userRepository.query(new FindUserById(id));
             return users.iterator().next();
@@ -84,6 +98,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /*
+     *For getting all of enrollees(make statistics)
+     */
     public Set<User> getUsersByRole(Role role) throws ServiceException {
         if (role != null) {
             try {
@@ -95,8 +112,11 @@ public class UserServiceImpl implements UserService {
         return new HashSet<>();
     }
 
+    /*
+     *Check is user exist
+     */
     public User getUserByLogin(String login) throws ServiceException {
-        if (login != null && !login.isEmpty()) {
+        if (isValidLogin(login)) {
             try {
                 Set<User> users = userRepository.query(new FindUserByLogin(login));
                 return users.iterator().next();
@@ -108,7 +128,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void editUser(User user) throws ServiceException {
-        if(isValidUser(user)){
+        if (isValidUser(user)) {
             try {
                 userRepository.update(user);
             } catch (RepositoryException e) {

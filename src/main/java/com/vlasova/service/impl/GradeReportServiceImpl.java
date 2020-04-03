@@ -3,22 +3,22 @@ package com.vlasova.service.impl;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
-import com.vlasova.entity.user.User;
 import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.repository.gradereport.GradeReportRepository;
 import com.vlasova.repository.gradereport.GradeReportRepositoryImpl;
 import com.vlasova.service.GradeReportService;
+import com.vlasova.specification.gradereport.FindAllGradeReports;
+import com.vlasova.specification.gradereport.FindGradeReportByFaculty;
 
 import static com.vlasova.validation.GradeReportValidator.*;
-import static com.vlasova.validation.UserDataValidator.*;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class GradeReportServiceImpl implements GradeReportService {
     private final GradeReportRepository gradeReportRepository;
-    private final GradeReportService gradeReportService;
 
     private static class Holder {
         private static final GradeReportServiceImpl INSTANCE = new GradeReportServiceImpl();
@@ -29,47 +29,65 @@ public class GradeReportServiceImpl implements GradeReportService {
     }
 
     private GradeReportServiceImpl() {
-        gradeReportService = GradeReportServiceImpl.getInstance();
         gradeReportRepository = GradeReportRepositoryImpl.getInstance();
     }
 
-    public void addGradeReport(GradeReport gradeReport) {
-
-    }
-
-    public void addGradeReport(int userId, Faculty faculty, double certificate, Map<Subject, Integer> marks) {
-        //validate before
-    }
-
-    public void removeGradeReport(GradeReport gradeReport) {
-        //validate before
-    }
-
-    public void deleteGradeReport(GradeReport gradeReport) {
-        //validate before
-    }
-
-    public Set<GradeReport> getAllGradeReports() {
-        return null;
-    }
-
-    public Set<GradeReport> getGradeReportsByFaculty() {
-        return null;
-    }
-
-    public void setGradeReportAcceptAndFree(User user, GradeReport gradeReport, boolean isAccepted, boolean isFree)
-            throws ServiceException {
-        if (isValidGradeReport(gradeReport) && user != null
-                && gradeReport.getId() == user.getId()) {
-            gradeReport.setAccepted(isAccepted);
-            gradeReport.setFree(isFree);
+    public void addGradeReport(int userId, Faculty faculty, double certificate, Map<Subject, Integer> marks) throws ServiceException {
+        if (isValidGradeReport(faculty, certificate, marks)) {
+            GradeReport gradeReport = new GradeReport();
+            gradeReport.setId(userId);
+            gradeReport.setFacultyId(faculty.getId());
+            gradeReport.setAccepted(false);
+            gradeReport.setFree(false);
+            gradeReport.setMarks(marks);
+            gradeReport.setCertificate(certificate);
             try {
-                gradeReportRepository.update(user, gradeReport);
+                gradeReportRepository.add(gradeReport);
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
         }
     }
-    //TODO mb need to add some methods with choosing GradeReports by attestat or privelege
-    //privelege will be add in some class with sorting?
+
+    public void removeGradeReport(GradeReport gradeReport) throws ServiceException {
+        if (isValidGradeReport(gradeReport)) {
+            try {
+                gradeReportRepository.remove(gradeReport);
+            } catch (RepositoryException e) {
+                throw new ServiceException(e);
+            }
+        }
+    }
+
+    public Set<GradeReport> getAllGradeReports() throws ServiceException {
+        try {
+            return gradeReportRepository.query(new FindAllGradeReports());
+        } catch (RepositoryException e) {
+            throw new ServiceException();
+        }
+    }
+
+    public Set<GradeReport> getGradeReportsByFaculty(Faculty faculty) throws ServiceException {
+        if (faculty != null) {
+            try {
+                gradeReportRepository.query(new FindGradeReportByFaculty(faculty));
+            } catch (RepositoryException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return new HashSet<>();
+    }
+
+    public void setGradeReportAcceptAndFree(GradeReport gradeReport, boolean isAccepted, boolean isFree)
+            throws ServiceException {
+        if (isValidGradeReport(gradeReport)) {
+            gradeReport.setAccepted(isAccepted);
+            gradeReport.setFree(isFree);
+            try {
+                gradeReportRepository.update(gradeReport);
+            } catch (RepositoryException e) {
+                throw new ServiceException(e);
+            }
+        }
+    }
 }

@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+$blue: #1A8093;
+$red: #EA534D;
+$button-blue: #196776;
+
+
+
+
+body{
+    font-family: 'Bree Serif', serif;
+    color: #FFFFFF;
+}
+.container{
+    align-content: center;
+    display: flex;
+    margin: 140px auto;
+    width: 400px;
+    height: 500px;
+    background: $blue;
+    border-radius: 20px;
+}
+.login{
+    font-size: 24px;
+    cursor: pointer;
+    padding-top: 10px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    margin-top: -20px;
+    width: 200px;
+    height: 70px;
+    background: $blue;
+    border-top-right-radius: 15px;
+    box-shadow: 2px black;
+    transition: margin 0.5s, border-top-right-radius 0.8s, border-bottom-right-radius 0.8s;
+}
+.singin{
+    font-size: 24px;
+    cursor: pointer;
+    padding-top: 10px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    margin: 0 200px;
+    width: 200px;
+    height: 50px;
+    background: $red;
+    border-bottom-left-radius: 15px;
+    transition: margin 0.5s,border-top-left-radius 0.8s, border-bottom-left-radius 0.8s;
+}
+.button{
+.login{
+    margin: 0;
+    background: $red;
+    height: 50px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 15px;
+    transition: margin 0.5s, border-top-right-radius 0.8s, border-bottom-right-radius 0.8s;
+}
+.singin{
+    font-size: 24px;
+    cursor: pointer;
+    padding-top: 10px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    margin: -20px 200px;
+    width: 200px;
+    height: 70px;
+    background: $blue;
+    border-top-left-radius: 15px;
+    transition: margin 0.5s, border-top-left-radius 0.8s, border-bottom-left-radius 0.8s;
+}
+}
+.login-enter{
+    position: absolute;
+    margin: 100px 50px;
+    width: 300px;
+    height: 35px;
+    background: #FFFFFF;
+    z-index: 1;
+    color: $blue;
+    font-size: 20px;
+    text-align: center;
+}
+.mail-enter{
+    position: absolute;
+    margin: 160px 50px;
+    width: 300px;
+    height: 35px;
+    background: #FFFFFF;
+    z-index: 1;
+    color: $blue;
+    font-size: 20px;
+    text-align: center;
+}
+.password-enter{
+    position: absolute;
+    margin: 220px 50px;
+    width: 300px;
+    height: 35px;
+    background: #FFFFFF;
+    color: $blue;
+    z-index: 1;
+    font-size: 20px;
+    text-align: center;
+}
+.second-password{
+    position: absolute;
+    margin: 280px 50px;
+    width: 300px;
+    height: 35px;
+    background: #FFFFFF;
+    z-index: 1;
+    color: $blue;
+    font-size: 20px;
+    text-align: center;
+}
+input[type='text']::-webkit-input-placeholder{
+    text-align: center;
+    color: $blue;
+    font-size: 18px;
+    opacity: 0.5;
+}
+input[type='password']::-webkit-input-placeholder{
+    text-align: center;
+    color: $blue;
+    font-size: 18px;
+    opacity: 0.5;
+}
+.submit-reg{
+    position: absolute;
+    margin: 400px 50px;
+    width: 300px;
+    height: 50px;
+    background: $button-blue;
+    z-index: 1;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+&:active{
+     opacity: 0.5;
+ }
+}
+.submit-enter{
+    display: none;
+}
+.check-conditions{
+    position: absolute;
+    display: block;
+    margin: 340px 50px;
+    width: 20px;
+    height: 50px;
+    background: $button-blue;
+    z-index: 1;
+}
+.agree{
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial;
+    position: absolute;
+    margin: 350px 80px;
+    color: #49A5B6;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.button{
+.login-enter{
+    margin: 100px 50px;
+}
+.mail-enter{
+    margin: 160px 50px;
+}
+.password-enter{
+    margin: 220px 50px;
+}
+.second-password{
+    display: none;
+}
+.check-conditions{
+    display: none;
+}
+.agree{
+    display: none;
+}
+.submit-reg{
+    opacity: 0;
+}
+.submit-enter{
+    display: block;
+    position: absolute;
+    margin: 300px 50px;
+    width: 300px;
+    height: 50px;
+    background: $button-blue;
+    z-index: 1;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+&:active{
+     opacity: 0.5;
+ }
+}
+}

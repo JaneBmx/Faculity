@@ -5,9 +5,14 @@ import com.vlasova.command.PageEnum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetAllGradeReports implements GradeReportCommand {
+public class ChangeGradeReportStatus implements GradeReportCommand{
     @Override
     public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
+    /*
+     * Use
+     * com.vlasova.service.impl.GradeReportServiceImpl.setGradeReportAcceptAndFree
+     * for set isFreePaid, isAccepted
+     */
 }

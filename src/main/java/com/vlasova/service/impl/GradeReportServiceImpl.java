@@ -49,7 +49,7 @@ public class GradeReportServiceImpl implements GradeReportService {
         }
     }
 
-    public void removeGradeReport(GradeReport gradeReport) throws ServiceException {
+    public void deleteGradeReport(GradeReport gradeReport) throws ServiceException {
         if (isValidGradeReport(gradeReport)) {
             try {
                 gradeReportRepository.remove(gradeReport);
@@ -83,6 +83,16 @@ public class GradeReportServiceImpl implements GradeReportService {
         if (isValidGradeReport(gradeReport)) {
             gradeReport.setAccepted(isAccepted);
             gradeReport.setFree(isFree);
+            try {
+                gradeReportRepository.update(gradeReport);
+            } catch (RepositoryException e) {
+                throw new ServiceException(e);
+            }
+        }
+    }
+
+    public void updateGradeReport(GradeReport gradeReport) throws ServiceException {
+        if (isValidGradeReport(gradeReport)) {
             try {
                 gradeReportRepository.update(gradeReport);
             } catch (RepositoryException e) {

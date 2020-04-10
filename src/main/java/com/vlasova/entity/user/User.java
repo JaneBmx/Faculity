@@ -4,16 +4,24 @@ import java.util.Objects;
 
 public class User {
     private int id;
-    Role role;
+    private Role role;
     private String name;
     private String surname;
     private String email;
     private String login;
     private String password;
-    Privilege privilege;
-    GradeReport gradeReport;
+    private Privilege privilege;
+    private GradeReport gradeReport;
 
     public User() {
+    }
+
+    public User(String name, String surname, String email, String login, String password){
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.login = login;
+        this.password = password;
     }
 
     public int getId() {

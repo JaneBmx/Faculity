@@ -2,11 +2,11 @@ package com.vlasova.command;
 
 public enum Parameter {
     COMMAND("command"),
-    NAME("name"),
-    SURNAME("surname"),
-    EMAIL("email"),
-    LOGIN("login"),
-    PASSWORD("password");
+    NAME("user_name"),
+    SURNAME("user_surname"),
+    EMAIL("user_email"),
+    LOGIN("user_login"),
+    PASSWORD("user_password");
 
     private String parameter;
 

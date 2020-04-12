@@ -19,9 +19,9 @@ import org.apache.logging.log4j.Logger;
 public enum ConnectionPool {
     INSTANCE;
     private Logger logger = LogManager.getLogger(ConnectionPool.class);
-    private static final String URL = "jdbc:mysql://localhost:3306/faculty";
     private static final String PROPERTY_PATH = "src/main/resources/db.properties";
     private static final int DEFAULT_POOL_SIZE = 32;
+    private String dbUrl;
     private BlockingQueue<ProxyConnection> free;
     private Queue<ProxyConnection> given;
     private AtomicBoolean isExist = new AtomicBoolean(false);
@@ -95,7 +95,7 @@ public enum ConnectionPool {
 
     private void fillPool() throws SQLException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-            free.add(new ProxyConnection(DriverManager.getConnection(URL, properties)));
+            free.add(new ProxyConnection(DriverManager.getConnection(dbUrl, properties)));
         }
     }
 
@@ -104,6 +104,7 @@ public enum ConnectionPool {
             properties = new Properties();
             properties.load(Objects.requireNonNull(inputStream));
             Class.forName(properties.getProperty("driver"));
+            dbUrl = properties.getProperty("url");
         } catch (ClassNotFoundException e) {
             logger.warn(e);
             throw new InitiationPoolException("Failed to initialize properties.", e);

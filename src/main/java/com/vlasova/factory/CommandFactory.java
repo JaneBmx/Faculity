@@ -7,7 +7,8 @@ import com.vlasova.command.impl.user.*;
 
 public enum CommandFactory {
     REGISTRATION(new RegisterUser()),
-    LOG_IN(new LogIn()),
+    LOGIN(new LogIn()),
+
     EDIT_USER(new EditUser()),
     DELETE_USER(new DeleteUser()),
     GET_USERS_BY_ROLE(new GetUsersByRoles()),

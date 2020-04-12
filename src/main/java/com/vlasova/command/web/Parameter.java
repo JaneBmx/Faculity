@@ -1,4 +1,4 @@
-package com.vlasova.command;
+package com.vlasova.command.web;
 
 public enum Parameter {
     COMMAND("command"),

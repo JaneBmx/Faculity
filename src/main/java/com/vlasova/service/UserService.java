@@ -1,16 +1,18 @@
 package com.vlasova.service;
 
-import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.service.ServiceException;
-import com.vlasova.repository.user.UserRepository;
-import com.vlasova.repository.user.UserRepositoryImpl;
+import com.vlasova.exception.service.UserAlreadyExistsException;
+import com.vlasova.exception.service.UserDataNotValidException;
+import com.vlasova.repository.user.UserDao;
+import com.vlasova.repository.user.UserDaoImpl;
 import com.vlasova.specification.user.FindUserById;
 import com.vlasova.specification.user.FindUserByLogin;
-import com.vlasova.specification.user.FindUserByLoginAndPassword;
 import com.vlasova.specification.user.FindUserByRole;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.vlasova.validation.UserDataValidator.*;
 
@@ -18,7 +20,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserService {
-    private final UserRepository userRepository;
+    private static Logger logger = LogManager.getLogger(UserService.class);
+
+    private final UserDao userDao;
 
     private static class Holder {
         private static final UserService INSTANCE = new UserService();
@@ -29,16 +33,13 @@ public class UserService {
     }
 
     private UserService() {
-        userRepository = UserRepositoryImpl.getInstance();
-    }
-    public UserRepository getUserRepository(){
-        return userRepository;
+        userDao = UserDaoImpl.getInstance();
     }
 
     public void delete(User user) throws ServiceException {
         if (user != null) {
             try {
-                userRepository.remove(user);
+                userDao.remove(user);
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
@@ -48,10 +49,7 @@ public class UserService {
     public User logIn(String login, String password) throws ServiceException {
         if (isValidLogin(login) && isValidPassword(password)) {
             try {
-                Set<User> users = userRepository.query(new FindUserByLoginAndPassword(login, password));
-                if (users.iterator().hasNext()) {
-                    return users.iterator().next();
-                }
+                return userDao.findUserByLoginAndPassword(login, password);
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
@@ -64,27 +62,21 @@ public class UserService {
      * if not: create user, write to DB, get from DB(with id)
      * (id needs for creating gradeReport later)
      */
-    public User registration(String name, String surname, String email, String login, String password, Privilege privilege) throws ServiceException {
-        User user = null;
-        if (isValidName(name) && isValidName(surname) && isValidEmail(email) && isValidLogin(login) && isValidPassword(password)) {
-            try {
-                if (getUserByLogin(login) == null) {
-                    user = new User();
-                    user.setRole(Role.ENROLLEE);
-                    user.setName(name);
-                    user.setSurname(surname);
-                    user.setEmail(email);
-                    user.setLogin(login);
-                    user.setPassword(password);
-                    user.setPrivilege(privilege);
-                    userRepository.add(user);
-                    user = userRepository.query(new FindUserByLoginAndPassword(login, password)).iterator().next();
-                }
-            } catch (RepositoryException e) {
-                throw new ServiceException(e);
-            }
+    public User registration(User user) {
+        if (isNotValidUserForRegistration(user)) {
+            throw new UserDataNotValidException();
         }
-        return user;
+        if (userDao.existsByEmail(user.getEmail())) {
+            throw new UserAlreadyExistsException(user.getEmail());
+        }
+
+        try {
+            userDao.add(user);
+            return userDao.findUserByLoginAndPassword(user.getLogin(), user.getPassword());
+        } catch (RepositoryException e) {
+            logger.error(e);
+            throw new ServiceException(e);
+        }
     }
 
     /*
@@ -93,7 +85,7 @@ public class UserService {
      */
     public User getUserById(int id) throws ServiceException {
         try {
-            Set<User> users = userRepository.query(new FindUserById(id));
+            Set<User> users = userDao.query(new FindUserById(id));
             return users.iterator().next();
         } catch (RepositoryException e) {
             throw new ServiceException(e);
@@ -106,7 +98,7 @@ public class UserService {
     public Set<User> getUsersByRole(Role role) throws ServiceException {
         if (role != null) {
             try {
-                return userRepository.query(new FindUserByRole(role));
+                return userDao.query(new FindUserByRole(role));
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }
@@ -117,10 +109,10 @@ public class UserService {
     /*
      *Check is user exist
      */
-    public User getUserByLogin(String login) throws ServiceException {
+    public User getUserByLogin(String login) {
         if (isValidLogin(login)) {
             try {
-                Set<User> users = userRepository.query(new FindUserByLogin(login));
+                Set<User> users = userDao.query(new FindUserByLogin(login));
                 return users.iterator().next();
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
@@ -132,7 +124,7 @@ public class UserService {
     public void editUser(User user) throws ServiceException {
         if (isValidUser(user)) {
             try {
-                userRepository.update(user);
+                userDao.update(user);
             } catch (RepositoryException e) {
                 throw new ServiceException(e);
             }

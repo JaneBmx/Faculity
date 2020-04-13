@@ -5,29 +5,42 @@ import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.specification.QueryException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
+import com.vlasova.repository.mappers.ResultSetMapper;
+import com.vlasova.repository.mappers.UserResultSetMapper;
 import com.vlasova.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserRepositoryImpl implements UserRepository {
-    /*
-     *Tested 02.03.20
-     */
+public class UserDaoImpl implements UserDao {
+
+    private static Logger logger = LogManager.getLogger(UserDaoImpl.class);
+
     private static final String INSERT = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password, user_privilege) VALUES(?,?,?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM users WHERE user_id = ?";
     private static final String UPDATE = "UPDATE users SET user_role_id = ?, user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_privilege =?";
+    private static final String FIND_BY_LOGIN_AND_PASSWORD =
+        "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege " +
+            "FROM users WHERE login = ? AND  password = ?";
 
-    private static class UserRepositoryHolder {
-        private static final UserRepositoryImpl INSTANCE = new UserRepositoryImpl();
+
+    private ResultSetMapper<User> mapper;
+
+    private static class UserDaoHolder {
+        private static final UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
-    public static UserRepositoryImpl getInstance() {
-        return UserRepositoryImpl.UserRepositoryHolder.INSTANCE;
+    public static UserDaoImpl getInstance() {
+        return UserDaoHolder.INSTANCE;
     }
 
-    private UserRepositoryImpl() {
+    private UserDaoImpl() {
+        this.mapper = new UserResultSetMapper();
     }
 
     /*
@@ -91,6 +104,27 @@ public class UserRepositoryImpl implements UserRepository {
                 throw new RepositoryException(e);
             }
         }
+    }
+
+    @Override
+    public User findUserByLoginAndPassword(String login, String password) throws RepositoryException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_LOGIN_AND_PASSWORD)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return mapper.map(resultSet);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            throw new RepositoryException(e);
+        }
+    }
+
+    //TODO: need to implement
+    @Override
+    public boolean existsByEmail(String email) {
+        return false;
     }
 
     /*

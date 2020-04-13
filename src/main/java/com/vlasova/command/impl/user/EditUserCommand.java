@@ -5,7 +5,7 @@ import com.vlasova.command.PageEnum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LogIn implements UserCommand {
+public class EditUserCommand implements UserCommand {
     @Override
     public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
         return null;

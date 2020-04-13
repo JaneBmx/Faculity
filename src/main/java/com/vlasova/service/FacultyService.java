@@ -4,8 +4,8 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.service.ServiceException;
-import com.vlasova.repository.faculity.FacultyRepository;
-import com.vlasova.repository.faculity.FacultyRepositoryImpl;
+import com.vlasova.repository.faculity.FacultyDao;
+import com.vlasova.repository.faculity.FacultyDaoImpl;
 import com.vlasova.specification.faculity.FindAllFaculties;
 import com.vlasova.specification.faculity.FindFacultyByFreePaid;
 import com.vlasova.specification.faculity.FindFacultyById;
@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FacultyService {
-    private final FacultyRepository facultyRepository;
+    private final FacultyDao facultyRepository;
 
     private static class Holder {
         private static final FacultyService INSTANCE = new FacultyService();
@@ -29,7 +29,7 @@ public class FacultyService {
     }
 
     private FacultyService() {
-        facultyRepository = FacultyRepositoryImpl.getInstance();
+        facultyRepository = FacultyDaoImpl.getInstance();
     }
 
     public Set<Faculty> getAllFaculties() throws ServiceException {

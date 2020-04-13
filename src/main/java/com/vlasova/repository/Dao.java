@@ -5,7 +5,7 @@ import com.vlasova.specification.Specification;
 
 import java.util.Set;
 
-public interface Repository<T> {
+public interface Dao<T> {
     void add(T t) throws RepositoryException;
 
     void remove(T t) throws RepositoryException;

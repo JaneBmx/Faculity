@@ -1,8 +1,5 @@
 package com.vlasova.controller;
 
-import com.vlasova.command.Command;
-import com.vlasova.command.PageEnum;
-import com.vlasova.factory.CommandFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +12,7 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
     }
 
     @Override
@@ -34,8 +31,5 @@ public class Controller extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Command command = CommandFactory.valueOf(req.getParameter("command").toUpperCase()).getCommand();
-        PageEnum pageEnum = command.execute(req, resp);
-        req.getRequestDispatcher(pageEnum.getPath()).forward(req, resp);
     }
 }

@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class GradeReportRepositoryImpl implements GradeReportRepository {
+public class GradeReportDaoImpl implements GradeReportDao {
     /*
      *Tested 02.03.20
      */
@@ -25,14 +25,14 @@ public class GradeReportRepositoryImpl implements GradeReportRepository {
     private static final String UPDATE = "UPDATE grade_reports SET certificate = ?, isAccepted = ?, isFree = ? WHERE user_id = ?";
 
     private static class GradeReportRepositoryHolder {
-        private static final GradeReportRepositoryImpl INSTANCE = new GradeReportRepositoryImpl();
+        private static final GradeReportDaoImpl INSTANCE = new GradeReportDaoImpl();
     }
 
-    public static GradeReportRepositoryImpl getInstance() {
+    public static GradeReportDaoImpl getInstance() {
         return GradeReportRepositoryHolder.INSTANCE;
     }
 
-    private GradeReportRepositoryImpl() {
+    private GradeReportDaoImpl() {
     }
 
     @Override

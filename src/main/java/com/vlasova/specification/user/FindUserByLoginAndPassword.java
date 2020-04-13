@@ -15,8 +15,8 @@ import java.util.Set;
  */
 public class FindUserByLoginAndPassword extends AbstractUserSpecification implements UserSpecification {
     private static final String FIND =
-            "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege " +
-                    "FROM users WHERE login = ? AND  password = ?";
+        "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege " +
+            "FROM users WHERE login = ? AND  password = ?";
     private String userLogin;
     private String userPassword;
 
@@ -30,14 +30,9 @@ public class FindUserByLoginAndPassword extends AbstractUserSpecification implem
         users = new HashSet<>();
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND)) {
-            if (preparedStatement != null) {
-                preparedStatement.setString(1, userLogin);
-                preparedStatement.setString(2, userPassword);
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    users.add(createUser());
-                }
-            }
+            preparedStatement.setString(1, userLogin);
+            preparedStatement.setString(2, userPassword);
+            resultSet = preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new QueryException(e);
         } finally {

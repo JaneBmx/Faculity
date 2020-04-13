@@ -1,6 +1,6 @@
 package com.vlasova.exception.service;
 
-public class ServiceException extends Exception {
+public class ServiceException extends RuntimeException {
     public ServiceException() {
     }
 

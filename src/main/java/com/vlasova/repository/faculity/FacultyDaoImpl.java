@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FacultyRepositoryImpl implements FacultyRepository {
+public class FacultyDaoImpl implements FacultyDao {
     /*
      *Tested 02.03.20
      */
@@ -24,14 +24,14 @@ public class FacultyRepositoryImpl implements FacultyRepository {
     private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? WHERE faculty_id = ?";
 
     private static class FacultyRepositoryHolder {
-        private static final FacultyRepositoryImpl INSTANCE = new FacultyRepositoryImpl();
+        private static final FacultyDaoImpl INSTANCE = new FacultyDaoImpl();
     }
 
-    public static FacultyRepositoryImpl getInstance() {
+    public static FacultyDaoImpl getInstance() {
         return FacultyRepositoryHolder.INSTANCE;
     }
 
-    private FacultyRepositoryImpl() {
+    private FacultyDaoImpl() {
     }
 
     /*

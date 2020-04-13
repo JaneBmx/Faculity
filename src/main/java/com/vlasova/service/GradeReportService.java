@@ -5,8 +5,8 @@ import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.exception.repository.RepositoryException;
 import com.vlasova.exception.service.ServiceException;
-import com.vlasova.repository.gradereport.GradeReportRepository;
-import com.vlasova.repository.gradereport.GradeReportRepositoryImpl;
+import com.vlasova.repository.gradereport.GradeReportDao;
+import com.vlasova.repository.gradereport.GradeReportDaoImpl;
 import com.vlasova.specification.gradereport.FindAllGradeReports;
 import com.vlasova.specification.gradereport.FindGradeReportByFaculty;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class GradeReportService {
-    private final GradeReportRepository gradeReportRepository;
+    private final GradeReportDao gradeReportRepository;
 
     private static class Holder {
         private static final GradeReportService INSTANCE = new GradeReportService();
@@ -28,7 +28,7 @@ public class GradeReportService {
     }
 
     private GradeReportService() {
-        gradeReportRepository = GradeReportRepositoryImpl.getInstance();
+        gradeReportRepository = GradeReportDaoImpl.getInstance();
     }
 
     public void addGradeReport(int userId, Faculty faculty, double certificate, Map<Subject, Integer> marks) throws ServiceException {

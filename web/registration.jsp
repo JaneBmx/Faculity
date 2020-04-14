@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="../css/registration.css">
+    <link rel="stylesheet" type="text/css" href="css/registration.css">
 </head>
 <body>
 <!-- барчик -->
@@ -18,7 +18,7 @@
         <h2 class="companyName">cool university</h2>
         <nav class="mainNav clearfix">
             <ul>
-                <li><a href="../index.jsp">Home</a></li>
+                <li><a href="index.jsp">Home</a></li>
                 <li><a href="login.jsp" class="smoothScroll">Log in</a></li>
                 <li><a href="#about" class="smoothScroll">About</a></li>
                 <li><a href="#contact" class="smoothScroll">Contact</a></li>
@@ -26,14 +26,11 @@
         </nav>
     </div>
 </div>
-<!-- форма для полей -->
 <div class="main-w3layouts wrapper">
     <h1>Create an Account</h1>
     <div class="main-agileinfo">
         <div class="agileits-top">
-            <%--            action="controller"--%>
-            <%--            enctype="multipart/form-data"--%>
-            <form action="controller" method="post">
+            <form action="${pageContext.request.contextPath}/controller?post=Registration" method="post">
                 <input class="text" type="text" name="user_name" placeholder="Name" required>
                 <input class="text_" type="text" name="user_surname" placeholder="Surname" required>
                 <input class="text email" type="email" name="user_email" placeholder="Email" required>

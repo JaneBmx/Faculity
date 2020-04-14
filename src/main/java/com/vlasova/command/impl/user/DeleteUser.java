@@ -1,13 +1,13 @@
 package com.vlasova.command.impl.user;
 
-import com.vlasova.command.web.WebPath;
+import com.vlasova.command.web.PageEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteUser implements UserCommand {
     @Override
-    public WebPath execute(HttpServletRequest request, HttpServletResponse response) {
+    public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 }

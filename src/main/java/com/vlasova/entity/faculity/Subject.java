@@ -20,7 +20,7 @@ public enum Subject {
     private String value;
     private int id;
 
-    private Subject(String value, int id) {
+    Subject(String value, int id) {
         this.value = value;
         this.id = id;
     }

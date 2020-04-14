@@ -1,5 +1,5 @@
 package com.vlasova.command.impl.user;
-import com.vlasova.command.web.WebPath;
+import com.vlasova.command.web.PageEnum;
 import com.vlasova.command.web.Parameter;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.exception.service.ServiceException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegisterUser implements UserCommand {
     @Override
-    public WebPath execute(HttpServletRequest request, HttpServletResponse response) {
+    public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter(Parameter.NAME.getParameter());
         String surname = request.getParameter(Parameter.SURNAME.getParameter());
         String email = request.getParameter(Parameter.EMAIL.getParameter());
@@ -20,9 +20,9 @@ public class RegisterUser implements UserCommand {
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
             UserService userService = serviceFactory.getUserService();
             userService.registration(name,surname,email,login,password, Privilege.NONE);
-            return WebPath.USER_PAGE;
+            return PageEnum.USER_PAGE;
         }catch (ServiceException e){
-            return WebPath.REGISTRATION;
+            return PageEnum.REGISTRATION;
         }
     }
 }

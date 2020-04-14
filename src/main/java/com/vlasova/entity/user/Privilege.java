@@ -10,7 +10,7 @@ public enum Privilege {
 
     private int id;
 
-    private Privilege(int id) {
+    Privilege(int id) {
         this.id = id;
     }
 

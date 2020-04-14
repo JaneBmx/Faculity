@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -22,7 +21,7 @@
             <nav class="mainNav clearfix">
                 <ul>
                     <li><a href="#home">Home</a></li>
-                    <li><a href="jsp/login.jsp" class="smoothScroll">Log in</a></li>
+                    <li><a href="login.jsp" class="smoothScroll">Log in</a></li>
                     <li><a href="" class="smoothScroll">About</a></li>
                     <li><a href="" class="smoothScroll">Contact</a></li>
                 </ul>

@@ -1,7 +1,7 @@
 package com.vlasova.controller;
 
 import com.vlasova.command.Command;
-import com.vlasova.command.web.WebPath;
+import com.vlasova.command.web.PageEnum;
 import com.vlasova.exception.connection.ClosePoolException;
 import com.vlasova.factory.CommandFactory;
 import com.vlasova.pool.ConnectionPool;
@@ -47,7 +47,7 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = CommandFactory.valueOf(req.getParameter("command").toUpperCase()).getCommand();
-        WebPath webPath = command.execute(req, resp);
-        req.getRequestDispatcher(webPath.getPath()).forward(req, resp);
+        PageEnum pageEnum = command.execute(req, resp);
+        req.getRequestDispatcher(pageEnum.getPath()).forward(req, resp);
     }
 }

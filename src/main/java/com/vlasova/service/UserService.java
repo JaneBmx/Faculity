@@ -31,9 +31,6 @@ public class UserService {
     private UserService() {
         userRepository = UserRepositoryImpl.getInstance();
     }
-    public UserRepository getUserRepository(){
-        return userRepository;
-    }
 
     public void delete(User user) throws ServiceException {
         if (user != null) {

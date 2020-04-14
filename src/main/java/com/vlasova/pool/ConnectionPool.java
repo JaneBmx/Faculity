@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public enum ConnectionPool {
     INSTANCE;
     private Logger logger = LogManager.getLogger(ConnectionPool.class);
-    private static final String PROPERTY_PATH = "src/main/resources/db.properties";
+    private static final String PROPERTY_PATH = "C:/Users/Bubaleh/Desktop/Faculity/src/main/resources/db.properties";
     private static final int DEFAULT_POOL_SIZE = 32;
     private String dbUrl;
     private BlockingQueue<ProxyConnection> free;
@@ -62,6 +62,9 @@ public enum ConnectionPool {
             connection = free.take();
             given.offer(connection);
         } catch (InterruptedException e) {
+            if (connection!=null){
+                //todo add connection obratno
+            }
             Thread.currentThread().interrupt();
             logger.warn(e);
         }

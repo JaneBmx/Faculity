@@ -10,7 +10,7 @@ public enum Parameter {
 
     private String parameter;
 
-    private Parameter(String parameter) {
+    Parameter(String parameter) {
         this.parameter = parameter;
     }
 

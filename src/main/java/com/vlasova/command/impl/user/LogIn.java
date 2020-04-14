@@ -1,6 +1,6 @@
 package com.vlasova.command.impl.user;
 
-import com.vlasova.command.web.WebPath;
+import com.vlasova.command.web.PageEnum;
 import com.vlasova.command.web.Parameter;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.factory.ServiceFactory;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LogIn implements UserCommand {
     @Override
-    public WebPath execute(HttpServletRequest request, HttpServletResponse response) {
+    public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
     try{
             ServiceFactory.getInstance().getUserService()
                     .logIn(request.getParameter(Parameter.LOGIN.getParameter())
                             ,request.getParameter(Parameter.PASSWORD.getParameter()));
-            return WebPath.USER_PAGE;
+            return PageEnum.USER_PAGE;
         }catch (ServiceException e){
-            return WebPath.LOGIN;
+            return PageEnum.LOGIN;
         }
     }
 }

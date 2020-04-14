@@ -1,13 +1,13 @@
 package com.vlasova.command.impl.faculty;
 
-import com.vlasova.command.web.WebPath;
+import com.vlasova.command.web.PageEnum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddFaculty implements FacultyCommand{
     @Override
-    public WebPath execute(HttpServletRequest request, HttpServletResponse response) {
+    public PageEnum execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 }

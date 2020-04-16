@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class User {
     private int id;
-    Role role;
+    private Role role;
     private String name;
     private String surname;
     private String email;
     private String login;
     private String password;
-    Privilege privilege;
-    GradeReport gradeReport;
+    private Privilege privilege;
+    private GradeReport gradeReport;
 
     public User() {
     }

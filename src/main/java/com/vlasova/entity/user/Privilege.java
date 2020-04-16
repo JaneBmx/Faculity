@@ -10,7 +10,7 @@ public enum Privilege {
 
     private int id;
 
-    private Privilege(int id) {
+    Privilege(int id) {
         this.id = id;
     }
 
@@ -19,19 +19,11 @@ public enum Privilege {
     }
 
     public static Privilege getPrivilegeById(int id) {
-        switch (id) {
-            case 1:
-                return OLYMPIAD;
-            case 2:
-                return ORPHAN;
-            case 3:
-                return RED_DIPLOMA;
-            case 4:
-                return FOREIGN;
-            case 5:
-                return COLLEGE;
-            default:
-                return NONE;
+        for (Privilege p : values()) {
+            if (p.getId() == id) {
+                return p;
+            }
         }
+        return NONE;
     }
 }

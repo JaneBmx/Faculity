@@ -17,10 +17,11 @@ public enum Subject {
     BIOLOGY("Biology", 14),
     SOCIAL("Social", 15),
     UNDEFINED("Undefined", 0);
+
     private String value;
     private int id;
 
-    private Subject(String value, int id) {
+    Subject(String value, int id) {
         this.value = value;
         this.id = id;
     }

@@ -5,7 +5,7 @@ import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.specification.mapper.UserResultSetMapper;
+import com.vlasova.dao.mapper.UserResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +27,6 @@ public class UserDAOImpl implements UserDAO {
     private static final String FIND_BY_ID = "SELECT user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE user_id = ?";
     private static final String FIND_ALL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users ";
     private static final String FIND_BY_ROLE = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE user_role = ?";
-
     private UserResultSetMapper mapper = new UserResultSetMapper();
     private ResultSet resultSet;
     private Set<User> users;

@@ -29,7 +29,7 @@ public class GradeReportDAOImpl implements GradeReportDAO {
     private static final String FIND_ALL = "SELECT g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id UNION SELECT  g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id";
     private static final String FIND_BY_FACULTY = "SELECT g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? UNION SELECT  g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? ";
     private static final String FIND_BY_USER = "SELECT g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE user_id = ? UNION SELECT  g.user_id, g.faculty_id, g.certificate, g.isAccepted, g.isFreePaid, gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE user_id = ? ";
-    GradeReportResultSetMapper mapper = new GradeReportResultSetMapper();
+    private GradeReportResultSetMapper mapper = new GradeReportResultSetMapper();
     ResultSet resultSet;
 
     @Override

@@ -1,4 +1,6 @@
-package com.vlasova.dao.faculity;
+package com.vlasova.dao.faculty;
+
+import static com.vlasova.dao.SQLQueries.*;
 
 import com.vlasova.dao.mapper.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
@@ -25,21 +27,8 @@ public class FacultyDAOImpl implements FacultyDAO {
     private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? WHERE faculty_id = ?";
     private static final String FIND_ALL_FACULTIES = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id;";
     private static final String FIND_BY_PAID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ? UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
-    private static final String FIND_BY_ID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-            "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
-            "WHERE f.faculty_id = ? " +
-            "UNION " +
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-            "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
-            "WHERE f.faculty_id = ?;";
-    private static final String FIND_BY_SUBJECT =
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
-                    "WHERE sf.subject_id " +
-                    "UNION " +
-                    "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
-                    "WHERE sf.subject_id = ?;";
+    private static final String FIND_BY_ID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.faculty_id = ? UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id";
+    private static final String FIND_BY_SUBJECT = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id = ?;";
     private FacultyResultSetMapper mapper = new FacultyResultSetMapper();
     private ResultSet resultSet;
 
@@ -141,10 +130,10 @@ public class FacultyDAOImpl implements FacultyDAO {
     public Set<Faculty> findFacultyBySubject(Subject subject) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_SUBJECT);) {
-                statement.setInt(1, subject.getId());
-                statement.setInt(2, subject.getId());
-                resultSet = statement.executeQuery();
-                return mapper.map(resultSet);
+            statement.setInt(1, subject.getId());
+            statement.setInt(2, subject.getId());
+            resultSet = statement.executeQuery();
+            return mapper.map(resultSet);
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

@@ -1,4 +1,4 @@
-package com.vlasova.dao.faculity;
+package com.vlasova.dao.faculty;
 
 import com.vlasova.dao.DAO;
 import com.vlasova.entity.faculity.Faculty;

@@ -11,6 +11,4 @@ public interface DAO<T> {
     void remove(T t) throws DAOException;
 
     void update(T t) throws DAOException;
-
-    Set<T> query(Specification<T> specification) throws DAOException;
 }

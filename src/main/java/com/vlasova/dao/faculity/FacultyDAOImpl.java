@@ -1,122 +1,165 @@
 package com.vlasova.dao.faculity;
 
-import com.vlasova.dao.DAO;
+import com.vlasova.dao.mapper.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
+import com.vlasova.exception.CreateObjectException;
 import com.vlasova.exception.dao.DAOException;
-import com.vlasova.exception.specification.QueryException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.specification.Specification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.sql.Statement;
 import java.util.Set;
 
-public class FacultyDAOImpl implements DAO<Faculty> {
-    /*
-     *Tested 02.03.20
-     */
+public class FacultyDAOImpl implements FacultyDAO {
+    private static final Logger LOGGER = LogManager.getLogger(FacultyDAOImpl.class);
     private static final String INSERT_FACULTY = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) VALUES(?,?,?)";
     private static final String INSERT_SUBJECTS = "INSERT INTO subject2faculty(faculty_id, subject_id) VALUES (?,?)";
     private static final String DELETE = "DELETE FROM faculties WHERE faculty_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM subject2faculty WHERE faculty_id = ?";
     private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? WHERE faculty_id = ?";
+    private static final String FIND_ALL_FACULTIES = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id;";
+    private static final String FIND_BY_PAID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ? UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
+    private static final String FIND_BY_ID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+            "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+            "WHERE f.faculty_id = ? " +
+            "UNION " +
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+            "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+            "WHERE f.faculty_id = ?;";
+    private static final String FIND_BY_SUBJECT =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE sf.subject_id " +
+                    "UNION " +
+                    "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE sf.subject_id = ?;";
+    private FacultyResultSetMapper mapper = new FacultyResultSetMapper();
+    private ResultSet resultSet;
 
-    private static class FacultyRepositoryHolder {
-        private static final FacultyDAOImpl INSTANCE = new FacultyDAOImpl();
-    }
-
-    public static FacultyDAOImpl getInstance() {
-        return FacultyRepositoryHolder.INSTANCE;
-    }
-
-    private FacultyDAOImpl() {
-    }
-
-    /*
-     *Add Faculty in 'faculties'
-     *Add Faculty.subjects in 'subject2faculty'
-     */
     @Override
     public void add(Faculty faculty) throws DAOException {
-        if (faculty != null) {
-            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-                 PreparedStatement preparedStatementFaculty = connection.prepareStatement(INSERT_FACULTY);
-                 PreparedStatement preparedStatementSubjects = connection.prepareStatement(INSERT_SUBJECTS)) {
-                if (preparedStatementFaculty != null) {
-                    preparedStatementFaculty.setString(1, faculty.getName());
-                    preparedStatementFaculty.setInt(2, faculty.getFreeAcceptPlan());
-                    preparedStatementFaculty.setInt(3, faculty.getPaidAcceptPlan());
-                    preparedStatementFaculty.executeUpdate();
-                }
-                if (preparedStatementSubjects != null) {
-                    for (Subject sb : faculty.getSubjects()) {
-                        preparedStatementSubjects.setInt(1, faculty.getId());
-                        preparedStatementSubjects.setInt(2, sb.getId());
-                        preparedStatementSubjects.executeUpdate();
-                    }
-                }
-            } catch (SQLException e) {
-                throw new DAOException(e);
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatementFaculty = connection.prepareStatement(INSERT_FACULTY);
+             PreparedStatement preparedStatementSubjects = connection.prepareStatement(INSERT_SUBJECTS)) {
+            preparedStatementFaculty.setString(1, faculty.getName());
+            preparedStatementFaculty.setInt(2, faculty.getFreeAcceptPlan());
+            preparedStatementFaculty.setInt(3, faculty.getPaidAcceptPlan());
+            preparedStatementFaculty.executeUpdate();
+            for (Subject sb : faculty.getSubjects()) {
+                preparedStatementSubjects.setInt(1, faculty.getId());
+                preparedStatementSubjects.setInt(2, sb.getId());
+                preparedStatementSubjects.executeUpdate();
             }
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
         }
     }
 
-    /*
-     *Remove faculty by faculty.id from 'faculties'
-     *Remove subjects by faculty.is from 'subject2faculty'
-     */
     @Override
     public void remove(Faculty faculty) throws DAOException {
-        if (faculty != null) {
-            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-                 PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
-                if (preparedStatement != null) {
-                    preparedStatement.setInt(1, faculty.getId());
-                    preparedStatement.executeUpdate();
-                }
-                if (preparedStatement1 != null) {
-                    preparedStatement1.setInt(1, faculty.getId());
-                }
-            } catch (SQLException e) {
-                throw new DAOException(e);
-            }
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+             PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
+            preparedStatement.setInt(1, faculty.getId());
+            preparedStatement.executeUpdate();
+            preparedStatement1.setInt(1, faculty.getId());
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
         }
     }
 
-    /*
-     *Update faculty by faculty.id from 'faculties'
-     */
     @Override
     public void update(Faculty faculty) throws DAOException {
-        if (faculty != null) {
-            try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
-                preparedStatement.setString(1, faculty.getName());
-                preparedStatement.setInt(2, faculty.getFreeAcceptPlan());
-                preparedStatement.setInt(3, faculty.getPaidAcceptPlan());
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                throw new DAOException(e);
-            }
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);) {
+            preparedStatement.setString(1, faculty.getName());
+            preparedStatement.setInt(2, faculty.getFreeAcceptPlan());
+            preparedStatement.setInt(3, faculty.getPaidAcceptPlan());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
         }
     }
 
-    /*
-     *Accepts any 'Faculty' specification
-     */
     @Override
-    public Set<Faculty> query(Specification<Faculty> specification) throws DAOException {
-        if (specification != null) {
+    public Set<Faculty> findAllFaculties() throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             Statement statement = connection.createStatement()) {
+            resultSet = statement.executeQuery(FIND_ALL_FACULTIES);
+            return mapper.map(resultSet);
+        } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    @Override
+    public Set<Faculty> findFacultyByPaid(boolean isPaid) throws DAOException {
+        String paid = isPaid ? "> 0" : " = 0";
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_PAID)) {
+            statement.setString(1, paid);
+            statement.setString(2, paid);
+            resultSet = statement.executeQuery(FIND_BY_PAID);
+            return mapper.map(resultSet);
+        } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    @Override
+    public Faculty findFacultyById(int id) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+            return mapper.map(resultSet).iterator().next();
+        } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    @Override
+    public Set<Faculty> findFacultyBySubject(Subject subject) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_SUBJECT);) {
+                statement.setInt(1, subject.getId());
+                statement.setInt(2, subject.getId());
+                resultSet = statement.executeQuery();
+                return mapper.map(resultSet);
+        } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    private void closeResultSet() {
+        if (resultSet != null) {
             try {
-                return specification.query();
-            } catch (QueryException e) {
-                throw new DAOException(e);
+                resultSet.close();
+            } catch (SQLException e) {
+                LOGGER.warn(e);
             }
         }
-        return new HashSet<>();
     }
 }

@@ -2,35 +2,35 @@ package com.vlasova.factory;
 
 import com.vlasova.command.Command;
 import com.vlasova.command.impl.faculty.*;
-import com.vlasova.command.impl.gradeReport.*;
+import com.vlasova.command.impl.gradereport.*;
 import com.vlasova.command.impl.user.*;
 
 public enum CommandFactory {
-    REGISTRATION(new RegisterUser()),
-    LOG_IN(new LogIn()),
-    EDIT_USER(new EditUser()),
+    REGISTRATION(new SignUpCommand()),
+    LOG_IN(new SignInCommand()),
+    EDIT_USER(new EditUserCommand()),
     DELETE_USER(new DeleteUser()),
-    GET_USERS_BY_ROLE(new GetUsersByRoles()),
+    GET_USERS_BY_ROLE(new GetUsersByRolesCommand()),
     GET_USER_BY_ID(new GetUserById()),
 
-    SHOW_ALL_FACULTIES(new GetAllFaculties()),
-    ADD_FACULTY(new AddFaculty()),
-    DELETE_FACULTY(new DeleteFaculty()),
-    EDIT_FACULTY(new EditFaculty()),
-    SHOW_ALL_FREE_PAID_FACULTY(new GetAllFreePaidFaculties()),
-    SHOW_FACULTY_BY_ID(new GetFacultyById()),
-    SHOW_FACULTY_BY_SUBJECT(new GetFacultiesBySubject()),
+    SHOW_ALL_FACULTIES(new GetAllFacultiesCommand()),
+    ADD_FACULTY(new AddFacultyCommand()),
+    DELETE_FACULTY(new DeleteFacultyCommand()),
+    EDIT_FACULTY(new EditFacultyCommand()),
+    SHOW_ALL_FREE_PAID_FACULTY(new GetAllFreePaidFacultiesCommand()),
+    SHOW_FACULTY_BY_ID(new GetFacultyByIdCommand()),
+    SHOW_FACULTY_BY_SUBJECT(new GetFacultiesBySubjectCommand()),
 
-    ADD_GRADE_REPORT(new AddGradeReport()),
-    CHANGE_GRADE_REPORT_STATUS(new ChangeGradeReportStatus()),
-    DELETE_GRADE_REPORT(new DeleteGradeReport()),
-    EDIT_GRADE_REPORT(new EditGradeReport()),
-    SHOW_ALL_GRADE_REPORTS(new GetAllGradeReports()),
-    SHOW_GRADE_REPORTS_BY_FACULTY(new GetGradeReportsByFaculty());
+    ADD_GRADE_REPORT(new AddGradeReportCommand()),
+    CHANGE_GRADE_REPORT_STATUS(new ChangeGradeReportStatusCommand()),
+    DELETE_GRADE_REPORT(new DeleteGradeReportCommand()),
+    EDIT_GRADE_REPORT(new EditGradeReportCommand()),
+    SHOW_ALL_GRADE_REPORTS(new GetAllGradeReportsCommand()),
+    SHOW_GRADE_REPORTS_BY_FACULTY(new GetGradeReportsByFacultyCommand());
 
     private Command command;
 
-    private CommandFactory(Command command) {
+    CommandFactory(Command command) {
         this.command = command;
     }
 

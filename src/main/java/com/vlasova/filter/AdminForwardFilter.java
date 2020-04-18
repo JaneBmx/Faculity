@@ -13,9 +13,6 @@ public class AdminForwardFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
-    /*
-     *If user not admin, he can't get admin page by url
-     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

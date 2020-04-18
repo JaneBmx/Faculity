@@ -20,9 +20,6 @@ public class PageRedirectFilter implements Filter {
         indexPath = filterConfig.getInitParameter("INDEX_PATH");
     }
 
-    /*
-     *Avoid getting authorized pages without login by url
-     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {

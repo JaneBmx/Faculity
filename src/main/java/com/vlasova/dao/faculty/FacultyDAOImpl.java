@@ -1,11 +1,9 @@
 package com.vlasova.dao.faculty;
 
-import static com.vlasova.dao.SQLQueries.*;
-
-import com.vlasova.dao.mapper.FacultyResultSetMapper;
+import com.vlasova.mapper.dao.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
-import com.vlasova.exception.CreateObjectException;
+import com.vlasova.exception.dao.CreateObjectException;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;

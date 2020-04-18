@@ -1,8 +1,10 @@
 package com.vlasova.command;
 
+import com.vlasova.params.PageAddress;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface Command {
-    PageEnum execute(HttpServletRequest request, HttpServletResponse response);
+    PageAddress execute(HttpServletRequest request, HttpServletResponse response);
 }

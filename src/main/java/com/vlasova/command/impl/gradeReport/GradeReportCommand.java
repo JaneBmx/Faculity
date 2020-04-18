@@ -1,4 +1,4 @@
-package com.vlasova.command.impl.gradeReport;
+package com.vlasova.command.impl.gradereport;
 
 import com.vlasova.command.Command;
 

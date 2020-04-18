@@ -4,11 +4,11 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
-import com.vlasova.exception.CreateObjectException;
+import com.vlasova.exception.dao.CreateObjectException;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.dao.mapper.GradeReportResultSetMapper;
+import com.vlasova.mapper.dao.GradeReportResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -93,7 +93,7 @@ public class GradeReportDAOImpl implements GradeReportDAO {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(FIND_ALL);
-            return mapper.createGradeReports(resultSet);
+            return mapper.map(resultSet);
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
@@ -109,7 +109,7 @@ public class GradeReportDAOImpl implements GradeReportDAO {
             preparedStatement.setInt(1, faculty.getId());
             preparedStatement.setInt(2, faculty.getId());
             resultSet = preparedStatement.executeQuery();
-            return mapper.createGradeReports(resultSet);
+            return mapper.map(resultSet);
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
@@ -125,7 +125,7 @@ public class GradeReportDAOImpl implements GradeReportDAO {
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setInt(2, user.getId());
             resultSet = preparedStatement.executeQuery();
-            return mapper.createGradeReports(resultSet).iterator().next();
+            return mapper.map(resultSet).iterator().next();
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

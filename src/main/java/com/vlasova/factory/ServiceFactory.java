@@ -1,9 +1,8 @@
 package com.vlasova.factory;
 
-import com.vlasova.service.*;
-import com.vlasova.service.impl.FacultyServiceImpl;
-import com.vlasova.service.impl.GradeReportServiceImpl;
-import com.vlasova.service.impl.UserServiceImpl;
+import com.vlasova.service.FacultyService;
+import com.vlasova.service.GradeReportService;
+import com.vlasova.service.UserService;
 
 public final class ServiceFactory {
     private final FacultyService facultyService;
@@ -15,9 +14,9 @@ public final class ServiceFactory {
     }
 
     private ServiceFactory() {
-        facultyService = FacultyServiceImpl.getInstance();
-        gradeReportService = GradeReportServiceImpl.getInstance();
-        userService = UserServiceImpl.getInstance();
+        facultyService = FacultyService.SERVICE;
+        gradeReportService = GradeReportService.SERVICE;
+        userService = UserService.SERVICE;
     }
 
     public static ServiceFactory getInstance() {

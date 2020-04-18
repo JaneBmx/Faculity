@@ -15,9 +15,6 @@ public class EncodingFilter implements Filter {
         code = filterConfig.getInitParameter("encoding");
     }
 
-    /*
-     *Avoid wrong displaying russian language
-     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {

@@ -5,7 +5,7 @@ import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface UserDAO extends DAO<User> {
     boolean existsByEmailAndLogin(String email, String login) throws DAOException;
@@ -14,7 +14,7 @@ public interface UserDAO extends DAO<User> {
 
     User findUserById(int id) throws DAOException;
 
-    Set<User> findAllUsers() throws DAOException;
+    Collection<User> findAllUsers() throws DAOException;
 
-    Set<User> findUsersByRole(Role role) throws DAOException;
+    Collection<User> findUsersByRole(Role role) throws DAOException;
 }

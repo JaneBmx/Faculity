@@ -6,12 +6,12 @@ import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface GradeReportDAO extends DAO<GradeReport> {
-    Set<GradeReport> findAllGradeReports() throws DAOException;
+    Collection<GradeReport> findAllGradeReports() throws DAOException;
 
-    Set<GradeReport> findGradeReportsByFaculty(Faculty faculty) throws DAOException;
+    Collection<GradeReport> findGradeReportsByFaculty(Faculty faculty) throws DAOException;
 
     GradeReport findGradeReportByUser(User user) throws DAOException;
 }

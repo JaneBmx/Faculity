@@ -1,9 +1,6 @@
 package com.vlasova.dao;
 
 import com.vlasova.exception.dao.DAOException;
-import com.vlasova.specification.Specification;
-
-import java.util.Set;
 
 public interface DAO<T> {
     void add(T t) throws DAOException;

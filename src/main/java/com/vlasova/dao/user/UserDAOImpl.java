@@ -1,5 +1,6 @@
 package com.vlasova.dao.user;
 
+import com.vlasova.dao.AbstractDAO;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
@@ -10,25 +11,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
-    private static final String CREATE = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password, user_privilege) VALUES(?,?,?,?,?,?,?)";
+    private static final String CREATE = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password) VALUES(?,?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM users WHERE user_id = ?";
-    private static final String UPDATE = "UPDATE users SET user_role_id = ?, user_name = ?, user_surname = ?, user_email = ?, user_password = ?, user_privilege =?";
-    private static final String FIND_BY_LOG_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE login = ? AND  password = ?";
-    private static final String FIND_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE login = ? AND  password = ?";
-    private static final String FIND_BY_ID = "SELECT user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE user_id = ?";
-    private static final String FIND_ALL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users ";
-    private static final String FIND_BY_ROLE = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password, user_privilege FROM users WHERE user_role = ?";
-    private UserResultSetMapper mapper = new UserResultSetMapper();
-    private ResultSet resultSet;
+    private static final String UPDATE = "UPDATE users SET user_role_id = ?, user_name = ?, user_surname = ?, user_email = ?, user_password = ?";
+    private static final String FIND_BY_LOG_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE login = ? AND  password = ?";
+    private static final String FIND_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE login = ? AND  password = ?";
+    private static final String FIND_BY_ID = "SELECT user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_id = ?";
+    private static final String FIND_ALL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users ";
+    private static final String FIND_BY_ROLE = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_role = ?";
+    private final UserResultSetMapper mapper = new UserResultSetMapper();
     private Set<User> users;
 
     @Override
@@ -42,7 +40,6 @@ public class UserDAOImpl implements UserDAO {
                 preparedStatement.setString(4, user.getEmail());
                 preparedStatement.setString(5, user.getLogin());
                 preparedStatement.setString(6, user.getPassword());
-                preparedStatement.setInt(7, user.getPrivilege().getId());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -72,7 +69,6 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(3, user.getSurname());
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setInt(6, user.getPrivilege().getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -171,15 +167,5 @@ public class UserDAOImpl implements UserDAO {
             closeResultSet();
         }
         return users;
-    }
-
-    private void closeResultSet() {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                LOGGER.warn(e);
-            }
-        }
     }
 }

@@ -23,7 +23,7 @@ public enum GradeReportService {
         gradeReport.setAccepted(false);
         gradeReport.setFree(false);
         gradeReport.setMarks(marks);
-        gradeReport.setCertificate(certificate);
+        gradeReport.setAttestatMark(certificate);
         try {
             gradeReportDAO.add(gradeReport);
         } catch (DAOException e) {

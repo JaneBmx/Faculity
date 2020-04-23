@@ -12,7 +12,7 @@ public class GradeReport {
     private boolean isAccepted;
     private boolean isFree;
     private Privilege privilege;
-    private double certificate;
+    private double attestatMark;
     private double averageMark;
     private Map<Subject, Integer> marks;
 
@@ -27,12 +27,12 @@ public class GradeReport {
         this.id = id;
     }
 
-    public double getCertificate() {
-        return certificate;
+    public double getAttestatMark() {
+        return attestatMark;
     }
 
-    public void setCertificate(double certificate) {
-        this.certificate = certificate;
+    public void setAttestatMark(double attestatMark) {
+        this.attestatMark = attestatMark;
     }
 
     public boolean isAccepted() {
@@ -91,7 +91,7 @@ public class GradeReport {
         return id == that.id &&
                 isAccepted == that.isAccepted &&
                 isFree == that.isFree &&
-                Double.compare(that.certificate, certificate) == 0 &&
+                Double.compare(that.attestatMark, attestatMark) == 0 &&
                 Double.compare(that.averageMark, averageMark) == 0 &&
                 faculty.equals(that.faculty) &&
                 privilege == that.privilege &&
@@ -100,7 +100,7 @@ public class GradeReport {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, faculty, isAccepted, isFree, privilege, certificate, averageMark, marks);
+        return Objects.hash(id, faculty, isAccepted, isFree, privilege, attestatMark, averageMark, marks);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class GradeReport {
                 ", isAccepted=" + isAccepted +
                 ", isFree=" + isFree +
                 ", privilege=" + privilege +
-                ", certificate=" + certificate +
+                ", certificate=" + attestatMark +
                 ", averageMark=" + averageMark +
                 ", marks=" + marks +
                 '}';

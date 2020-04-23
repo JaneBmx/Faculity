@@ -1,5 +1,6 @@
 package com.vlasova.dao.faculty;
 
+import com.vlasova.dao.AbstractDAO;
 import com.vlasova.mapper.dao.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
@@ -16,19 +17,36 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
-public class FacultyDAOImpl implements FacultyDAO {
+public class FacultyDAOImpl  extends AbstractDAO implements FacultyDAO{
     private static final Logger LOGGER = LogManager.getLogger(FacultyDAOImpl.class);
-    private static final String INSERT_FACULTY = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) VALUES(?,?,?)";
+    private static final String INSERT_FACULTY = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) " +
+                                                 "VALUES(?,?,?)";
     private static final String INSERT_SUBJECTS = "INSERT INTO subject2faculty(faculty_id, subject_id) VALUES (?,?)";
     private static final String DELETE = "DELETE FROM faculties WHERE faculty_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM subject2faculty WHERE faculty_id = ?";
-    private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? WHERE faculty_id = ?";
-    private static final String FIND_ALL_FACULTIES = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id;";
-    private static final String FIND_BY_PAID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ? UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
-    private static final String FIND_BY_ID = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.faculty_id = ? UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id";
-    private static final String FIND_BY_SUBJECT = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id = ?;";
-    private FacultyResultSetMapper mapper = new FacultyResultSetMapper();
-    private ResultSet resultSet;
+    private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? " +
+                                         "WHERE faculty_id = ?";
+    private static final String FIND_ALL_FACULTIES =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id;";
+    private static final String FIND_BY_PAID =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id " +
+                    "WHERE f.free_accept_plan ? " +
+                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
+    private static final String FIND_BY_ID =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE f.faculty_id = ? " +
+                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id";
+    private static final String FIND_BY_SUBJECT =
+            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f LEFT JOIN  subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id " +
+                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                    "FROM faculties f RIGHT JOIN subject2faculty sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id = ?;";
+    private final FacultyResultSetMapper mapper = new FacultyResultSetMapper();
 
     @Override
     public void add(Faculty faculty) throws DAOException {
@@ -137,16 +155,6 @@ public class FacultyDAOImpl implements FacultyDAO {
             throw new DAOException(e);
         } finally {
             closeResultSet();
-        }
-    }
-
-    private void closeResultSet() {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                LOGGER.warn(e);
-            }
         }
     }
 }

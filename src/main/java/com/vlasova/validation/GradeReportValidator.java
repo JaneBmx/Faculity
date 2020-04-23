@@ -33,7 +33,7 @@ public class GradeReportValidator {
 
     public static boolean isValidGradeReport(GradeReport gradeReport) {
         if (gradeReport != null) {
-            return isValidCertificate(gradeReport.getCertificate())
+            return isValidCertificate(gradeReport.getAttestatMark())
                     && isValidMarks(gradeReport.getMarks());
         }
         return false;

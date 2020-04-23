@@ -41,7 +41,7 @@ public class GradeReportResultSetMapper {
                     gradeReport.setAccepted(resultSet.getBoolean(IS_ACCEPTED));
                     gradeReport.setFree(resultSet.getBoolean(IS_FREE_PAID));
                     gradeReport.setPrivilege(Privilege.getPrivilegeById(resultSet.getInt(PRIVILEGE)));
-                    gradeReport.setCertificate(resultSet.getDouble(ATTESTAT_MARK));
+                    gradeReport.setAttestatMark(resultSet.getDouble(ATTESTAT_MARK));
                     gradeReport.setAverageMark(resultSet.getDouble(AVERAGE_MARK));
                     gradeReport.setMarks(new HashMap<>());
                 }

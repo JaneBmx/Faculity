@@ -7,7 +7,7 @@ public enum Subject {
     GEOLOGY("Geology", 4),
     RUSSIAN("Russian", 5),
     ENGLISH("English", 6),
-    DEUTCH("Deutch", 7),
+    DEUTSCH("Deutch", 7),
     SPANISH("Spanish", 8),
     FRENCH("French", 9),
     INFORMATICS("Informatics", 10),

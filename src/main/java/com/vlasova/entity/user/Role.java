@@ -2,8 +2,8 @@ package com.vlasova.entity.user;
 
 public enum Role {
     ADMIN(1),
-    USER(3),
-    GUEST(4);
+    USER(2),
+    GUEST(3);
 
     private int roleId;
 

@@ -18,7 +18,7 @@ public class EditUserCommand implements UserCommand {
         User user = new UserRequestMapper().map(request);
         try {
             if (isValidUser(user)) {
-                UserService.SERVICE.editUser(user);
+                UserService.getInstance().editUser(user);
                 request.getSession().setAttribute("user", user);
                 request.setAttribute("message", "Data has been update");
             }

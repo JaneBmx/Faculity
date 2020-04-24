@@ -14,9 +14,9 @@ public final class ServiceFactory {
     }
 
     private ServiceFactory() {
-        facultyService = FacultyService.SERVICE;
-        gradeReportService = GradeReportService.SERVICE;
-        userService = UserService.SERVICE;
+        facultyService = FacultyService.getInstance();
+        gradeReportService = GradeReportService.getInstance();
+        userService = UserService.getInstance();
     }
 
     public static ServiceFactory getInstance() {

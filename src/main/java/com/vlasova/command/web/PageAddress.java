@@ -3,7 +3,7 @@ package com.vlasova.command.web;
 public enum PageAddress {
     ERROR("jsp/error_page"),
     HOME_PAGE("jsp/home.jsp"),
-    LOGIN("jsp/login.jsp"),
+    LOGIN("jsp/signin.jsp"),
     REGISTRATION("registration.jsp"),
     ABOUT("jsp/about.jsp"),
     CONTACRS("jsp/contacts"),

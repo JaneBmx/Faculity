@@ -2,7 +2,7 @@ package com.vlasova.params;
 
 public enum PageAddress {
     HOME_PAGE("/index.jsp"),
-    LOG_IN("/jsp/login.jsp"),
+    LOG_IN("/jsp/signin.jsp"),
     SIGN_UP("/jsp/registration"),
     USER_PAGE("jsp/user/user.jsp"),
     ADMIN_PAGE("/jsp/admin/admin.jsp"),

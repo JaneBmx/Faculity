@@ -2,28 +2,31 @@ package com.vlasova.service;
 
 import com.vlasova.dao.gradereport.GradeReportDAO;
 import com.vlasova.entity.faculity.Faculty;
-import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.dao.gradereport.GradeReportDAOImpl;
 
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
 
-public enum GradeReportService {
-    SERVICE;
-    private GradeReportDAO gradeReportDAO = new GradeReportDAOImpl();
+public class GradeReportService {
+    public static class Holder {
+        static final GradeReportService INSTANCE = new GradeReportService();
+    }
 
-    public void addGradeReport(int userId, Faculty faculty, double certificate, Map<Subject, Integer> marks) throws ServiceException {
-        GradeReport gradeReport = new GradeReport();
-        gradeReport.setId(userId);
-        gradeReport.setFacultyId(faculty.getId());
-        gradeReport.setAccepted(false);
-        gradeReport.setFree(false);
-        gradeReport.setMarks(marks);
-        gradeReport.setAttestatMark(certificate);
+    public static GradeReportService getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    private final GradeReportDAO gradeReportDAO;
+
+    private GradeReportService() {
+        gradeReportDAO = new GradeReportDAOImpl();
+    }
+
+    public void addGradeReport(GradeReport gradeReport) throws ServiceException {
         try {
             gradeReportDAO.add(gradeReport);
         } catch (DAOException e) {
@@ -49,7 +52,7 @@ public enum GradeReportService {
 
     public Set<GradeReport> getAllGradeReports() throws ServiceException {
         try {
-            return gradeReportDAO.findAllGradeReports();
+            return new HashSet<>(gradeReportDAO.findAllGradeReports());
         } catch (DAOException e) {
             throw new ServiceException();
         }
@@ -57,7 +60,7 @@ public enum GradeReportService {
 
     public Set<GradeReport> getGradeReportsByFaculty(Faculty faculty) throws ServiceException {
         try {
-            return gradeReportDAO.findGradeReportsByFaculty(faculty);
+            return new HashSet<>(gradeReportDAO.findGradeReportsByFaculty(faculty));
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

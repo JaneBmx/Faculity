@@ -1,33 +1,35 @@
 package com.vlasova.service;
 
 import com.vlasova.dao.user.UserDAO;
-import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.dao.user.UserDAOImpl;
 
+import java.util.HashSet;
 import java.util.Set;
 
-public enum UserService {
-    SERVICE;
-    private final UserDAO userDAO = new UserDAOImpl();
+public class UserService {
+    public static class Holder {
+        static final UserService INSTANCE = new UserService();
+    }
 
-    public User registration(String name, String surname, String email, String login, String password, Privilege privilege) throws ServiceException {
-        User user = null;
+    public static UserService getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    private UserService() {
+        userDAO = new UserDAOImpl();
+    }
+
+    private final UserDAO userDAO;
+
+    public User registration(User user) throws ServiceException {
         try {
-            if (!userDAO.existsByEmailAndLogin(email, login)) {
-                user = new User();
-                user.setRole(Role.USER);
-                user.setName(name);
-                user.setSurname(surname);
-                user.setEmail(email);
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setPrivilege(privilege);
+            if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getPassword())) {
                 userDAO.add(user);
-                user = userDAO.findUserByLoginAndPassword(login, password);
+                user = userDAO.findUserByLoginAndPassword(user.getLogin(),user.getPassword());
             }
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -61,7 +63,7 @@ public enum UserService {
 
     public Set<User> getUsersByRole(Role role) throws ServiceException {
         try {
-            return userDAO.findUsersByRole(role);
+            return new HashSet<>(userDAO.findUsersByRole(role));
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

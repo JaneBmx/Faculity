@@ -1,9 +1,10 @@
 package com.vlasova.entity.faculity;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
-public class Faculty {
+public class Faculty implements Serializable {
     private int id;
     private String name;
     private int freeAcceptPlan;

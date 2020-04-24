@@ -3,10 +3,11 @@ package com.vlasova.entity.user;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-public class GradeReport {
+public class GradeReport implements Serializable {
     private int id;
     private Faculty faculty;
     private boolean isAccepted;

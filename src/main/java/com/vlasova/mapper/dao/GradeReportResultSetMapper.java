@@ -1,9 +1,11 @@
 package com.vlasova.mapper.dao;
 
+import com.vlasova.dao.faculty.FacultyDAOImpl;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.exception.dao.CreateObjectException;
+import com.vlasova.exception.dao.DAOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,6 +40,7 @@ public class GradeReportResultSetMapper {
                     gradeReport = new GradeReport();
                     gradeReportMap.put(id, gradeReport);
                     gradeReport.setId(id);
+                    gradeReport.setFaculty(new FacultyDAOImpl().findFacultyById(resultSet.getInt(FACULTY_ID)));
                     gradeReport.setAccepted(resultSet.getBoolean(IS_ACCEPTED));
                     gradeReport.setFree(resultSet.getBoolean(IS_FREE_PAID));
                     gradeReport.setPrivilege(Privilege.getPrivilegeById(resultSet.getInt(PRIVILEGE)));
@@ -47,7 +50,7 @@ public class GradeReportResultSetMapper {
                 }
                 gradeReport.getMarks().put(Subject.getSubjectById(resultSet.getInt(SUBJECT_ID)), resultSet.getInt(MARK));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | DAOException e) {
             LOGGER.warn(e);
             throw new CreateObjectException(e);
         }

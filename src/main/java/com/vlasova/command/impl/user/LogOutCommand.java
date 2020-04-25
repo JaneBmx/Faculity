@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LogOutCommand implements UserCommand{
     @Override
     public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        request.getSession().invalidate();
+        return PageAddress.HOME_PAGE;
     }
 }

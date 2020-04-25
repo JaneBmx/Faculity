@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserService {
-    public static class Holder {
+    private static class Holder {
         static final UserService INSTANCE = new UserService();
     }
 
@@ -29,7 +29,7 @@ public class UserService {
         try {
             if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getPassword())) {
                 userDAO.add(user);
-                user = userDAO.findUserByLoginAndPassword(user.getLogin(),user.getPassword());
+                user = userDAO.findUserByLoginAndPassword(user.getLogin(), user.getPassword());
             }
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -72,6 +72,14 @@ public class UserService {
     public void editUser(User user) throws ServiceException {
         try {
             userDAO.update(user);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public Set<User> getAllUsers() throws ServiceException {
+        try {
+            return new HashSet<>(userDAO.findAllUsers());
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

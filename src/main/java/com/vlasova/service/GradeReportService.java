@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GradeReportService {
-    public static class Holder {
+    private static class Holder {
         static final GradeReportService INSTANCE = new GradeReportService();
     }
 

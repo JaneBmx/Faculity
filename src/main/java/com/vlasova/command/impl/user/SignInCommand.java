@@ -13,8 +13,8 @@ public class SignInCommand implements UserCommand {
     @Override
     public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            User user = UserService.getInstance().logIn((String) request.getAttribute("login"),
-                    (String) request.getAttribute("password"));
+            User user = UserService.getInstance().logIn(request.getParameter("login"),
+                    request.getParameter("password"));
 
             if (user != null) {
                 request.getSession().setAttribute("user", user);
@@ -24,7 +24,7 @@ public class SignInCommand implements UserCommand {
             }
             request.setAttribute("message", "Wrong login or password. Try again");
         } catch (ServiceException e) {
-            request.setAttribute("message", "Wrong login or password. Try again");
+            request.setAttribute("message", "Some problems with server. Tra again later.");
         }
         return PageAddress.LOG_IN;
     }

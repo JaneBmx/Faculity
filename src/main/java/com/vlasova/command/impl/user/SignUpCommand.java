@@ -19,6 +19,7 @@ public class SignUpCommand implements UserCommand {
                 UserService.getInstance().registration(user);
                 request.getSession().setAttribute("user", user);
                 return PageAddress.USER_PAGE;
+
             }catch (ServiceException e){
                 request.setAttribute("message", "User with those login and email is already exist");
             }

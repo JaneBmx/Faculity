@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
         try {
             ConnectionPool.INSTANCE.closePool();
         } catch (ClosePoolException e) {
-            LOGGER.warn("Fail to close com.vlasova.pool.", e);
+            LOGGER.warn("Fail to close pool.", e);
         }
     }
 

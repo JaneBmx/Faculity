@@ -20,12 +20,12 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
     private static final String CREATE = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password) VALUES(?,?,?,?,?,?)";
     private static final String DELETE = "DELETE FROM users WHERE user_id = ?";
-    private static final String UPDATE = "UPDATE users SET user_role_id = ?, user_name = ?, user_surname = ?, user_email = ?, user_password = ?";
-    private static final String FIND_BY_LOG_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE login = ? AND  password = ?";
-    private static final String FIND_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE login = ? AND  password = ?";
-    private static final String FIND_BY_ID = "SELECT user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_id = ?";
-    private static final String FIND_ALL = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users ";
-    private static final String FIND_BY_ROLE = "SELECT user_id, user_role, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_role = ?";
+    private static final String UPDATE_USER_INFO = "UPDATE users SET user_name = ?, user_surname = ?, user_password = ? WHERE user_id = ?";
+    private static final String FIND_BY_LOG_AND_EMAIL = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_password = ?";
+    private static final String FIND_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_password = ?";
+    private static final String FIND_BY_ID = "SELECT user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_id = ?";
+    private static final String FIND_ALL = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users ";
+    private static final String FIND_BY_ROLE = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_role_id = ?";
     private final UserResultSetMapper mapper = new UserResultSetMapper();
     private Set<User> users;
 
@@ -60,15 +60,15 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         }
     }
 
+    //updated & tested with front
     @Override
     public void update(User user) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
-            preparedStatement.setInt(1, user.getRole().getId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getSurname());
-            preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getPassword());
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_INFO)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -104,7 +104,11 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
             statement.setString(1, login);
             statement.setString(2, password);
             resultSet = statement.executeQuery();
-            return mapper.map(resultSet);
+            User user = null;
+            if(resultSet.next()){
+                user = mapper.map(resultSet);
+            }
+            return user;
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

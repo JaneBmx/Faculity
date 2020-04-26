@@ -9,24 +9,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/controller"},
-        name = "Controller")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 5,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+//@WebServlet(name = "controller", urlPatterns = "/controller")
 public class Controller extends HttpServlet {
-    private static Logger LOGGER = LogManager.getLogger(Controller.class);
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
     @Override
     public void init() {
+        ConnectionPool.INSTANCE.init();
         LOGGER.info("Controller initialization.");
     }
 

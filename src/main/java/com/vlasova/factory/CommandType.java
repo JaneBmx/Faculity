@@ -4,13 +4,15 @@ import com.vlasova.command.Command;
 import com.vlasova.command.impl.user.*;
 
 public enum CommandType {
-    SIGN_UP(new SignUpCommand()),
-    SIGN_IN(new SignInCommand()),
-    SIGN_OUT(new LogOutCommand()),
+    LOGIN(new SignInCommand()),
     EDIT_USER(new EditUserCommand()),
+
+
+    SIGN_UP(new SignUpCommand()),
+    SIGN_OUT(new LogOutCommand()),
     GET_ALL_USERS(new GetAllUsersCommand());
 
-    private Command command;
+    private final Command command;
 
     CommandType(Command command) {
         this.command = command;

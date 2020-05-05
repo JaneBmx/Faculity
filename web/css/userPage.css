@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    background: url(https://ununsplash.imgix.net/uploads/141319062591093cefc09/ad50c1f0?q=75&fm=jpg&s=a356dd61ff3da2269124bcd12a303b7e);
+    background-size: cover;
+    font-family: "Times New Roman", Times, serif;
+}
+
+/*HEADER*/
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 40px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+    display: flex;
+}
+
+.logo a {
+    display: flex;
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+}
+
+header h2 {
+    margin: auto;
+}
+
+header .nav {
+    display: flex;
+    list-style-type: none;
+}
+
+header .nav li {
+    display: flex;
+}
+
+header .nav li:hover {
+    background-color: #000;
+    cursor: pointer;
+}
+
+header .nav li a {
+    display: block;
+    padding: 0 20px;
+    height: 100%;
+    line-height: 80px;
+    color: #fff;
+    text-decoration: none;
+}
+/*HEADER END*/
+
+
+/*FOOTER*/
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+footer div {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    margin: 15px;
+
+}
+/*END FOOTER*/
+
+
+/*MAIN: USER PAGE */
+.photo {
+    width: 20%;
+    float: left;
+    margin-top: 15px;
+    margin-left: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.info {
+    width: 75%;
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.info p {
+    margin-left: 30px;
+}
+
+.info h2 {
+    margin-left: 10px;
+}
+
+.photo input {
+    height: 2rem;
+    width: 60%;
+    color: #fff;
+    border: none;
+    background-color: rgb(119, 163, 119);
+    margin-left: 40px;
+}
+
+.info input:hover {
+    background-color: rgb(50, 182, 50);
+}
+/*END MAIN: USER PAGE */
+
+
+/* EDIT PROFILE*/
+.edit_profile {
+    width: 50%;
+    float: right;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.edit_profile h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.edit_profile label {
+    color: white;
+    margin-left: 150px;
+}
+
+form input {
+    margin-left: 150px;
+}
+
+.button input {
+    height: 2rem;
+    width: 20%;
+    color: #fff;
+    border: none;
+    background-color: rgb(119, 163, 119);
+    margin-left: 185px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+/* END EDIT PROFILE*/

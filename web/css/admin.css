@@ -1,0 +1,212 @@
+/* ADMIN PAGE */
+
+.admin_block{
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 15px;
+}
+
+.admin_block h2{
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.tablinks{
+    color: #fff;
+}
+
+.tablinks:hover{
+    color: black;
+}
+
+.tablinks.active{
+    color: black;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab button:hover {
+    background-color: rgb(119, 163, 119);
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    color: #fff;
+}
+
+/* ADMIN PAGE END */
+
+/* TESTING INNER VKLADKI */
+.tab3 {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.tablinks3{
+    color: #fff;
+}
+
+.tablinks3:hover{
+    color: black;
+}
+
+.tablinks3.active{
+    color: black;
+}
+
+.tab3 button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab3 button:hover {
+    background-color: rgb(119, 163, 119);
+}
+
+.tab3 button.active {
+    background-color: #ccc;
+}
+
+.tabcontent3 {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    color: #fff;
+}
+/* -------------------- */
+.tab2 {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.tablinks2{
+    color: #fff;
+}
+
+.tablinks2:hover{
+    color: black;
+}
+
+.tablinks2.active{
+    color: black;
+}
+
+.tab2 button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab2 button:hover {
+    background-color: rgb(119, 163, 119);
+}
+
+.tab2 button.active {
+    background-color: #ccc;
+}
+
+.tabcontent2 {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    color: #fff;
+}
+/* ---------------- */
+.tab1 {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.tablinks1{
+    color: #fff;
+}
+
+.tablinks1:hover{
+    color: black;
+}
+
+.tablinks1.active{
+    color: black;
+}
+
+.tab1 button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab1 button:hover {
+    background-color: rgb(119, 163, 119);
+}
+
+.tab1 button.active {
+    background-color: #ccc;
+}
+
+.tabcontent1 {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    color: #fff;
+}
+
+/*TESTING INNER VKLADKI END  */
+
+/* DROP SPISKI */
+/* DROP SPISKI END */
+
+/* ADD FACULTY */
+
+.add_faculty{
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.add_faculty h3{
+    text-align: center;
+}
+
+.add_faculty input{
+    margin-top: 10px;
+    margin-right: 30%;
+    width: 40%;
+    height: 25px;
+}
+
+.add_faculty .select1{
+    margin-left: 30px;
+}
+/* ADD FACULTY END*/

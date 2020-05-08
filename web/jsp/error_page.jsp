@@ -1,16 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yana
-  Date: 24.04.2020
-  Time: 14:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
+<jsp:include page="../include/header.jsp"/>
 
+<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

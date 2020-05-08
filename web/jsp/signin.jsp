@@ -1,51 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yana
-  Date: 24.04.2020
-  Time: 14:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <html>
 <head>
-    <title>UserPage</title>
+    <title>Sign in</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body>
-<div class="navWrapper" id="home">
-    <div class=" clearfix">
-        <h2 class="companyName">cool university</h2>
-        <nav class="mainNav clearfix">
-            <ul>
-                <li><a href="../index.jsp">Home</a></li>
-                <li><a href="signup.jsp" class="smoothScroll">Create account</a></li>
-                <li><a href="about.jsp" class="smoothScroll">About</a></li>
-                <li><a href="contacts.jsp" class="smoothScroll">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
-<div class="main-w3layouts wrapper">
-    <h1>Create an Account</h1>
-    <div class="main-agileinfo">
-        <div class="agileits-top">
-            <form method="POST" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="command" value="">
-                Login: <br/>
-                <input class="text_" type="text" name="user_login" required>
-                <br/>Password: <br/>
-                <input class="text" type="password" name="user_password" required>
-                <br/>
-                ${errorLoginPassMessage}
-                <br/>
-                ${wrongAction}
-                <br/>
-                ${nullPage}
-                <br/>
-                <input type="submit" value="log in">
-            </form>
-            <p>Have no Account yet? <a href="signup.jsp"> Registrate now!</a></p>
+<jsp:include page="../include/header.jsp"/>
+
+<div class="login_form">
+    <form method="post" class="login" action="${pageContext.request.contextPath}/controller?command=login">
+<%--        <input type="hidden" name="command" value="login"/>--%>
+        <h2>Log in</h2>
+        <div class="login-form">
+            <input type="text" name="login" placeholder="login" required>
+            <input type="password" name="password" placeholder="password" required>
+            <p>${message}</p>
+            <button type="submit">Log in</button>
         </div>
-    </div>
+        <a href="signup.jsp">Sign up now!</a>
+    </form>
 </div>
+
+<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

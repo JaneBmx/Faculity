@@ -7,7 +7,26 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
+<!--    <session-config>-->
+<!--        <session-timeout>30</session-timeout>-->
+<!--    </session-config>-->
+
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>com.vlasova.controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.vlasova.filter.EncodingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+    </filter-mapping>
 </web-app>

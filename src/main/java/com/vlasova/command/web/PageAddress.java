@@ -1,13 +1,16 @@
-package com.vlasova.command.web;
+package com.vlasova.params;
 
 public enum PageAddress {
-    ERROR("jsp/error_page"),
-    HOME_PAGE("index.jsp"),
-    LOGIN("jsp/signin.jsp"),
-    REGISTRATION("registration.jsp"),
-    ABOUT("jsp/about.jsp"),
-    CONTACRS("jsp/contacts"),
-    USER_PAGE("jsp/user/user_page.jsp");
+
+    LOG_IN("/jsp/signin.jsp"),
+    ADMIN_PAGE("/jsp/admin/admin_page.jsp"),
+    USER_PAGE("jsp/user/user_page.jsp"),
+    SIGN_UP("/jsp/signup.jsp"),
+
+    ABOUT("/jsp/about.jsp"),
+    CONTACTS("/jsp/contacts.jsp"),
+    HOME_PAGE("/index.jsp"),
+    ERROR("/jsp/error_page");
     private String path;
 
     PageAddress(String path) {

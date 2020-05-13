@@ -25,7 +25,7 @@ public class UserService {
 
     private final UserDAO userDAO;
 
-    public User registration(User user) throws ServiceException {
+    public User registrate(User user) throws ServiceException {
         try {
             if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())) {
                 userDAO.add(user);

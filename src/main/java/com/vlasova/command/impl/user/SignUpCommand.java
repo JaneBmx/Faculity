@@ -3,9 +3,10 @@ package com.vlasova.command.impl.user;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.mapper.request.UserRequestMapper;
-import com.vlasova.params.PageAddress;
+import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
 import com.vlasova.validation.UserDataValidator;
+import static com.vlasova.command.impl.user.UserConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,14 +18,14 @@ public class SignUpCommand implements UserCommand {
         if(UserDataValidator.isValidUser(user)){
             try{
                 UserService.getInstance().registration(user);
-                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute(USER, user);
                 return PageAddress.USER_PAGE;
 
             }catch (ServiceException e){
-                request.setAttribute("message", "User with those login and email is already exist");
+                request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);
             }
         }else{
-            request.setAttribute("message", "Invalid data");
+            request.setAttribute(MSG, MSG_ERR_INV_DATA);
         }
         return PageAddress.SIGN_UP;
     }

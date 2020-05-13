@@ -1,4 +1,4 @@
-package com.vlasova.params;
+package com.vlasova.command.web;
 
 public enum PageAddress {
 

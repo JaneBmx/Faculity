@@ -27,7 +27,7 @@ public class UserService {
 
     public User registration(User user) throws ServiceException {
         try {
-            if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getPassword())) {
+            if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())) {
                 userDAO.add(user);
                 user = userDAO.findUserByLoginAndPassword(user.getLogin(), user.getPassword());
             }

@@ -6,9 +6,9 @@ import com.vlasova.command.impl.user.*;
 public enum CommandType {
     LOGIN(new SignInCommand()),
     EDIT_USER(new EditUserCommand()),
-
-
     SIGN_UP(new SignUpCommand()),
+
+
     SIGN_OUT(new LogOutCommand()),
     GET_ALL_USERS(new GetAllUsersCommand());
 

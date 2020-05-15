@@ -6,6 +6,7 @@ import com.vlasova.entity.user.User;
 import javax.servlet.http.HttpServletRequest;
 
 public class UserRequestMapper {
+    //TODO remove duplicate string
     private static final String NAME = "user_name";
     private static final String SURNAME = "user_surname";
     private static final String EMAIL = "user_email";

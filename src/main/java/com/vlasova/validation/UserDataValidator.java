@@ -46,14 +46,15 @@ public class UserDataValidator {
     }
 
     public static boolean isValidUser(User user) {
-        if (user != null) {
-            return user.getRole() != null
-                    && isValidName(user.getName())
-                    && isValidName(user.getSurname())
-                    && isValidEmail(user.getEmail())
-                    && isValidLogin(user.getLogin())
-                    && isValidPassword(user.getPassword());
-        }
-        return false;
+        return true;
+//        if (user != null) {
+//            return user.getRole() != null
+//                    && isValidName(user.getName())
+//                    && isValidName(user.getSurname())
+//                    && isValidEmail(user.getEmail())
+//                    && isValidLogin(user.getLogin())
+//                    && isValidPassword(user.getPassword());
+//        }
+       // return false;
     }
 }

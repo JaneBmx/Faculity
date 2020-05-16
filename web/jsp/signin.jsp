@@ -10,13 +10,14 @@
 <body>
 <jsp:include page="../include/header.jsp"/>
 
+<%--TODO add front validation--%>
+
 <div class="login_form">
     <form method="post" class="login" action="${pageContext.request.contextPath}/controller?command=login">
-<%--        <input type="hidden" name="command" value="login"/>--%>
         <h2>Log in</h2>
         <div class="login-form">
-            <input type="text" name="login" placeholder="login" required>
-            <input type="password" name="password" placeholder="password" required>
+            <input type="text" name="user_login" placeholder="login" required>
+            <input type="password" name="user_password" placeholder="password" required>
             <p>${message}</p>
             <button type="submit">Log in</button>
         </div>

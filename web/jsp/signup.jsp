@@ -8,17 +8,18 @@
 </head>
 <body>
 <jsp:include page="../include/header.jsp"/>
-
+<%--TODO add checkin pass--%>
 <div class="login_form">
-    <form class="login" method="POST" action="${pageContext.request.contextPath}/controller">
+    <form method="post" class="login" action="${pageContext.request.contextPath}/controller?command=sign_up">
         <h2>Sign up</h2>
         <div class="login-form">
-            <input type="text" placeholder="Name" required>
-            <input type="text" placeholder="Surname" required>
-            <input type="email" placeholder="Email" required>
-            <input type="text" placeholder="Login" required>
-            <input type="password" placeholder="Password" required>
-            <input type="password" placeholder="Confirm password" required>
+            <input type="text" placeholder="Name" name="user_name"required>
+            <input type="text" placeholder="Surname"name="user_surname" required>
+            <input type="email" placeholder="Email" name = "user_email" required>
+            <input type="text" placeholder="Login" name="user_login" required>
+            <input type="password" placeholder="Password" name="user_password" required>
+            <input type="password" placeholder="Confirm password" name="new_password" required>
+            <p>${message}</p>
             <button type="submit">Sign up</button>
         </div>
         <a href="signin.jsp">Log in now!</a>

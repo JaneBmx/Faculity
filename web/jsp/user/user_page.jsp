@@ -32,6 +32,7 @@
             <button class="tablinks" onclick="openTab(event, 'EditRequest')">Edit request</button>
         </div>
 
+        <%--TAB WITH COMMON INFO--%>
         <div id="Info" class="tabcontent">
             <div class="info_block">
                 <h2>Main info</h2>
@@ -44,30 +45,31 @@
                 <p>Privelege:</p>
                 <p>Accepted status:</p>
             </div>
-
         </div>
+
+        <%--TAB WITH USER INFO EDIT--%>
         <div id="EditInfo" class="tabcontent">
             <div class="info_block">
                 <h2>Edit user info</h2>
                 <form class="login" method="POST" action="${pageContext.request.contextPath}/controller?command=edit_user">
                     <div class="login-form">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="text" name="surname" placeholder="Surname" required>
-                        <input type="password" name = "old_password" placeholder="Old password" required>
+                        <input type="text" name="user_name" placeholder="Name" required>
+                        <input type="text" name="user_surname" placeholder="Surname" required>
+                        <input type="password" name = "user_password" placeholder="Old password" required>
                         <input type="password" name = "new_password" placeholder="New password" required>
                         <p>${message}</p>
                         <button type="submit">Submit changes</button>
                     </div>
                 </form>
             </div>
-
         </div>
+
+        <%--TAB WITH GRADE REPORT EDIT--%>
         <div id="EditRequest" class="tabcontent">
             <h2>EDIT REQUEST BLOCK</h2>
         </div>
     </div>
 </div>
-
 
 <jsp:include page="../../include/footer.jsp"/>
 </body>

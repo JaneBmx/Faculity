@@ -66,7 +66,56 @@
 
         <%--TAB WITH GRADE REPORT EDIT--%>
         <div id="EditRequest" class="tabcontent">
-            <h2>EDIT REQUEST BLOCK</h2>
+            <h2>Edit request</h2>
+            <form class="login" method="POST" action="${pageContext.request.contextPath}/controller?command=edit_request">
+                <div class="login-form">
+
+                    <div class="row">
+                        <div>
+                            <label for="" class="required">Faculty: </label>
+                            <input list="faculties" name= "faculty_name"/>
+                            <datalist id="faculties">
+                                <option value="KSIS">
+                                <option value="FITU">
+                                <option value="FRE">
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <!-- privelege & middle mark(double!) -->
+                    <div class="row">
+                        <div>
+                            <label for="" class="required">Privelege: </label>
+                            <input list="privileges" name= "privilege"/>
+                            <datalist id="privileges">
+                                <option value="sirotka">
+                                <option value="olimpiada">
+                                <option value="none">
+                            </datalist>
+                        </div>
+                        <div>
+                            <label for="" class="required">Average school mark:  </label>
+                            <input type="number" step="0.1" min="1" max="10" placeholder="0,0">
+                        </div>
+                    </div>
+                    <!-- 3 marks(int) -->
+                    <div class="row2">
+                        <div>
+                            <label for="" class="required">mark 1: </label>
+                            <input type="number" min="1" max = "10" value="1">
+                        </div>
+                        <div>
+                            <label for="" class="required">mark 2: </label>
+                            <input type="number" min="1" max = "10" value="1">
+                        </div>
+                        <div>
+                            <label for="" class="required">mark 3: </label>
+                            <input type="number" min="1" max = "10" value="1">
+                        </div>
+                    </div>
+                    <button type="submit">Submit changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

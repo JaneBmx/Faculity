@@ -2,11 +2,11 @@ package com.vlasova.command.impl.user;
 
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
-import com.vlasova.mapper.request.UserRequestMapper;
+import com.vlasova.command.mapper.UserRequestMapper;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
 import com.vlasova.validation.UserDataValidator;
-import static com.vlasova.command.impl.user.UserConstants.*;
+import static com.vlasova.command.RequestConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

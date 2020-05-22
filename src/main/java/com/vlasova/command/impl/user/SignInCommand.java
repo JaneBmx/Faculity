@@ -1,6 +1,5 @@
 package com.vlasova.command.impl.user;
 
-import com.vlasova.controller.Controller;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
@@ -11,7 +10,7 @@ import com.vlasova.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.vlasova.command.impl.user.UserConstants.*;
+import static com.vlasova.command.RequestConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

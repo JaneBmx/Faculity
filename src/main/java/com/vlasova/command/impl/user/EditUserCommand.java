@@ -8,7 +8,7 @@ import com.vlasova.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.vlasova.command.impl.user.UserConstants.*;
+import static com.vlasova.command.RequestConstants.*;
 
 public class EditUserCommand implements UserCommand {
 //TODO add validation, add trim

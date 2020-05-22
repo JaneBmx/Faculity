@@ -4,7 +4,7 @@ import com.vlasova.command.Command;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.exception.connection.ClosePoolException;
 import com.vlasova.exception.service.ServiceException;
-import com.vlasova.factory.CommandType;
+import com.vlasova.command.CommandType;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.service.FacultyService;

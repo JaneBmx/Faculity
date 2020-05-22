@@ -1,21 +1,27 @@
 package com.vlasova.entity.user;
 
 public enum Privilege {
-    NONE(6),
-    COLLEGE(1),
-    FOREIGN(2),
-    RED_DIPLOMA(3),
-    ORPHAN(4),
-    OLYMPIAD(5);
+    NONE(6, "Нет льгот"),
+    COLLEGE(1, "CУЗ"),
+    FOREIGN(2, "Иностранный гражданин"),
+    RED_DIPLOMA(3, "Диплом/Медаль"),
+    ORPHAN(4, "Сирота"),
+    OLYMPIAD(5, "Победитель олимпиад");
 
     private int id;
+    private String name;
 
-    Privilege(int id) {
+    Privilege(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static Privilege getPrivilegeById(int id) {

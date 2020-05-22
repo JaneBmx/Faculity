@@ -9,6 +9,7 @@ public abstract class UserConstants {
     static final String LOGIN = "user_login";
     static final String NEW_PASS = "new_password";
     static final String PASS = "user_password";
+    static final String GRADE_REPORT = "grade_report";
 
 
     //TODO make RU\EN (internationalize it)

@@ -7,9 +7,7 @@ import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class FacultyService {
     private static class Holder {
@@ -55,9 +53,9 @@ public class FacultyService {
         }
     }
 
-    public Set<Faculty> getAllFaculties() throws ServiceException {
+    public List<Faculty> getAllFaculties() throws ServiceException {
         try {
-            return new HashSet<>(facultyDAO.findAllFaculties());
+            return new ArrayList<>(facultyDAO.findAllFaculties());
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

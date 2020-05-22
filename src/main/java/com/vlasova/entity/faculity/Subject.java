@@ -18,16 +18,16 @@ public enum Subject {
     SOCIAL("Social", 15),
     UNDEFINED("Undefined", 0);
 
-    private String value;
+    private String name;
     private int id;
 
-    Subject(String value, int id) {
-        this.value = value;
+    Subject(String name, int id) {
+        this.name = name;
         this.id = id;
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
 
     public int getId() {

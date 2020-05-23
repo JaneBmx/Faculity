@@ -1,5 +1,5 @@
-/*LEFT BLOCK WITH AVATAR*/
-.left {
+/*левый блок с авой*/
+.left{
     width: 20%;
     float: left;
     margin-top: 15px;
@@ -7,31 +7,34 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.left h2 {
+.left h2{
     text-align: center;
     width: auto;
     color: #fff;
 }
 
-img.displayed {
+img.displayed{
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
 }
 
-.left form button {
+.left form button{
     height: 3rem;
     width: 40%;
     align-self: center;
     color: white;
     background-color: rgb(119, 163, 119);
     border: none;
+
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    margin-bottom: 5px;
 }
-/*LEFT BLOCK WITH AVATAR END*/
+/*левый блок с авой, конец*/
+
 
 /*RIGHT BLOCK WITH TABS*/
 .right {
@@ -42,99 +45,9 @@ img.displayed {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
 }
+/*RIGHT BLOCK WITH TABS END*/
 
-.info p {
-    margin-left: 30px;
-}
-
-.info h2 {
-    margin-left: 10px;
-}
-
-.info input:hover {
-    background-color: rgb(50, 182, 50);
-}
-
-/*END MAIN: USER PAGE */
-
-
-/* EDIT PROFILE*/
-.edit_profile {
-    width: 50%;
-    float: right;
-    margin-left: 15px;
-    margin-top: 15px;
-    margin-right: 200px;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.edit_profile h2 {
-    color: white;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.edit_profile label {
-    color: white;
-    margin-left: 150px;
-}
-
-form input {
-    margin-left: 150px;
-}
-
-.button input {
-    height: 2rem;
-    width: 20%;
-    color: #fff;
-    border: none;
-    background-color: rgb(119, 163, 119);
-    margin-left: 185px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* END EDIT PROFILE*/
-
-/* EDIT REQUEST */
-.edit_request {
-    width: 50%;
-    float: right;
-    margin-left: 15px;
-    margin-top: 15px;
-    margin-right: 200px;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.edit_request h2 {
-    color: white;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.edit_request label {
-    color: white;
-    margin-left: 150px;
-}
-
-/* END EDIT REQUEST */
-
-/* ADMIN */
-heh {
-    width: 30%;
-    background-color: rgba(0, 0, 0, 0.7);
-    float: left;
-}
-
-result {
-    width: 70%;
-    background-color: rgba(0, 0, 0, 0.7);
-    float: right;
-}
-
-/* ADMIN END */
-
-/*tabs on user page */
+/*TABS*/
 .tab {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
@@ -176,14 +89,36 @@ result {
     border-top: none;
     color: #fff;
 }
+/*TABS end*/
 
-/* tabs user */
+
+/* EDIT REQUEST */
+.edit_request {
+    width: 50%;
+    float: right;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-right: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.edit_request h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.edit_request label {
+    color: white;
+    margin-left: 150px;
+}
+/* END EDIT REQUEST */
+
 
 /* info tab style */
 .info_block {
     margin: 15px;
 }
-
 /* info tab style end*/
 
 
@@ -226,66 +161,4 @@ result {
     border: none;
     background-color: rgb(119, 163, 119);
 }
-
-/* EDIT FORM END */
-
-/* EDIT REQUEST*/
-.login-form .block {
-    margin-bottom: 10px;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 2.5rem;
-}
-
-.block .mark {
-    display: flex;
-}
-
-.row {
-    overflow: hidden;
-}
-
-.row > div {
-    float: left;
-    width: 50%;
-}
-
-label {
-    display: inline-block;
-    padding-right: .66em;
-    position: relative;
-}
-
-label.required::after {
-    content: "*";
-    color: #c00;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.row2 {
-    overflow: hidden;
-}
-
-.row2 > div {
-    float: left;
-    width: 30%;
-}
-
-label {
-    display: inline-block;
-    padding-right: .66em;
-    position: relative;
-}
-
-label.required::after {
-    content: "*";
-    color: #c00;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-/*END EDIT REQUEST*/
+/* EDIT FORM end*/

@@ -23,7 +23,7 @@
         <form>
             <button type="submit">Edit photo</button>
         </form>
-        <form class="logout" action="${pageContext.request.contextPath}/controller?command=log_out">
+        <form action="${pageContext.request.contextPath}/controller?command=log_out">
             <button type="submit">Log out</button>
         </form>
     </div>
@@ -79,15 +79,7 @@
                                     <option value="${fac.id}"> ${fac.name}</option>
                                 </c:forEach>
                             </select>
-<%--                            <label class="required">Faculty: </label>--%>
-<%--                            <input list="faculties" name= "faculty_name"/>--%>
-<%--                            <datalist id="faculties">--%>
-<%--                                <option value="KSIS">--%>
-<%--                                <option value="FITU">--%>
-<%--                                <option value="FRE">--%>
-<%--                            </datalist>--%>
-<%--                        </div>--%>
-                    </div>
+                        </div>
 
                     <!-- privelege & middle mark(double!) -->
                     <div class="row">
@@ -97,19 +89,13 @@
                                     <option value="${priv.id}">${priv.name} </option>
                                 </c:forEach>
                             </select>
-<%--                            <label class="required">Privilege: </label>--%>
-<%--                            <input list="privileges" name= "privilege"/>--%>
-<%--                            <datalist id="privileges">--%>
-<%--                                <option value="sirotka">--%>
-<%--                                <option value="olimpiada">--%>
-<%--                                <option value="none">--%>
-<%--                            </datalist>--%>
                         </div>
                         <div>
                             <label class="required">Average school mark:  </label>
                             <input type="number" step="0.1" min="1" max="10" placeholder="0,0" name = "attestat_mark">
                         </div>
                     </div>
+                        
                     <!-- 3 marks(int) -->
                     <div class="row2">
                         <div>

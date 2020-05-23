@@ -23,6 +23,9 @@
         <form>
             <button type="submit">Edit photo</button>
         </form>
+        <form class="logout" action="${pageContext.request.contextPath}/controller?command=log_out">
+            <button type="submit">Log out</button>
+        </form>
     </div>
 
     <div class="right">

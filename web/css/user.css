@@ -1,4 +1,4 @@
-/*MAIN: USER PAGE */
+/*LEFT BLOCK WITH AVATAR*/
 .left {
     width: 20%;
     float: left;
@@ -16,7 +16,8 @@
 img.displayed {
     display: block;
     margin-left: auto;
-    margin-right: auto
+    margin-right: auto;
+    border-radius: 50%;
 }
 
 .left form button {
@@ -26,13 +27,13 @@ img.displayed {
     color: white;
     background-color: rgb(119, 163, 119);
     border: none;
-
     display: block;
     margin-left: auto;
     margin-right: auto
 }
+/*LEFT BLOCK WITH AVATAR END*/
 
-
+/*RIGHT BLOCK WITH TABS*/
 .right {
     width: 75%;
     float: right;
@@ -49,15 +50,6 @@ img.displayed {
 .info h2 {
     margin-left: 10px;
 }
-
-/* .photo input {
-   height: 2rem;
-   width: 60%;
-   color: #fff;
-   border: none;
-   background-color: rgb(119, 163, 119);
-   margin-left: 40px;
-} */
 
 .info input:hover {
     background-color: rgb(50, 182, 50);

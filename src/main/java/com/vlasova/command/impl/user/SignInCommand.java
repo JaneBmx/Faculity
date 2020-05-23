@@ -28,10 +28,10 @@ public class SignInCommand implements UserCommand {
 
             if (user != null) {
                 request.getSession().setAttribute(USER, user);
-
-                if(getGradeReport(user)!=null){
-                    request.getSession().setAttribute(GRADE_REPORT, getGradeReport(user));
-                }
+//
+//                if(getGradeReport(user)!=null){
+//                    request.getSession().setAttribute(GRADE_REPORT, getGradeReport(user));
+//                }
 
                 return user.getRole() == Role.ADMIN
                         ? PageAddress.ADMIN_PAGE

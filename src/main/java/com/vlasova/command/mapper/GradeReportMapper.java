@@ -8,7 +8,8 @@ import static com.vlasova.command.RequestConstants.*;
 public class GradeReportMapper {
 
     public GradeReport map (HttpServletRequest request){
-        GradeReport gradeReport = new GradeReport();
-        gradeReport.setFaculty(request.getAttribute(FACULTY_ID));
+//        GradeReport gradeReport = new GradeReport();
+//        gradeReport.setFaculty(request.getAttribute(FACULTY_ID));
+        return null;
     }
 }

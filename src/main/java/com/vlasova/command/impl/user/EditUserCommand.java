@@ -23,8 +23,8 @@ public class EditUserCommand implements UserCommand {
             user.setPassword(request.getParameter(NEW_PASS));
         }
 
-        if (request.getParameter(NAME) != null) {
-            user.setName(request.getParameter(NAME));
+        if (request.getParameter(USER_NAME) != null) {
+            user.setName(request.getParameter(USER_NAME));
         }
         if (request.getParameter(SURNAME) != null) {
             user.setSurname(request.getParameter(SURNAME));

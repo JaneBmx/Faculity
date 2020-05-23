@@ -10,6 +10,6 @@
         <li><a href="../jsp/about.jsp">about</a></li>
         <li><a href="../jsp/contacts.jsp">contacts</a></li>
         <li><a href="">language</a></li>
-        <li><a href="../jsp/signin.jsp">login</a></li>
+        <li><a href="${pageContext.request.contextPath}/controller?command=login_page">login</a></li>
     </ul>
 </header>

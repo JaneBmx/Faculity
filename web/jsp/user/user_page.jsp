@@ -16,9 +16,9 @@
 
 <div class="main">
     <div class="left">
-        <h2>${user.name}  ${user.surname}</h2>
+        <h2>${user.name} ${user.surname}</h2>
         <div class="photo">
-            <img class ="displayed" src="https://vk.com/images/camera_200.png?ava=1" alt="photo"></p>
+            <img class="displayed" src="https://vk.com/images/camera_200.png?ava=1" alt="photo"></p>
         </div>
         <form>
             <button type="submit">Edit photo</button>
@@ -55,12 +55,13 @@
         <div id="EditInfo" class="tabcontent">
             <div class="info_block">
                 <h2>Edit user info</h2>
-                <form class="login" method="POST" action="${pageContext.request.contextPath}/controller?command=edit_user">
+                <form class="login" method="POST"
+                      action="${pageContext.request.contextPath}/controller?command=edit_user">
                     <div class="login-form">
                         <input type="text" name="user_name" placeholder="Name" required>
                         <input type="text" name="user_surname" placeholder="Surname" required>
-                        <input type="password" name = "user_password" placeholder="Old password" required>
-                        <input type="password" name = "new_password" placeholder="New password" required>
+                        <input type="password" name="user_password" placeholder="Old password" required>
+                        <input type="password" name="new_password" placeholder="New password" required>
                         <p>${message}</p>
                         <button type="submit">Submit changes</button>
                     </div>
@@ -71,48 +72,77 @@
         <%--TAB WITH GRADE REPORT EDIT--%>
         <div id="EditRequest" class="tabcontent">
             <h2>Edit request</h2>
-            <form class="login" method="POST" action="${pageContext.request.contextPath}/controller?command=edit_request">
+            <form class="login" method="POST"
+                  action="${pageContext.request.contextPath}/controller?command=edit_request">
                 <div class="login-form">
                     <div class="row">
+                        <script>
+                            const fac = {
+                                    <c:forEach items="${faculties}" var="fac">
+                                '${fac.id}':
+                                    {
 
+                                        name: "${fac.name}",
+                                subjects: [
+                                    <c:forEach items="${fac.subjects}" var="sub">
+                                {
+                                    id: ${sub.id},
+                                    name: "${sub.name}"
+                                },
+                                    </c:forEach>
+                            ]
+                            },
+                                    </c:forEach>
+                            }
+                            ;
+                        </script>
                         <div class="choose_priv">
-                            <select name="faculty_id">
+                            <select id="facultySelector" name="faculty_id">
                                 <c:forEach items="${faculties}" var="fac">
                                     <option value="${fac.id}"> ${fac.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
 
-                          <!-- privelege & middle mark(double!) -->
+                        <!-- privelege & middle mark(double!) -->
                         <div class="row">
-                            <div class = "choose_fac">
-                                <select name ="privilege">
-                                     <c:forEach items="${privileges}" var = "priv">
-                                         <option value="${priv.id}">${priv.name} </option>
-                                     </c:forEach>
+                            <div class="choose_fac">
+                                <select name="privilege">
+                                    <c:forEach items="${privileges}" var="priv">
+                                        <option value="${priv.id}">${priv.name} </option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div>
-                                <label class="required">Average school mark:  </label>
-                                <input type="number" step="0.1" min="1" max="10" placeholder="0,0" name = "attestat_mark">
+                                <label class="required">Average school mark: </label>
+                                <input type="number" step="0.1" min="1" max="10" placeholder="0,0" name="attestat_mark">
                             </div>
                         </div>
 
-                    <!-- 3 marks(int) -->
-                    <div class="row2">
-                        <div>
-                            <label class="required">mark 1: </label>
-<%--                            <input type="hidden" value="" name = "sub_1">--%>
-                            <input type="number" min="1" max = "10" value="1" name = "mark_1@rgr">
-                        </div>
-                        <div>
-                            <label class="required">mark 2: </label>
-                            <input type="number" min="1" max = "10" value="1" name = "mark_2">
-                        </div>
-                        <div>
-                            <label class="required">mark 3: </label>
-                            <input type="number" min="1" max = "10" value="1" name = "mark_3">
-                        </div>
+                        <!-- 3 marks(int) -->
+                        <div class="row2">
+
+                            <div>
+                                <label class="required">
+                                    <div id="mark1">mark 1:</div>
+                                </label>
+                                <input type="hidden" value="" name="mark_1_subId" id="mark_1_subId">
+                                <input type="number" min="1" max="10" value="1" name="mark_1">
+                            </div>
+                            <div>
+                                <label class="required">
+                                    <div id="mark2">mark 2:</div>
+                                </label>
+                                <input type="hidden" value="" name="mark_2_subId" id="mark_2_subId">
+                                <input type="number" min="1" max="10" value="1" name="mark_2">
+                            </div>
+                            <div>
+                                <label class="required">
+                                    <div id="mark3">mark 3:</div>
+                                </label>
+                                <input type="text" value="" name="mark_3_subId" id="mark_3_subId">
+                                <input type="number" min="1" max="10" value="1" name="mark_3">
+                            </div>
                         </div>
                         <button type="submit">Submit changes</button>
                     </div>

@@ -16,6 +16,7 @@ public class GradeReportMapper {
     private static final String MARK_1 = "mark_1";
     private static final String MARK_2 = "mark_2";
     private static final String MARK_3 = "mark_3";
+    public static final String SUB_1 = "sub_1";
 
     public GradeReport map(HttpServletRequest request) {
         GradeReport gradeReport = new GradeReport();

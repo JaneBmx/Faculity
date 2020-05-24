@@ -8,7 +8,7 @@ public enum CommandType {
     LOGIN(new SignInCommand()),
     EDIT_USER(new EditUserCommand()),
     SIGN_UP(new SignUpCommand()),
-    EDIT_GRADE_REPORT(new EditGradeReportCommand()),
+    EDIT_REQUEST(new EditGradeReportCommand()),
     LOG_OUT(new LogOutCommand()),
 
     /*Footer links*/

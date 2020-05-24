@@ -47,6 +47,7 @@ img.displayed{
 }
 /*RIGHT BLOCK WITH TABS END*/
 
+
 /*TABS*/
 .tab {
     overflow: hidden;
@@ -115,6 +116,7 @@ img.displayed{
 /* END EDIT REQUEST */
 
 
+
 /* info tab style */
 .info_block {
     margin: 15px;
@@ -162,3 +164,12 @@ img.displayed{
     background-color: rgb(119, 163, 119);
 }
 /* EDIT FORM end*/
+
+/*divs with choice*/
+.choose_fac{
+    margin: 15px;
+}
+.choose_priv{
+    margin: 15px;
+}
+/*divs with choice end*/

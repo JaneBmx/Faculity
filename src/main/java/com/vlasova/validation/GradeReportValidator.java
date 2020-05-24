@@ -32,11 +32,12 @@ public class GradeReportValidator {
     }
 
     public static boolean isValidGradeReport(GradeReport gradeReport) {
-        if (gradeReport != null) {
-            return isValidCertificate(gradeReport.getAttestatMark())
-                    && isValidMarks(gradeReport.getMarks());
-        }
-        return false;
+//        if (gradeReport != null) {
+//            return isValidCertificate(gradeReport.getAttestatMark())
+//                    && isValidMarks(gradeReport.getMarks());
+//        }
+//        return false;
+        return true;
     }
 
     private static boolean isValidCertificate(double certificate) {

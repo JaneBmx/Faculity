@@ -44,9 +44,10 @@
                 <p>Email: ${user.email}</p>
                 <p>Login: ${user.login}</p>
                 <h2>Request info</h2>
-                <p>Faculty:</p>
-                <p>Privilege:</p>
-                <p>Accepted status:</p>
+                <p>Faculty: ${gradereport.faculty}</p>
+                <p>Privilege: ${gradereport.privilege.name}</p>
+                <p>Accepted status: ${gradereport.isAccepted}</p>
+                <p>Free paid status: ${gradereport.isFree}</p>
             </div>
         </div>
 
@@ -73,7 +74,8 @@
             <form class="login" method="POST" action="${pageContext.request.contextPath}/controller?command=edit_request">
                 <div class="login-form">
                     <div class="row">
-                        <div>
+
+                        <div class="choose_priv">
                             <select name="faculty_id">
                                 <c:forEach items="${faculties}" var="fac">
                                     <option value="${fac.id}"> ${fac.name}</option>
@@ -81,26 +83,27 @@
                             </select>
                         </div>
 
-                    <!-- privelege & middle mark(double!) -->
-                    <div class="row">
-                        <div>
-                            <select name ="privilege">
-                                <c:forEach items="${privileges}" var = "priv">
-                                    <option value="${priv.id}">${priv.name} </option>
-                                </c:forEach>
-                            </select>
+                          <!-- privelege & middle mark(double!) -->
+                        <div class="row">
+                            <div class = "choose_fac">
+                                <select name ="privilege">
+                                     <c:forEach items="${privileges}" var = "priv">
+                                         <option value="${priv.id}">${priv.name} </option>
+                                     </c:forEach>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="required">Average school mark:  </label>
+                                <input type="number" step="0.1" min="1" max="10" placeholder="0,0" name = "attestat_mark">
+                            </div>
                         </div>
-                        <div>
-                            <label class="required">Average school mark:  </label>
-                            <input type="number" step="0.1" min="1" max="10" placeholder="0,0" name = "attestat_mark">
-                        </div>
-                    </div>
-                        
+
                     <!-- 3 marks(int) -->
                     <div class="row2">
                         <div>
                             <label class="required">mark 1: </label>
-                            <input type="number" min="1" max = "10" value="1" name = "mark_1">
+<%--                            <input type="hidden" value="" name = "sub_1">--%>
+                            <input type="number" min="1" max = "10" value="1" name = "mark_1@rgr">
                         </div>
                         <div>
                             <label class="required">mark 2: </label>

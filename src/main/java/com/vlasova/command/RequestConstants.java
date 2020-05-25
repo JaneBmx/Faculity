@@ -4,6 +4,7 @@ public abstract class RequestConstants {
 
     /*Common constants*/
     public static final String MSG             = "message";
+    public static final String USERS           = "users";
 
     /*User constants*/
     public static final String USER            = "user";

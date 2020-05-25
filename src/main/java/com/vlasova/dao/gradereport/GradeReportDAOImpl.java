@@ -9,7 +9,7 @@ import com.vlasova.exception.dao.CreateObjectException;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.mapper.dao.GradeReportResultSetMapper;
+import com.vlasova.dao.mapper.GradeReportResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

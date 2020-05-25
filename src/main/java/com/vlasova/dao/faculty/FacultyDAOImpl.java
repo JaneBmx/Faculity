@@ -1,7 +1,7 @@
 package com.vlasova.dao.faculty;
 
 import com.vlasova.dao.AbstractDAO;
-import com.vlasova.mapper.dao.FacultyResultSetMapper;
+import com.vlasova.dao.mapper.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.dao.CreateObjectException;

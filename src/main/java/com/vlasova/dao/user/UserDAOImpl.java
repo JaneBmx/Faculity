@@ -6,7 +6,7 @@ import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
-import com.vlasova.mapper.dao.UserResultSetMapper;
+import com.vlasova.dao.mapper.UserResultSetMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

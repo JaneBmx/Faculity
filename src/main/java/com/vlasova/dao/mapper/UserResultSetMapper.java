@@ -1,4 +1,4 @@
-package com.vlasova.mapper.dao;
+package com.vlasova.dao.mapper;
 
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;

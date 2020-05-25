@@ -16,7 +16,9 @@ public class GradeReportMapper {
     private static final String MARK_1 = "mark_1";
     private static final String MARK_2 = "mark_2";
     private static final String MARK_3 = "mark_3";
-    public static final String SUB_1 = "sub_1";
+    private static final String SUB_1 = "mark_1_subId";
+    private static final String SUB_2 = "mark_2_subId";
+    private static final String SUB_3 = "mark_3_subId";
 
     public GradeReport map(HttpServletRequest request) {
         GradeReport gradeReport = new GradeReport();
@@ -47,8 +49,14 @@ public class GradeReportMapper {
     }
 
     private Map<Subject, Integer> mapMarks(HttpServletRequest request) {
-        //TODO make method
-        return new HashMap<>();
+        Map <Subject, Integer> subjects = new HashMap<>();
+        subjects.put(Subject.getSubjectById(Integer.parseInt(request.getParameter(SUB_1)))
+                ,Integer.parseInt(request.getParameter(MARK_1)));
+        subjects.put(Subject.getSubjectById(Integer.parseInt(request.getParameter(SUB_2)))
+                ,Integer.parseInt(request.getParameter(MARK_2)));
+        subjects.put(Subject.getSubjectById(Integer.parseInt(request.getParameter(SUB_3)))
+                ,Integer.parseInt(request.getParameter(MARK_3)));
+        return subjects;
     }
 
     private double mapMiddleMark(HttpServletRequest request) {

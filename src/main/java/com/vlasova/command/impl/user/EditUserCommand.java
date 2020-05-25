@@ -1,33 +1,47 @@
 package com.vlasova.command.impl.user;
 
+import com.vlasova.command.Answer;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
+import com.vlasova.validation.UserDataValidator;
+
+import static com.vlasova.command.RequestConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.vlasova.command.RequestConstants.*;
-
 public class EditUserCommand implements UserCommand {
-//TODO add validation, add trim
+    private UserDataValidator validator = new UserDataValidator();
 
     @Override
-    public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
+    public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute(USER);
+        String newPassword = request.getParameter(NEW_PASS);
+        String oldPassword = request.getParameter(PASS);
+        String name = request.getParameter(USER_NAME);
+        String surname = request.getParameter(SURNAME);
 
-        if (request.getParameter(NEW_PASS) != null
-                && request.getParameter(PASS) != null
+
+        if (validator.isValidPassword(newPassword)
+                && validator.isValidPassword(oldPassword)
                 && request.getParameter(PASS).equals(user.getPassword())) {
-            user.setPassword(request.getParameter(NEW_PASS));
+            newPassword = newPassword.trim();
+            oldPassword = oldPassword.trim();
+            if (oldPassword.equals(user.getPassword())) {
+                user.setPassword(newPassword);
+            }
         }
 
-        if (request.getParameter(USER_NAME) != null) {
-            user.setName(request.getParameter(USER_NAME));
+        if (validator.isValidName(name)) {
+            name = name.trim();
+            user.setName(name);
         }
-        if (request.getParameter(SURNAME) != null) {
-            user.setSurname(request.getParameter(SURNAME));
+
+        if (validator.isValidName(surname)) {
+            surname = surname.trim();
+            user.setSurname(surname);
         }
 
         try {
@@ -35,10 +49,10 @@ public class EditUserCommand implements UserCommand {
             user = UserService.getInstance().getUserById(user.getId());
             request.getSession().setAttribute(USER, user);
             request.setAttribute(MSG, MSG_UPD_DATA_SCC);
-            return PageAddress.USER_PAGE;
+            return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);
-            return PageAddress.USER_PAGE;
+            return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
         }
     }
 }

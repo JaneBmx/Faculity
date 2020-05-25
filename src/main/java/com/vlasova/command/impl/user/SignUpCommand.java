@@ -1,5 +1,6 @@
 package com.vlasova.command.impl.user;
 
+import com.vlasova.command.Answer;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.mapper.UserRequestMapper;
@@ -12,21 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignUpCommand implements UserCommand {
+    private UserDataValidator userDataValidator = new UserDataValidator();
+
     @Override
-    public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
+    public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = new UserRequestMapper().map(request);
-        if(UserDataValidator.isValidUser(user)){
+
+        if(userDataValidator.isValidUser(user)){
             try{
                 UserService.getInstance().registrate(user);
                 request.getSession().setAttribute(USER, user);
-                return PageAddress.USER_PAGE;
-
+                return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             }catch (ServiceException e){
                 request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);
             }
-        }else{
-            request.setAttribute(MSG, MSG_ERR_INV_DATA);
         }
-        return PageAddress.SIGN_UP;
+        request.setAttribute(MSG, MSG_ERR_INV_DATA);
+        return new Answer(PageAddress.SIGN_UP, Answer.Type.FORWARD);
     }
 }

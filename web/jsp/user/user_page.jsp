@@ -79,21 +79,20 @@
                         <script>
                             const fac = {
                                     <c:forEach items="${faculties}" var="fac">
-                                '${fac.id}':
-                                    {
-
-                                        name: "${fac.name}",
-                                subjects: [
-                                    <c:forEach items="${fac.subjects}" var="sub">
-                                {
-                                    id: ${sub.id},
-                                    name: "${sub.name}"
-                                },
+                                    '${fac.id}':
+                                        {
+                                            name: "${fac.name}",
+                                            subjects: [
+                                                <c:forEach items="${fac.subjects}" var="sub">
+                                                {
+                                                    id: ${sub.id},
+                                                    name: "${sub.name}"
+                                                },
+                                                </c:forEach>
+                                            ]
+                                        },
                                     </c:forEach>
-                            ]
-                            },
-                                    </c:forEach>
-                            }
+                                }
                             ;
                         </script>
                         <div class="choose_priv">
@@ -140,7 +139,7 @@
                                 <label class="required">
                                     <div id="mark3">mark 3:</div>
                                 </label>
-                                <input type="text" value="" name="mark_3_subId" id="mark_3_subId">
+                                <input type="hidden" value="" name="mark_3_subId" id="mark_3_subId">
                                 <input type="number" min="1" max="10" value="1" name="mark_3">
                             </div>
                         </div>

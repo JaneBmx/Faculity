@@ -15,7 +15,6 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-
 window.onload = function () {
     document.getElementById("facultySelector").onchange = (e) => {
         const mark1 = document.getElementById("mark1");
@@ -35,7 +34,5 @@ window.onload = function () {
 
         mark3.innerHTML = fac[facultyId].subjects[2].name;
         mark3_subId.value = fac[facultyId].subjects[2].id;
-
-        console.log(fac[facultyId].subjects[2].id);
     }
 };

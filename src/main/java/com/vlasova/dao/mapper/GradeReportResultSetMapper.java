@@ -1,4 +1,4 @@
-package com.vlasova.mapper.dao;
+package com.vlasova.dao.mapper;
 
 import com.vlasova.dao.faculty.FacultyDAOImpl;
 import com.vlasova.entity.faculity.Subject;

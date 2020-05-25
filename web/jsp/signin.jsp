@@ -21,7 +21,7 @@
             <p>${message}</p>
             <button type="submit">Log in</button>
         </div>
-        <a href="signup.jsp">Sign up now!</a>
+        <a href="${pageContext.request.contextPath}/jsp/signup.jsp">Sign up now!</a>
     </form>
 </div>
 

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 public class GetAllUsersCommand implements UserCommand {
-    //TODO add json& js for load set of users on page
+
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {

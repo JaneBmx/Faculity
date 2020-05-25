@@ -66,9 +66,18 @@ public class GradeReportService {
         }
     }
 
+    @Deprecated
     public GradeReport getGradeReportByUser(User user) throws ServiceException {
         try {
             return gradeReportDAO.findGradeReportByUser(user);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public GradeReport getGradeReportByUserId(int id) throws ServiceException {
+        try {
+            return gradeReportDAO.findGradeReportByUserId(id);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

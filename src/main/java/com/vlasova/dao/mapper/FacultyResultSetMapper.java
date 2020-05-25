@@ -46,4 +46,18 @@ public class FacultyResultSetMapper {
         }
         return new HashSet<>(facultyMap.values());
     }
+
+    public Faculty mapOne(ResultSet resultSet) throws CreateObjectException {
+        Faculty faculty = new Faculty();
+        try {
+            faculty.setId(resultSet.getInt(FACULTY_ID));
+            faculty.setName(resultSet.getString(FACULTY_NAME));
+            faculty.setFreeAcceptPlan(resultSet.getInt(FREE_ACCEPT_PLAN));
+            faculty.setPaidAcceptPlan(resultSet.getInt(PAID_ACCEPT_PLAN));
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new CreateObjectException(e);
+        }
+        return faculty;
+    }
 }

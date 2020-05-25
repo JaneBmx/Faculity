@@ -16,15 +16,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Set;
 
-public class FacultyDAOImpl  extends AbstractDAO implements FacultyDAO{
+public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
     private static final Logger LOGGER = LogManager.getLogger(FacultyDAOImpl.class);
     private static final String INSERT_FACULTY = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) " +
-                                                 "VALUES(?,?,?)";
+            "VALUES(?,?,?)";
     private static final String INSERT_SUBJECTS = "INSERT INTO faculty2subject (faculty_id, subject_id) VALUES (?,?)";
     private static final String DELETE = "DELETE FROM faculties WHERE faculty_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM faculty2subject WHERE faculty_id = ?";
     private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? " +
-                                         "WHERE faculty_id = ?";
+            "WHERE faculty_id = ?";
     private static final String FIND_ALL_FACULTIES =
             "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
                     "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id " +
@@ -37,9 +37,7 @@ public class FacultyDAOImpl  extends AbstractDAO implements FacultyDAO{
                     "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
                     "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
     private static final String FIND_BY_ID =
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f LEFT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE f.faculty_id = ? " +
-                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id";
+            "SELECT faculty_id, faculty_name, free_accept_plan, paid_accept_plan FROM faculties WHERE faculty_id = ?";
     private static final String FIND_BY_SUBJECT =
             "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
                     "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id " +
@@ -132,7 +130,10 @@ public class FacultyDAOImpl  extends AbstractDAO implements FacultyDAO{
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
             statement.setInt(1, id);
             resultSet = statement.executeQuery();
-            return mapper.map(resultSet).iterator().next();
+            if (resultSet.next()) {
+                return mapper.mapOne(resultSet);
+            }
+            return null;
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

@@ -23,7 +23,7 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     private static final Logger LOGGER = LogManager.getLogger(GradeReportDAOImpl.class);
     private static final String INSERT_GRADE_REPORT =
             "INSERT INTO  grade_reports(user_id, faculty_id, is_accepted, is_free_paid, privilege_id, attestat_mark, average_mark) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String INSERT_SUBJECTS = "INSERT INTO grade_repotr2subject (user_id, subject_id, mark) VALUES(?,?,?)";
     private static final String DELETE = "DELETE FROM grade_reports WHERE user_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM grade_report2subject WHERE user_id = ?";
@@ -42,11 +42,11 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             "UNION SELECT   g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? ";
     private static final String FIND_BY_USER =
-            "SELECT  g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
-            "gr.subject_id, gr.mark FROM grade_reports g " +
-            "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE user_id = ? " +
-            "UNION SELECT   g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
-            "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE user_id = ? ";
+            "SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
+                    "gr.subject_id, gr.mark FROM grade_reports g " +
+                    "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE g.user_id = ? " +
+                    "UNION SELECT   g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
+                    "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE gr.user_id = ? ";
     private final GradeReportResultSetMapper mapper = new GradeReportResultSetMapper();
 
     @Override
@@ -56,8 +56,8 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             preparedStatement.setInt(1, gradeReport.getId());
             preparedStatement.setInt(2, gradeReport.getFaculty().getId());
             preparedStatement.setBoolean(3, gradeReport.isAccepted());
-            preparedStatement.setBoolean(4,gradeReport.isFree());
-            preparedStatement.setInt(5,gradeReport.getPrivilege().getId());
+            preparedStatement.setBoolean(4, gradeReport.isFree());
+            preparedStatement.setInt(5, gradeReport.getPrivilege().getId());
             preparedStatement.setDouble(6, gradeReport.getAttestatMark());
             preparedStatement.setDouble(7, gradeReport.getAverageMark());
             preparedStatement.executeUpdate();
@@ -117,7 +117,11 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             resultSet = statement.executeQuery(FIND_ALL);
-            return mapper.map(resultSet);
+            Set<GradeReport> gradeReports = null;
+            if (resultSet.next()) {
+                gradeReports = mapper.map(resultSet);
+            }
+            return gradeReports;
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
@@ -133,7 +137,11 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             preparedStatement.setInt(1, faculty.getId());
             preparedStatement.setInt(2, faculty.getId());
             resultSet = preparedStatement.executeQuery();
-            return mapper.map(resultSet);
+            Set<GradeReport> gradeReports = null;
+            if (resultSet.next()) {
+                gradeReports = mapper.map(resultSet);
+            }
+            return gradeReports;
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
@@ -149,7 +157,36 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setInt(2, user.getId());
             resultSet = preparedStatement.executeQuery();
-            return mapper.map(resultSet).iterator().next();
+
+            Set<GradeReport> gradeReports = null;
+            if (resultSet.next()) {
+                gradeReports = mapper.map(resultSet);
+            }
+            return gradeReports == null
+                    ? null
+                    : gradeReports.iterator().next();
+        } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    @Override
+    public GradeReport findGradeReportByUserId(int id) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_USER)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, id);
+            resultSet = preparedStatement.executeQuery();
+            Set<GradeReport> gradeReports = null;
+            if (resultSet.next()) {
+                gradeReports = mapper.map(resultSet);
+            }
+            return gradeReports == null
+                    ? null
+                    : gradeReports.iterator().next();
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

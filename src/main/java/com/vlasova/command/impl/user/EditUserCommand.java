@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditUserCommand implements UserCommand {
-    private UserDataValidator validator = new UserDataValidator();
+    private final UserDataValidator validator = new UserDataValidator();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
@@ -22,7 +22,6 @@ public class EditUserCommand implements UserCommand {
         String oldPassword = request.getParameter(PASS);
         String name = request.getParameter(USER_NAME);
         String surname = request.getParameter(SURNAME);
-
 
         if (validator.isValidPassword(newPassword)
                 && validator.isValidPassword(oldPassword)
@@ -33,17 +32,14 @@ public class EditUserCommand implements UserCommand {
                 user.setPassword(newPassword);
             }
         }
-
         if (validator.isValidName(name)) {
             name = name.trim();
             user.setName(name);
         }
-
         if (validator.isValidName(surname)) {
             surname = surname.trim();
             user.setSurname(surname);
         }
-
         try {
             UserService.getInstance().editUser(user);
             user = UserService.getInstance().getUserById(user.getId());

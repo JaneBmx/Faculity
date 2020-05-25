@@ -1,5 +1,6 @@
 package com.vlasova.command.impl.page;
 
+import com.vlasova.command.Answer;
 import com.vlasova.command.Command;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.entity.user.Role;
@@ -11,13 +12,13 @@ import static com.vlasova.command.RequestConstants.*;
 
 public class LoginPage implements Command {
     @Override
-    public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
+    public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User)request.getSession().getAttribute(USER);
         if(user == null){
-            return PageAddress.LOG_IN;
+            return new Answer(PageAddress.LOG_IN, Answer.Type.FORWARD);
         }
         return user.getRole() == Role.ADMIN
-                ? PageAddress.ADMIN_PAGE
-                : PageAddress.USER_PAGE;
+                ? new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT)
+                : new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
     }
 }

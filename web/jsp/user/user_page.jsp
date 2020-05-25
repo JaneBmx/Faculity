@@ -44,10 +44,16 @@
                 <p>Email: ${user.email}</p>
                 <p>Login: ${user.login}</p>
                 <h2>Request info</h2>
-                <p>Faculty: ${gradereport.faculty}</p>
-                <p>Privilege: ${gradereport.privilege.name}</p>
-                <p>Accepted status: ${gradereport.isAccepted}</p>
-                <p>Free paid status: ${gradereport.isFree}</p>
+                <p>Faculty: ${grade_report.faculty.name}</p>
+                <p>Privilege: ${grade_report.privilege.name}</p>
+                <p>Accepted status:
+                    <c:if test="${grade_report.isAccepted() == true}">Accepted</c:if>
+                    <c:if test="${grade_report.isAccepted() == false}">Rejected</c:if>
+                </p>
+                <p>Free paid status:
+                    <c:if test="${grade_report.isFree() == true}">Free</c:if>
+                    <c:if test="${grade_report.isFree() == false}">Paid</c:if>
+                </p>
             </div>
         </div>
 

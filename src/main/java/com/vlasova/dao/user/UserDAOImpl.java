@@ -29,7 +29,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private final UserResultSetMapper mapper = new UserResultSetMapper();
     private Set<User> users;
 
-    //updated & tested with front
     @Override
     public void add(User user) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
@@ -61,7 +60,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         }
     }
 
-    //updated & tested with front
     @Override
     public void update(User user) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
@@ -77,7 +75,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         }
     }
 
-    //updated & tested with front
     @Override
     public boolean existsByEmailAndLogin(String email, String login) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
@@ -101,7 +98,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         return false;
     }
 
-    //updated & tested with front
     @Override
     public User findUserByLoginAndPassword(String login, String password) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();

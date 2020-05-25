@@ -31,7 +31,7 @@ public class GradeReportResultSetMapper {
     public Set<GradeReport> map(ResultSet resultSet) throws CreateObjectException {
         Map<Integer, GradeReport> gradeReportMap = new HashMap<>();
         try {
-            while (resultSet.next()) {
+            do {
                 int id = resultSet.getInt(USER_ID);
                 GradeReport gradeReport;
                 if (gradeReportMap.containsKey(id)) {
@@ -49,11 +49,11 @@ public class GradeReportResultSetMapper {
                     gradeReport.setMarks(new HashMap<>());
                 }
                 gradeReport.getMarks().put(Subject.getSubjectById(resultSet.getInt(SUBJECT_ID)), resultSet.getInt(MARK));
-            }
+            } while (resultSet.next());
         } catch (SQLException | DAOException e) {
             LOGGER.warn(e);
             throw new CreateObjectException(e);
         }
-        return new HashSet<>(gradeReportMap.values());
+        return gradeReportMap.isEmpty() ? null : new HashSet<>(gradeReportMap.values());
     }
 }

@@ -1,13 +1,13 @@
 package com.vlasova.command.impl.gradereport;
 
-import com.vlasova.command.web.PageAddress;
+import com.vlasova.command.Answer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteGradeReportCommand implements GradeReportCommand {
     @Override
-    public PageAddress execute(HttpServletRequest request, HttpServletResponse response) {
+    public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 }

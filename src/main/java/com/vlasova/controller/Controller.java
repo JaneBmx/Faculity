@@ -1,11 +1,11 @@
 package com.vlasova.controller;
 
+import com.vlasova.command.Answer;
 import com.vlasova.command.Command;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.exception.connection.ClosePoolException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.CommandType;
-import com.vlasova.command.web.PageAddress;
 import com.vlasova.pool.ConnectionPool;
 import com.vlasova.service.FacultyService;
 import org.apache.logging.log4j.LogManager;
@@ -56,7 +56,7 @@ public class Controller extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = CommandType.valueOf(req.getParameter("command").toUpperCase()).getCommand();
-        PageAddress pageAddress = command.execute(req, resp);
-        req.getRequestDispatcher(pageAddress.getPath()).forward(req, resp);
+        Answer pageAddress = command.execute(req, resp);
+        req.getRequestDispatcher(pageAddress.getPageAddress().getPath()).forward(req, resp);
     }
 }

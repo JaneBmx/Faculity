@@ -8,7 +8,7 @@ import static com.vlasova.command.RequestConstants.*;
 import javax.servlet.http.HttpServletRequest;
 
 public class UserRequestMapper {
-//TODO check NPE
+    //TODO check NPE
     public User map(HttpServletRequest request) {
         User user = new User();
         user.setName(request.getParameter(USER_NAME));

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignUpCommand implements UserCommand {
-    private UserDataValidator userDataValidator = new UserDataValidator();
+    private final UserDataValidator userDataValidator = new UserDataValidator();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {

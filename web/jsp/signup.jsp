@@ -22,7 +22,7 @@
             <p>${message}</p>
             <button type="submit">Sign up</button>
         </div>
-        <a href="signin.jsp">Log in now!</a>
+        <a href="${pageContext.request.contextPath}/controller?command=login_page">Log in now!</a>
     </form>
 </div>
 

@@ -19,7 +19,8 @@ public class SignUpCommand implements UserCommand {
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = new UserRequestMapper().map(request);
 
-        if(userDataValidator.isValidUser(user)){
+        //if(userDataValidator.isValidUser(user)){
+        if(true){
             try{
                 UserService.getInstance().registrate(user);
                 request.getSession().setAttribute(USER, user);

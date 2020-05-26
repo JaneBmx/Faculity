@@ -21,25 +21,23 @@ import java.util.Set;
 
 public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     private static final Logger LOGGER = LogManager.getLogger(GradeReportDAOImpl.class);
-    private static final String INSERT_GRADE_REPORT =
-            "INSERT INTO  grade_reports(user_id, faculty_id, is_accepted, is_free_paid, privilege_id, attestat_mark, average_mark) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private static final String INSERT_SUBJECTS = "INSERT INTO grade_repotr2subject (user_id, subject_id, mark) VALUES(?,?,?)";
+    private static final String INSERT_GRADE_REPORT = "INSERT INTO  grade_reports(user_id, faculty_id, is_accepted, is_free_paid, privilege_id, attestat_mark, average_mark) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_SUBJECTS = "INSERT INTO grade_report2subject (user_id, subject_id, mark) VALUES(?,?,?)";
     private static final String DELETE = "DELETE FROM grade_reports WHERE user_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM grade_report2subject WHERE user_id = ?";
     private static final String UPDATE = "UPDATE grade_reports " +
-            "SET faculty_id = ?, is_accepted = ?, is_free_paid = ?, privilege_id = ?, attestat_mark = ?, avarage_mark = ? " +
+            "SET faculty_id = ?, is_accepted = ?, is_free_paid = ?, privilege_id = ?, attestat_mark = ?, average_mark = ? " +
             "WHERE user_id = ?";
-    private static final String FIND_ALL = "SELECT g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
+    private static final String FIND_ALL = "SELECT g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g " +
             "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id " +
-            "UNION SELECT  g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
+            "UNION SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g " +
             "RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id";
-    private static final String FIND_BY_FACULTY = "SELECT  g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
+    private static final String FIND_BY_FACULTY = "SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g " +
             "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? " +
-            "UNION SELECT   g.user_id, g.faculty_id, g.isAccepted, g.isFreePaid, g.privelege_id, g.attestat_mark, g.average_mark, " +
+            "UNION SELECT   g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? ";
     private static final String FIND_BY_USER =
             "SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
@@ -157,7 +155,6 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setInt(2, user.getId());
             resultSet = preparedStatement.executeQuery();
-
             Set<GradeReport> gradeReports = null;
             if (resultSet.next()) {
                 gradeReports = mapper.map(resultSet);

@@ -18,7 +18,7 @@
     <div class="left">
         <h2>${user.name} ${user.surname}</h2>
         <div class="photo">
-            <img class="displayed" src="https://vk.com/images/camera_200.png?ava=1" alt="photo"></p>
+            <img class="displayed" src="${pageContext.request.contextPath}/img/user_default_ava.JPG" alt="photo"></p>
         </div>
         <form>
             <button type="submit">Edit photo</button>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.command.RequestConstants.*;
 
-public class LoginPage implements Command {
+public class ProfilePageCommand implements Command {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = (User)request.getSession().getAttribute(USER);

@@ -2,7 +2,7 @@ package com.vlasova.command;
 
 import com.vlasova.command.impl.faculty.AddFacultyCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
-import com.vlasova.command.impl.page.LoginPage;
+import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.command.impl.user.*;
 
 public enum CommandType {
@@ -14,7 +14,7 @@ public enum CommandType {
     LOG_OUT(new LogOutCommand()),
 
     /*Footer links*/
-    LOGIN_PAGE(new LoginPage()),
+    PROFILE(new ProfilePageCommand()),
 
     /*ADMIN*/
     ADD_FACULTY(new AddFacultyCommand()),

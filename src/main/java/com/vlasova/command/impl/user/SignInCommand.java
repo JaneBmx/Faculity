@@ -15,17 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignInCommand implements UserCommand {
+    private final UserService userService = UserService.getInstance();
+    private final GradeReportService gradeReportService = GradeReportService.getInstance();
+
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASS);
 
         try {
-            User user = UserService.getInstance().logIn(login,password);
+            User user = userService.logIn(login,password);
 
             if (user != null) {
                 request.getSession().setAttribute(USER, user);
-                GradeReport gradeReport = GradeReportService.getInstance().getGradeReportByUserId(user.getId());
+                GradeReport gradeReport = gradeReportService.getGradeReportByUserId(user.getId());
                 if (gradeReport != null) {
                     request.getSession().setAttribute(GRADE_REPORT, gradeReport);
                 }

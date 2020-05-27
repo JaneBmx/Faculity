@@ -2,6 +2,7 @@ package com.vlasova.controller;
 
 import com.vlasova.command.Answer;
 import com.vlasova.command.Command;
+import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.exception.connection.ClosePoolException;
 import com.vlasova.exception.service.ServiceException;
@@ -32,6 +33,7 @@ public class Controller extends HttpServlet {
         }
         this.getServletContext().setAttribute("privileges", Privilege.values());
         LOGGER.info("Privileges has been loaded.");
+        this.getServletContext().setAttribute("subjects", Subject.values());
     }
 
     @Override

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EditUserCommand implements UserCommand {
     private final UserDataValidator validator = new UserDataValidator();
+    private final UserService userService = UserService.getInstance();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
@@ -25,7 +26,7 @@ public class EditUserCommand implements UserCommand {
 
         if (validator.isValidPassword(newPassword)
                 && validator.isValidPassword(oldPassword)
-                && request.getParameter(PASS).equals(user.getPassword())) {
+                && oldPassword.equals(user.getPassword())) {
             newPassword = newPassword.trim();
             oldPassword = oldPassword.trim();
             if (oldPassword.equals(user.getPassword())) {
@@ -41,8 +42,8 @@ public class EditUserCommand implements UserCommand {
             user.setSurname(surname);
         }
         try {
-            UserService.getInstance().editUser(user);
-            user = UserService.getInstance().getUserById(user.getId());
+            userService.editUser(user);
+            user = userService.getUserById(user.getId());
             request.getSession().setAttribute(USER, user);
             request.setAttribute(MSG, MSG_UPD_DATA_SCC);
             return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);

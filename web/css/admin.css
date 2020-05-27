@@ -210,3 +210,22 @@
     margin-left: 30px;
 }
 /* ADD FACULTY END*/
+
+/*scroll faculty edit*/
+.inner_edit{
+    overflow: auto;
+    height: 300px;
+}
+/*scroll faculty edit edn*/
+
+/*table with fclt*/
+table{
+    color: white;
+}
+button .delete{
+    color: brown;
+}
+button .edit{
+    color: darkolivegreen;
+}
+/*table with faculty end*/

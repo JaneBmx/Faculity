@@ -16,16 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditGradeReportCommand implements GradeReportCommand {
-    private final GradeReportMapper gradeReportMapper = new GradeReportMapper();
-
     private static final Logger LOGGER = LogManager.getLogger(EditGradeReportCommand.class);
+    private final GradeReportMapper gradeReportMapper = new GradeReportMapper();
+    private final GradeReportService gradeReportService = GradeReportService.getInstance();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         int userID = ((User) request.getSession().getAttribute(USER)).getId();
         GradeReport gradeReport;
         try {
-            gradeReport = GradeReportService.getInstance().getGradeReportByUserId(userID);
+            gradeReport = gradeReportService.getGradeReportByUserId(userID);
         } catch (ServiceException e) {
             LOGGER.warn(e);
             request.setAttribute(MSG, MSG_SERV_ERR);
@@ -35,7 +35,7 @@ public class EditGradeReportCommand implements GradeReportCommand {
         if (gradeReport == null) {
             gradeReport = gradeReportMapper.map(request);
             try {
-                GradeReportService.getInstance().addGradeReport(gradeReport);
+                gradeReportService.addGradeReport(gradeReport);
                 request.getSession().setAttribute(GRADE_REPORT, gradeReport);
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
@@ -47,7 +47,7 @@ public class EditGradeReportCommand implements GradeReportCommand {
 
         gradeReport = gradeReportMapper.map(request);
         try {
-            GradeReportService.getInstance().updateGradeReport(gradeReport);
+            gradeReportService.updateGradeReport(gradeReport);
         } catch (ServiceException e) {
             LOGGER.warn(e);
             request.setAttribute(MSG, MSG_SERV_ERR);

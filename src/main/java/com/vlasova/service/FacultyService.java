@@ -37,6 +37,14 @@ public class FacultyService {
         }
     }
 
+    public void addFaculty(Faculty faculty) throws ServiceException {
+        try{
+            facultyDAO.add(faculty);
+        }catch (DAOException e ){
+            throw new ServiceException(e);
+        }
+    }
+
     public void deleteFaculty(Faculty faculty) throws ServiceException {
         try {
             facultyDAO.remove(faculty);

@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
 public class GetAllUsersCommand implements UserCommand {
+    private final UserService userService = UserService.getInstance();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Set<User> users = UserService.getInstance().getAllUsers();
+            Set<User> users = userService.getAllUsers();
             request.getSession().setAttribute(USERS, users);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

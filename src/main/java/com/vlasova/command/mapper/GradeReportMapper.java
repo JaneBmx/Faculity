@@ -11,14 +11,14 @@ import java.util.Map;
 
 public class GradeReportMapper {
     private static final String FACULTY_ID = "faculty_id";
-    private static final String PRIVILEGE = "privilege";
-    private static final String ATTESTAT = "attestat_mark";
-    private static final String MARK_1 = "mark_1";
-    private static final String MARK_2 = "mark_2";
-    private static final String MARK_3 = "mark_3";
-    private static final String SUB_1 = "mark_1_subId";
-    private static final String SUB_2 = "mark_2_subId";
-    private static final String SUB_3 = "mark_3_subId";
+    private static final String PRIVILEGE  = "privilege";
+    private static final String ATTESTAT   = "attestat_mark";
+    private static final String MARK_1     = "mark_1";
+    private static final String MARK_2     = "mark_2";
+    private static final String MARK_3     = "mark_3";
+    private static final String SUB_1      = "mark_1_subId";
+    private static final String SUB_2      = "mark_2_subId";
+    private static final String SUB_3      = "mark_3_subId";
 
     public GradeReport map(HttpServletRequest request) {
         GradeReport gradeReport = new GradeReport();

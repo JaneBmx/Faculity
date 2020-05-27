@@ -72,53 +72,87 @@
                         <th>Free accept plan</th>
                         <th>Paid accept plan</th>
                         <th colspan="3">Subjects</th>
-                        <th><th>
-                        <th><th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     <c:forEach items="${faculties}" var="fac">
+                        <input type="hidden" name="faculty_on_table" value=${fac.id}>
                         <tr>
                             <td>${fac.id}</td>
                             <td>${fac.name}</td>
                             <td>${fac.freeAcceptPlan}</td>
                             <td>${fac.paidAcceptPlan}</td>
                             <c:forEach items="${fac.subjects}" var="sub">
-                                <td>${sub.name}</td>
+                                <td><c:if test="${sub == null}"> - </c:if>
+                                    <c:if test="${sub != null}"> ${sub.name} </c:if></td>
                             </c:forEach>
-                            <td><button class="delete">Delete</button><td>
-                            <td><button class="edit" >Edit</button><td>
+                            <td>
+                                <button class="delete">Delete</button>
+                            <td>
+                            <td>
+                                <button class="edit">Edit</button>
+                            <td>
                         </tr>
                     </c:forEach>
                 </table>
-                <%--                <c:forEach items="${faculties}" var="fac">--%>
-                <%--                    <p> ${fac.id} ${fac.name} ${fac.freeAcceptPlan}  ${fac.paidAcceptPlan} <c:forEach items="${fac.subjects}" var="sub"> ${sub.name}</c:forEach></p>--%>
-                <%--                </c:forEach>--%>
             </div>
         </div>
-
-        <div id="Search faculties" class="tabcontent1">
-            <h2>Search faculty div</h2>
-        </div>
-
     </div>
-
     <!-- Users -->
     <div id="Paris" class="tabcontent">
-        <h3>Users</h3>
-
         <div class="tab2">
             <button class="tablinks2" onclick="openCity2(event, 'Edit user')">Edit</button>
             <button class="tablinks2" onclick="openCity2(event, 'Search users')">Search</button>
         </div>
 
         <div id="Edit user" class="tabcontent2">
-            <h2>Edit user div</h2>
+
+
+            <form method="post" action="${pageContext.request.contextPath}/controller?command=get_all_users">
+
+                <table width="90%">
+                    <tr>
+                        <th>ID</th>
+                        <th>Role</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Login</th>
+                        <th>Grade report</th>
+                    </tr>
+                </table>
+                <div class="inner_edit">
+                    <table width="100%">
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.role.toString()}</td>
+                                <td>${user.name}</td>
+                                <td>${user.surname}</td>
+                                <td>${user.email}</td>
+                                <td>${user.login}</td>
+                                <th><c:if test="${user.getGradeReport() == null}"> - </c:if>
+                                    <c:if test="${user.getGradeReport() != null}"> + </c:if></th>
+                                <td>
+                                    <button class="delete">Delete</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+                <p>
+                    <button type="submit">Update</button>
+                </p>
+            </form>
+
         </div>
 
         <div id="Search users" class="tabcontent2">
             <h2>Search user div</h2>
         </div>
 
-        <p>Paris is the capital of France.</p>
     </div>
 
     <!-- Gradereports -->

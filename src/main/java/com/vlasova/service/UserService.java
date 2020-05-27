@@ -45,6 +45,14 @@ public class UserService {
         }
     }
 
+    public void delete(int userID) throws ServiceException {
+        try {
+            userDAO.remove(userID);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public User logIn(String login, String password) throws ServiceException {
         try {
             return userDAO.findUserByLoginAndPassword(login, password);

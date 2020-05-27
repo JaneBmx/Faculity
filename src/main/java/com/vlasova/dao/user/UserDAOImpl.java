@@ -60,6 +60,17 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         }
     }
 
+    public void remove(int userId) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        }
+    }
+
     @Override
     public void update(User user) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
@@ -142,11 +153,9 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              Statement statement = connection.createStatement()) {
             users = new HashSet<>();
-            if (statement != null) {
-                resultSet = statement.executeQuery(FIND_ALL_USERS);
-                while (resultSet.next()) {
-                    users.add(mapper.map(resultSet));
-                }
+            resultSet = statement.executeQuery(FIND_ALL_USERS);
+            while (resultSet.next()) {
+                users.add(mapper.map(resultSet));
             }
             return users;
         } catch (SQLException e) {

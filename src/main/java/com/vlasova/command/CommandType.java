@@ -16,9 +16,9 @@ public enum CommandType {
     /*Footer links*/
     LOGIN_PAGE(new LoginPage()),
 
-    /*faculty*/
+    /*ADMIN*/
     ADD_FACULTY(new AddFacultyCommand()),
-
+    DELETE_USER(new DeleteUserCommand()),
     GET_ALL_USERS(new GetAllUsersCommand());
 
     private final Command command;

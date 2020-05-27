@@ -228,4 +228,8 @@ button .delete{
 button .edit{
     color: darkolivegreen;
 }
+
+td{
+    text-align: left;
+}
 /*table with faculty end*/

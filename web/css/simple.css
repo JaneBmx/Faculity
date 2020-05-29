@@ -1,0 +1,12 @@
+.infa {
+    width: 50%;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white
+}
+
+.hm {
+    width: 90%;
+    margin: 20px;
+    height: 400px;
+}

@@ -65,6 +65,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
         }
     }
 
+    @Deprecated
     @Override
     public void remove(Faculty faculty) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
@@ -73,6 +74,21 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
             preparedStatement.setInt(1, faculty.getId());
             preparedStatement.executeUpdate();
             preparedStatement1.setInt(1, faculty.getId());
+        } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public void remove(int facultyId) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS);
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);) {
+            preparedStatement1.setInt(1, facultyId);
+            preparedStatement1.executeUpdate();
+            preparedStatement.setInt(1, facultyId);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

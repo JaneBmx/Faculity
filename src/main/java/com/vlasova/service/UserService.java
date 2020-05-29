@@ -1,14 +1,16 @@
 package com.vlasova.service;
 
+import com.vlasova.dao.gradereport.GradeReportDAO;
+import com.vlasova.dao.gradereport.GradeReportDAOImpl;
 import com.vlasova.dao.user.UserDAO;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.dao.user.UserDAOImpl;
+import com.vlasova.service.comparator.UserComparatorByID;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class UserService {
     private static class Holder {
@@ -21,9 +23,11 @@ public class UserService {
 
     private UserService() {
         userDAO = new UserDAOImpl();
+        gradeReportDAO = new GradeReportDAOImpl();
     }
 
     private final UserDAO userDAO;
+    private final GradeReportDAO gradeReportDAO;
 
     public User registrate(User user) throws ServiceException {
         try {
@@ -37,6 +41,7 @@ public class UserService {
         return user;
     }
 
+    @Deprecated
     public void delete(User user) throws ServiceException {
         try {
             userDAO.remove(user);
@@ -47,6 +52,7 @@ public class UserService {
 
     public void delete(int userID) throws ServiceException {
         try {
+            gradeReportDAO.remove(userID);
             userDAO.remove(userID);
         } catch (DAOException e) {
             throw new ServiceException(e);
@@ -69,9 +75,11 @@ public class UserService {
         }
     }
 
-    public Set<User> getUsersByRole(Role role) throws ServiceException {
+    public List<User> getUsersByRole(Role role) throws ServiceException {
         try {
-            return new HashSet<>(userDAO.findUsersByRole(role));
+            List<User> list = new ArrayList<>(userDAO.findUsersByRole(role));
+            list.sort(new UserComparatorByID());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -85,9 +93,11 @@ public class UserService {
         }
     }
 
-    public Set<User> getAllUsers() throws ServiceException {
+    public List<User> getAllUsers() throws ServiceException {
         try {
-            return new HashSet<>(userDAO.findAllUsers());
+            List<User> list = new ArrayList<>(userDAO.findAllUsers());
+            list.sort(new UserComparatorByID());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

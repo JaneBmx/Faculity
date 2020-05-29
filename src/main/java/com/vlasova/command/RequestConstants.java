@@ -14,6 +14,7 @@ public abstract class RequestConstants {
     public static final String LOGIN           = "user_login";
     public static final String NEW_PASS        = "new_password";
     public static final String PASS            = "user_password";
+    public static final String ROLE            = "user_role";
 
     /*GradeReport constants*/
     public static final String GRADE_REPORT    = "grade_report";
@@ -29,6 +30,10 @@ public abstract class RequestConstants {
     public static final String SUB_1           = "subject_1";
     public static final String SUB_2           = "subject_2";
     public static final String SUB_3           = "subject_3";
+
+
+    /*Common constants*/
+    public static final String FACULTIES       = "faculties";
 
 
     //TODO make RU\EN (internationalize it)

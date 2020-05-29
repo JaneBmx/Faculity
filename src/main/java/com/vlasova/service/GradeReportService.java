@@ -7,9 +7,9 @@ import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.dao.gradereport.GradeReportDAOImpl;
+import com.vlasova.service.comparator.GradeReportComparatorByID;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class GradeReportService {
     private static class Holder {
@@ -50,17 +50,21 @@ public class GradeReportService {
         }
     }
 
-    public Set<GradeReport> getAllGradeReports() throws ServiceException {
+    public List<GradeReport> getAllGradeReports() throws ServiceException {
         try {
-            return new HashSet<>(gradeReportDAO.findAllGradeReports());
+            List<GradeReport> list = new ArrayList<>(gradeReportDAO.findAllGradeReports());
+            list.sort(new GradeReportComparatorByID());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException();
         }
     }
 
-    public Set<GradeReport> getGradeReportsByFaculty(Faculty faculty) throws ServiceException {
+    public List<GradeReport> getGradeReportsByFaculty(Faculty faculty) throws ServiceException {
         try {
-            return new HashSet<>(gradeReportDAO.findGradeReportsByFaculty(faculty));
+            List<GradeReport> list = new ArrayList<>(gradeReportDAO.findGradeReportsByFaculty(faculty));
+            list.sort(new GradeReportComparatorByID());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

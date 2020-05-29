@@ -19,7 +19,11 @@ public enum CommandType {
     /*ADMIN*/
     ADD_FACULTY(new AddFacultyCommand()),
     DELETE_USER(new DeleteUserCommand()),
-    GET_ALL_USERS(new GetAllUsersCommand());
+    GET_ALL_USERS(new GetAllUsersCommand()),
+
+
+    /*testing*/
+    GET_ALL_USERS_AJAX(new GetAllUserAJAX());
 
     private final Command command;
 

@@ -10,7 +10,7 @@ import static com.vlasova.command.RequestConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Set;
+import java.util.List;
 
 public class GetAllUsersCommand implements UserCommand {
     private final UserService userService = UserService.getInstance();
@@ -18,7 +18,7 @@ public class GetAllUsersCommand implements UserCommand {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Set<User> users = userService.getAllUsers();
+            List<User> users = userService.getAllUsers();
             request.getSession().setAttribute(USERS, users);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

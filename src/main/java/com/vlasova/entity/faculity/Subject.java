@@ -15,8 +15,7 @@ public enum Subject {
     ART("Art", 12),
     CHEMISTRY("Chemistry", 13),
     BIOLOGY("Biology", 14),
-    SOCIAL("Social", 15),
-    UNDEFINED("Undefined", 0);
+    SOCIAL("Social", 15);
 
     private String name;
     private int id;
@@ -40,6 +39,6 @@ public enum Subject {
                 return s;
             }
         }
-        return UNDEFINED;
+        throw new RuntimeException();
     }
 }

@@ -6,6 +6,7 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
+import com.vlasova.service.comparator.FacultyComparatorById;
 
 import java.util.*;
 
@@ -18,12 +19,13 @@ public class FacultyService {
         return Holder.INSTANCE;
     }
 
-    private FacultyService(){
+    private FacultyService() {
         facultyDAO = new FacultyDAOImpl();
     }
 
     private final FacultyDAO facultyDAO;
 
+    @Deprecated
     public void addFaculty(String name, int free, int paid, Subject... subjects) throws ServiceException {
         Faculty faculty = new Faculty();
         faculty.setName(name);
@@ -38,16 +40,25 @@ public class FacultyService {
     }
 
     public void addFaculty(Faculty faculty) throws ServiceException {
-        try{
+        try {
             facultyDAO.add(faculty);
-        }catch (DAOException e ){
+        } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
+    @Deprecated
     public void deleteFaculty(Faculty faculty) throws ServiceException {
         try {
             facultyDAO.remove(faculty);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void deleteFaculty(int facultyId) throws ServiceException {
+        try {
+            facultyDAO.remove(facultyId);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -63,15 +74,19 @@ public class FacultyService {
 
     public List<Faculty> getAllFaculties() throws ServiceException {
         try {
-            return new ArrayList<>(facultyDAO.findAllFaculties());
+            List<Faculty> list = new ArrayList<>(facultyDAO.findAllFaculties());
+            list.sort(new FacultyComparatorById());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
-    public Set<Faculty> getAllFreePaidFaculties(boolean isPaid) throws ServiceException {
+    public List<Faculty> getAllFreePaidFaculties(boolean isPaid) throws ServiceException {
         try {
-            return new HashSet<>(facultyDAO.findFacultyByPaid(isPaid));
+            List<Faculty> list = new ArrayList<>(facultyDAO.findFacultyByPaid(isPaid));
+            list.sort(new FacultyComparatorById());
+            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -85,14 +100,13 @@ public class FacultyService {
         }
     }
 
-    public Set<Faculty> getFacultiesBySubjects(Subject subject) throws ServiceException {
-        if (subject != null) {
-            try {
-                return new HashSet<>(facultyDAO.findFacultyBySubject(subject));
-            } catch (DAOException e) {
-                throw new ServiceException(e);
-            }
+    public List<Faculty> getFacultiesBySubjects(Subject subject) throws ServiceException {
+        try {
+            List<Faculty> list = new ArrayList<>(facultyDAO.findFacultyBySubject(subject));
+            list.sort(new FacultyComparatorById());
+            return list;
+        } catch (DAOException e) {
+            throw new ServiceException(e);
         }
-        return new HashSet<>();
     }
 }

@@ -24,41 +24,62 @@
     <!-- Faculties -->
     <div id="London" class="tabcontent">
         <div class="tab1">
-            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new faculty</button>
-            <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')">Edit faculty</button>
-            <button class="tablinks1" onclick="openCity1(event, 'Search faculties')">Search</button>
+            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new</button>
+            <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')">All</button>
         </div>
 
+        <%-- Facultues: Add new  --%>
         <div id="Add faculties" class="tabcontent1">
             <div class="add_faculty">
                 <form method="post" action="${pageContext.request.contextPath}/controller?command=add_faculty">
-                    <p><label>Name of faculty: </label>
-                        <input type="text" placeholder="Name of faculty" name="faculty_name" required></p>
-                    <p><label>Free accept plan: </label>
-                        <input type="number" placeholder="Free accept plan" min="0" name="free" required></p>
-                    <p><label>Paid accept plan: </label>
-                        <input type="number" placeholder="Paid accept plan" min="0" name="paid" required></p>
-                    <p><label>First subject: </label>
-                        <select name="sub_1_id">
-                            <c:forEach items="${subjects}" var="sub">
-                                <option value="${sub.id}">${sub.name}</option>
-                            </c:forEach>
-                        </select></p>
+                    <table width="100%">
+                        <tr>
+                            <td>Name of faculty:</td>
+                            <td><input type="text" placeholder="Name of faculty" name="faculty_name" required></td>
 
-                    <p><label>Second subject: </label>
-                        <select name="sub_2_id">
-                            <c:forEach items="${subjects}" var="sub">
-                                <option value="${sub.id}">${sub.name}</option>
-                            </c:forEach>
-                        </select></p>
-
-                    <p><label>Third subject: </label>
-                        <select name="sub_3_id">
-                            <c:forEach items="${subjects}" var="sub">
-                                <option value="${sub.id}">${sub.name}</option>
-                            </c:forEach>
-                        </select></p>
-                    <button type="submit">Add</button>
+                        </tr>
+                        <tr>
+                            <td>Free accept plan:</td>
+                            <td><input type="number" placeholder="Free accept plan" min="0" max="100" name="free"
+                                       required></td>
+                        </tr>
+                        <tr>
+                            <td>Paid accept plan:</td>
+                            <td><input type="number" placeholder="Paid accept plan" min="0" max="100" name="paid"
+                                       required></td>
+                        </tr>
+                        <tr>
+                            <td>Subject 1:</td>
+                            <td>
+                                <select name="sub_1_id">
+                                    <c:forEach items="${subjects}" var="sub">
+                                        <option value="${sub.id}">${sub.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Subject 2:</td>
+                            <td>
+                                <select name="sub_2_id">
+                                    <c:forEach items="${subjects}" var="sub">
+                                        <option value="${sub.id}">${sub.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Subject 3:</td>
+                            <td>
+                                <select name="sub_3_id">
+                                    <c:forEach items="${subjects}" var="sub">
+                                        <option value="${sub.id}">${sub.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">Add faculty</button>
                 </form>
             </div>
         </div>
@@ -100,68 +121,55 @@
             </div>
         </div>
     </div>
+
     <!-- Users -->
     <div id="Paris" class="tabcontent">
         <div class="tab2">
-            <button class="tablinks2" onclick="openCity2(event, 'Edit user')">Edit</button>
-            <button class="tablinks2" onclick="openCity2(event, 'Search users')">Search</button>
+            <button class="tablinks2" onclick="openCity2(event, 'Search_users')">All users</button>
+            <button class="tablinks2" onclick="openCity2(event, 'Edit_user')">Add admin</button>
         </div>
 
-        <div id="Edit user" class="tabcontent2">
-
-
-            <form method="post" action="${pageContext.request.contextPath}/controller?command=get_all_users">
-
-                <table width="90%">
+        <div id="Edit_user" class="tabcontent2">
+            <form method="post" action="${pageContext.request.contextPath}/controller?command=Add_user">
+                <input type="hidden" name="user_role" value="admin">
+                <table>
                     <tr>
-                        <th>ID</th>
-                        <th>Role</th>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Email</th>
-                        <th>Login</th>
-                        <th>Grade report</th>
+                        <td>Name: </td>
+                        <td><input type="text" placeholder="Name" name="user_name" required></td>
+                    </tr>
+                    <tr>
+                        <td>Surname: </td>
+                        <td><input type="text" placeholder="Surname" name="user_surname" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td><input type="email" placeholder="Email" name="user_email" required></td>
+                    </tr>
+                    <tr>
+                        <td>Login: </td>
+                        <td><input type="text" placeholder="Email" name="user_login" required></td>
+                    </tr>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" placeholder="Password" name="user_login" required></td>
                     </tr>
                 </table>
-                <div class="inner_edit">
-                    <table width="100%">
-                        <c:forEach items="${users}" var="user">
-                            <tr>
-                                <td>${user.id}</td>
-                                <td>${user.role.toString()}</td>
-                                <td>${user.name}</td>
-                                <td>${user.surname}</td>
-                                <td>${user.email}</td>
-                                <td>${user.login}</td>
-                                <th><c:if test="${user.getGradeReport() == null}"> - </c:if>
-                                    <c:if test="${user.getGradeReport() != null}"> + </c:if></th>
-                                <td>
-                                    <button class="delete">Delete</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </div>
                 <p>
-                    <button type="submit">Update</button>
+                    <button type="submit">Create</button>
                 </p>
             </form>
+        </div>
+        <div id="Search_users" class="tabcontent2">
+
 
         </div>
-
-        <div id="Search users" class="tabcontent2">
-            <h2>Search user div</h2>
-        </div>
-
     </div>
 
     <!-- Gradereports -->
     <div id="Tokyo" class="tabcontent">
-        <h3>Gradereports</h3>
-
         <div class="tab3">
-            <button class="tablinks3" onclick="openCity3(event, 'Add')">Add</button>
-            <button class="tablinks3" onclick="openCity3(event, 'Edit')">Edit</button>
+            <button class="tablinks3" onclick="openCity3(event, 'Add')">All</button>
+            <button class="tablinks3" onclick="openCity3(event, 'Edit')">Submit</button>
             <button class="tablinks3" onclick="openCity3(event, 'Search')">Search</button>
             <button class="tablinks3" onclick="openCity3(event, 'Accept')">Accept</button>
         </div>
@@ -181,7 +189,6 @@
         <div id="Accept" class="tabcontent3">
             <h2>Button for accepting srudents</h2>
         </div>
-
 
         <p>Tokyo is the capital of Japan.</p>
     </div>

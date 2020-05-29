@@ -29,6 +29,7 @@ public class Answer {
 
     public enum Type {
         FORWARD,
-        REDIRECT
+        REDIRECT,
+        JSON
     }
 }

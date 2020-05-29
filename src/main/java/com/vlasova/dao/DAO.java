@@ -7,5 +7,7 @@ public interface DAO<T> {
 
     void remove(T t) throws DAOException;
 
+    void remove(int id) throws DAOException;
+
     void update(T t) throws DAOException;
 }

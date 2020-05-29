@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteUserCommand implements UserCommand {
-    private  final UserService userService= UserService.getInstance();
+    private final UserService userService = UserService.getInstance();
+
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-        int userID =  Integer.parseInt(request.getParameter("user_id"));
-        try{
+        int userID = Integer.parseInt(request.getParameter("user_id"));
+        try {
             userService.delete(userID);
-        }catch (ServiceException e){
-            //TODO add later
+        } catch (ServiceException e) {
+            return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.FORWARD);
         }
-        return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.FORWARD);
+        return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT);
     }
 }

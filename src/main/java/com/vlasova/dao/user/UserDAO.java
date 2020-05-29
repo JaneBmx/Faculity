@@ -17,6 +17,4 @@ public interface UserDAO extends DAO<User> {
     Collection<User> findAllUsers() throws DAOException;
 
     Collection<User> findUsersByRole(Role role) throws DAOException;
-
-    void remove(int userId) throws DAOException;
 }

@@ -1,11 +1,10 @@
-/* ADMIN PAGE */
-
-.admin_block{
+/* ADMIN PAGE COMMON */
+.admin_block {
     background-color: rgba(0, 0, 0, 0.7);
     margin: 15px;
 }
 
-.admin_block h2{
+.admin_block h2 {
     margin-top: 1rem;
     text-align: center;
     margin-bottom: 1rem;
@@ -17,15 +16,15 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.tablinks{
+.tablinks {
     color: #fff;
 }
 
-.tablinks:hover{
+.tablinks:hover {
     color: black;
 }
 
-.tablinks.active{
+.tablinks.active {
     color: black;
 }
 
@@ -53,24 +52,24 @@
     border-top: none;
     color: #fff;
 }
-
 /* ADMIN PAGE END */
 
-/* TESTING INNER VKLADKI */
+/* INNER TABS */
+/*faclty*/
 .tab3 {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.tablinks3{
+.tablinks3 {
     color: #fff;
 }
 
-.tablinks3:hover{
+.tablinks3:hover {
     color: black;
 }
 
-.tablinks3.active{
+.tablinks3.active {
     color: black;
 }
 
@@ -98,21 +97,22 @@
     border-top: none;
     color: #fff;
 }
-/* -------------------- */
+
+/* usrs */
 .tab2 {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.tablinks2{
+.tablinks2 {
     color: #fff;
 }
 
-.tablinks2:hover{
+.tablinks2:hover {
     color: black;
 }
 
-.tablinks2.active{
+.tablinks2.active {
     color: black;
 }
 
@@ -140,21 +140,22 @@
     border-top: none;
     color: #fff;
 }
-/* ---------------- */
+
+/* gr rep*/
 .tab1 {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.tablinks1{
+.tablinks1 {
     color: #fff;
 }
 
-.tablinks1:hover{
+.tablinks1:hover {
     color: black;
 }
 
-.tablinks1.active{
+.tablinks1.active {
     color: black;
 }
 
@@ -182,54 +183,53 @@
     border-top: none;
     color: #fff;
 }
+/*INNER TABS END  */
 
-/*TESTING INNER VKLADKI END  */
-
-/* DROP SPISKI */
-/* DROP SPISKI END */
 
 /* ADD FACULTY */
-
-.add_faculty{
+.add_faculty {
     width: 80%;
-    background-color: rgba(0, 0, 0, 0.7);
+    /*background-color: rgba(0, 0, 0, 0.7);*/
 }
 
-.add_faculty h3{
+.add_faculty h3 {
     text-align: center;
 }
 
-.add_faculty input{
+.add_faculty input {
     margin-top: 10px;
     margin-right: 30%;
     width: 40%;
     height: 25px;
 }
 
-.add_faculty .select1{
+.add_faculty .select1 {
     margin-left: 30px;
 }
 /* ADD FACULTY END*/
 
+
 /*scroll faculty edit*/
-.inner_edit{
+.inner_edit {
     overflow: auto;
     height: 300px;
 }
 /*scroll faculty edit edn*/
 
 /*table with fclt*/
-table{
+table {
     color: white;
 }
-button .delete{
+
+button .delete {
     color: brown;
 }
-button .edit{
+
+button .edit {
     color: darkolivegreen;
 }
 
-td{
+td {
     text-align: left;
 }
 /*table with faculty end*/

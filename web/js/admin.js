@@ -70,5 +70,65 @@ function openCity3(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
+window.onload = function () {
+    let content = "";
+    fetch('http://localhost:8081/controller?command=GET_ALL_USERS_AJAX')
+        .then((response) => {
+            //console.log((response.json()));
+            return response.json();
+        })
+        .then((data) => {
+            showUsers(data);
+        });
+}
+
+let dataGlobal;
+function showUsers(data){
+    let content;
+    dataGlobal=data;
+    console.log(data);
+    content = content + "<table>";
+    for (let i = 0; i < data.length; i++) {
+
+        content = content + "<tr>";
+        content = content + "<td>";
+        content = content + data[i].id;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + data[i].name;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + data[i].surname;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + data[i].email;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + data[i].login;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + "<a href='javascript:deleteUser(" + i + ")'>Delete</a>";
+        content = content + "</td>";
+        content = content + "</tr>";
+    }
+    content = content + "</table>";
+    document.getElementById("Search_users").innerHTML = content;
+}
+
+function deleteUser(index){
+
+    fetch('http://localhost:8081/controller?command=delete_user&user_id='+dataGlobal[index].id)
+        .then((response) => {
+            //console.log((response.json()));
+            //return response.json();
+        })
+        .then((data) => {
+
+        });
+    alert("User "+dataGlobal[index].name+" "+dataGlobal[index].surname+ " has been deleted!");
+    dataGlobal.splice(index,1);
+    showUsers(dataGlobal);
+
+}
 
 

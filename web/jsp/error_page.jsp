@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Error</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body>
 <jsp:include page="../include/header.jsp"/>

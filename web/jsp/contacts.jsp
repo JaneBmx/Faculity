@@ -3,21 +3,46 @@
 <html>
 <head>
     <title>Contacts</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simple.css">
 </head>
 <body>
-    <jsp:include page="../include/header.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
 
-    <section class="hero">
-        <div class="innerWrapper">
-            <h1>Contacts</h1>
-            <h3>email:   contact@examle.heh</h3>
-            <h3>phone:   8-800-555-35-35</h3>
-            <h3>address: st. Hmmmmm, 45, Minsk, Belarus</h3>
-            <h3>//TODO translate it later</h3>
-        </div>
-    </section>
+<div class="infa">
+    <h2>Contacts</h2>
+    <table>
+        <tr>
+            <td>email:</td>
+            <td>contact@examle.heh</td>
+        </tr>
+        <tr>
+            <td>phone:</td>
+            <td>8-800-555-35-35</td>
+        </tr>
+        <tr>
+            <td>address:</td>
+            <td>st. Hmmmmm, 45, Minsk, Belarus</td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+</div>
 
-    <jsp:include page="../include/footer.jsp"/>
+<div id="googleMap" class="hm"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+<script>
+    window.onload = function () {
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(51.508742, -0.120850),
+                zoom: 5,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
+    }
+</script>
+
+<jsp:include page="${pageContext.request.contextPath}/include/footer.jsp"/>
 </body>
 </html>

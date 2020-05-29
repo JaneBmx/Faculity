@@ -62,6 +62,13 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = CommandType.valueOf(req.getParameter("command").toUpperCase()).getCommand();
         Answer answer = command.execute(req, resp);
+
+
+        if(req.getMethod().equals("POST")){
+            resp.sendRedirect(answer.getPageAddress().getPath());
+            return;
+        }
+
         if (answer.getType() == Answer.Type.JSON) {
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");

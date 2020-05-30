@@ -212,21 +212,13 @@
 /*scroll faculty edit*/
 .inner_edit {
     overflow: auto;
-    height: 300px;
+    height: 400px;
 }
 /*scroll faculty edit edn*/
 
 /*table with fclt*/
 table {
     color: white;
-}
-
-button .delete {
-    color: brown;
-}
-
-button .edit {
-    color: darkolivegreen;
 }
 
 td {

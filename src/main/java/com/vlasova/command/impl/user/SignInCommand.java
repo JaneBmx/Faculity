@@ -9,7 +9,7 @@ import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.GradeReportService;
 import com.vlasova.service.UserService;
 
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

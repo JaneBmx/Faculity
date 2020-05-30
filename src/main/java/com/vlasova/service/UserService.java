@@ -29,7 +29,7 @@ public class UserService {
     private final UserDAO userDAO;
     private final GradeReportDAO gradeReportDAO;
 
-    public User registrate(User user) throws ServiceException {
+    public User registrateAndLogin(User user) throws ServiceException {
         try {
             if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())) {
                 userDAO.add(user);
@@ -39,6 +39,16 @@ public class UserService {
             throw new ServiceException(e);
         }
         return user;
+    }
+
+    public void registrate(User user) throws ServiceException {
+        try{
+            if(!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())){
+                userDAO.add(user);
+            }
+        }catch (DAOException e){
+            throw new ServiceException(e);
+        }
     }
 
     @Deprecated

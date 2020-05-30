@@ -1,7 +1,6 @@
 package com.vlasova.command;
 
-public abstract class RequestConstants {
-
+public abstract class RequestParams {
     /*Common constants*/
     public static final String MSG             = "message";
     public static final String USERS           = "users";
@@ -31,9 +30,15 @@ public abstract class RequestConstants {
     public static final String SUB_2           = "subject_2";
     public static final String SUB_3           = "subject_3";
 
-
     /*Common constants*/
     public static final String FACULTIES       = "faculties";
+    public static final String LIST_TYPE       = "list_type";
+    public static final String USER_LIST       = "user_list";
+    public static final String FACULTY_LIST    = "faculty_list";
+    public static final String GR_LIST         = "grade_report_list";
+
+
+
 
 
     //TODO make RU\EN (internationalize it)

@@ -7,7 +7,7 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.FacultyService;
 
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

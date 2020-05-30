@@ -8,7 +8,7 @@ import com.vlasova.entity.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 public class ProfilePageCommand implements Command {
     @Override

@@ -15,7 +15,8 @@ public enum Subject {
     ART("Art", 12),
     CHEMISTRY("Chemistry", 13),
     BIOLOGY("Biology", 14),
-    SOCIAL("Social", 15);
+    SOCIAL("Social", 15),
+    NULEVOI("NULEVOI",16);
 
     private String name;
     private int id;
@@ -39,6 +40,6 @@ public enum Subject {
                 return s;
             }
         }
-        throw new RuntimeException();
+    return NULEVOI;
     }
 }

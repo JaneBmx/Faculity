@@ -7,7 +7,7 @@ import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
 import com.vlasova.validation.UserDataValidator;
 
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

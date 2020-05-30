@@ -10,7 +10,7 @@ import com.vlasova.service.GradeReportService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

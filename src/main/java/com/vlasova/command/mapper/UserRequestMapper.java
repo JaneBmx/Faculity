@@ -3,7 +3,7 @@ package com.vlasova.command.mapper;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 
-import static com.vlasova.command.RequestConstants.*;
+import static com.vlasova.command.RequestParams.*;
 
 import javax.servlet.http.HttpServletRequest;
 

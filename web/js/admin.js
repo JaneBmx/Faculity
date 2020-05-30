@@ -72,7 +72,7 @@ function openCity3(evt, cityName) {
 
 window.onload = function () {
     let content = "";
-    fetch('http://localhost:8081/controller?command=GET_ALL_USERS_AJAX')
+    fetch('http://localhost:8081/controller?command=GET_ALL_USERS_AJAX&type=users')
         .then((response) => {
             //console.log((response.json()));
             return response.json();
@@ -80,19 +80,42 @@ window.onload = function () {
         .then((data) => {
             showUsers(data);
         });
+
+    let contenf = "";
+    fetch('http://localhost:8081/controller?command=GET_ALL_FACULTIES_AJAX&type=faculty')
+        .then((response) => {
+            //console.log((response.json()));
+            return response.json();
+        })
+        .then((data) => {
+            showFaculties(data);
+        });
+
+    let conteng = "";
+    fetch('http://localhost:8081/controller?command=GET_ALL_GRADE_REPORTS_AJAX&type=grade_report')
+        .then((response) => {
+            //console.log((response.json()));
+            return response.json();
+        })
+        .then((data) => {
+            showGrades(data);
+        });
 }
 
 let dataGlobal;
-function showUsers(data){
-    let content;
-    dataGlobal=data;
-    console.log(data);
-    content = content + "<table>";
-    for (let i = 0; i < data.length; i++) {
 
+function showUsers(data) {
+    let content;
+    dataGlobal = data;
+    console.log(data);
+    content = content + "<table width=\"100%\">";
+    for (let i = 0; i < data.length; i++) {
         content = content + "<tr>";
         content = content + "<td>";
         content = content + data[i].id;
+        content = content + "</td>";
+        content = content + "<td>";
+        content = content + data[i].role;
         content = content + "</td>";
         content = content + "<td>";
         content = content + data[i].name;
@@ -115,9 +138,9 @@ function showUsers(data){
     document.getElementById("Search_users").innerHTML = content;
 }
 
-function deleteUser(index){
+function deleteUser(index) {
 
-    fetch('http://localhost:8081/controller?command=delete_user&user_id='+dataGlobal[index].id)
+    fetch('http://localhost:8081/controller?command=delete_user&user_id=' + dataGlobal[index].id)
         .then((response) => {
             //console.log((response.json()));
             //return response.json();
@@ -125,10 +148,113 @@ function deleteUser(index){
         .then((data) => {
 
         });
-    alert("User "+dataGlobal[index].name+" "+dataGlobal[index].surname+ " has been deleted!");
-    dataGlobal.splice(index,1);
+    alert("User " + dataGlobal[index].name + " " + dataGlobal[index].surname + " has been deleted!");
+    dataGlobal.splice(index, 1);
     showUsers(dataGlobal);
 
+}
+
+//hmmmmm testing zone
+
+// window.onload = function () {
+//     let contenf = "";
+//     fetch('http://localhost:8081/controller?command=GET_ALL_FACULTIES_AJAX&type=faculty')
+//         .then((response) => {
+//             //console.log((response.json()));
+//             return response.json();
+//         })
+//         .then((data) => {
+//             showFaculties(data);
+//         });
+// }
+
+let dataGlobalF;
+
+function showFaculties(data) {
+    let contentf;
+    dataGlobalF = data;
+    console.log(data);
+    contentf = contentf + "<table width=\"100%\">";
+
+    contentf = contentf + "<tr><th>ID</th>" +
+        "><th>Name</th> " +
+        "<th colspan=\"3\">Subjects</th>" +
+        "<th>Paid accept plan</th>" +
+        "<th>Free accept plan</th>" +
+        "<th>Delete</th></tr>";
+    for (let i = 0; i < data.length; i++) {
+        contentf = contentf + "<tr>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].id;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].name;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].sub1;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].sub2;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].sub3;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].free;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + data[i].paid;
+        contentf = contentf + "</td>";
+        contentf = contentf + "<td>";
+        contentf = contentf + "<a href='javascript:deleteFaculty(" + i + ")'>Delete</a>";
+        contentf = contentf + "</td>";
+        contentf = contentf + "</tr>";
+    }
+    contentf = contentf + "</table>";
+    document.getElementById("experemental").innerHTML = contentf;
+}
+//grades
+function showGrades(data) {
+    let contentg;
+    console.log(data);
+    contentg = contentg + "<table width=\"100%\">";
+    for (let i = 0; i < data.length; i++) {
+        contentg = contentg + "<tr>";
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].id;
+        contentg = contentg + "</td>";
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].faculty;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].isAccept;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].isFree;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].privilege;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].attestat;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + data[i].average;
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "<td>";
+        contentg = contentg + "<a href=''>Delete</a>";
+        contentg = contentg + "</td>";
+
+        contentg = contentg + "</tr>";
+    }
+    contentg = contentg + "</table>";
+    document.getElementById("all_grades").innerHTML = contentg;
 }
 
 

@@ -1,7 +1,10 @@
 package com.vlasova.command;
 
+import com.vlasova.command.impl.ajax.GetAllFacultiesAJAX;
+import com.vlasova.command.impl.ajax.GetAllGradeReportsAJAX;
 import com.vlasova.command.impl.faculty.AddFacultyCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
+import com.vlasova.command.impl.ajax.GetAllUserAJAX;
 import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.command.impl.user.*;
 
@@ -23,7 +26,9 @@ public enum CommandType {
 
 
     /*testing*/
-    GET_ALL_USERS_AJAX(new GetAllUserAJAX());
+    GET_ALL_USERS_AJAX(new GetAllUserAJAX()),
+    GET_ALL_FACULTIES_AJAX(new GetAllFacultiesAJAX()),
+    GET_ALL_GRADE_REPORTS_AJAX(new GetAllGradeReportsAJAX());
 
     private final Command command;
 

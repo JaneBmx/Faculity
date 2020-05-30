@@ -86,38 +86,42 @@
 
         <div id="Edit faculties" class="tabcontent1">
             <div class="inner_edit">
-                <table width="100%">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Free accept plan</th>
-                        <th>Paid accept plan</th>
-                        <th colspan="3">Subjects</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <c:forEach items="${faculties}" var="fac">
-                        <input type="hidden" name="faculty_on_table" value=${fac.id}>
-                        <tr>
-                            <td>${fac.id}</td>
-                            <td>${fac.name}</td>
-                            <td>${fac.freeAcceptPlan}</td>
-                            <td>${fac.paidAcceptPlan}</td>
-                            <c:forEach items="${fac.subjects}" var="sub">
-                                <td><c:if test="${sub == null}"> - </c:if>
-                                    <c:if test="${sub != null}"> ${sub.name} </c:if></td>
-                            </c:forEach>
-                            <td>
-                                <button class="delete">Delete</button>
-                            <td>
-                            <td>
-                                <button class="edit">Edit</button>
-                            <td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                <%--                <table width="100%">--%>
+                <%--                    <tr>--%>
+                <%--                        <th>Id</th>--%>
+                <%--                        <th>Name</th>--%>
+                <%--                        <th>Free accept plan</th>--%>
+                <%--                        <th>Paid accept plan</th>--%>
+                <%--                        <th colspan="3">Subjects</th>--%>
+                <%--                        <th></th>--%>
+                <%--                        <th></th>--%>
+                <%--                        <th></th>--%>
+                <%--                        <th></th>--%>
+                <%--                    </tr>--%>
+                <%--                    <c:forEach items="${faculties}" var="fac">--%>
+                <%--                        <input type="hidden" name="faculty_on_table" value=${fac.id}>--%>
+                <%--                        <tr>--%>
+                <%--                            <td>${fac.id}</td>--%>
+                <%--                            <td>${fac.name}</td>--%>
+                <%--                            <td>${fac.freeAcceptPlan}</td>--%>
+                <%--                            <td>${fac.paidAcceptPlan}</td>--%>
+                <%--                            <c:forEach items="${fac.subjects}" var="sub">--%>
+                <%--                                <td><c:if test="${sub == null}"> - </c:if>--%>
+                <%--                                    <c:if test="${sub != null}"> ${sub.name} </c:if></td>--%>
+                <%--                            </c:forEach>--%>
+                <%--                            <td>--%>
+                <%--                                <button class="delete">Delete</button>--%>
+                <%--                            <td>--%>
+                <%--                            <td>--%>
+                <%--                                <button class="edit">Edit</button>--%>
+                <%--                            <td>--%>
+                <%--                        </tr>--%>
+                <%--                    </c:forEach>--%>
+                <%--                </table>--%>
+                <div id="experemental">
+
+
+                </div>
             </div>
         </div>
     </div>
@@ -125,7 +129,7 @@
     <!-- Users -->
     <div id="Paris" class="tabcontent">
         <div class="tab2">
-            <button class="tablinks2" onclick="openCity2(event, 'Search_users')">All users</button>
+            <button class="tablinks2" onclick="openCity2(event, 'All_users')">All users</button>
             <button class="tablinks2" onclick="openCity2(event, 'Edit_user')">Add admin</button>
         </div>
 
@@ -134,23 +138,23 @@
                 <input type="hidden" name="user_role" value="admin">
                 <table>
                     <tr>
-                        <td>Name: </td>
+                        <td>Name:</td>
                         <td><input type="text" placeholder="Name" name="user_name" required></td>
                     </tr>
                     <tr>
-                        <td>Surname: </td>
+                        <td>Surname:</td>
                         <td><input type="text" placeholder="Surname" name="user_surname" required></td>
                     </tr>
                     <tr>
-                        <td>Email: </td>
+                        <td>Email:</td>
                         <td><input type="email" placeholder="Email" name="user_email" required></td>
                     </tr>
                     <tr>
-                        <td>Login: </td>
+                        <td>Login:</td>
                         <td><input type="text" placeholder="Email" name="user_login" required></td>
                     </tr>
                     <tr>
-                        <td>Password: </td>
+                        <td>Password:</td>
                         <td><input type="password" placeholder="Password" name="user_login" required></td>
                     </tr>
                 </table>
@@ -159,38 +163,29 @@
                 </p>
             </form>
         </div>
-        <div id="Search_users" class="tabcontent2">
+        <div id="All_users" class="tabcontent2">
+            <div class="inner_edit" id="Search_users">
 
 
+            </div>
         </div>
     </div>
 
     <!-- Gradereports -->
     <div id="Tokyo" class="tabcontent">
         <div class="tab3">
-            <button class="tablinks3" onclick="openCity3(event, 'Add')">All</button>
-            <button class="tablinks3" onclick="openCity3(event, 'Edit')">Submit</button>
-            <button class="tablinks3" onclick="openCity3(event, 'Search')">Search</button>
-            <button class="tablinks3" onclick="openCity3(event, 'Accept')">Accept</button>
+            <button class="tablinks3" onclick="openCity3(event, 'allGr')">All</button>
+            <button class="tablinks3" onclick="openCity3(event, 'acceptGr')">Accept</button>
+        </div>
+        <div id="allGr" class="tabcontent3">
+            <div id="all_grades">
+
+            </div>
         </div>
 
-        <div id="Add" class="tabcontent3">
-            <h2>Add gradereport div</h2>
-        </div>
-
-        <div id="Edit" class="tabcontent3">
-            <h2>Edit gradereport div</h2>
-        </div>
-
-        <div id="Search" class="tabcontent3">
-            <h2>Search gradereport div</h2>
-        </div>
-
-        <div id="Accept" class="tabcontent3">
+        <div id="acceptGr" class="tabcontent3">
             <h2>Button for accepting srudents</h2>
         </div>
-
-        <p>Tokyo is the capital of Japan.</p>
     </div>
 </div>
 

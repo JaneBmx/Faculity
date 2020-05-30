@@ -14,18 +14,17 @@
 
 <div class="admin_block">
     <h2>Admin page</h2>
-
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')">Faculties</button>
+        <button class="tablinks" onclick="openCity(event, 'Faculty_tab')">Faculties</button>
         <button class="tablinks" onclick="openCity(event, 'Paris')">Users</button>
         <button class="tablinks" onclick="openCity(event, 'Tokyo')">Gradereports</button>
     </div>
 
     <!-- Faculties -->
-    <div id="London" class="tabcontent">
+    <div id="Faculty_tab" class="tabcontent">
         <div class="tab1">
-            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new</button>
             <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')">All</button>
+            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new</button>
         </div>
 
         <%-- Facultues: Add new  --%>
@@ -36,7 +35,6 @@
                         <tr>
                             <td>Name of faculty:</td>
                             <td><input type="text" placeholder="Name of faculty" name="faculty_name" required></td>
-
                         </tr>
                         <tr>
                             <td>Free accept plan:</td>
@@ -86,41 +84,7 @@
 
         <div id="Edit faculties" class="tabcontent1">
             <div class="inner_edit">
-                <%--                <table width="100%">--%>
-                <%--                    <tr>--%>
-                <%--                        <th>Id</th>--%>
-                <%--                        <th>Name</th>--%>
-                <%--                        <th>Free accept plan</th>--%>
-                <%--                        <th>Paid accept plan</th>--%>
-                <%--                        <th colspan="3">Subjects</th>--%>
-                <%--                        <th></th>--%>
-                <%--                        <th></th>--%>
-                <%--                        <th></th>--%>
-                <%--                        <th></th>--%>
-                <%--                    </tr>--%>
-                <%--                    <c:forEach items="${faculties}" var="fac">--%>
-                <%--                        <input type="hidden" name="faculty_on_table" value=${fac.id}>--%>
-                <%--                        <tr>--%>
-                <%--                            <td>${fac.id}</td>--%>
-                <%--                            <td>${fac.name}</td>--%>
-                <%--                            <td>${fac.freeAcceptPlan}</td>--%>
-                <%--                            <td>${fac.paidAcceptPlan}</td>--%>
-                <%--                            <c:forEach items="${fac.subjects}" var="sub">--%>
-                <%--                                <td><c:if test="${sub == null}"> - </c:if>--%>
-                <%--                                    <c:if test="${sub != null}"> ${sub.name} </c:if></td>--%>
-                <%--                            </c:forEach>--%>
-                <%--                            <td>--%>
-                <%--                                <button class="delete">Delete</button>--%>
-                <%--                            <td>--%>
-                <%--                            <td>--%>
-                <%--                                <button class="edit">Edit</button>--%>
-                <%--                            <td>--%>
-                <%--                        </tr>--%>
-                <%--                    </c:forEach>--%>
-                <%--                </table>--%>
                 <div id="experemental">
-
-
                 </div>
             </div>
         </div>
@@ -129,7 +93,7 @@
     <!-- Users -->
     <div id="Paris" class="tabcontent">
         <div class="tab2">
-            <button class="tablinks2" onclick="openCity2(event, 'All_users')">All users</button>
+            <button class="tablinks2" onclick="openCity2(event, 'All_users')">All</button>
             <button class="tablinks2" onclick="openCity2(event, 'Edit_user')">Add admin</button>
         </div>
 
@@ -165,8 +129,7 @@
         </div>
         <div id="All_users" class="tabcontent2">
             <div class="inner_edit" id="Search_users">
-
-
+            <%--Here js will load list of users--%>
             </div>
         </div>
     </div>
@@ -179,12 +142,13 @@
         </div>
         <div id="allGr" class="tabcontent3">
             <div id="all_grades">
-
+                <%--Here js will load list of grade reports--%>
             </div>
         </div>
 
         <div id="acceptGr" class="tabcontent3">
             <h2>Button for accepting srudents</h2>
+            <h2>....still in progress...</h2>
         </div>
     </div>
 </div>

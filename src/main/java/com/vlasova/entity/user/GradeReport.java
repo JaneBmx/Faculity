@@ -108,7 +108,7 @@ public class GradeReport implements Serializable {
     public String toString() {
         return "GradeReport{" +
                 "id=" + id +
-                ", faculty=" + faculty +
+                ", faculty=" + faculty.getName() +
                 ", isAccepted=" + isAccepted +
                 ", isFree=" + isFree +
                 ", privilege=" + privilege +

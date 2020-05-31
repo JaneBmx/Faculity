@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,6 +46,8 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
                     "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE g.user_id = ? " +
                     "UNION SELECT   g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
                     "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE gr.user_id = ? ";
+    private static final String ACCEPT_BATCH = "UPDATE grade_reports SET is_accepted = ?, is_free_paid = ? WHERE user_id = ?";
+
     private final GradeReportResultSetMapper mapper = new GradeReportResultSetMapper();
 
     @Override
@@ -204,6 +207,30 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             throw new DAOException(e);
         } finally {
             closeResultSet();
+        }
+    }
+
+    public void enroll(List<GradeReport> gradeReports) throws DAOException {
+        try {
+            ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(ACCEPT_BATCH);
+
+            for (GradeReport g : gradeReports) {
+                statement.setBoolean(1, g.isAccepted());
+                statement.setBoolean(2, g.isFree());
+                statement.setInt(3, g.getId());
+                statement.addBatch();
+            }
+
+            int[] updated = statement.executeBatch();
+            connection.commit();
+
+            connection.close();
+            statement.close();
+        } catch (SQLException e) {
+            LOGGER.warn("Can't execute batch.", e);
+            throw new DAOException(e);
         }
     }
 }

@@ -148,6 +148,9 @@
 
         <div id="acceptGr" class="tabcontent3">
             <h2>Button for accepting srudents</h2>
+            <form  method="post" action="${pageContext.request.contextPath}/controller?command=accept">
+                <button type="submit">MAGIC BUTTON</button>
+            </form>
             <h2>....still in progress...</h2>
         </div>
     </div>

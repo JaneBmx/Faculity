@@ -1,12 +1,12 @@
 package com.vlasova.entity.user;
 
 public enum Privilege {
-    NONE(6, "Нет льгот"),
     COLLEGE(1, "CУЗ"),
     FOREIGN(2, "Иностранный гражданин"),
     RED_DIPLOMA(3, "Диплом/Медаль"),
     ORPHAN(4, "Сирота"),
-    OLYMPIAD(5, "Победитель олимпиад");
+    OLYMPIAD(5, "Победитель олимпиад"),
+    NONE(6, "Нет льгот");
 
     private int id;
     private String name;

@@ -8,6 +8,7 @@ import com.vlasova.exception.dao.DAOException;
 import java.util.Collection;
 
 public interface FacultyDAO extends DAO<Faculty> {
+
     Collection<Faculty> findAllFaculties() throws DAOException;
 
     Collection<Faculty> findFacultyByPaid(boolean isPaid) throws DAOException;

@@ -46,7 +46,8 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
                     "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE g.user_id = ? " +
                     "UNION SELECT   g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
                     "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE gr.user_id = ? ";
-    private static final String ACCEPT_BATCH = "UPDATE grade_reports SET is_accepted = ?, is_free_paid = ? WHERE user_id = ?";
+    private static final String ENROLL_GRADES = "UPDATE grade_reports SET is_accepted = ?, is_free_paid = ? WHERE user_id = ?";
+    private static final String UN_ENROLL_GRADES = "UPDATE grade_reports SET is_accepted = 0, is_free_paid = 0;";
 
     private final GradeReportResultSetMapper mapper = new GradeReportResultSetMapper();
 
@@ -214,23 +215,31 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
         try {
             ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
             connection.setAutoCommit(false);
-            PreparedStatement statement = connection.prepareStatement(ACCEPT_BATCH);
-
+            PreparedStatement statement = connection.prepareStatement(ENROLL_GRADES);
             for (GradeReport g : gradeReports) {
                 statement.setBoolean(1, g.isAccepted());
                 statement.setBoolean(2, g.isFree());
                 statement.setInt(3, g.getId());
                 statement.addBatch();
             }
-
             int[] updated = statement.executeBatch();
             connection.commit();
-
             connection.close();
             statement.close();
         } catch (SQLException e) {
-            LOGGER.warn("Can't execute batch.", e);
+            LOGGER.warn("Can't enroll gradeReports.", e);
             throw new DAOException(e);
         }
     }
+
+    public void unEnroll() throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             Statement statement = connection.createStatement()) {
+            statement.execute(UN_ENROLL_GRADES);
+        } catch (SQLException e) {
+            LOGGER.warn("Can't reset gradeReport status", e);
+            throw new DAOException(e);
+        }
+    }
+
 }

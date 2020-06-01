@@ -35,8 +35,10 @@
         <%--TAB WITH COMMON INFO--%>
         <div id="Info" class="tabcontent">
             <div class="info_block">
-                <h2>User info</h2>
                 <table>
+                    <tr>
+                        <td colspan="2"><h2>User info</h2></td>
+                    </tr>
                     <tr>
                         <td>Name:</td>
                         <td>${user.name}</td>
@@ -53,9 +55,10 @@
                         <td>Login:</td>
                         <td>${user.login}</td>
                     </tr>
-                </table>
-                <h2>Grade report info</h2>
-                <table>
+                    <tr>
+                        <td colspan="2"><h2>Grade report info</h2></td>
+                    </tr>
+
                     <tr>
                         <td>Faculty:</td>
                         <td>${grade_report.faculty.name}</td>

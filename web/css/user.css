@@ -173,3 +173,8 @@ img.displayed{
     margin: 15px;
 }
 /*divs with choice end*/
+
+table {
+    color: white;
+    border-spacing: 20px 5px;
+}

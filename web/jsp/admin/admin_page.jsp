@@ -129,7 +129,7 @@
         </div>
         <div id="All_users" class="tabcontent2">
             <div class="inner_edit" id="Search_users">
-            <%--Here js will load list of users--%>
+                <%--Here js will load list of users--%>
             </div>
         </div>
     </div>
@@ -147,11 +147,37 @@
         </div>
 
         <div id="acceptGr" class="tabcontent3">
-            <h2>Button for accepting srudents</h2>
-            <form  method="post" action="${pageContext.request.contextPath}/controller?command=accept">
-                <button type="submit">MAGIC BUTTON</button>
-            </form>
-            <h2>....still in progress...</h2>
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <img class="displayed" src="${pageContext.request.contextPath}/img/admin/accept.jpg"
+                             alt="photo">
+                    </td>
+                </tr>
+                <tr>
+                    <td><h3 class="red">RED BUTTON</h3></td>
+                    <td><h3 class="blue">BLUE BUTTON</h3></td>
+                </tr>
+                <tr>
+                    <td><p>The red button represents an uncertain future — it would free from the enslaving control of
+                        the
+                        machine - generated dream world and allow to escape into the real world, but living the "truth
+                        of reality" is harsher and more difficult</p></td>
+                    <td><p>The blue button represents a beautiful prison — it would lead back to ignorance, live in
+                        confined
+                        comfort without want or fear within the simulated reality of the Matrix</p></td>
+                </tr>
+                <tr>
+                    <td><p><strike>This button will accept all suitable grade reports according faculty acception
+                        plan</strike></p></td>
+                    <td><p><strike>This button will reset accept and free paid status all of the grade reports</strike>
+                    </p></td>
+                </tr>
+                <tr>
+                    <td><input class="rb" type="button" onclick="magicButton()" value="Enroll!"></td>
+                    <td><input class="bb" type="button" onclick="antiMagicButton()" value="Nullify enroll statuses"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

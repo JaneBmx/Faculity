@@ -1,6 +1,5 @@
 package com.vlasova.service.accept;
 
-import com.vlasova.dao.gradereport.GradeReportDAO;
 import com.vlasova.dao.gradereport.GradeReportDAOImpl;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.user.GradeReport;
@@ -19,22 +18,22 @@ import java.util.stream.Collectors;
 
 public class Accepter {
     private static final Logger LOGGER = LogManager.getLogger(Accepter.class);
-    GradeReportDAOImpl gradeReportDAO = new GradeReportDAOImpl();
+    private static final GradeReportDAOImpl gradeReportDAO = new GradeReportDAOImpl();
+    private final List<GradeReport> toBatch = new ArrayList<>();
     private List<GradeReport> gradeReports;
     private List<Faculty> faculties;
-    private final List<GradeReport> toBatch =new ArrayList<>();
     private int facultyID;
 
     /**
      * Gets all of GradeReports and Faculties.
      * Set GradeReports isAccept and isFree
      * according Faculty accept plan
+     *
+     * @throws ServiceException if db data incorrect
      * @see Faculty
      * @see GradeReport
-     * @throws ServiceException if db data incorrect
      */
     public void enroll() throws ServiceException {
-
         int freePlan;
         int paidPlan;
         getData();
@@ -46,13 +45,30 @@ public class Accepter {
                     .getId() == facultyID).sorted(new GradeReportComparatorByMarks())
                     .collect(Collectors.toList());
             acceptToFaculty(byFaculty, paidPlan + freePlan);
-            acceptToFree(byFaculty, freePlan);
+            if (freePlan > 0) {
+                acceptToFree(byFaculty, freePlan);
+            }
             byFaculty.removeIf(list -> !list.isAccepted());
             toBatch.addAll(byFaculty);
         }
         try {
             gradeReportDAO.enroll(toBatch);
         } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    /**
+     * Reset to false isAccept and isFree in all GradeReports
+     *
+     * @throws ServiceException if db data incorrect
+     * @see GradeReport
+     */
+    public void unEnroll() throws ServiceException {
+        try {
+            gradeReportDAO.unEnroll();
+        } catch (DAOException e) {
+            LOGGER.warn("Can't reset enroll data", e);
             throw new ServiceException(e);
         }
     }
@@ -79,6 +95,12 @@ public class Accepter {
         }
     }
 
+    /**
+     * Get init params as all grade reports and all faculties
+     *
+     * @see GradeReport
+     * @see Faculty
+     */
     private void getData() {
         try {
             gradeReports = GradeReportService.getInstance().getAllGradeReports();

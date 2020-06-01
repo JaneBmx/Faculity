@@ -9,12 +9,12 @@ import com.vlasova.service.accept.Accepter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AcceptGraderReportsCommand implements Command {
+public class UnEnrollCommand implements Command {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         Accepter accepter = new Accepter();
         try {
-            accepter.enroll();
+            accepter.unEnroll();
         } catch (ServiceException e) {
             e.printStackTrace();
         }

@@ -219,9 +219,50 @@
 /*table with fclt*/
 table {
     color: white;
+    border-spacing: 7px 5px;
 }
 
 td {
     text-align: left;
 }
 /*table with faculty end*/
+
+/*crazy accept tab*/
+img.displayed{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+.red{
+    color: brown;
+}
+.blue{
+    color: darkslateblue;
+}
+
+
+.but2 input{
+    position: relative;
+    display: inline-block;
+    font-family: Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: rgb(245,245,245);
+    text-shadow: 0 -1px rgba(0,0,0,.1);
+    text-decoration: none;
+    user-select: none;
+    padding: .3em 1em;
+    outline: none;
+    border: none;
+    background: #5e051a linear-gradient(#cd6b6b, #a30000);
+}
+.but2 input:hover {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+/*crazy accept tab end*/

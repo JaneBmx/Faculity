@@ -200,8 +200,8 @@ function showGrades(data) {
     contentg = contentg + "<tr>";
     contentg = contentg + "<td>User</td>";
     contentg = contentg + "<td>Faculty</td>";
-    contentg = contentg + "<td>Is accepted</td>";
-    contentg = contentg + "<td>Is free paid</td>";
+    contentg = contentg + "<td>Accept status</td>";
+    contentg = contentg + "<td>Free paid status</td>";
     contentg = contentg + "<td>Privilege</td>";
     contentg = contentg + "<td>Middle school mark</td>";
     contentg = contentg + "<td>Average mark(of certificates)</td>";
@@ -215,35 +215,46 @@ function showGrades(data) {
         contentg = contentg + "<td>";
         contentg = contentg + data[i].faculty;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + data[i].isAccept;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + data[i].isFree;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + data[i].privilege;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + data[i].attestat;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + data[i].average;
         contentg = contentg + "</td>";
-
         contentg = contentg + "<td>";
         contentg = contentg + "<a href=''>Delete</a>";
         contentg = contentg + "</td>";
-
         contentg = contentg + "</tr>";
     }
     contentg = contentg + "</table>";
     document.getElementById("all_grades").innerHTML = contentg;
 }
+
+function magicButton() {
+    fetch('http://localhost:8081/controller?command=accept')
+        .then((response) => {
+        })
+        .then((data) => {
+        });
+    alert("Users has been enroll! Update page to see the changes.");
+}
+function antiMagicButton() {
+    fetch('http://localhost:8081/controller?command=nullify')
+        .then((response) => {
+        })
+        .then((data) => {
+        });
+    alert("Grade report statuses has been reloaded! Update page to see the changes.");
+}
+
 
 

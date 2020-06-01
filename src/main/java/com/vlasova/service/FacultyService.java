@@ -3,7 +3,6 @@ package com.vlasova.service;
 import com.vlasova.dao.faculty.FacultyDAO;
 import com.vlasova.dao.faculty.FacultyDAOImpl;
 import com.vlasova.entity.faculity.Faculty;
-import com.vlasova.entity.faculity.Subject;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.comparator.FacultyComparatorById;
@@ -25,32 +24,9 @@ public class FacultyService {
 
     private final FacultyDAO facultyDAO;
 
-    @Deprecated
-    public void addFaculty(String name, int free, int paid, Subject... subjects) throws ServiceException {
-        Faculty faculty = new Faculty();
-        faculty.setName(name);
-        faculty.setFreeAcceptPlan(free);
-        faculty.setPaidAcceptPlan(paid);
-        faculty.setSubjects(new HashSet<>(Arrays.asList(subjects)));
-        try {
-            facultyDAO.add(faculty);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
     public void addFaculty(Faculty faculty) throws ServiceException {
         try {
             facultyDAO.add(faculty);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Deprecated
-    public void deleteFaculty(Faculty faculty) throws ServiceException {
-        try {
-            facultyDAO.remove(faculty);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -82,29 +58,9 @@ public class FacultyService {
         }
     }
 
-    public List<Faculty> getAllFreePaidFaculties(boolean isPaid) throws ServiceException {
-        try {
-            List<Faculty> list = new ArrayList<>(facultyDAO.findFacultyByPaid(isPaid));
-            list.sort(new FacultyComparatorById());
-            return list;
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
     public Faculty getFacultyById(int id) throws ServiceException {
         try {
             return facultyDAO.findFacultyById(id);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public List<Faculty> getFacultiesBySubjects(Subject subject) throws ServiceException {
-        try {
-            List<Faculty> list = new ArrayList<>(facultyDAO.findFacultyBySubject(subject));
-            list.sort(new FacultyComparatorById());
-            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

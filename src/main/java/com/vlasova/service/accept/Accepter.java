@@ -77,8 +77,7 @@ public class Accepter {
         Iterator<GradeReport> iterator = current.iterator();
         int counter = 0;
         while (iterator.hasNext()) {
-            counter++;
-            if (counter < limitAccept + 1)
+            if (counter < limitAccept)
                 iterator.next().setAccepted(true);
             counter++;
         }
@@ -88,8 +87,7 @@ public class Accepter {
         Iterator<GradeReport> iterator = current.iterator();
         int counter = 0;
         while (iterator.hasNext()) {
-            counter++;
-            if (counter < limitToFree + 1)
+            if (counter < limitToFree)
                 iterator.next().setFree(true);
             counter++;
         }

@@ -8,7 +8,6 @@ import com.vlasova.command.impl.gradereport.EnrollGraderReportsCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
 import com.vlasova.command.impl.ajax.GetAllUserAJAX;
 import com.vlasova.command.impl.gradereport.UnEnrollCommand;
-import com.vlasova.command.impl.page.LogInPageCommand;
 import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.command.impl.user.*;
 
@@ -26,6 +25,7 @@ public enum CommandType {
     /*ADMIN*/
     ADD_FACULTY               (new AddFacultyCommand()),
     DELETE_FACULTY            (new DeleteFacultyCommand()),
+    ADD_USER                  (new AddUserCommand()),
     DELETE_USER               (new DeleteUserCommand()),
     GET_ALL_USERS             (new GetAllUsersCommand()),
 

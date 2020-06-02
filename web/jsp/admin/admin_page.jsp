@@ -99,29 +99,46 @@
 
         <div id="Edit_user" class="tabcontent2">
             <form method="post" action="${pageContext.request.contextPath}/controller?command=Add_user">
-                <input type="hidden" name="user_role" value="admin">
                 <table>
                     <tr>
+                        <td>Role:</td>
+                        <td>
+                            <p><input name="user_role" type="radio" value="admin">Admin</p>
+                            <p><input name="user_role" type="radio" value="user" checked>User</p>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Name:</td>
-                        <td><input type="text" placeholder="Name" name="user_name" required></td>
+                        <td><input type="text" placeholder="Name" name="user_name" required
+                                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                                   title="2-40 symbols. First in uppercase"></td>
                     </tr>
                     <tr>
                         <td>Surname:</td>
-                        <td><input type="text" placeholder="Surname" name="user_surname" required></td>
+                        <td><input type="text" placeholder="Surname" name="user_surname" required
+                                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                                   title="2-40 symbols. First in uppercase"></td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td><input type="email" placeholder="Email" name="user_email" required></td>
+                        <td><input type="email" placeholder="Email" name="user_email" required
+                                   pattern="^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$"
+                                   title="someletters@letters.letters"></td>
                     </tr>
                     <tr>
                         <td>Login:</td>
-                        <td><input type="text" placeholder="Email" name="user_login" required></td>
+                        <td><input type="text" placeholder="Login" name="user_login" required
+                                   pattern="([a-zA-Z\\d]{4,40})$"
+                                   title="4-40 latin symbols & digits"></td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td><input type="password" placeholder="Password" name="user_login" required></td>
+                        <td><input type="password" placeholder="Password" name="user_password" required
+                                   pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
+                                   title="6-40 symbols"></td>
                     </tr>
                 </table>
+                <%--                <p style="color:white;"> ${message}</p>--%>
                 <p>
                     <button type="submit">Create</button>
                 </p>
@@ -176,7 +193,8 @@
                 </tr>
                 <tr>
                     <td><input class="rb" type="button" onclick="magicButton()" value="Enroll!"></td>
-                    <td><input class="bb" type="button" onclick="antiMagicButton()" value="Nullify enroll statuses"></td>
+                    <td><input class="bb" type="button" onclick="antiMagicButton()" value="Nullify enroll statuses">
+                    </td>
                 </tr>
             </table>
         </div>

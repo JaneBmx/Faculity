@@ -8,7 +8,6 @@ import static com.vlasova.command.RequestParams.*;
 import javax.servlet.http.HttpServletRequest;
 
 public class UserRequestMapper {
-    //TODO check NPE
     public User map(HttpServletRequest request) {
         User user = new User();
         user.setName(request.getParameter(USER_NAME));
@@ -16,7 +15,9 @@ public class UserRequestMapper {
         user.setEmail(request.getParameter(EMAIL));
         user.setLogin(request.getParameter(LOGIN));
         user.setPassword(request.getParameter(PASS));
-        user.setRole(Role.valueOf(request.getParameter(USER_ROLE).toUpperCase()));
+        if (request.getParameter(USER_ROLE) != null) {
+            user.setRole(Role.valueOf(request.getParameter(USER_ROLE).toUpperCase()));
+        }
         return user;
     }
 }

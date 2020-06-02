@@ -9,6 +9,8 @@ import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.GradeReportService;
 import com.vlasova.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.vlasova.command.RequestParams.*;
 
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignInCommand implements UserCommand {
+    private static final Logger LOGGER = LogManager.getLogger(SignInCommand.class);
     private final UserService userService = UserService.getInstance();
     private final GradeReportService gradeReportService = GradeReportService.getInstance();
 
@@ -29,16 +32,12 @@ public class SignInCommand implements UserCommand {
                 User user = userService.logIn(login, password);
                 if (user != null) {
                     request.getSession().setAttribute(USER, user);
-
-
                     request.getSession().setAttribute(ROLE, user.getRole() == Role.ADMIN ? ADMIN : USER);
-
-
-
                     GradeReport gradeReport = gradeReportService.getGradeReportByUserId(user.getId());
                     if (gradeReport != null) {
                         request.getSession().setAttribute(GRADE_REPORT, gradeReport);
                     }
+                    LOGGER.info("Log in: "+user.getLogin());
                     return user.getRole() == Role.ADMIN
                             ? new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT)
                             : new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);

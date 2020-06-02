@@ -23,6 +23,7 @@
     </servlet-mapping>
 
     <!--  FILTERS  -->
+    <!--Encoding-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.vlasova.filter.EncodingFilter</filter-class>
@@ -34,34 +35,45 @@
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-<!--        <servlet-name>Controller</servlet-name>-->
     </filter-mapping>
 
-
+    <!--access to user page. admin & user only-->
     <filter>
-        <filter-name>PageSecurityFilter</filter-name>
-        <filter-class>com.vlasova.filter.PageSecurityFilter</filter-class>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.vlasova.filter.UserFilter</filter-class>
         <init-param>
             <param-name>INDEX_PATH</param-name>
             <param-value>/index.jsp</param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>PageSecurityFilter</filter-name>
-        <url-pattern>/jsp/admin/*</url-pattern>
+        <filter-name>UserFilter</filter-name>
         <url-pattern>/jsp/user/*</url-pattern>
     </filter-mapping>
 
+    <!--access to admin page. admin only-->
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.vlasova.filter.AdminFilter</filter-class>
+        <init-param>
+            <param-name>INDEX_PATH</param-name>
+            <param-value>/index.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/jsp/admin/*</url-pattern>
+    </filter-mapping>
 
-<!--    <filter>-->
-<!--        <filter-name>CommandSecurityFilter</filter-name>-->
-<!--        <filter-class>com.vlasova.filter.CommandSecurityFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>CommandSecurityFilter</filter-name>-->
-<!--&lt;!&ndash;        <url-pattern>/*</url-pattern>&ndash;&gt;-->
-<!--                <servlet-name>Controller</servlet-name>-->
-<!--        <url-pattern>/controller</url-pattern>-->
-<!--&lt;!&ndash;        <dispatcher>FORWARD</dispatcher>&ndash;&gt;-->
-<!--    </filter-mapping>-->
+    <!--    <filter>-->
+    <!--        <filter-name>CommandSecurityFilter</filter-name>-->
+    <!--        <filter-class>com.vlasova.filter.CommandSecurityFilter</filter-class>-->
+    <!--    </filter>-->
+    <!--    <filter-mapping>-->
+    <!--        <filter-name>CommandSecurityFilter</filter-name>-->
+    <!--&lt;!&ndash;        <url-pattern>/*</url-pattern>&ndash;&gt;-->
+    <!--                <servlet-name>Controller</servlet-name>-->
+    <!--        <url-pattern>/controller</url-pattern>-->
+    <!--&lt;!&ndash;        <dispatcher>FORWARD</dispatcher>&ndash;&gt;-->
+    <!--    </filter-mapping>-->
 </web-app>

@@ -11,7 +11,7 @@
             <a href="${pageContext.request.contextPath}/controller?command=log_out">Log out</a>
         </c:if>
         <c:if test="${user== null}">
-            <a href="${pageContext.request.contextPath}/controller?command=login">Log in</a>
+            <a href="${pageContext.request.contextPath}/controller?command=LOGIN">Log in</a>
         </c:if>
     </div>
 </div>

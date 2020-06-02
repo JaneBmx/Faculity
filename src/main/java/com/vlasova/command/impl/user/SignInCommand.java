@@ -1,6 +1,7 @@
 package com.vlasova.command.impl.user;
 
 import com.vlasova.command.Answer;
+import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
@@ -23,23 +24,29 @@ public class SignInCommand implements UserCommand {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASS);
 
-        try {
-            User user = userService.logIn(login,password);
+        if (login != null && password != null) {
+            try {
+                User user = userService.logIn(login, password);
+                if (user != null) {
+                    request.getSession().setAttribute(USER, user);
 
-            if (user != null) {
-                request.getSession().setAttribute(USER, user);
-                request.getSession().setAttribute(ROLE, user.getRole() == Role.ADMIN? ADMIN:USER);
-                GradeReport gradeReport = gradeReportService.getGradeReportByUserId(user.getId());
-                if (gradeReport != null) {
-                    request.getSession().setAttribute(GRADE_REPORT, gradeReport);
+
+                    request.getSession().setAttribute(ROLE, user.getRole() == Role.ADMIN ? ADMIN : USER);
+
+
+
+                    GradeReport gradeReport = gradeReportService.getGradeReportByUserId(user.getId());
+                    if (gradeReport != null) {
+                        request.getSession().setAttribute(GRADE_REPORT, gradeReport);
+                    }
+                    return user.getRole() == Role.ADMIN
+                            ? new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT)
+                            : new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
                 }
-                return user.getRole() == Role.ADMIN
-                        ? new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT)
-                        : new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
+                request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);
+            } catch (ServiceException e) {
+                request.setAttribute(MSG, MSG_SERV_ERR);
             }
-            request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);
-        } catch (ServiceException e) {
-            request.setAttribute(MSG, MSG_SERV_ERR);
         }
         return new Answer(PageAddress.LOG_IN, Answer.Type.FORWARD);
     }

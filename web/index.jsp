@@ -5,10 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body>
-
 <jsp:include page="include/header.jsp"/>
 <main>
 <%--some main content with beautiful pic--%>

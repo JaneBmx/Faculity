@@ -51,7 +51,10 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req, resp);
+        Command command = CommandType.valueOf(req.getParameter(COMMAND).toUpperCase()).getCommand();
+        Answer answer = command.execute(req, resp);
+        resp.sendRedirect(req.getServletContext().getContextPath()+answer.getPageAddress().getPath());
+        // processRequest(req, resp);
     }
 
     @Override
@@ -68,7 +71,8 @@ public class Controller extends HttpServlet {
         Command command = CommandType.valueOf(req.getParameter(COMMAND).toUpperCase()).getCommand();
         Answer answer = command.execute(req, resp);
 
-        if (req.getMethod().equalsIgnoreCase(POST)) {
+//        if (req.getMethod().equalsIgnoreCase(POST)) {
+        if (answer.getType() == Answer.Type.REDIRECT) {
             resp.sendRedirect(answer.getPageAddress().getPath());
             return;
         }
@@ -79,9 +83,9 @@ public class Controller extends HttpServlet {
             String json = "";
             JSONParser parser = new JSONParser();
 
-            switch (req.getParameter("type")){
+            switch (req.getParameter("type")) {
                 case USERS:
-                    json = parser.parseUserListToJSON((List<User>)(req.getAttribute("user_list")));
+                    json = parser.parseUserListToJSON((List<User>) (req.getAttribute("user_list")));
                     break;
                 case FACULTY:
                     json = parser.parseFacultyListToJSON((List<Faculty>) req.getAttribute("faculty_list"));

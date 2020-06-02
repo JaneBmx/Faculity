@@ -18,7 +18,7 @@
         <div class="login-form">
             <input type="text" name="user_login" placeholder="login" required>
             <input type="password" name="user_password" placeholder="password" required>
-            <%--            <p>${message}</p>--%>
+                        <p style="color: white">${message}</p>
             <button type="submit">Log in</button>
         </div>
         <a href="${pageContext.request.contextPath}/jsp/signup.jsp">Sign up now!</a>

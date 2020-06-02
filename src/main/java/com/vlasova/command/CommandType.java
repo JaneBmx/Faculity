@@ -8,6 +8,7 @@ import com.vlasova.command.impl.gradereport.EnrollGraderReportsCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
 import com.vlasova.command.impl.ajax.GetAllUserAJAX;
 import com.vlasova.command.impl.gradereport.UnEnrollCommand;
+import com.vlasova.command.impl.page.LogInPageCommand;
 import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.command.impl.user.*;
 

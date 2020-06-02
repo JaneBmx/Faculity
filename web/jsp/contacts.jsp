@@ -4,7 +4,7 @@
 <head>
     <title>Contacts</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simple.css">
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simple.css">--%>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>

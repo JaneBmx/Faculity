@@ -4,6 +4,8 @@ public abstract class RequestParams {
     /*Common constants*/
     public static final String MSG             = "message";
     public static final String USERS           = "users";
+    public static final String COMMAND         = "command";
+    public static final String POST            = "post";
 
     /*User constants*/
     public static final String USER            = "user";
@@ -13,7 +15,7 @@ public abstract class RequestParams {
     public static final String LOGIN           = "user_login";
     public static final String NEW_PASS        = "new_password";
     public static final String PASS            = "user_password";
-    public static final String ROLE            = "user_role";
+    public static final String USER_ROLE       = "user_role";
 
     /*GradeReport constants*/
     public static final String GRADE_REPORT    = "grade_report";
@@ -36,10 +38,12 @@ public abstract class RequestParams {
     public static final String USER_LIST       = "user_list";
     public static final String FACULTY_LIST    = "faculty_list";
     public static final String GR_LIST         = "grade_report_list";
+    public static final String FACULTY         = "faculty";
 
-
-
-
+    /*Session params*/
+    public static final String ROLE            = "role";
+    public static final String ADMIN           = "admin";
+    public static final String GUEST           = "guest";
 
     //TODO make RU\EN (internationalize it)
     public static final String MSG_SERV_ERR             = "Some problems with server. Tra again later.";

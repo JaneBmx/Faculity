@@ -23,7 +23,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final String UPDATE_USER_BY_ID = "UPDATE users SET user_name = ?, user_surname = ?, user_password = ? WHERE user_id = ?";
     private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_password = ?";
     private static final String FIND_USER_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_email = ?";
-    private static final String FIND_USER_BY_ID = "SELECT user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_id = ?";
+    private static final String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
     private static final String FIND_ALL_USERS = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users ";
     private static final String FIND_USERS_BY_ROLE = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_role_id = ?";
     private final UserResultSetMapper mapper = new UserResultSetMapper();

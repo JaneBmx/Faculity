@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="include/meta.jsp"/>
+
 </head>
 <body>
 

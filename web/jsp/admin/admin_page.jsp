@@ -146,6 +146,7 @@
             </div>
         </div>
 
+        <%-- ACCEPT TAB. TESTED  --%>
         <div id="acceptGr" class="tabcontent3">
             <table>
                 <tr>

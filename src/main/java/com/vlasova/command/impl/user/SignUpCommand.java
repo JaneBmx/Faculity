@@ -22,16 +22,12 @@ public class SignUpCommand implements UserCommand {
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = new UserRequestMapper().map(request);
 
-
         //if(userDataValidator.isValidUser(user)){
         if (true) {
             try {
-                if(user.getRole()== Role.ADMIN){
-                    userService.registrate(user);
-                    return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT);
-                }
                 userService.registrateAndLogin(user);
                 request.getSession().setAttribute(USER, user);
+                request.getSession().setAttribute(ROLE, USER);
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
                 request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);

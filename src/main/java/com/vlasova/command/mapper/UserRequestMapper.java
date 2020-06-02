@@ -16,7 +16,7 @@ public class UserRequestMapper {
         user.setEmail(request.getParameter(EMAIL));
         user.setLogin(request.getParameter(LOGIN));
         user.setPassword(request.getParameter(PASS));
-        user.setRole(Role.valueOf(request.getParameter(ROLE).toUpperCase()));
+        user.setRole(Role.valueOf(request.getParameter(USER_ROLE).toUpperCase()));
         return user;
     }
 }

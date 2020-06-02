@@ -34,8 +34,10 @@ public class EditGradeReportCommand implements GradeReportCommand {
 
         if (gradeReport == null) {
             gradeReport = gradeReportMapper.map(request);
+            gradeReport.setId(userID);
             try {
                 gradeReportService.addGradeReport(gradeReport);
+                gradeReport = gradeReportService.getGradeReportByUserId(userID);
                 request.getSession().setAttribute(GRADE_REPORT, gradeReport);
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
@@ -46,6 +48,7 @@ public class EditGradeReportCommand implements GradeReportCommand {
         }
 
         gradeReport = gradeReportMapper.map(request);
+        gradeReport.setId(userID);
         try {
             gradeReportService.updateGradeReport(gradeReport);
         } catch (ServiceException e) {

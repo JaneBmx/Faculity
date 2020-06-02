@@ -45,7 +45,6 @@ public class EditUserCommand implements UserCommand {
             userService.editUser(user);
             user = userService.getUserById(user.getId());
             request.getSession().setAttribute(USER, user);
-            request.setAttribute(MSG, MSG_UPD_DATA_SCC);
             return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

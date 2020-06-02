@@ -5,9 +5,9 @@ import com.vlasova.entity.user.User;
 import java.util.regex.Pattern;
 
 public class UserDataValidator {
-    private static final String PASS_FORMAT = "((?=.*\\d)(?=.*[a-z]).{8,40})";
-    private static final String NAME_FORMAT = "[a-zA-Z\\._\\-]{3,40}";
-    private static final String EMAIL_FORMAT = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
+    private static final String PASS_FORMAT = "((?=.*\\d)(?=.*[a-z]).{6,40})";
+    private static final String NAME_FORMAT = "([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$";
+    private static final String EMAIL_FORMAT = "^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
     private static final String LOGIN_FORMAT = "[a-zA-Z\\d]{4,40}";
 
     private boolean isValidString(String string) {

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,6 +75,9 @@ public class Accepter {
     }
 
     private void acceptToFaculty(List<GradeReport> current, int limitAccept) {
+//        current.stream()
+//                .sorted(Comparator.comparing(GradeReport::getAverageMark).reversed())
+//                .limit(limitAccept).forEach(gradeReport -> gradeReport.setAccepted(true));
         Iterator<GradeReport> iterator = current.iterator();
         int counter = 0;
         while (iterator.hasNext()) {

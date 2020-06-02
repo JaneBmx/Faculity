@@ -28,6 +28,7 @@ public class SignInCommand implements UserCommand {
 
             if (user != null) {
                 request.getSession().setAttribute(USER, user);
+                request.getSession().setAttribute(ROLE, user.getRole() == Role.ADMIN? ADMIN:USER);
                 GradeReport gradeReport = gradeReportService.getGradeReportByUserId(user.getId());
                 if (gradeReport != null) {
                     request.getSession().setAttribute(GRADE_REPORT, gradeReport);

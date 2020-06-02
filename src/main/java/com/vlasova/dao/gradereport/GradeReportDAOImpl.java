@@ -71,14 +71,17 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     }
 
     private void addSubjectsMarks(Map<Subject, Integer> marks, int gradeReportId, ProxyConnection connection) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SUBJECTS)) {
-            for (Map.Entry<Subject, Integer> entry : marks.entrySet()) {
-                preparedStatement.setInt(1, gradeReportId);
-                preparedStatement.setInt(2, entry.getKey().getId());
-                preparedStatement.setInt(3, entry.getValue());
-                preparedStatement.executeUpdate();
-            }
+        connection.setAutoCommit(false);
+        PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SUBJECTS);
+        for (Map.Entry<Subject, Integer> entry : marks.entrySet()) {
+            preparedStatement.setInt(1, gradeReportId);
+            preparedStatement.setInt(2, entry.getKey().getId());
+            preparedStatement.setInt(3, entry.getValue());
+            preparedStatement.addBatch();
         }
+        preparedStatement.executeBatch();
+        preparedStatement.close();
+        connection.setAutoCommit(true);
     }
 
     @Override

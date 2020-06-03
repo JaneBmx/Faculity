@@ -6,6 +6,8 @@ import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
 import com.vlasova.validation.UserDataValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.vlasova.command.RequestParams.*;
 
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditUserCommand implements UserCommand {
+    private static final Logger LOGGER = LogManager.getLogger(EditUserCommand.class);
     private final UserDataValidator validator = new UserDataValidator();
     private final UserService userService = UserService.getInstance();
 
@@ -24,31 +27,68 @@ public class EditUserCommand implements UserCommand {
         String name = request.getParameter(USER_NAME);
         String surname = request.getParameter(SURNAME);
 
-        if (validator.isValidPassword(newPassword)
+        String message = "";
+
+        if (!validator.isValidName(name)) {
+            message += "Invalid name.\n";
+        }
+        user.setName(name);
+
+        if (!validator.isValidName(surname)) {
+            message += "Invalid surname. \n";
+        }
+        user.setSurname(surname);
+
+        if (!(validator.isValidPassword(newPassword)
                 && validator.isValidPassword(oldPassword)
-                && oldPassword.equals(user.getPassword())) {
-            newPassword = newPassword.trim();
-            oldPassword = oldPassword.trim();
-            if (oldPassword.equals(user.getPassword())) {
-                user.setPassword(newPassword);
+                && oldPassword.equals(user.getPassword()))) {
+            message += "Invalid password. \n";
+        }
+
+        if (message.isEmpty()) {
+            try {
+                userService.editUser(user);
+                user = userService.getUserById(user.getId());
+                request.getSession().setAttribute(USER, user);
+                LOGGER.info("User with id " + user.getId() + " edited user_info");
+                return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
+            } catch (ServiceException e) {
+                LOGGER.warn(e);
+                request.setAttribute(MSG_EDITINFO, MSG_SERV_ERR);
+                return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
             }
         }
-        if (validator.isValidName(name)) {
-            name = name.trim();
-            user.setName(name);
-        }
-        if (validator.isValidName(surname)) {
-            surname = surname.trim();
-            user.setSurname(surname);
-        }
-        try {
-            userService.editUser(user);
-            user = userService.getUserById(user.getId());
-            request.getSession().setAttribute(USER, user);
-            return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
-        } catch (ServiceException e) {
-            request.setAttribute(MSG, MSG_SERV_ERR);
-            return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
-        }
+        request.setAttribute(MSG_EDITINFO, message);
+        LOGGER.info("User with id " + user.getId() + " did'n edit data");
+        return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
+//
+//        if (validator.isValidPassword(newPassword)
+//                && validator.isValidPassword(oldPassword)
+//                && oldPassword.equals(user.getPassword())) {
+//            newPassword = newPassword.trim();
+//            oldPassword = oldPassword.trim();
+//            if (oldPassword.equals(user.getPassword())) {
+//                user.setPassword(newPassword);
+//            }
+//        }else {
+//
+//        if (validator.isValidName(name)) {
+//            name = name.trim();
+//            user.setName(name);
+//        }
+//
+//        if (validator.isValidName(surname)) {
+//            surname = surname.trim();
+//            user.setSurname(surname);
+//        }
+//        try {
+//            userService.editUser(user);
+//            user = userService.getUserById(user.getId());
+//            request.getSession().setAttribute(USER, user);
+//            return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
+//        } catch (ServiceException e) {
+//            request.setAttribute(MSG_EDITINFO, MSG_SERV_ERR);
+//            return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
+//        }
     }
 }

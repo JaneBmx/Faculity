@@ -138,7 +138,6 @@
                                    title="6-40 symbols"></td>
                     </tr>
                 </table>
-                <%--                <p style="color:white;"> ${message}</p>--%>
                 <p>
                     <button type="submit">Create</button>
                 </p>

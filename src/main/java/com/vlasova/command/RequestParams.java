@@ -3,6 +3,8 @@ package com.vlasova.command;
 public abstract class RequestParams {
     /*Common constants*/
     public static final String MSG             = "message";
+    public static final String MSG_SIGNUP      = "message_signup";
+    public static final String MSG_EDITINFO    = "message_edit_info";
     public static final String USERS           = "users";
     public static final String COMMAND         = "command";
     public static final String POST            = "post";

@@ -95,22 +95,31 @@
                         <table width="70%">
                             <tr>
                                 <td>Name</td>
-                                <td><input type="text" name="user_name" placeholder="${user.name}" required></td>
+                                <td><input type="text" name="user_name" placeholder="${user.name}" required
+                                           pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                                           title="2-40 symbols. First in uppercase"></td>
                             </tr>
                             <tr>
                                 <td>Surname</td>
-                                <td><input type="text" name="user_surname" placeholder="${user.surname}" required></td>
+                                <td><input type="text" name="user_surname" placeholder="${user.surname}" required
+                                           pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                                           title="2-40 symbols. First in uppercase"></td>
                             </tr>
                             <tr>
                                 <td>Old password</td>
-                                <td><input type="password" name="user_password" placeholder="Old password" required>
+                                <td><input type="password" name="user_password" placeholder="Old password" required
+                                           pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
+                                           title="6-40 symbols">
                                 </td>
                             </tr>
                             <tr>
                                 <td>New password</td>
-                                <td><input type="password" name="new_password" placeholder="New password" required></td>
+                                <td><input type="password" name="new_password" placeholder="New password"
+                                           required pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
+                                           title="6-40 symbols"></td>
                             </tr>
                         </table>
+                        <p style="color: white">${message_edit_info}</p>
                         <br>
                         <button type="submit">Submit changes</button>
                     </div>

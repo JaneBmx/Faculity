@@ -5,11 +5,9 @@ import com.vlasova.command.Command;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.FacultyService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
 import static com.vlasova.command.RequestParams.*;
 
 public class GetAllFacultiesAJAX implements Command {

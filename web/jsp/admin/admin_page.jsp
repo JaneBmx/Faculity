@@ -77,6 +77,7 @@
                             </td>
                         </tr>
                     </table>
+                    <p style="color: white">${message_add_faculty}</p>
                     <button type="submit">Add faculty</button>
                 </form>
             </div>

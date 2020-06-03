@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FacultyMapper {
-    //todo add validation input data
     private static final String FAC_NAME = "faculty_name";
     private static final String PAID = "paid";
     private static final String FREE = "free";

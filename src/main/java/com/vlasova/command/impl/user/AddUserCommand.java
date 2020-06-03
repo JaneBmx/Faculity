@@ -17,14 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddUserCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(AddUserCommand.class);
-    private UserService userService = UserService.getInstance();
-    private UserDataValidator validator = new UserDataValidator();
-    private UserRequestMapper mapper = new UserRequestMapper();
+    private final UserService userService = UserService.getInstance();
+    private final UserDataValidator validator = new UserDataValidator();
+    private final UserRequestMapper mapper = new UserRequestMapper();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         User user = mapper.map(request);
-
         if(validator.isValidUser(user)){
             try {
                 userService.registrate(user);

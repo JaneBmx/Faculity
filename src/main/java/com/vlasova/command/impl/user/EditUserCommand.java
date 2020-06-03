@@ -61,34 +61,5 @@ public class EditUserCommand implements UserCommand {
         request.setAttribute(MSG_EDITINFO, message);
         LOGGER.info("User with id " + user.getId() + " did'n edit data");
         return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
-//
-//        if (validator.isValidPassword(newPassword)
-//                && validator.isValidPassword(oldPassword)
-//                && oldPassword.equals(user.getPassword())) {
-//            newPassword = newPassword.trim();
-//            oldPassword = oldPassword.trim();
-//            if (oldPassword.equals(user.getPassword())) {
-//                user.setPassword(newPassword);
-//            }
-//        }else {
-//
-//        if (validator.isValidName(name)) {
-//            name = name.trim();
-//            user.setName(name);
-//        }
-//
-//        if (validator.isValidName(surname)) {
-//            surname = surname.trim();
-//            user.setSurname(surname);
-//        }
-//        try {
-//            userService.editUser(user);
-//            user = userService.getUserById(user.getId());
-//            request.getSession().setAttribute(USER, user);
-//            return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
-//        } catch (ServiceException e) {
-//            request.setAttribute(MSG_EDITINFO, MSG_SERV_ERR);
-//            return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
-//        }
     }
 }

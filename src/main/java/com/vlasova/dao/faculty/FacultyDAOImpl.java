@@ -43,26 +43,73 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
                     "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id " +
                     "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
                     "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id = ?;";
+    private static final String FIND_BY_NAME = "SELECT * FROM faculties WHERE faculty_name = ?";
     private final FacultyResultSetMapper mapper = new FacultyResultSetMapper();
 
     @Override
     public void add(Faculty faculty) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatementFaculty = connection.prepareStatement(INSERT_FACULTY);
-             PreparedStatement preparedStatementSubjects = connection.prepareStatement(INSERT_SUBJECTS)) {
-            preparedStatementFaculty.setString(1, faculty.getName());
-            preparedStatementFaculty.setInt(2, faculty.getFreeAcceptPlan());
-            preparedStatementFaculty.setInt(3, faculty.getPaidAcceptPlan());
-            preparedStatementFaculty.executeUpdate();
-            for (Subject sb : faculty.getSubjects()) {
-                preparedStatementSubjects.setInt(1, faculty.getId());
-                preparedStatementSubjects.setInt(2, sb.getId());
-                preparedStatementSubjects.executeUpdate();
-            }
-        } catch (SQLException e) {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection()) {
+            addFaculty(connection, faculty);
+            int facultyID = findByName(connection, faculty.getName()).getId();
+            addSubjects(connection, facultyID, faculty.getSubjects());
+        } catch (CreateObjectException | SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
         }
+    }
+
+    /**
+     * Add faculty into database only with name, free accept plan, paid accept plan
+     *
+     * @param connection
+     * @param faculty
+     * @throws SQLException
+     */
+    public void addFaculty(ProxyConnection connection, Faculty faculty) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(INSERT_FACULTY);
+        statement.setString(1, faculty.getName());
+        statement.setInt(2, faculty.getFreeAcceptPlan());
+        statement.setInt(3, faculty.getPaidAcceptPlan());
+        statement.executeUpdate();
+        statement.close();
+    }
+
+    /**
+     * Get faculty from db with id (given by db)
+     *
+     * @param connection
+     * @param name
+     * @return incomplete Faculty
+     * @throws SQLException
+     * @throws CreateObjectException
+     * @see Faculty
+     */
+    private Faculty findByName(ProxyConnection connection, String name) throws SQLException, CreateObjectException {
+        PreparedStatement statement = connection.prepareStatement(FIND_BY_NAME);
+        statement.setString(1, name);
+        resultSet = statement.executeQuery();
+        Faculty faculty = mapper.mapOne(resultSet);
+        statement.close();
+        return faculty;
+    }
+
+    /**
+     * Add subjects to adjacent table
+     *
+     * @param connection
+     * @param facultyId  faculty id
+     * @param subjects   Set with subjects
+     * @throws SQLException
+     */
+    private void addSubjects(ProxyConnection connection, int facultyId, Set<Subject> subjects) throws SQLException {
+        connection.setAutoCommit(false);
+        PreparedStatement statement = connection.prepareStatement(INSERT_SUBJECTS);
+        for (Subject s : subjects) {
+            statement.setInt(1, facultyId);
+            statement.setInt(2, s.getId());
+            statement.addBatch();
+        }
+        statement.executeBatch();
     }
 
     @Deprecated

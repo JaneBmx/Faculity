@@ -5,7 +5,6 @@ import com.vlasova.command.Command;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.UserService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;

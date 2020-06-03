@@ -1,7 +1,6 @@
 package com.vlasova.command.impl.user;
 
 import com.vlasova.command.Answer;
-import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
@@ -42,7 +41,7 @@ public class SignInCommand implements UserCommand {
                             ? new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT)
                             : new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
                 }
-                request.setAttribute(MSG, MSG_ERR_WRONG_PAS_OR_LOG);
+                request.setAttribute(MSG, MSG_WRONG_LOG_IN);
             } catch (ServiceException e) {
                 request.setAttribute(MSG, MSG_SERV_ERR);
             }

@@ -29,7 +29,7 @@ public class SignUpCommand implements UserCommand {
                 LOGGER.info("Sign up: "+user.getLogin());
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
-                request.setAttribute(MSG_SIGNUP, MSG_ERR_WRONG_PAS_OR_LOG);
+                request.setAttribute(MSG_SIGNUP, MSG_WRONG_LOG_IN);
             }
         }
         request.setAttribute(MSG_SIGNUP, MSG_ERR_INV_DATA);

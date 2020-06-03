@@ -18,7 +18,8 @@ function openCity1(evt, cityName) {
     var i, tabcontent1, tablinks1;
     tabcontent1 = document.getElementsByClassName("tabcontent1");
     for (i = 0; i < tabcontent1.length; i++) {
-        tabcontent1[i].style.display = "none";    }
+        tabcontent1[i].style.display = "none";
+    }
 
     tablinks1 = document.getElementsByClassName("tablinks1");
     for (i = 0; i < tablinks1.length; i++) {
@@ -92,11 +93,14 @@ window.onload = function () {
         });
 }
 
+/**
+ * Users manipulation
+ */
 let dataGlobal;
 
 function showUsers(data) {
     dataGlobal = data;
-    let content ="<table width=\"100%\">";
+    let content = "<table width=\"100%\">";
     console.log(data);
     content = content + "<tr>";
     content = content + "<td>ID</td>";
@@ -147,10 +151,14 @@ function deleteUser(index) {
     alert("User " + dataGlobal[index].name + " " + dataGlobal[index].surname + " has been deleted!");
     dataGlobal.splice(index, 1);
     showUsers(dataGlobal);
-
 }
 
+
+/**
+ *Faculties manipulation
+ */
 let dataGlobalF;
+
 function showFaculties(data) {
     let contentf = "<table width=\"100%\">";
     dataGlobalF = data;
@@ -193,9 +201,15 @@ function showFaculties(data) {
     document.getElementById("experemental").innerHTML = contentf;
 }
 
-//grades
+
+/**
+ *GradeReports manipulation
+ */
+let dataGlobalG;
+
 function showGrades(data) {
     let contentg = "<table width=\"100%\">";
+    dataGlobalG = data;
     console.log(data);
     contentg = contentg + "<tr>";
     contentg = contentg + "<td>User</td>";
@@ -231,7 +245,7 @@ function showGrades(data) {
         contentg = contentg + data[i].average;
         contentg = contentg + "</td>";
         contentg = contentg + "<td>";
-        contentg = contentg + "<a href=''>Delete</a>";
+        contentg = contentg + "<a href='javascript:deleteGradeReport(" + i + ")'>Delete</a>";
         contentg = contentg + "</td>";
         contentg = contentg + "</tr>";
     }
@@ -239,6 +253,24 @@ function showGrades(data) {
     document.getElementById("all_grades").innerHTML = contentg;
 }
 
+function deleteGradeReport() {
+    fetch('http://localhost:8081/controller?command=delete_grade_report&grade_report_id=' + dataGlobalG[index].id)
+        .then((response) => {
+            //console.log((response.json()));
+            //return response.json();
+        })
+        .then((data) => {
+
+        });
+    alert("GradeReport " + dataGlobalG[index].id + " has been deleted!");
+    dataGlobalG.splice(index, 1);
+    showGrades(dataGlobalG);
+}
+
+
+/**
+ * Enroll & UnEnroll buttons
+ */
 function magicButton() {
     fetch('http://localhost:8081/controller?command=accept')
         .then((response) => {
@@ -247,6 +279,7 @@ function magicButton() {
         });
     alert("Users has been enroll! Update page to see the changes.");
 }
+
 function antiMagicButton() {
     fetch('http://localhost:8081/controller?command=nullify')
         .then((response) => {

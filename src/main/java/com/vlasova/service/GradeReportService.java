@@ -34,9 +34,18 @@ public class GradeReportService {
         }
     }
 
+    @Deprecated
     public void deleteGradeReport(GradeReport gradeReport) throws ServiceException {
         try {
             gradeReportDAO.remove(gradeReport);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void deleteGradeReport(int gradeReportId) throws ServiceException {
+        try {
+            gradeReportDAO.remove(gradeReportId);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

@@ -24,7 +24,7 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     private static final Logger LOGGER = LogManager.getLogger(GradeReportDAOImpl.class);
     private static final String INSERT_GRADE_REPORT = "INSERT INTO  grade_reports(user_id, faculty_id, is_accepted, is_free_paid, privilege_id, attestat_mark, average_mark) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String INSERT_SUBJECTS = "INSERT INTO grade_report2subject (user_id, subject_id, mark) VALUES(?,?,?)";
-    private static final String DELETE = "DELETE FROM grade_reports WHERE user_id = ?";
+    private static final String DELETE_GRADE_REPORT = "DELETE FROM grade_reports WHERE user_id = ?";
     private static final String DELETE_MARKS = "DELETE FROM grade_report2subject WHERE user_id = ?";
     private static final String UPDATE = "UPDATE grade_reports " +
             "SET faculty_id = ?, is_accepted = ?, is_free_paid = ?, privilege_id = ?, attestat_mark = ?, average_mark = ? " +
@@ -88,11 +88,11 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     public void remove(int gradeReportId) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS);
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GRADE_REPORT);) {
             preparedStatement1.setInt(1, gradeReportId);
             preparedStatement1.executeUpdate();
             preparedStatement.setInt(1, gradeReportId);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
@@ -102,10 +102,10 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     @Override
     public void remove(GradeReport gradeReport) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GRADE_REPORT);
              PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
             preparedStatement.setInt(1, gradeReport.getId());
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             preparedStatement1.setInt(1, gradeReport.getId());
             preparedStatement1.executeUpdate();
         } catch (SQLException e) {

@@ -4,6 +4,7 @@ import com.vlasova.command.impl.ajax.GetAllFacultiesAJAX;
 import com.vlasova.command.impl.ajax.GetAllGradeReportsAJAX;
 import com.vlasova.command.impl.faculty.AddFacultyCommand;
 import com.vlasova.command.impl.faculty.DeleteFacultyCommand;
+import com.vlasova.command.impl.gradereport.DeleteGradeReportCommand;
 import com.vlasova.command.impl.gradereport.EnrollGraderReportsCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
 import com.vlasova.command.impl.ajax.GetAllUserAJAX;
@@ -28,6 +29,7 @@ public enum CommandType {
     ADD_USER                  (new AddUserCommand()),
     DELETE_USER               (new DeleteUserCommand()),
     GET_ALL_USERS             (new GetAllUsersCommand()),
+    DELETE_GRADE_REPORT       (new DeleteGradeReportCommand()),
 
     /*json data*/
     GET_ALL_USERS_AJAX        (new GetAllUserAJAX()),

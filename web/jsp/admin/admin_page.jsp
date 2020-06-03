@@ -158,7 +158,7 @@
             <button class="tablinks3" onclick="openCity3(event, 'acceptGr')">Accept</button>
         </div>
         <div id="allGr" class="tabcontent3">
-            <div id="all_grades">
+            <div id="all_grades" class="inner_edit">
                 <%--Here js will load list of grade reports--%>
             </div>
         </div>

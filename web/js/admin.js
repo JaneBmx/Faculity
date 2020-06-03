@@ -59,8 +59,9 @@ function openCity3(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-//json load
-
+/**
+ * JSON load
+ */
 window.onload = function () {
     let content = "";
     fetch('http://localhost:8081/controller?command=GET_ALL_USERS_AJAX&type=users')
@@ -253,7 +254,7 @@ function showGrades(data) {
     document.getElementById("all_grades").innerHTML = contentg;
 }
 
-function deleteGradeReport() {
+function deleteGradeReport(index) {
     fetch('http://localhost:8081/controller?command=delete_grade_report&grade_report_id=' + dataGlobalG[index].id)
         .then((response) => {
             //console.log((response.json()));

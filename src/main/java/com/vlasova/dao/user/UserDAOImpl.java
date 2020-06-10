@@ -48,19 +48,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         }
     }
 
-    @Deprecated
-    @Override
-    public void remove(User user) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER)) {
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        }
-    }
-
     @Override
     public void remove(int userId) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();

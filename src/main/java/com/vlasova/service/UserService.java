@@ -51,15 +51,6 @@ public class UserService {
         }
     }
 
-    @Deprecated
-    public void delete(User user) throws ServiceException {
-        try {
-            userDAO.remove(user);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
     public void delete(int userID) throws ServiceException {
         try {
             gradeReportDAO.remove(userID);

@@ -51,10 +51,7 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Command command = CommandType.valueOf(req.getParameter(COMMAND).toUpperCase()).getCommand();
-        Answer answer = command.execute(req, resp);
-        resp.sendRedirect(req.getServletContext().getContextPath()+answer.getPageAddress().getPath());
-        // processRequest(req, resp);
+        processRequest(req, resp);
     }
 
     @Override
@@ -70,8 +67,6 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = CommandType.valueOf(req.getParameter(COMMAND).toUpperCase()).getCommand();
         Answer answer = command.execute(req, resp);
-
-//        if (req.getMethod().equalsIgnoreCase(POST)) {
         if (answer.getType() == Answer.Type.REDIRECT) {
             resp.sendRedirect(answer.getPageAddress().getPath());
             return;
@@ -79,10 +74,8 @@ public class Controller extends HttpServlet {
 
         if (answer.getType() == Answer.Type.JSON) {
             resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
             String json = "";
             JSONParser parser = new JSONParser();
-
             switch (req.getParameter("type")) {
                 case USERS:
                     json = parser.parseUserListToJSON((List<User>) (req.getAttribute("user_list")));
@@ -97,8 +90,8 @@ public class Controller extends HttpServlet {
             PrintWriter p = resp.getWriter();
             p.write(json);
             p.flush();
-        } else {
-            req.getRequestDispatcher(answer.getPageAddress().getPath()).forward(req, resp);
+            return;
         }
+        req.getRequestDispatcher(answer.getPageAddress().getPath()).forward(req, resp);
     }
 }

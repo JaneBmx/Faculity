@@ -100,21 +100,6 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     }
 
     @Override
-    public void remove(GradeReport gradeReport) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_GRADE_REPORT);
-             PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
-            preparedStatement.setInt(1, gradeReport.getId());
-            preparedStatement.executeUpdate();
-            preparedStatement1.setInt(1, gradeReport.getId());
-            preparedStatement1.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        }
-    }
-
-    @Override
     public void update(GradeReport gradeReport) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {

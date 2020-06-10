@@ -49,12 +49,18 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
     @Override
     public void add(Faculty faculty) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection()) {
+            connection.setAutoCommit(false);
             addFaculty(connection, faculty);
-            int facultyID = findByName(connection, faculty.getName()).getId();
-            addSubjects(connection, facultyID, faculty.getSubjects());
+            Faculty faculty1 = findByName(connection, faculty.getName());
+            if (faculty1 != null) {
+                addSubjects(connection, faculty1.getId(), faculty.getSubjects());
+            }
+            connection.commit();
         } catch (CreateObjectException | SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
+        }finally {
+            closeResultSet();
         }
     }
 
@@ -71,6 +77,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
         statement.setInt(2, faculty.getFreeAcceptPlan());
         statement.setInt(3, faculty.getPaidAcceptPlan());
         statement.executeUpdate();
+        connection.commit();
         statement.close();
     }
 
@@ -88,7 +95,10 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
         PreparedStatement statement = connection.prepareStatement(FIND_BY_NAME);
         statement.setString(1, name);
         resultSet = statement.executeQuery();
-        Faculty faculty = mapper.mapOne(resultSet);
+        Faculty faculty = null;
+        if (resultSet.next()) {
+            faculty = mapper.mapOne(resultSet);
+        }
         statement.close();
         return faculty;
     }
@@ -102,7 +112,6 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
      * @throws SQLException
      */
     private void addSubjects(ProxyConnection connection, int facultyId, Set<Subject> subjects) throws SQLException {
-        connection.setAutoCommit(false);
         PreparedStatement statement = connection.prepareStatement(INSERT_SUBJECTS);
         for (Subject s : subjects) {
             statement.setInt(1, facultyId);
@@ -110,21 +119,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
             statement.addBatch();
         }
         statement.executeBatch();
-    }
-
-    @Deprecated
-    @Override
-    public void remove(Faculty faculty) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-             PreparedStatement preparedStatement1 = connection.prepareStatement(DELETE_MARKS)) {
-            preparedStatement.setInt(1, faculty.getId());
-            preparedStatement.executeUpdate();
-            preparedStatement1.setInt(1, faculty.getId());
-        } catch (SQLException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        }
+        connection.commit();
     }
 
     @Override

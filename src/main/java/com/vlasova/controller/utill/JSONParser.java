@@ -4,22 +4,30 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
+import com.vlasova.validation.FacultyValidator;
+import com.vlasova.validation.GradeReportValidator;
+import com.vlasova.validation.UserDataValidator;
 
 import java.util.List;
 
 public class JSONParser {
+    private final FacultyValidator fValidator = new FacultyValidator();
+    private final GradeReportValidator gRValidator = new GradeReportValidator();
+    private final UserDataValidator uValidtor = new UserDataValidator();
 
     public String parseUserListToJSON(List<User> list) {
+        list.removeIf(user -> (!uValidtor.isValidUser(user)));
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (User u : list) {
-            sb.append("{").append("\"id\": \"" + u.getId() + "\",")
-                    .append("\"role\": \"" + u.getRole().name() + "\",")
-                    .append("\"name\": \"" + u.getName() + "\",")
-                    .append("\"surname\": \"" + u.getSurname() + "\",")
-                    .append("\"email\": \"" + u.getEmail() + "\",")
-                    .append("\"login\": \"" + u.getLogin() + "\"")
-                    .append("},");
+            sb.append("{");
+            sb.append("\"id\": \"" + u.getId() + "\",");
+            sb.append("\"role\": \"" + u.getRole().name() + "\",");
+            sb.append("\"name\": \"" + u.getName() + "\",");
+            sb.append("\"surname\": \"" + u.getSurname() + "\",");
+            sb.append("\"email\": \"" + u.getEmail() + "\",");
+            sb.append("\"login\": \"" + u.getLogin() + "\"");
+            sb.append("},");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("]");
@@ -27,20 +35,21 @@ public class JSONParser {
     }
 
     public String parseFacultyListToJSON(List<Faculty> list) {
+        list.removeIf(faculty -> (!fValidator.isValidFaculty(faculty)));
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (Faculty f : list) {
-            sb.append("{")
-                    .append("\"id\": \"" + f.getId() + "\",")
-                    .append("\"name\": \"" + f.getName() + "\",");
+            sb.append("{");
+            sb.append("\"id\": \"" + f.getId() + "\",");
+            sb.append("\"name\": \"" + f.getName() + "\",");
             int count = 1;
             for (Subject s : f.getSubjects()) {
                 sb.append("\"sub" + count + "\": \"" + s.getName() + "\",");
                 count++;
             }
-            sb.append("\"free\": \"" + f.getFreeAcceptPlan() + "\",")
-                    .append("\"paid\": \"" + f.getPaidAcceptPlan() + "\"")
-                    .append("},");
+            sb.append("\"free\": \"" + f.getFreeAcceptPlan() + "\",");
+            sb.append("\"paid\": \"" + f.getPaidAcceptPlan() + "\"");
+            sb.append("},");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("]");
@@ -48,6 +57,7 @@ public class JSONParser {
     }
 
     public String parseGradeReportListToJSON(List<GradeReport> list) {
+        list.removeIf(gr -> (!gRValidator.isValidGradeReport(gr)));
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (GradeReport g : list) {

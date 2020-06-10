@@ -21,10 +21,17 @@
     </div>
 
     <!-- Faculties -->
-    <div id="Faculty_tab" class="tabcontent">
+    <div id="Faculty_tab" class="tabcontent"style="display: block">
         <div class="tab1">
             <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')">All</button>
             <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new</button>
+        </div>
+        <%-- All faculties  --%>
+        <div id="Edit faculties" class="tabcontent1" style="display: block">
+            <div class="inner_edit">
+                <div id="experemental">
+                </div>
+            </div>
         </div>
 
         <%-- Facultues: Add new  --%>
@@ -83,12 +90,7 @@
             </div>
         </div>
 
-        <div id="Edit faculties" class="tabcontent1">
-            <div class="inner_edit">
-                <div id="experemental">
-                </div>
-            </div>
-        </div>
+
     </div>
 
     <!-- Users -->
@@ -144,7 +146,7 @@
                 </p>
             </form>
         </div>
-        <div id="All_users" class="tabcontent2">
+        <div id="All_users" class="tabcontent2"style="display: block">
             <div class="inner_edit" id="Search_users">
                 <%--Here js will load list of users--%>
             </div>
@@ -157,7 +159,7 @@
             <button class="tablinks3" onclick="openCity3(event, 'allGr')">All</button>
             <button class="tablinks3" onclick="openCity3(event, 'acceptGr')">Accept</button>
         </div>
-        <div id="allGr" class="tabcontent3">
+        <div id="allGr" class="tabcontent3" style="display: block">
             <div id="all_grades" class="inner_edit">
                 <%--Here js will load list of grade reports--%>
             </div>

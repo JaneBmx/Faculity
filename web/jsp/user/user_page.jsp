@@ -32,8 +32,8 @@
             <button class="tablinks" onclick="openTab(event, 'EditRequest')">Edit request</button>
         </div>
 
-        <%--TAB WITH COMMON INFO--%>
-        <div id="Info" class="tabcontent">
+        <%--INFO--%>
+        <div id="Info" class="tabcontent" style="display: block">
             <div class="info_block">
                 <table>
                     <tr>
@@ -85,8 +85,8 @@
             </div>
         </div>
 
-        <%--TAB WITH USER INFO EDIT--%>
-        <div id="EditInfo" class="tabcontent">
+        <%--EDIT INFO--%>
+        <div id="EditInfo" class="tabcontent" >
             <div class="info_block">
                 <h2>Edit user info</h2>
                 <form class="login" method="POST"

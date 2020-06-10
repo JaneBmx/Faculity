@@ -159,11 +159,10 @@ function deleteUser(index) {
  *Faculties manipulation
  */
 let dataGlobalF;
-
 function showFaculties(data) {
-    let contentf = "<table width=\"100%\">";
     dataGlobalF = data;
     console.log(data);
+    let contentf = "<table width=\"100%\">";
     contentf = contentf + "<tr><th>ID</th>" +
         "<th>Name</th> " +
         "<th colspan=\"3\">Subjects</th>" +
@@ -202,6 +201,19 @@ function showFaculties(data) {
     document.getElementById("experemental").innerHTML = contentf;
 }
 
+function deleteFaculty(index) {
+    fetch('http://localhost:8081/controller?command=delete_faculty&faculty_id=' + dataGlobalF[index].id)
+        .then((response) => {
+            //console.log((response.json()));
+            //return response.json();
+        })
+        .then((data) => {
+
+        });
+    alert("Faculty " + dataGlobalF[index].name + " has been deleted!");
+    dataGlobalF.splice(index, 1);
+    showFaculties(dataGlobalF);
+}
 
 /**
  *GradeReports manipulation

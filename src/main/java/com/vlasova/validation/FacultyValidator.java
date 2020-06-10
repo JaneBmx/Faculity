@@ -8,7 +8,8 @@ public class FacultyValidator {
 
     public  boolean isValidFaculty(String name, int free, int paid, Subject... subjects) {
         return name != null && !name.isEmpty() && free >= MIN && paid >= MIN
-                && free + paid > MIN && isValidSubjects(subjects);
+                && free + paid > MIN && isValidSubjects(subjects)
+                && subjects.length!=3;
     }
 
     public  boolean isValidSubjects(Subject... subjects) {

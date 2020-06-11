@@ -29,7 +29,10 @@
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'Info')">Info</button>
             <button class="tablinks" onclick="openTab(event, 'EditInfo')">Edit info</button>
-            <button class="tablinks" onclick="openTab(event, 'EditRequest')">Edit request</button>
+            <button class="tablinks" onclick="openTab(event, 'EditRequest')">
+                <c:if test="${grade_report == null}"> Create request</c:if>
+                <c:if test="${grade_report != null}"> Edit request </c:if>
+            </button>
         </div>
 
         <%--INFO--%>
@@ -59,34 +62,41 @@
                         <td colspan="2"><h2>Grade report info</h2></td>
                     </tr>
 
-                    <tr>
-                        <td>Faculty:</td>
-                        <td>${grade_report.faculty.name}</td>
-                    </tr>
-                    <tr>
-                        <td>Privilege:</td>
-                        <td>${grade_report.privilege.name}</td>
-                    </tr>
-                    <tr>
-                        <td>Accepted status:</td>
-                        <td>
-                            <c:if test="${grade_report.isAccepted() == true}">Accepted</c:if>
-                            <c:if test="${grade_report.isAccepted() == false}">Rejected</c:if>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Free paid status:</td>
-                        <td>
-                            <c:if test="${grade_report.isFree() == true}">Free</c:if>
-                            <c:if test="${grade_report.isFree() == false}">Paid</c:if>
-                        </td>
-                    </tr>
+                    <c:if test="${grade_report != null}">
+                        <tr>
+                            <td>Faculty:</td>
+                            <td>${grade_report.faculty.name}</td>
+                        </tr>
+                        <tr>
+                            <td>Privilege:</td>
+                            <td>${grade_report.privilege.name}</td>
+                        </tr>
+                        <tr>
+                            <td>Accepted status:</td>
+                            <td>
+                                <c:if test="${grade_report.isAccepted() == true}">Accepted</c:if>
+                                <c:if test="${grade_report.isAccepted() == false}">Rejected</c:if>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Free paid status:</td>
+                            <td>
+                                <c:if test="${grade_report.isFree() == true}">Free</c:if>
+                                <c:if test="${grade_report.isFree() == false}">Paid</c:if>
+                            </td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${grade_report == null}">
+                        <tr>
+                            <td colspan="2" style="color: red">No grade report found!</td>
+                        </tr>
+                    </c:if>
                 </table>
             </div>
         </div>
 
         <%--EDIT INFO--%>
-        <div id="EditInfo" class="tabcontent" >
+        <div id="EditInfo" class="tabcontent">
             <div class="info_block">
                 <h2>Edit user info</h2>
                 <form class="login" method="POST"
@@ -130,9 +140,15 @@
         <%--TAB WITH GRADE REPORT EDIT--%>
         <div id="EditRequest" class="tabcontent">
             <div class="info_block">
-                <h2>Edit request</h2>
+                <c:if test="${grade_report == null}">
+                    <h2>Create request</h2>
+                </c:if>
+                <c:if test="${grade_report != null}">
+                    <h2>Edit request</h2>
+                </c:if>
                 <form class="login" method="POST"
                       action="${pageContext.request.contextPath}/controller?command=edit_request">
+                    <input type="hidden" name="user_id" value="${user.id}">
                     <div class="login-form">
                         <div class="row">
                             <script>
@@ -156,8 +172,9 @@
                             </script>
                             <table width="70%">
                                 <tr>
+                                    <%--                                TODO add default faculty--%>
                                     <td>Choose faculty:</td>
-                                    <td><select id="facultySelector" name="faculty_id">
+                                    <td><select id="facultySelector" name="faculty_id" required>
                                         <c:forEach items="${faculties}" var="fac">
                                             <option value="${fac.id}"> ${fac.name}</option>
                                         </c:forEach>
@@ -165,7 +182,7 @@
                                 </tr>
                                 <tr>
                                     <td>Choose privilege:</td>
-                                    <td><select name="privilege">
+                                    <td><select name="privilege" required>
                                         <c:forEach items="${privileges}" var="priv">
                                             <option value="${priv.id}">${priv.name} </option>
                                         </c:forEach>
@@ -175,7 +192,7 @@
                                 <tr>
                                     <td>Average school mark:</td>
                                     <td><input type="number" step="0.1" min="1" max="10" placeholder="0,0"
-                                               name="attestat_mark"></td>
+                                               name="attestat_mark" required></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -183,7 +200,7 @@
                                     </td>
                                     <td>
                                         <input type="hidden" value="" name="mark_1_subId" id="mark_1_subId">
-                                        <input type="number" min="1" max="10" value="1" name="mark_1">
+                                        <input type="number" min="1" max="10" value="1" name="mark_1" required>
                                     </td>
                                 </tr>
                                 <tr>
@@ -192,7 +209,7 @@
                                     </td>
                                     <td>
                                         <input type="hidden" value="" name="mark_2_subId" id="mark_2_subId">
-                                        <input type="number" min="1" max="10" value="1" name="mark_2">
+                                        <input type="number" min="1" max="10" value="1" name="mark_2" required>
                                     </td>
                                 </tr>
                                 <tr>
@@ -201,7 +218,7 @@
                                     </td>
                                     <td>
                                         <input type="hidden" value="" name="mark_3_subId" id="mark_3_subId">
-                                        <input type="number" min="1" max="10" value="1" name="mark_3">
+                                        <input type="number" min="1" max="10" value="1" name="mark_3" required>
                                     </td>
                                 </tr>
                             </table>

@@ -23,7 +23,7 @@ public class SignUpCommand implements UserCommand {
         User user = new UserRequestMapper().map(request);
         if (userDataValidator.isValidUser(user)) {
             try {
-                userService.registrateAndLogin(user);
+                user = userService.registrateAndLogin(user);
                 request.getSession().setAttribute(USER, user);
                 request.getSession().setAttribute(ROLE, USER);
                 LOGGER.info("Sign up: "+user.getLogin());

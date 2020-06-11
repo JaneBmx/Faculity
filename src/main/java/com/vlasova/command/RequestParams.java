@@ -15,6 +15,7 @@ public abstract class RequestParams {
     public static final String NEW_PASS         = "new_password";
     public static final String PASS             = "user_password";
     public static final String USER_ROLE        = "user_role";
+    public static final String USER_ID          = "user_id";
 
     /**GradeReport constants*/
     public static final String GRADE_REPORT     = "grade_report";
@@ -55,4 +56,6 @@ public abstract class RequestParams {
     public static final String MSG_WRONG_LOG_IN = "Wrong login or password. Try again";
     public static final String MSG_USER_EXIST   = "User with those login and email is already exist";
     public static final String MSG_ERR_INV_DATA = "Invalid data";
+
+    private RequestParams(){}
 }

@@ -62,6 +62,7 @@ function openCity3(evt, cityName) {
 /**
  * JSON load
  */
+
 window.onload = function () {
     let content = "";
     fetch('http://localhost:8081/controller?command=GET_ALL_USERS_AJAX&type=users')

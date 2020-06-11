@@ -19,7 +19,6 @@ import org.apache.logging.log4j.Logger;
 
 public enum ConnectionPool {
     INSTANCE;
-
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static final int DEFAULT_POOL_SIZE = 32;
     private static final String PROPERTY_PATH = "resources/db.properties";

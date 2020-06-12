@@ -1,4 +1,4 @@
-package com.vlasova.validation;
+package com.vlasova.util.validation;
 
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;

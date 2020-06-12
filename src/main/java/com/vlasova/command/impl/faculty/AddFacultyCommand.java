@@ -6,7 +6,7 @@ import com.vlasova.command.web.PageAddress;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.FacultyService;
-import com.vlasova.validation.FacultyValidator;
+import com.vlasova.util.validation.FacultyValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

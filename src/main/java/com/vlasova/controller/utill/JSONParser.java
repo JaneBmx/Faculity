@@ -4,9 +4,9 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
-import com.vlasova.validation.FacultyValidator;
-import com.vlasova.validation.GradeReportValidator;
-import com.vlasova.validation.UserDataValidator;
+import com.vlasova.util.validation.FacultyValidator;
+import com.vlasova.util.validation.GradeReportValidator;
+import com.vlasova.util.validation.UserDataValidator;
 
 import java.util.List;
 

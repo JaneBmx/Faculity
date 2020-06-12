@@ -22,7 +22,6 @@ public class EditGradeReportCommand implements GradeReportCommand {
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-//        int userID = ((User) request.getSession().getAttribute(USER)).getId();
         int userID = Integer.parseInt(request.getParameter(USER_ID));
         GradeReport gradeReport;
         try {

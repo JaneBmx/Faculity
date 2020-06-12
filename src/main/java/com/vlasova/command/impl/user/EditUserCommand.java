@@ -5,7 +5,7 @@ import com.vlasova.entity.user.User;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
-import com.vlasova.validation.UserDataValidator;
+import com.vlasova.util.validation.UserDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

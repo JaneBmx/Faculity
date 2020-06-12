@@ -6,12 +6,12 @@ import com.vlasova.exception.service.ServiceException;
 import com.vlasova.command.mapper.UserRequestMapper;
 import com.vlasova.command.web.PageAddress;
 import com.vlasova.service.UserService;
-import com.vlasova.validation.UserDataValidator;
+import com.vlasova.util.validation.UserDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import static com.vlasova.command.RequestParams.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static com.vlasova.command.RequestParams.*;
 
 public class SignUpCommand implements UserCommand {
     private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class);
@@ -26,7 +26,7 @@ public class SignUpCommand implements UserCommand {
                 user = userService.registrateAndLogin(user);
                 request.getSession().setAttribute(USER, user);
                 request.getSession().setAttribute(ROLE, USER);
-                LOGGER.info("Sign up: "+user.getLogin());
+                LOGGER.info("Sign up: " + user.getLogin());
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
                 request.setAttribute(MSG_SIGNUP, MSG_WRONG_LOG_IN);

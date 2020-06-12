@@ -41,7 +41,7 @@ public class GradeReportValidator {
     private boolean isValidMarks(Map<Subject, Integer> marks) {
         if (marks != null && !marks.isEmpty()) {
             for (Map.Entry<Subject, Integer> entry : marks.entrySet()) {
-                if (entry.getKey() == null || entry.getValue() != null
+                if (entry.getKey() == null || entry.getValue() == null
                         || entry.getValue() < MIN_MARK || entry.getValue() > MAX_MARK) {
                     return false;
                 }

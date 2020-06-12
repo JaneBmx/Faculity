@@ -4,6 +4,7 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Privilege;
+import com.vlasova.exception.InvalidRequestDataException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -20,14 +21,18 @@ public class GradeReportMapper {
     private static final String SUB_2      = "mark_2_subId";
     private static final String SUB_3      = "mark_3_subId";
 
-    public GradeReport map(HttpServletRequest request) {
-        GradeReport gradeReport = new GradeReport();
-        gradeReport.setFaculty(mapFaculty(request));
-        gradeReport.setPrivilege(mapPrivilege(request));
-        gradeReport.setAttestatMark(mapAttestatMark(request));
-        gradeReport.setMarks(mapMarks(request));
-        gradeReport.setAverageMark(mapMiddleMark(request));
-        return gradeReport;
+    public GradeReport map(HttpServletRequest request) throws InvalidRequestDataException {
+        try {
+            GradeReport gradeReport = new GradeReport();
+            gradeReport.setFaculty(mapFaculty(request));
+            gradeReport.setPrivilege(mapPrivilege(request));
+            gradeReport.setAttestatMark(mapAttestatMark(request));
+            gradeReport.setMarks(mapMarks(request));
+            gradeReport.setAverageMark(mapMiddleMark(request));
+            return gradeReport;
+        }catch (NumberFormatException e){
+            throw new InvalidRequestDataException(e);
+        }
     }
 
     /**

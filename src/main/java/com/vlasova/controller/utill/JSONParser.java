@@ -7,16 +7,15 @@ import com.vlasova.entity.user.User;
 import com.vlasova.util.validation.FacultyValidator;
 import com.vlasova.util.validation.GradeReportValidator;
 import com.vlasova.util.validation.UserDataValidator;
-
 import java.util.List;
 
 public class JSONParser {
     private final FacultyValidator fValidator = new FacultyValidator();
     private final GradeReportValidator gRValidator = new GradeReportValidator();
-    private final UserDataValidator uValidtor = new UserDataValidator();
+    private final UserDataValidator uValidator = new UserDataValidator();
 
     public String parseUserListToJSON(List<User> list) {
-        list.removeIf(user -> (!uValidtor.isValidUser(user)));
+        list.removeIf(user -> (!uValidator.isValidUser(user)));
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (User u : list) {

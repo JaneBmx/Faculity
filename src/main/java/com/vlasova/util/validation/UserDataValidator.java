@@ -1,7 +1,6 @@
 package com.vlasova.util.validation;
 
 import com.vlasova.entity.user.User;
-
 import java.util.regex.Pattern;
 
 public class UserDataValidator {

@@ -13,6 +13,12 @@ public class FacultyValidator {
                 && isValidAcceptPlan(paid) && isValidSubjects(subjects);
     }
 
+    public boolean isValidFaculty(Faculty faculty) {
+        return faculty != null
+                && isValidFaculty(faculty.getName(), faculty.getFreeAcceptPlan()
+                , faculty.getPaidAcceptPlan(), faculty.getSubjects());
+    }
+
     private boolean isValidSubjects(Set<Subject> subjects) {
         if (subjects != null && subjects.size() == 3) {
             for (Subject s : subjects) {
@@ -34,12 +40,5 @@ public class FacultyValidator {
 
     private boolean isValidFreeAcceptPlan(int freeAcceptPlan) {
         return freeAcceptPlan >= MIN_PLAN;
-    }
-
-
-    public boolean isValidFaculty(Faculty faculty) {
-        return faculty != null
-                && isValidFaculty(faculty.getName(), faculty.getFreeAcceptPlan()
-                , faculty.getPaidAcceptPlan(), faculty.getSubjects());
     }
 }

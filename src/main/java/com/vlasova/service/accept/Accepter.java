@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,8 +104,8 @@ public class Accepter {
      */
     private void getData() {
         try {
-            gradeReports = GradeReportService.getInstance().getAllGradeReports();
-            faculties = FacultyService.getInstance().getAllFaculties();
+            gradeReports = GradeReportService.getInstance().getAll();
+            faculties = FacultyService.getInstance().getAll();
         } catch (ServiceException e) {
             LOGGER.warn("Cant get init data.", e);
         }

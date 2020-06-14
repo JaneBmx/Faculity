@@ -27,8 +27,8 @@ public class AddFacultyCommand implements FacultyCommand {
         Faculty faculty = mapper.map(request);
         if (validator.isValidFaculty(faculty)) {
             try {
-                facultyService.addFaculty(faculty);
-                List<Faculty> facultyList = facultyService.getAllFaculties();
+                facultyService.add(faculty);
+                List<Faculty> facultyList = facultyService.getAll();
                 request.getServletContext().setAttribute(FACULTIES, facultyList);
                 LOGGER.info("New faculty has been added.");
                 return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.REDIRECT);

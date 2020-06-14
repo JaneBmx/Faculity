@@ -32,7 +32,7 @@ public class Controller extends HttpServlet {
         ConnectionPool.INSTANCE.init();
         LOGGER.info("Controller initialization.");
         try {
-            this.getServletContext().setAttribute("faculties", FacultyService.getInstance().getAllFaculties());
+            this.getServletContext().setAttribute("faculties", FacultyService.getInstance().getAll());
             LOGGER.info("List of faculties has been loaded.");
         } catch (ServiceException e) {
             LOGGER.warn("Can't load list of faculties", e);

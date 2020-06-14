@@ -18,7 +18,7 @@ public class GetAllUsersCommand implements UserCommand {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<User> users = userService.getAllUsers();
+            List<User> users = userService.getAll();
             request.getSession().setAttribute(USERS, users);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

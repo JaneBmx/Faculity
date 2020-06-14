@@ -16,7 +16,7 @@ public class GetAllFacultiesAJAX implements Command {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Faculty> list = facultyService.getAllFaculties();
+            List<Faculty> list = facultyService.getAll();
             request.setAttribute(FACULTY_LIST, list);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

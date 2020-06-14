@@ -6,7 +6,6 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.service.comparator.FacultyComparatorById;
-
 import java.util.*;
 
 public class FacultyService {
@@ -24,7 +23,7 @@ public class FacultyService {
 
     private final FacultyDAO facultyDAO;
 
-    public void addFaculty(Faculty faculty) throws ServiceException {
+    public void add(Faculty faculty) throws ServiceException {
         try {
             facultyDAO.add(faculty);
         } catch (DAOException e) {
@@ -32,7 +31,7 @@ public class FacultyService {
         }
     }
 
-    public void deleteFaculty(int facultyId) throws ServiceException {
+    public void remove(int facultyId) throws ServiceException {
         try {
             facultyDAO.remove(facultyId);
         } catch (DAOException e) {
@@ -40,7 +39,7 @@ public class FacultyService {
         }
     }
 
-    public void updateFaculty(Faculty faculty) throws ServiceException {
+    public void update(Faculty faculty) throws ServiceException {
         try {
             facultyDAO.update(faculty);
         } catch (DAOException e) {
@@ -48,7 +47,7 @@ public class FacultyService {
         }
     }
 
-    public List<Faculty> getAllFaculties() throws ServiceException {
+    public List<Faculty> getAll() throws ServiceException {
         try {
             List<Faculty> list = new ArrayList<>(facultyDAO.findAllFaculties());
             list.sort(new FacultyComparatorById());

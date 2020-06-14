@@ -20,7 +20,7 @@ public class DeleteGradeReportCommand implements GradeReportCommand {
         if (gradeId != null) {
             int gradeID = Integer.parseInt(gradeId);
             try {
-                gradeReportService.delete(gradeID);
+                gradeReportService.remove(gradeID);
                 LOGGER.info("Delete gradeReport with id:" + gradeID);
             } catch (ServiceException e) {
                 LOGGER.warn(e);

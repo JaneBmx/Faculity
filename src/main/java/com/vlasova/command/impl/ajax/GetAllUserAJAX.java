@@ -17,7 +17,7 @@ public class GetAllUserAJAX implements Command {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<User> list = userService.getAllUsers();
+            List<User> list = userService.getAll();
             request.setAttribute(USER_LIST, list);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

@@ -21,7 +21,7 @@ public class DeleteUserCommand implements UserCommand {
         if (userId != null && !userId.equalsIgnoreCase(adminId)) {
             int userID = Integer.parseInt(userId);
             try {
-                userService.delete(userID);
+                userService.remove(userID);
                 LOGGER.info("Delete user with id: "+userID);
             } catch (ServiceException e) {
                 LOGGER.warn(e);

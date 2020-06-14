@@ -47,7 +47,7 @@ public class EditUserCommand implements UserCommand {
 
         if (message.isEmpty()) {
             try {
-                userService.editUser(user);
+                userService.update(user);
                 user = userService.getUserById(user.getId());
                 request.getSession().setAttribute(USER, user);
                 LOGGER.info("User with id " + user.getId() + " edited user_info");

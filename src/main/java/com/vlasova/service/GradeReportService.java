@@ -34,15 +34,15 @@ public class GradeReportService {
         }
     }
 
-    public void delete(int gradeReportId) throws ServiceException {
+    public void remove(int id) throws ServiceException {
         try {
-            gradeReportDAO.remove(gradeReportId);
+            gradeReportDAO.remove(id);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
-    public void updateGradeReport(GradeReport gradeReport) throws ServiceException {
+    public void update(GradeReport gradeReport) throws ServiceException {
         try {
             gradeReportDAO.update(gradeReport);
         } catch (DAOException e) {
@@ -50,7 +50,7 @@ public class GradeReportService {
         }
     }
 
-    public List<GradeReport> getAllGradeReports() throws ServiceException {
+    public List<GradeReport> getAll() throws ServiceException {
         try {
             List<GradeReport> list = new ArrayList<>(gradeReportDAO.findAllGradeReports());
             list.sort(new GradeReportComparatorByID());

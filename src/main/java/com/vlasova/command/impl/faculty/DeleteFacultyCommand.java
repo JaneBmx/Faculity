@@ -22,7 +22,7 @@ public class DeleteFacultyCommand implements FacultyCommand {
         if (reqParam != null) {
             int facultyId = Integer.parseInt(reqParam);
             try {
-                facultyService.deleteFaculty(facultyId);
+                facultyService.remove(facultyId);
                 LOGGER.info("Delete faculty with id: "+facultyId);
                 return new Answer(PageAddress.ADMIN_PAGE, Answer.Type.FORWARD);
             } catch (ServiceException e) {

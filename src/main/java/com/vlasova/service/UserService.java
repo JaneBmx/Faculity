@@ -8,7 +8,6 @@ import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
 import com.vlasova.dao.user.UserDAOImpl;
 import com.vlasova.service.comparator.UserComparatorByID;
-
 import java.util.*;
 
 public class UserService {
@@ -50,10 +49,10 @@ public class UserService {
         }
     }
 
-    public void delete(int userID) throws ServiceException {
+    public void remove(int id) throws ServiceException {
         try {
-            gradeReportDAO.remove(userID);
-            userDAO.remove(userID);
+            gradeReportDAO.remove(id);
+            userDAO.remove(id);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -75,7 +74,7 @@ public class UserService {
         }
     }
 
-    public void editUser(User user) throws ServiceException {
+    public void update(User user) throws ServiceException {
         try {
             userDAO.update(user);
         } catch (DAOException e) {
@@ -83,7 +82,7 @@ public class UserService {
         }
     }
 
-    public List<User> getAllUsers() throws ServiceException {
+    public List<User> getAll() throws ServiceException {
         try {
             List<User> list = new ArrayList<>(userDAO.findAllUsers());
             list.sort(new UserComparatorByID());

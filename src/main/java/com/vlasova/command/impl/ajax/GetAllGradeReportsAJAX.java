@@ -16,7 +16,7 @@ public class GetAllGradeReportsAJAX implements Command {
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<GradeReport> list = gradeReportService.getAllGradeReports();
+            List<GradeReport> list = gradeReportService.getAll();
             request.setAttribute(GR_LIST, list);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);

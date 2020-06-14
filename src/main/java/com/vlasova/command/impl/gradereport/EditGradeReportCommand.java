@@ -49,7 +49,7 @@ public class EditGradeReportCommand implements GradeReportCommand {
             if (dbGradeReport == null) {
                 gradeReportService.add(reqGradeReport);
             } else {
-                gradeReportService.updateGradeReport(reqGradeReport);
+                gradeReportService.update(reqGradeReport);
             }
             reqGradeReport = gradeReportService.getGradeReportByUserId(userID);
         } catch (ServiceException e) {

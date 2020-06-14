@@ -26,7 +26,7 @@ public class GradeReportService {
         gradeReportDAO = new GradeReportDAOImpl();
     }
 
-    public void addGradeReport(GradeReport gradeReport) throws ServiceException {
+    public void add(GradeReport gradeReport) throws ServiceException {
         try {
             gradeReportDAO.add(gradeReport);
         } catch (DAOException e) {
@@ -34,7 +34,7 @@ public class GradeReportService {
         }
     }
 
-    public void deleteGradeReport(int gradeReportId) throws ServiceException {
+    public void delete(int gradeReportId) throws ServiceException {
         try {
             gradeReportDAO.remove(gradeReportId);
         } catch (DAOException e) {
@@ -60,39 +60,9 @@ public class GradeReportService {
         }
     }
 
-    public List<GradeReport> getGradeReportsByFaculty(Faculty faculty) throws ServiceException {
-        try {
-            List<GradeReport> list = new ArrayList<>(gradeReportDAO.findGradeReportsByFaculty(faculty));
-            list.sort(new GradeReportComparatorByID());
-            return list;
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Deprecated
-    public GradeReport getGradeReportByUser(User user) throws ServiceException {
-        try {
-            return gradeReportDAO.findGradeReportByUser(user);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
     public GradeReport getGradeReportByUserId(int id) throws ServiceException {
         try {
             return gradeReportDAO.findGradeReportByUserId(id);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public void setGradeReportAcceptAndFree(GradeReport gradeReport, boolean isAccepted, boolean isFree)
-            throws ServiceException {
-        gradeReport.setAccepted(isAccepted);
-        gradeReport.setFree(isFree);
-        try {
-            gradeReportDAO.update(gradeReport);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

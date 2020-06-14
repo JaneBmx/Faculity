@@ -1,7 +1,6 @@
 package com.vlasova.dao.user;
 
 import com.vlasova.dao.AbstractDAO;
-import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.pool.ConnectionPool;
@@ -21,11 +20,10 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final String CREATE_USER = "INSERT INTO users (user_role_id, user_name, user_surname, user_email, user_login, user_password) VALUES(?,?,?,?,?,?)";
     private static final String DELETE_USER = "DELETE FROM users WHERE user_id = ?";
     private static final String UPDATE_USER_BY_ID = "UPDATE users SET user_name = ?, user_surname = ?, user_password = ? WHERE user_id = ?";
-    private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_password = ?";
-    private static final String FIND_USER_BY_LOGIN_AND_EMAIL = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_login = ? AND  user_email = ?";
+    private static final String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE user_login = ? AND  user_password = ?";
+    private static final String FIND_USER_BY_LOGIN_AND_EMAIL = "SELECT * FROM users WHERE user_login = ? AND  user_email = ?";
     private static final String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
-    private static final String FIND_ALL_USERS = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users ";
-    private static final String FIND_USERS_BY_ROLE = "SELECT user_id, user_role_id, user_name, user_surname, user_email, user_login, user_password FROM users WHERE user_role_id = ?";
+    private static final String FIND_ALL_USERS = "SELECT * FROM users ";
     private final UserResultSetMapper mapper = new UserResultSetMapper();
     private Set<User> users;
 
@@ -87,7 +85,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
                 if (resultSet.next()) {
                     user = mapper.map(resultSet);
                 }
-                return user != null;
+                return user == null;
             }
         } catch (SQLException e) {
             LOGGER.warn(e);
@@ -95,7 +93,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         } finally {
             closeResultSet();
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -145,27 +143,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
             resultSet = statement.executeQuery(FIND_ALL_USERS);
             while (resultSet.next()) {
                 users.add(mapper.map(resultSet));
-            }
-            return users;
-        } catch (SQLException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        } finally {
-            closeResultSet();
-        }
-    }
-
-    @Override
-    public Set<User> findUsersByRole(Role role) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_USERS_BY_ROLE)) {
-            users = new HashSet<>();
-            if (preparedStatement != null) {
-                preparedStatement.setInt(1, role.getId());
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    users.add(mapper.map(resultSet));
-                }
             }
             return users;
         } catch (SQLException e) {

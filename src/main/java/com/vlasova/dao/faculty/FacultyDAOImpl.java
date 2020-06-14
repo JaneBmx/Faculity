@@ -10,7 +10,6 @@ import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,19 +29,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
                     "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id " +
                     "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
                     "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id;";
-    private static final String FIND_BY_PAID =
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id " +
-                    "WHERE f.free_accept_plan ? " +
-                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE f.free_accept_plan ?;";
-    private static final String FIND_BY_ID =
-            "SELECT faculty_id, faculty_name, free_accept_plan, paid_accept_plan FROM faculties WHERE faculty_id = ?";
-    private static final String FIND_BY_SUBJECT =
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id " +
-                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id WHERE sf.subject_id = ?;";
+    private static final String FIND_BY_ID = "SELECT * FROM faculties WHERE faculty_id = ?";
     private static final String FIND_BY_NAME = "SELECT * FROM faculties WHERE faculty_name = ?";
     private final FacultyResultSetMapper mapper = new FacultyResultSetMapper();
 
@@ -59,7 +46,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
         } catch (CreateObjectException | SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
-        }finally {
+        } finally {
             closeResultSet();
         }
     }
@@ -71,7 +58,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
      * @param faculty
      * @throws SQLException
      */
-    public void addFaculty(ProxyConnection connection, Faculty faculty) throws SQLException {
+    private void addFaculty(ProxyConnection connection, Faculty faculty) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(INSERT_FACULTY);
         statement.setString(1, faculty.getName());
         statement.setInt(2, faculty.getFreeAcceptPlan());
@@ -166,23 +153,6 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
     }
 
     @Override
-    public Set<Faculty> findFacultyByPaid(boolean isPaid) throws DAOException {
-        String paid = isPaid ? "> 0" : " = 0";
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_PAID)) {
-            statement.setString(1, paid);
-            statement.setString(2, paid);
-            resultSet = statement.executeQuery(FIND_BY_PAID);
-            return mapper.map(resultSet);
-        } catch (SQLException | CreateObjectException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        } finally {
-            closeResultSet();
-        }
-    }
-
-    @Override
     public Faculty findFacultyById(int id) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
@@ -192,22 +162,6 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
                 return mapper.mapOne(resultSet);
             }
             return null;
-        } catch (SQLException | CreateObjectException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        } finally {
-            closeResultSet();
-        }
-    }
-
-    @Override
-    public Set<Faculty> findFacultyBySubject(Subject subject) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_SUBJECT);) {
-            statement.setInt(1, subject.getId());
-            statement.setInt(2, subject.getId());
-            resultSet = statement.executeQuery();
-            return mapper.map(resultSet);
         } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);

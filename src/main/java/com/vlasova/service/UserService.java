@@ -3,7 +3,6 @@ package com.vlasova.service;
 import com.vlasova.dao.gradereport.GradeReportDAO;
 import com.vlasova.dao.gradereport.GradeReportDAOImpl;
 import com.vlasova.dao.user.UserDAO;
-import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.exception.dao.DAOException;
 import com.vlasova.exception.service.ServiceException;
@@ -31,7 +30,7 @@ public class UserService {
 
     public User registrateAndLogin(User user) throws ServiceException {
         try {
-            if (!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())) {
+            if (userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())) {
                 userDAO.add(user);
                 user = userDAO.findUserByLoginAndPassword(user.getLogin(), user.getPassword());
             }
@@ -43,7 +42,7 @@ public class UserService {
 
     public void registrate(User user) throws ServiceException {
         try{
-            if(!userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())){
+            if(userDAO.existsByEmailAndLogin(user.getEmail(), user.getLogin())){
                 userDAO.add(user);
             }
         }catch (DAOException e){
@@ -71,16 +70,6 @@ public class UserService {
     public User getUserById(int id) throws ServiceException {
         try {
             return userDAO.findUserById(id);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public List<User> getUsersByRole(Role role) throws ServiceException {
-        try {
-            List<User> list = new ArrayList<>(userDAO.findUsersByRole(role));
-            list.sort(new UserComparatorByID());
-            return list;
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

@@ -35,12 +35,7 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             "UNION SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
             "gr.subject_id, gr.mark FROM grade_reports g " +
             "RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id";
-    private static final String FIND_BY_FACULTY = "SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
-            "gr.subject_id, gr.mark FROM grade_reports g " +
-            "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? " +
-            "UNION SELECT   g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
-            "gr.subject_id, gr.mark FROM grade_reports g RIGHT JOIN  grade_report2subject gr ON g.user_id = gr.user_id WHERE faculty_id = ? ";
-    private static final String FIND_BY_USER =
+      private static final String FIND_BY_USER =
             "SELECT  g.user_id, g.faculty_id, g.is_accepted, g.is_free_paid, g.privilege_id, g.attestat_mark, g.average_mark, " +
                     "gr.subject_id, gr.mark FROM grade_reports g " +
                     "LEFT JOIN grade_report2subject gr ON g.user_id = gr.user_id WHERE g.user_id = ? " +
@@ -136,48 +131,6 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
     }
 
     @Override
-    public Set<GradeReport> findGradeReportsByFaculty(Faculty faculty) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_FACULTY)) {
-            preparedStatement.setInt(1, faculty.getId());
-            preparedStatement.setInt(2, faculty.getId());
-            resultSet = preparedStatement.executeQuery();
-            Set<GradeReport> gradeReports = null;
-            if (resultSet.next()) {
-                gradeReports = mapper.map(resultSet);
-            }
-            return gradeReports;
-        } catch (SQLException | CreateObjectException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        } finally {
-            closeResultSet();
-        }
-    }
-
-    @Override
-    public GradeReport findGradeReportByUser(User user) throws DAOException {
-        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_USER)) {
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setInt(2, user.getId());
-            resultSet = preparedStatement.executeQuery();
-            Set<GradeReport> gradeReports = null;
-            if (resultSet.next()) {
-                gradeReports = mapper.map(resultSet);
-            }
-            return gradeReports == null
-                    ? null
-                    : gradeReports.iterator().next();
-        } catch (SQLException | CreateObjectException e) {
-            LOGGER.warn(e);
-            throw new DAOException(e);
-        } finally {
-            closeResultSet();
-        }
-    }
-
-    @Override
     public GradeReport findGradeReportByUserId(int id) throws DAOException {
         try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_USER)) {
@@ -210,7 +163,7 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
                 statement.setInt(3, g.getId());
                 statement.addBatch();
             }
-            int[] updated = statement.executeBatch();
+            statement.executeBatch();
             connection.commit();
             connection.close();
             statement.close();
@@ -229,5 +182,4 @@ public class GradeReportDAOImpl extends AbstractDAO implements GradeReportDAO {
             throw new DAOException(e);
         }
     }
-
 }

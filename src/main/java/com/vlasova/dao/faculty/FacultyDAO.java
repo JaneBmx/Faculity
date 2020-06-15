@@ -9,4 +9,6 @@ public interface FacultyDAO extends DAO<Faculty> {
     Collection<Faculty> findAllFaculties() throws DAOException;
 
     Faculty findFacultyById(int id) throws DAOException;
+
+    boolean isExistByName(String name) throws DAOException;
 }

@@ -1,6 +1,7 @@
 package com.vlasova.dao.faculty;
 
 import com.vlasova.dao.AbstractDAO;
+import com.vlasova.dao.DAO;
 import com.vlasova.dao.mapper.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
@@ -10,6 +11,7 @@ import com.vlasova.pool.ConnectionPool;
 import com.vlasova.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -163,6 +165,20 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
             }
             return null;
         } catch (SQLException | CreateObjectException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    public boolean isExistByName(String name) throws DAOException {
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_NAME)) {
+            statement.setString(1, name);
+            resultSet = statement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
         } finally {

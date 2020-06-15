@@ -26,8 +26,9 @@ public class FacultyValidator {
                     return false;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private boolean isValidName(String facultyName) {

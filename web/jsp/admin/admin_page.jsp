@@ -54,6 +54,9 @@
                                        required></td>
                         </tr>
                         <tr>
+                            <td colspan="2">Choose 3 different subjects:</td>
+                        </tr>
+                        <tr>
                             <td>Subject 1:</td>
                             <td>
                                 <select name="sub_1_id">
@@ -84,7 +87,7 @@
                             </td>
                         </tr>
                     </table>
-                    <p style="color: white">${message_add_faculty}</p>
+                    <p style="color: red">${message_add_faculty}</p>
                     <button type="submit">Add faculty</button>
                 </form>
             </div>

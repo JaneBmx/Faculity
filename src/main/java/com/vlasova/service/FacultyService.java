@@ -64,4 +64,11 @@ public class FacultyService {
             throw new ServiceException(e);
         }
     }
+    public boolean isExistByName(String name) throws ServiceException {
+        try{
+            return facultyDAO.isExistByName(name);
+        }catch (DAOException e){
+            throw new ServiceException(e);
+        }
+    }
 }

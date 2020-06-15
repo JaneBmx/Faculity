@@ -303,5 +303,18 @@ function antiMagicButton() {
     alert("Grade report statuses has been reloaded! Update page to see the changes.");
 }
 
+//TESTING....
+
+function updateFaculties() {
+    fetch('http://localhost:8081/controller?command=GET_ALL_FACULTIES_AJAX&type=faculty')
+        .then((response) => {
+            //console.log((response.json()));
+            return response.json();
+        })
+        .then((data) => {
+            showFaculties(data);
+        });
+}
+
 
 

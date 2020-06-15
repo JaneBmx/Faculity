@@ -2,6 +2,7 @@ package com.vlasova.command.mapper;
 
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
+import com.vlasova.exception.InvalidRequestDataException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
@@ -15,12 +16,16 @@ public class FacultyMapper {
     private static final String SUB_2 = "sub_2_id";
     private static final String SUB_3 = "sub_3_id";
 
-    public Faculty map(HttpServletRequest request) {
+    public Faculty map(HttpServletRequest request) throws InvalidRequestDataException {
         Faculty faculty = new Faculty();
-        faculty.setName(request.getParameter(FAC_NAME));
-        faculty.setFreeAcceptPlan(Integer.parseInt(request.getParameter(FREE)));
-        faculty.setPaidAcceptPlan(Integer.parseInt(request.getParameter(PAID)));
-        faculty.setSubjects(mapSubjects(request));
+        try {
+            faculty.setName(request.getParameter(FAC_NAME));
+            faculty.setFreeAcceptPlan(Integer.parseInt(request.getParameter(FREE)));
+            faculty.setPaidAcceptPlan(Integer.parseInt(request.getParameter(PAID)));
+            faculty.setSubjects(mapSubjects(request));
+        }catch (NumberFormatException e){
+            throw new InvalidRequestDataException("Invalid dara in request.",e);
+        }
         return faculty;
     }
 

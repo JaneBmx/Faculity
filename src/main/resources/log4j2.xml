@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Configuration status = "info">
+<Configuration status="info">
     <Properties>
         <property name="pattern_console">%d{HH:mm:ss} %-5level- %msg%n</property>
         <property name="pattern_file">%d{yyy-MM-dd HH:mm:ss} %t %-5level %logger{36} - %msg%n</property>
@@ -16,9 +16,9 @@
     </Appenders>
 
     <Loggers>
-        <Root level = "info">
-            <Appender-ref ref =  "Console"/>
-            <Appender-ref ref ="logfile"/>
+        <Root level="info">
+            <Appender-ref ref="Console"/>
+            <Appender-ref ref="logfile"/>
         </Root>
     </Loggers>
 </Configuration>

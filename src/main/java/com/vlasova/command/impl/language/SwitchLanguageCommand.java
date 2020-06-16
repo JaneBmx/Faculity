@@ -9,15 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SwitchLanguageCommand implements Command {
+    private static final int    COOKIE_AGE   = 60 * 60 * 24; // 1 day
     private static final String LANG         = "lang";
     private static final String DEFAULT_LANG = "EN";
-    private static final int    COOKIE_AGE   = 60*60*24; // 1 day
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-        Object language = request.getSession().getAttribute(LANG);
+        /** Get current lang
+         */
+        Object lngO = request.getSession().getAttribute(LANG);
+        String lng = lngO == null ? DEFAULT_LANG : lngO.toString();
+        /** Switch to another
+         */
+        String lang;
 
-        String lang = language == null ? DEFAULT_LANG : language.toString();
+        switch (lng) {
+            case "RU":
+                lang = "EN";
+                break;
+            case "EN":
+                lang = "RU";
+                break;
+            default:
+                lang = "EN";
+                break;
+        }
 
         Cookie cookie = new Cookie(LANG, lang);
         cookie.setMaxAge(COOKIE_AGE);
@@ -25,7 +41,6 @@ public class SwitchLanguageCommand implements Command {
         response.addCookie(cookie);
 
         request.getSession().setAttribute(LANG, lang);
-
         return new Answer(PageAddress.HOME_PAGE, Answer.Type.REDIRECT);
     }
 }

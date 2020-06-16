@@ -27,7 +27,7 @@
             <button type="submit"><fmt:message bundle="${locale}" key="login.log"/></button>
         </div>
         <a href="${pageContext.request.contextPath}/jsp/signup.jsp"> <fmt:message bundle="${locale}"
-                                                                                  key="login.registr"/></a>
+                                                                                  key="login.registrate"/></a>
     </form>
 </div>
 

@@ -1,10 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<fmt:setLocale value="${lang}"/>
+<fmt:setBundle basename="text" var="locale"/>
+
 <html>
 <head>
-    <title>Administrate</title>
+    <title><fmt:message bundle="${locale}" key="admin.page"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
     <script src="${pageContext.request.contextPath}/js/admin.js"></script>
@@ -13,9 +16,9 @@
 <jsp:include page="../../include/header.jsp"/>
 
 <div class="admin_block">
-    <h2>Admin page</h2>
+    <h2><fmt:message bundle="${locale}" key="admin.admin"/></h2>
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Faculty_tab')">Faculties</button>
+        <button class="tablinks" onclick="openCity(event, 'Faculty_tab')"><fmt:message bundle="${locale}" key="admin.faculty"/></button>
         <button class="tablinks" onclick="openCity(event, 'Paris')">Users</button>
         <button class="tablinks" onclick="openCity(event, 'Tokyo')">Gradereports</button>
     </div>
@@ -23,8 +26,8 @@
     <!-- Faculties -->
     <div id="Faculty_tab" class="tabcontent"style="display: block">
         <div class="tab1">
-            <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')">All</button>
-            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')">Add new</button>
+            <button class="tablinks1" onclick="openCity1(event, 'Edit faculties')"><fmt:message bundle="${locale}" key="admin.faculty.all"/></button>
+            <button class="tablinks1" onclick="openCity1(event, 'Add faculties')"><fmt:message bundle="${locale}" key="admin.faculty.add"/></button>
         </div>
         <%-- All faculties  --%>
         <div id="Edit faculties" class="tabcontent1" style="display: block">
@@ -40,24 +43,24 @@
                 <form method="post" action="${pageContext.request.contextPath}/controller?command=add_faculty">
                     <table width="100%">
                         <tr>
-                            <td>Name of faculty:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.name"/></td>
                             <td><input type="text" placeholder="Name of faculty" name="faculty_name" required></td>
                         </tr>
                         <tr>
-                            <td>Free accept plan:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.freeaccept"/></td>
                             <td><input type="number" placeholder="Free accept plan" min="0" max="100" name="free"
                                        required></td>
                         </tr>
                         <tr>
-                            <td>Paid accept plan:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.paidaccept"/></td>
                             <td><input type="number" placeholder="Paid accept plan" min="0" max="100" name="paid"
                                        required></td>
                         </tr>
                         <tr>
-                            <td colspan="2">Choose 3 different subjects:</td>
+                            <td colspan="2"><fmt:message bundle="${locale}" key="admin.faculty.add.choose"/></td>
                         </tr>
                         <tr>
-                            <td>Subject 1:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.sub"/> 1:</td>
                             <td>
                                 <select name="sub_1_id">
                                     <c:forEach items="${subjects}" var="sub">
@@ -67,7 +70,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Subject 2:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.sub"/> 2:</td>
                             <td>
                                 <select name="sub_2_id">
                                     <c:forEach items="${subjects}" var="sub">
@@ -77,7 +80,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Subject 3:</td>
+                            <td><fmt:message bundle="${locale}" key="admin.faculty.add.sub"/> 3:</td>
                             <td>
                                 <select name="sub_3_id">
                                     <c:forEach items="${subjects}" var="sub">
@@ -88,7 +91,7 @@
                         </tr>
                     </table>
                     <p style="color: red">${message_add_faculty}</p>
-                    <button type="submit">Add faculty</button>
+                    <button type="submit"><fmt:message bundle="${locale}" key="admin.faculty.add"/></button>
                 </form>
             </div>
         </div>

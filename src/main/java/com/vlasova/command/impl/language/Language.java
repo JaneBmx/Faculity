@@ -3,7 +3,7 @@ package com.vlasova.command.impl.language;
 import java.util.Locale;
 
 public enum Language {
-    EN(Locale.US),
+    EN(new Locale("en", "EN")),
     RU(new Locale("ru", "RU"));
     private Locale locale;
 
@@ -15,7 +15,12 @@ public enum Language {
         return locale;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public static Language getLanguage(String language){
+        for(Language lang: Language.values()){
+            if (lang.equals(language)){
+                return lang;
+            }
+        }
+        return EN;
     }
 }

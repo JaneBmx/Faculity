@@ -9,6 +9,7 @@ import com.vlasova.command.impl.gradereport.EnrollGraderReportsCommand;
 import com.vlasova.command.impl.gradereport.EditGradeReportCommand;
 import com.vlasova.command.impl.ajax.GetAllUserAJAX;
 import com.vlasova.command.impl.gradereport.UnEnrollCommand;
+import com.vlasova.command.impl.language.SwitchLanguageCommand;
 import com.vlasova.command.impl.page.ProfilePageCommand;
 import com.vlasova.command.impl.user.*;
 
@@ -38,7 +39,10 @@ public enum CommandType {
 
     /*buttons*/
     ACCEPT                    (new EnrollGraderReportsCommand()),
-    NULLIFY                   (new UnEnrollCommand());
+    NULLIFY                   (new UnEnrollCommand()),
+
+    /*testing...*/
+    SWITCH_LANG               (new SwitchLanguageCommand());
 
     private final Command command;
 

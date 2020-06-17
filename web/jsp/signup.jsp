@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <fmt:setLocale value="${lang}"/>
 <fmt:setBundle basename="text" var="locale"/>
 
@@ -17,22 +16,25 @@
         <h2><fmt:message bundle="${locale}" key="reg.reg"/></h2>
         <div class="login-form">
             <input type="text" placeholder=
-            <fmt:message bundle="${locale}" key="reg.name"/> name="user_name" required
-                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$" title="2-40 symbols. First in uppercase">
+            <fmt:message bundle="${locale}" key="user.name"/> name="user_name" required
+                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                   title=<fmt:message bundle="${locale}" key="tip.name"/>>
             <input type="text" placeholder=
-            <fmt:message bundle="${locale}" key="reg.surname"/> name="user_surname" required
-                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$" title="2-40 symbols. First in uppercase">
+            <fmt:message bundle="${locale}" key="user.surname"/> name="user_surname" required
+                   pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
+                   title=<fmt:message bundle="${locale}" key="tip.surname"/>>
             <input type="email" placeholder=
-            <fmt:message bundle="${locale}" key="reg.email"/> name="user_email" required
+            <fmt:message bundle="${locale}" key="user.email"/> name="user_email" required
                    pattern="^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$"
-                   title="someletters@letters.letters">
+                   title=<fmt:message bundle="${locale}" key="tip.email"/>>
             <input type="text" placeholder=
-            <fmt:message bundle="${locale}" key="reg.login"/> name="user_login" required
+            <fmt:message bundle="${locale}" key="user.login"/> name="user_login" required
                    pattern="([a-zA-Z\\d]{4,40})$"
-                   title="4-40 latin symbols & digits">
+                   title=<fmt:message bundle="${locale}" key="tip.login"/>>
             <input type="password" placeholder=
-            <fmt:message bundle="${locale}" key="reg.password"/> name="user_password" required
-                   pattern="((?=.*\d)(?=.*[a-z]).{6,40})$" title="6-40 symbols">
+            <fmt:message bundle="${locale}" key="user.password"/> name="user_password" required
+                   pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
+                   title=<fmt:message bundle="${locale}" key="tip.password"/>>
             <input type="hidden" name="user_role" value="user">
             <p style="color: white">${message_signup}</p>
             <button type="submit"><fmt:message bundle="${locale}" key="reg.go"/></button>

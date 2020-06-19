@@ -1,10 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
+
 <!DOCTYPE>
 <html>
 <head>
     <title>Contacts</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simple.css">--%>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>

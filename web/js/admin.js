@@ -315,6 +315,3 @@ function updateFaculties() {
             showFaculties(data);
         });
 }
-
-
-

@@ -78,7 +78,7 @@
     <!--    </filter-mapping>-->
 
     <jsp-config>
-        <!-- TAG  -->
+        <!-- IMPORT TAG  -->
         <taglib>
             <taglib-uri>customtags</taglib-uri>
             <taglib-location>/tag/tag.tld</taglib-location>

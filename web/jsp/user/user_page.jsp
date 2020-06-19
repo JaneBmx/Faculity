@@ -1,15 +1,11 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-<%--<fmt:setLocale value="${lang}"/>--%>
-<%--<fmt:setBundle basename="text" var="locale"/>--%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title><fmt:message bundle="${locale}" key="profile"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user.css">
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
+    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
     <script src="${pageContext.request.contextPath}/js/user.js"></script>
     <meta charset="UTF-8">
 </head>

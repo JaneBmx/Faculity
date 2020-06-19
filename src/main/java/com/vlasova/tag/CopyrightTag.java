@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class CopyrightTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger(CopyrightTag.class);
-    private static final String COPYRIGHT_TAG = "J :)";
+    private static final String COPYRIGHT_TAG = "<a href=\"https://github.com/JaneBmx\">Jane Vlasova, 2020</a>";
 
     @Override
     public int doStartTag() {

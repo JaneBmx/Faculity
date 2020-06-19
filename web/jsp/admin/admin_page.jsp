@@ -1,18 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
 <%--<fmt:setLocale value="${lang}"/>--%>
 <%--<fmt:setBundle basename="text" var="locale"/>--%>
 
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title><fmt:message bundle="${locale}" key="admin.page"/></title>--%>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin.css">--%>
+<html>
+<head>
+    <title><fmt:message bundle="${locale}" key="admin.page"/></title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin.css">
 <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
-<%--    <script src="${pageContext.request.contextPath}/js/admin.js"></script>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<jsp:include page="../../include/header.jsp"/>--%>
+    <script src="${pageContext.request.contextPath}/js/admin.js"></script>
+</head>
+<body>
+
+<jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
 
 <div class="admin_block">
     <h2><fmt:message bundle="${locale}" key="admin.admin"/></h2>
@@ -219,7 +220,7 @@
     </div>
 </div>
 
-<%--<jsp:include page="../../include/footer.jsp"/>--%>
+<jsp:include page="${pageContext.request.contextPath}/include/footer.jsp"/>
 
-<%--</body>--%>
-<%--</html>--%>
+</body>
+</html>

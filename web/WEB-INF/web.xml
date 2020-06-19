@@ -77,16 +77,17 @@
     <!--&lt;!&ndash;        <dispatcher>FORWARD</dispatcher>&ndash;&gt;-->
     <!--    </filter-mapping>-->
 
-    <!--  TAG  -->
     <jsp-config>
+        <!-- TAG  -->
         <taglib>
             <taglib-uri>customtags</taglib-uri>
             <taglib-location>/tag/tag.tld</taglib-location>
         </taglib>
+        <!--  IMPORT META  -->
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
-            <include-prelude>/include/header.jsp</include-prelude>
-            <include-coda>/include/footer.jsp</include-coda>
+            <include-prelude>/include/meta.jsp</include-prelude>
+            <include-coda>/include/meta.jsp</include-coda>
         </jsp-property-group>
     </jsp-config>
 </web-app>

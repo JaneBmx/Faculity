@@ -1,20 +1,20 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
 <%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
 <%--<fmt:setLocale value="${lang}"/>--%>
 <%--<fmt:setBundle basename="text" var="locale"/>--%>
 
-<%--<!DOCTYPE html>--%>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title><fmt:message bundle="${locale}" key="profile"/></title>--%>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user.css">--%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title><fmt:message bundle="${locale}" key="profile"/></title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user.css">
 <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
-<%--    <script src="${pageContext.request.contextPath}/js/user.js"></script>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<jsp:include page="../../include/header.jsp"/>--%>
+    <script src="${pageContext.request.contextPath}/js/user.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body>
+<jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
 
 <div class="main">
     <div class="left">
@@ -247,6 +247,6 @@
     </div>
 </div>
 
-<jsp:include page="../../include/footer.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/include/footer.jsp"/>
 </body>
 </html>

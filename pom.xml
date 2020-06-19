@@ -9,9 +9,11 @@
 
     <properties>
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
-        <log4j.version>2.13.0</log4j.version>
-        <jstl.version>1.2</jstl.version>
+        <javax.servlet.jsp.version>2.3.3</javax.servlet.jsp.version>
         <servlet.version>4.0.1</servlet.version>
+        <log4j.version>2.13.0</log4j.version>
+        <junit.version>4.13</junit.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <dependencies>
@@ -38,6 +40,20 @@
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>${javax.servlet.jsp.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

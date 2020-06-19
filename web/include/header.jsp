@@ -1,23 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <fmt:setLocale value="${lang}"/>
 <fmt:setBundle basename="text" var="locale"/>
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-<%--    <title><fmt:message bundle="${locale}" key="admin.page"/></title>--%>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin.css">
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
-    <script src="${pageContext.request.contextPath}/js/admin.js"></script>
-<%--    <title><fmt:message bundle="${locale}" key="profile"/></title>--%>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user.css">
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
-    <script src="${pageContext.request.contextPath}/js/user.js"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/signup.css">
     <meta charset="UTF-8">
 </head>
 <body>

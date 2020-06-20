@@ -4,8 +4,8 @@ import com.vlasova.dao.faculty.FacultyDAOImpl;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Privilege;
-import com.vlasova.exception.dao.CreateObjectException;
-import com.vlasova.exception.dao.DAOException;
+import com.vlasova.dao.exception.dao.CreateObjectException;
+import com.vlasova.dao.exception.dao.DAOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,14 +1,13 @@
 package com.vlasova.dao.faculty;
 
 import com.vlasova.dao.AbstractDAO;
-import com.vlasova.dao.DAO;
 import com.vlasova.dao.mapper.FacultyResultSetMapper;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
-import com.vlasova.exception.dao.CreateObjectException;
-import com.vlasova.exception.dao.DAOException;
-import com.vlasova.pool.ConnectionPool;
-import com.vlasova.pool.ProxyConnection;
+import com.vlasova.dao.exception.dao.CreateObjectException;
+import com.vlasova.dao.exception.dao.DAOException;
+import com.vlasova.dao.pool.ConnectionPool;
+import com.vlasova.dao.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

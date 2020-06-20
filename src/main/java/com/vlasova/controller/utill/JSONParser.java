@@ -4,9 +4,9 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
-import com.vlasova.util.validation.FacultyValidator;
-import com.vlasova.util.validation.GradeReportValidator;
-import com.vlasova.util.validation.UserDataValidator;
+import com.vlasova.controller.utill.validator.FacultyValidator;
+import com.vlasova.controller.utill.validator.GradeReportValidator;
+import com.vlasova.controller.utill.validator.UserDataValidator;
 import java.util.List;
 
 public class JSONParser {

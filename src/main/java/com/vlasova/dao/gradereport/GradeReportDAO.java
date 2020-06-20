@@ -2,7 +2,7 @@ package com.vlasova.dao.gradereport;
 
 import com.vlasova.dao.DAO;
 import com.vlasova.entity.user.GradeReport;
-import com.vlasova.exception.dao.DAOException;
+import com.vlasova.dao.exception.dao.DAOException;
 import java.util.Collection;
 import java.util.List;
 

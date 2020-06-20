@@ -2,7 +2,7 @@ Faculity.iml
 /.idea/
 /target/
 /src/main/java/com/vlasova/redundant/
-/src/main/java/com/vlasova/pool/Main.java
-src/main/java/com/vlasova/pool/Main.java
+/src/main/java/com/vlasova/dao/pool/Main.java
+src/main/java/com/vlasova/dao/pool/Main.java
 /logs/
 /out/

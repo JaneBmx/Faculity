@@ -1,11 +1,9 @@
 package com.vlasova.service;
 
 import com.vlasova.dao.gradereport.GradeReportDAO;
-import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.user.GradeReport;
-import com.vlasova.entity.user.User;
-import com.vlasova.exception.dao.DAOException;
-import com.vlasova.exception.service.ServiceException;
+import com.vlasova.dao.exception.dao.DAOException;
+import com.vlasova.service.exception.ServiceException;
 import com.vlasova.dao.gradereport.GradeReportDAOImpl;
 import com.vlasova.service.comparator.GradeReportComparatorByID;
 

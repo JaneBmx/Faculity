@@ -3,8 +3,8 @@ package com.vlasova.service;
 import com.vlasova.dao.faculty.FacultyDAO;
 import com.vlasova.dao.faculty.FacultyDAOImpl;
 import com.vlasova.entity.faculity.Faculty;
-import com.vlasova.exception.dao.DAOException;
-import com.vlasova.exception.service.ServiceException;
+import com.vlasova.dao.exception.dao.DAOException;
+import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.comparator.FacultyComparatorById;
 import java.util.*;
 

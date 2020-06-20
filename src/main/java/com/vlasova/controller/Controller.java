@@ -1,17 +1,17 @@
 package com.vlasova.controller;
 
-import com.vlasova.command.Answer;
-import com.vlasova.command.Command;
+import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.controller.utill.JSONParser;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Privilege;
 import com.vlasova.entity.user.User;
-import com.vlasova.exception.connection.ClosePoolException;
-import com.vlasova.exception.service.ServiceException;
-import com.vlasova.command.CommandType;
-import com.vlasova.pool.ConnectionPool;
+import com.vlasova.dao.exception.connection.ClosePoolException;
+import com.vlasova.service.exception.ServiceException;
+import com.vlasova.controller.command.CommandType;
+import com.vlasova.dao.pool.ConnectionPool;
 import com.vlasova.service.FacultyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import static com.vlasova.command.RequestParams.*;
+import static com.vlasova.controller.command.RequestParams.*;
 
 public class Controller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);

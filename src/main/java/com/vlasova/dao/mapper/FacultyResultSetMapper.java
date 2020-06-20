@@ -2,7 +2,7 @@ package com.vlasova.dao.mapper;
 
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
-import com.vlasova.exception.dao.CreateObjectException;
+import com.vlasova.dao.exception.dao.CreateObjectException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

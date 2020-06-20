@@ -5,12 +5,10 @@ import com.vlasova.entity.user.User;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.controller.command.web.PageAddress;
 import com.vlasova.service.UserService;
-
-import static com.vlasova.controller.command.RequestParams.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import static com.vlasova.controller.command.RequestParams.*;
 
 public class GetAllUsersCommand implements UserCommand {
     private final UserService userService = UserService.getInstance();

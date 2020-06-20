@@ -10,10 +10,9 @@ import com.vlasova.service.UserService;
 import com.vlasova.controller.utill.validator.UserDataValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import static com.vlasova.controller.command.RequestParams.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static com.vlasova.controller.command.RequestParams.*;
 
 public class AddUserCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(AddUserCommand.class);

@@ -9,8 +9,4 @@ public class Listener implements HttpSessionListener {
         sessionEvent.getSession().setAttribute("role", "guest");
         sessionEvent.getSession().setAttribute("lang", "EN");
     }
-
-    @Override
-    public void sessionDestroyed(HttpSessionEvent se) {
-    }
 }

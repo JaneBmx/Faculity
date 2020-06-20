@@ -5,10 +5,8 @@ import com.vlasova.controller.command.web.PageAddress;
 import com.vlasova.entity.user.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import static com.vlasova.controller.command.RequestParams.*;
 
 public class LogOutCommand implements UserCommand {
@@ -16,7 +14,7 @@ public class LogOutCommand implements UserCommand {
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-        String name = ((User) request.getSession().getAttribute("user")).getLogin();
+        String name = ((User) request.getSession().getAttribute(USER)).getLogin();
         request.getSession().invalidate();
         request.getSession().setAttribute(ROLE, GUEST);
         LOGGER.info("Logout: " + name);

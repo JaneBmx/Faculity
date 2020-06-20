@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SwitchLanguageCommand implements Command {
-    private static final int COOKIE_AGE = 60 * 60 * 24; // 1 day
+    private static final int COOKIE_AGE = 60 * 60 * 24;
     private static final String LANG = "lang";
     private static final String DEFAULT_LANG = "EN";
 

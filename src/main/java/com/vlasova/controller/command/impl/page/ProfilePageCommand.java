@@ -5,10 +5,8 @@ import com.vlasova.controller.command.Command;
 import com.vlasova.controller.command.web.PageAddress;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import static com.vlasova.controller.command.RequestParams.*;
 
 public class ProfilePageCommand implements Command {

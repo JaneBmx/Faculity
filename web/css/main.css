@@ -1,0 +1,53 @@
+.main_block {
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 15px;
+    color:white;
+}
+
+.main_block h2 {
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #fff;
+    padding: 10px;
+}
+
+.in{
+    margin: 0;
+}
+
+.inner_table {
+    overflow: auto;
+    height: 485px;
+}
+
+/*hmm*/
+img.displayed{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.image1{
+    width: 45%;
+    float: left;
+}
+.text1{
+    width: 45%;
+    float: right;
+}
+
+.image2{
+    width: 45%;
+    float: right;
+}
+.text2{
+    width: 45%;
+    float: left;
+}
+
+table{
+    padding: 10px;
+    color: white;
+}

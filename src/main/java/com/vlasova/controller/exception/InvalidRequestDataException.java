@@ -1,6 +1,6 @@
 package com.vlasova.controller.exception;
 
-public class InvalidRequestDataException extends Exception{
+public class InvalidRequestDataException extends Exception {
     public InvalidRequestDataException() {
     }
 

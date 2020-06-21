@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" %>
 
 <html>
 <head>
@@ -32,9 +32,8 @@
 
         <%-- All faculties  --%>
         <div id="Edit faculties" class="tabcontent1" style="display: block">
-            <div class="inner_edit">
-                <div id="experemental">
-                </div>
+            <div id="experemental">
+                <%-- JSON  with all correct faculties --%>
             </div>
         </div>
 
@@ -107,6 +106,12 @@
                 <fmt:message bundle="${locale}" key="add"/></button>
         </div>
 
+        <div id="All_users" class="tabcontent2" style="display: block">
+            <div class="inner_edit" id="Search_users">
+                <%--Here js will load list of users--%>
+            </div>
+        </div>
+
         <div id="Edit_user" class="tabcontent2">
             <form method="post" action="${pageContext.request.contextPath}/controller?command=Add_user">
                 <table>
@@ -156,11 +161,7 @@
                 </p>
             </form>
         </div>
-        <div id="All_users" class="tabcontent2" style="display: block">
-            <div class="inner_edit" id="Search_users">
-                <%--Here js will load list of users--%>
-            </div>
-        </div>
+
     </div>
 
     <!-- Gradereports -->

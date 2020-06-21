@@ -1,21 +1,21 @@
 package com.vlasova.entity.faculity;
 
 public enum Subject {
-    MATH("Mathematics", 1),
-    PHYSICS("Physics", 2),
-    GEOGRAPHY("Geography", 3),
-    GEOLOGY("Geology", 4),
-    RUSSIAN("Russian", 5),
-    ENGLISH("English", 6),
-    DEUTSCH("Deutch", 7),
-    SPANISH("Spanish", 8),
-    FRENCH("French", 9),
-    INFORMATICS("Informatics", 10),
-    HISTORY("History", 11),
-    ART("Art", 12),
-    CHEMISTRY("Chemistry", 13),
-    BIOLOGY("Biology", 14),
-    SOCIAL("Social", 15);
+    MATH("Математика", 1),
+    PHYSICS("Физика", 2),
+    GEOGRAPHY("География", 3),
+    GEOLOGY("Геология", 4),
+    RUSSIAN("Русский язык", 5),
+    ENGLISH("Английский язык", 6),
+    DEUTSCH("Немецкий язык", 7),
+    SPANISH("Испанский язык", 8),
+    FRENCH("Французский язык", 9),
+    INFORMATICS("Информатика", 10),
+    HISTORY("История", 11),
+    ART("Искусство", 12),
+    CHEMISTRY("Химия", 13),
+    BIOLOGY("Биология", 14),
+    SOCIAL("Социология", 15);
 
     private String name;
     private int id;

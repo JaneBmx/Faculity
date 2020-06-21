@@ -1,7 +1,8 @@
 package com.vlasova.controller.command.impl.user;
 
 import com.vlasova.controller.command.Answer;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.Command;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.entity.user.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class LogOutCommand implements UserCommand {
+public class LogOutCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(LogOutCommand.class);
 
     @Override

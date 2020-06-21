@@ -1,4 +1,4 @@
-package com.vlasova.controller.command.web;
+package com.vlasova.controller.command;
 
 public enum PageAddress {
     LOG_IN      ("/jsp/signin.jsp"),

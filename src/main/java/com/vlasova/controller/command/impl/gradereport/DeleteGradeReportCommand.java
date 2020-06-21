@@ -1,21 +1,23 @@
 package com.vlasova.controller.command.impl.gradereport;
 
 import com.vlasova.controller.command.Answer;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.Command;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.GradeReportService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static com.vlasova.controller.command.RequestParams.*;
 
-public class DeleteGradeReportCommand implements GradeReportCommand {
+public class DeleteGradeReportCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(DeleteGradeReportCommand.class);
     private final GradeReportService gradeReportService = GradeReportService.getInstance();
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-        String gradeId = request.getParameter("grade_report_id");
+        String gradeId = request.getParameter(GRADE_REPORT_ID);
         if (gradeId != null) {
             int gradeID = Integer.parseInt(gradeId);
             try {

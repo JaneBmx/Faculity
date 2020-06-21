@@ -2,7 +2,7 @@ package com.vlasova.controller.command.impl.language;
 
 import com.vlasova.controller.command.Answer;
 import com.vlasova.controller.command.Command;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +31,6 @@ public class SwitchLanguageCommand implements Command {
                 lang = "EN";
                 break;
         }
-
         Cookie cookie = new Cookie(LANG, lang);
         cookie.setMaxAge(COOKIE_AGE);
         cookie.setPath(request.getContextPath());

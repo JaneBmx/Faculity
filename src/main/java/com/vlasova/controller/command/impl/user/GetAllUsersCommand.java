@@ -1,16 +1,17 @@
 package com.vlasova.controller.command.impl.user;
 
 import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.entity.user.User;
 import com.vlasova.service.exception.ServiceException;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class GetAllUsersCommand implements UserCommand {
+public class GetAllUsersCommand implements Command {
     private final UserService userService = UserService.getInstance();
 
     @Override

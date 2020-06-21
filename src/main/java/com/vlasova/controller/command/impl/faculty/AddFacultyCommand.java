@@ -1,8 +1,9 @@
 package com.vlasova.controller.command.impl.faculty;
 
 import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.controller.command.mapper.FacultyMapper;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.controller.exception.InvalidRequestDataException;
 import com.vlasova.service.exception.ServiceException;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class AddFacultyCommand implements FacultyCommand {
+public class AddFacultyCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(AddFacultyCommand.class);
     private final FacultyValidator validator = new FacultyValidator();
     private final FacultyMapper mapper = new FacultyMapper();

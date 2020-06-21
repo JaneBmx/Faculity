@@ -50,7 +50,7 @@ public abstract class RequestParams {
     public static final String MSG              = "message";
     public static final String MSG_ADD_FACULTY  = "message_add_faculty";
     public static final String MSG_SIGNUP       = "message_signup";
-    public static final String MSG_EDITINFO     = "message_edit_info";
+    public static final String MSG_EDIT_INFO = "message_edit_info";
     public static final String MSG_SERV_ERR     = "Some problems with server. Tra again later.";
     public static final String MSG_UPD_DATA_SCC = "Data has been updated";
     public static final String MSG_WRONG_LOG_IN = "Wrong login or password. Try again";

@@ -1,7 +1,5 @@
 package com.vlasova.controller.command;
 
-import com.vlasova.controller.command.web.PageAddress;
-
 public class Answer {
     private PageAddress pageAddress;
     private Type type;

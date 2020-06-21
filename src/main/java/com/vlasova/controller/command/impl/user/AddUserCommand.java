@@ -3,7 +3,7 @@ package com.vlasova.controller.command.impl.user;
 import com.vlasova.controller.command.Answer;
 import com.vlasova.controller.command.Command;
 import com.vlasova.controller.command.mapper.UserRequestMapper;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.entity.user.User;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.UserService;

@@ -2,7 +2,7 @@ package com.vlasova.controller.command.impl.page;
 
 import com.vlasova.controller.command.Answer;
 import com.vlasova.controller.command.Command;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ public class ProfilePageCommand implements Command {
 
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
-        String role = (String) request.getSession().getAttribute("role");
+        String role = (String) request.getSession().getAttribute(ROLE);
         if (role != null && !role.equalsIgnoreCase(GUEST)) {
             LOGGER.info("Role has been found. Go to user page.");
             return request.getSession().getAttribute(ROLE).toString().equalsIgnoreCase(ADMIN)

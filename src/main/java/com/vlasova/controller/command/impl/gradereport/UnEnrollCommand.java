@@ -2,7 +2,7 @@ package com.vlasova.controller.command.impl.gradereport;
 
 import com.vlasova.controller.command.Answer;
 import com.vlasova.controller.command.Command;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.accept.Accepter;
 import org.apache.logging.log4j.LogManager;

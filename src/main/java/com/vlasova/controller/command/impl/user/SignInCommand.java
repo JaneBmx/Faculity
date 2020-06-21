@@ -1,11 +1,12 @@
 package com.vlasova.controller.command.impl.user;
 
 import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.Role;
 import com.vlasova.entity.user.User;
 import com.vlasova.service.exception.ServiceException;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.service.GradeReportService;
 import com.vlasova.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class SignInCommand implements UserCommand {
+public class SignInCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(SignInCommand.class);
     private final UserService userService = UserService.getInstance();
     private final GradeReportService gradeReportService = GradeReportService.getInstance();

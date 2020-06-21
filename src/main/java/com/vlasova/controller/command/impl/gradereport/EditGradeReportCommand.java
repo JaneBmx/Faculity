@@ -1,8 +1,9 @@
 package com.vlasova.controller.command.impl.gradereport;
 
 import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.controller.command.mapper.GradeReportMapper;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.controller.exception.InvalidRequestDataException;
 import com.vlasova.service.exception.ServiceException;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class EditGradeReportCommand implements GradeReportCommand {
+public class EditGradeReportCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(EditGradeReportCommand.class);
     private final GradeReportMapper gradeReportMapper = new GradeReportMapper();
     private final GradeReportService gradeReportService = GradeReportService.getInstance();

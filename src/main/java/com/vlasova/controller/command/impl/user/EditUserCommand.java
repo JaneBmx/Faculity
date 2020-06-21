@@ -1,9 +1,10 @@
 package com.vlasova.controller.command.impl.user;
 
 import com.vlasova.controller.command.Answer;
+import com.vlasova.controller.command.Command;
 import com.vlasova.entity.user.User;
 import com.vlasova.service.exception.ServiceException;
-import com.vlasova.controller.command.web.PageAddress;
+import com.vlasova.controller.command.PageAddress;
 import com.vlasova.service.UserService;
 import com.vlasova.controller.utill.validator.UserDataValidator;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.vlasova.controller.command.RequestParams.*;
 
-public class EditUserCommand implements UserCommand {
+public class EditUserCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(EditUserCommand.class);
     private final UserDataValidator validator = new UserDataValidator();
     private final UserService userService = UserService.getInstance();
@@ -52,11 +53,11 @@ public class EditUserCommand implements UserCommand {
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.REDIRECT);
             } catch (ServiceException e) {
                 LOGGER.warn(e);
-                request.setAttribute(MSG_EDITINFO, MSG_SERV_ERR);
+                request.setAttribute(MSG_EDIT_INFO, MSG_SERV_ERR);
                 return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
             }
         }
-        request.setAttribute(MSG_EDITINFO, message);
+        request.setAttribute(MSG_EDIT_INFO, message);
         LOGGER.info("User with id " + user.getId() + " did'n edit data");
         return new Answer(PageAddress.USER_PAGE, Answer.Type.FORWARD);
     }

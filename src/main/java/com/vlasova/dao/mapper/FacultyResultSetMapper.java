@@ -5,7 +5,6 @@ import com.vlasova.entity.faculity.Subject;
 import com.vlasova.dao.exception.dao.CreateObjectException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,11 +14,16 @@ import java.util.Set;
 
 public class FacultyResultSetMapper {
     private static final Logger LOGGER = LogManager.getLogger(FacultyResultSetMapper.class);
-    private static final String FACULTY_ID = "faculty_id";
-    private static final String FACULTY_NAME = "faculty_name";
+    private static final String FACULTY_ID       = "faculty_id";
+    private static final String FACULTY_NAME     = "faculty_name";
     private static final String FREE_ACCEPT_PLAN = "free_accept_plan";
     private static final String PAID_ACCEPT_PLAN = "paid_accept_plan";
-    private static final String SUBJECT_ID = "subject_id";
+    private static final String SUBJECT_ID       = "subject_id";
+
+    private static final String FAC_COUNT        = "fac_count";
+    private static final String COMMON_FREE_PLAN = "free_plan";
+    private static final String COMMON_PLAN      = "all_plan";
+    private static final String ENROLS_COUNT     = "enroles";
 
     public Set<Faculty> map(ResultSet resultSet) throws CreateObjectException {
         Map<Integer, Faculty> facultyMap = new HashMap<>();
@@ -59,5 +63,19 @@ public class FacultyResultSetMapper {
             throw new CreateObjectException(e);
         }
         return faculty;
+    }
+
+    public Map<String, Integer> mapInfo(ResultSet resultSet) throws CreateObjectException {
+        Map <String, Integer> info = new HashMap<>();
+        try{
+            info.put("facultiesCount", resultSet.getInt(FAC_COUNT));
+            info.put("allFreePlan", resultSet.getInt(COMMON_FREE_PLAN));
+            info.put("allPlan", resultSet.getInt(COMMON_PLAN));
+            info.put("enrolCount", resultSet.getInt(ENROLS_COUNT));
+        }catch (SQLException e){
+            LOGGER.warn(e);
+            throw new CreateObjectException(e);
+        }
+        return info;
     }
 }

@@ -71,4 +71,12 @@ public class FacultyService {
             throw new ServiceException(e);
         }
     }
+
+    public Map<String, Integer> getCommonInfo() throws ServiceException{
+        try{
+            return facultyDAO.getCommonStatistics();
+        } catch (DAOException e){
+            throw new ServiceException(e);
+        }
+    }
 }

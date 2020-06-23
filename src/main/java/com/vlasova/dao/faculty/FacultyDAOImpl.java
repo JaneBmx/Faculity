@@ -6,33 +6,36 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.dao.exception.dao.CreateObjectException;
 import com.vlasova.dao.exception.dao.DAOException;
-import com.vlasova.dao.pool.ConnectionPool;
-import com.vlasova.dao.pool.ProxyConnection;
+import com.vlasova.pool.ConnectionPool;
+import com.vlasova.pool.ProxyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.Set;
 
 public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
     private static final Logger LOGGER = LogManager.getLogger(FacultyDAOImpl.class);
-    private static final String INSERT_FACULTY = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) " +
-            "VALUES(?,?,?)";
-    private static final String INSERT_SUBJECTS = "INSERT INTO faculty2subject (faculty_id, subject_id) VALUES (?,?)";
-    private static final String DELETE = "DELETE FROM faculties WHERE faculty_id = ?";
-    private static final String DELETE_MARKS = "DELETE FROM faculty2subject WHERE faculty_id = ?";
-    private static final String UPDATE = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? " +
-            "WHERE faculty_id = ?";
-    private static final String FIND_ALL_FACULTIES =
-            "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id " +
-                    "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
-                    "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id;";
-    private static final String FIND_BY_ID = "SELECT * FROM faculties WHERE faculty_id = ?";
-    private static final String FIND_BY_NAME = "SELECT * FROM faculties WHERE faculty_name = ?";
     private final FacultyResultSetMapper mapper = new FacultyResultSetMapper();
+
+    private static final String INSERT_FACULTY     = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) " +
+            "VALUES(?,?,?)";
+    private static final String INSERT_SUBJECTS    = "INSERT INTO faculty2subject (faculty_id, subject_id) VALUES (?,?)";
+    private static final String DELETE             = "DELETE FROM faculties WHERE faculty_id = ?";
+    private static final String DELETE_MARKS       = "DELETE FROM faculty2subject WHERE faculty_id = ?";
+    private static final String UPDATE             = "UPDATE faculty SET faculty_name = ?, free_accept_plan = ?, paid_accept_plan = ? " +
+                                                     "WHERE faculty_id = ?";
+    private static final String FIND_ALL_FACULTIES = "SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                                                     "FROM faculties f LEFT JOIN  faculty2subject sf ON f.faculty_id = sf.faculty_id " +
+                                                     "UNION SELECT f.faculty_id, f.faculty_name, f.free_accept_plan, f.paid_accept_plan, sf.subject_id " +
+                                                     "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id;";
+    private static final String FIND_BY_ID         = "SELECT * FROM faculties WHERE faculty_id = ?";
+    private static final String FIND_BY_NAME       = "SELECT * FROM faculties WHERE faculty_name = ?";
+    private static final String COMMON_STAT        = "SELECT COUNT(*) AS fac_count, SUM(free_accept_plan) AS free_plan, (SUM(paid_accept_plan) +SUM(free_accept_plan)) AS all_plan, " +
+                                                     "(SELECT COUNT(*) FROM grade_reports) AS enroles FROM faculties";
 
     @Override
     public void add(Faculty faculty) throws DAOException {
@@ -178,6 +181,22 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
             resultSet = statement.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
+            LOGGER.warn(e);
+            throw new DAOException(e);
+        } finally {
+            closeResultSet();
+        }
+    }
+
+    public Map<String, Integer> getCommonStatistics() throws DAOException{
+        try (ProxyConnection connection = ConnectionPool.INSTANCE.getConnection();
+             Statement statement = connection.createStatement()) {
+            resultSet = statement.executeQuery(COMMON_STAT);
+            if (resultSet.next()) {
+                return mapper.mapInfo(resultSet);
+            }
+            return null;
+        } catch (SQLException | CreateObjectException e) {
             LOGGER.warn(e);
             throw new DAOException(e);
         } finally {

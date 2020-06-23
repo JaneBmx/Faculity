@@ -1,4 +1,4 @@
-package com.vlasova.dao.pool;
+package com.vlasova.pool;
 
 import java.sql.*;
 import java.util.Map;

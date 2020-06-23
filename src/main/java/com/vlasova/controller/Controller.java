@@ -11,7 +11,7 @@ import com.vlasova.entity.user.User;
 import com.vlasova.dao.exception.connection.ClosePoolException;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.controller.command.CommandType;
-import com.vlasova.dao.pool.ConnectionPool;
+import com.vlasova.pool.ConnectionPool;
 import com.vlasova.service.FacultyService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,31 +65,36 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Command command = CommandType.valueOf(req.getParameter(COMMAND).toUpperCase()).getCommand();
         Answer answer = command.execute(req, resp);
-        if (answer.getType() == Answer.Type.REDIRECT) {
-            resp.sendRedirect(answer.getPageAddress().getPath());
-            return;
-        }
 
-        if (answer.getType() == Answer.Type.JSON) {
-            resp.setContentType("application/json");
-            String json = "";
-            JSONParser parser = new JSONParser();
-            switch (req.getParameter("type")) {
-                case USERS:
-                    json = parser.parseUserListToJSON((List<User>) (req.getAttribute("user_list")));
-                    break;
-                case FACULTY:
-                    json = parser.parseFacultyListToJSON((List<Faculty>) req.getAttribute("faculty_list"));
-                    break;
-                case GRADE_REPORT:
-                    json = parser.parseGradeReportListToJSON((List<GradeReport>) req.getAttribute("grade_report_list"));
-                    break;
-            }
-            PrintWriter p = resp.getWriter();
-            p.write(json);
-            p.flush();
-            return;
+        switch (answer.getType()){
+            case REDIRECT:
+                resp.sendRedirect(answer.getPageAddress().getPath());
+                return;
+            case JSON:
+                processJSON(req, resp);
+                return;
+            default:
+                req.getRequestDispatcher(answer.getPageAddress().getPath()).forward(req, resp);
         }
-        req.getRequestDispatcher(answer.getPageAddress().getPath()).forward(req, resp);
+    }
+
+    public void processJSON(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json");
+        String json = "";
+        JSONParser parser = new JSONParser();
+        switch (req.getParameter("type")) {
+            case USERS:
+                json = parser.parseUserListToJSON((List<User>) (req.getAttribute("user_list")));
+                break;
+            case FACULTY:
+                json = parser.parseFacultyListToJSON((List<Faculty>) req.getAttribute("faculty_list"));
+                break;
+            case GRADE_REPORT:
+                json = parser.parseGradeReportListToJSON((List<GradeReport>) req.getAttribute("grade_report_list"));
+                break;
+        }
+        PrintWriter p = resp.getWriter();
+        p.write(json);
+        p.flush();
     }
 }

@@ -102,37 +102,29 @@ let dataGlobal;
 
 function showUsers(data) {
     dataGlobal = data;
-    let content = "<table width=\"100%\">";
+    let content = "<table width='100%'>";
     console.log(data);
-    content = content + "<tr>";
-    content = content + "<td>ID</td>";
-    content = content + "<td>Role</td>";
-    content = content + "<td>Name</td>";
-    content = content + "<td>Surname</td>";
-    content = content + "<td>Email</td>";
-    content = content + "<td>Login</td>";
-    content = content + "<td></td></tr>";
     for (let i = 0; i < data.length; i++) {
         content = content + "<tr>";
-        content = content + "<td>";
+        content = content + "<td style='width: 3%'>";
         content = content + data[i].id;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 10%'>";
         content = content + data[i].role;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 17%'>";
         content = content + data[i].name;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 17%'>";
         content = content + data[i].surname;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 33%'>";
         content = content + data[i].email;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 10%'>";
         content = content + data[i].login;
         content = content + "</td>";
-        content = content + "<td>";
+        content = content + "<td style='width: 10%'>";
         content = content + "<a href='javascript:deleteUser(" + i + ")'>Delete</a>";
         content = content + "</td>";
         content = content + "</tr>";
@@ -163,37 +155,31 @@ let dataGlobalF;
 function showFaculties(data) {
     dataGlobalF = data;
     console.log(data);
-    let contentf = "<table width=\"100%\">";
-    contentf = contentf + "<tr><th>ID</th>" +
-        "<th>Name</th> " +
-        "<th colspan=\"3\">Subjects</th>" +
-        "<th>Paid accept plan</th>" +
-        "<th>Free accept plan</th>" +
-        "<th>Delete</th></tr>";
+    let contentf = "<table width='100%'>";
     for (let i = 0; i < data.length; i++) {
         contentf = contentf + "<tr>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 2%'>";
         contentf = contentf + data[i].id;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 29%'>";
         contentf = contentf + data[i].name;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width:13%'>";
         contentf = contentf + data[i].sub1;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 13%'>";
         contentf = contentf + data[i].sub2;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 13%'>";
         contentf = contentf + data[i].sub3;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='10%'>";
         contentf = contentf + data[i].free;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 10%;'>";
         contentf = contentf + data[i].paid;
         contentf = contentf + "</td>";
-        contentf = contentf + "<td>";
+        contentf = contentf + "<td style='width: 10%'>";
         contentf = contentf + "<a href='javascript:deleteFaculty(" + i + ")'>Delete</a>";
         contentf = contentf + "</td>";
         contentf = contentf + "</tr>";
@@ -225,40 +211,30 @@ function showGrades(data) {
     let contentg = "<table width=\"100%\">";
     dataGlobalG = data;
     console.log(data);
-    contentg = contentg + "<tr>";
-    contentg = contentg + "<td>User</td>";
-    contentg = contentg + "<td>Faculty</td>";
-    contentg = contentg + "<td>Accept status</td>";
-    contentg = contentg + "<td>Free paid status</td>";
-    contentg = contentg + "<td>Privilege</td>";
-    contentg = contentg + "<td>Middle school mark</td>";
-    contentg = contentg + "<td>Average mark(of certificates)</td>";
-    contentg = contentg + "<td></td>";
-    contentg = contentg + "</tr>";
     for (let i = 0; i < data.length; i++) {
         contentg = contentg + "<tr>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 2%'>";
         contentg = contentg + data[i].id;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 28%'>";
         contentg = contentg + data[i].faculty;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 9%'>";
         contentg = contentg + data[i].isAccept;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 9%'>";
         contentg = contentg + data[i].isFree;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 18%'>";
         contentg = contentg + data[i].privilege;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 12%'>";
         contentg = contentg + data[i].attestat;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 12%'>";
         contentg = contentg + data[i].average;
         contentg = contentg + "</td>";
-        contentg = contentg + "<td>";
+        contentg = contentg + "<td style='width: 10%'>";
         contentg = contentg + "<a href='javascript:deleteGradeReport(" + i + ")'>Delete</a>";
         contentg = contentg + "</td>";
         contentg = contentg + "</tr>";
@@ -314,4 +290,13 @@ function updateFaculties() {
         .then((data) => {
             showFaculties(data);
         });
+}
+
+function  getTr(name, subs, paid, free, del) {
+    return "<tr><td>ID</td>" +
+        "<td>name</td>" +
+        "<td colspan='3'>subs</td>" +
+        "<td>paid</td>" +
+        "<td>free</td>" +
+        "<td>del</td></tr>";
 }

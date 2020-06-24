@@ -32,8 +32,20 @@
 
         <%-- All faculties  --%>
         <div id="Edit faculties" class="tabcontent1" style="display: block">
-            <div id="experemental">
-                <%-- JSON  with all correct faculties --%>
+            <table width="100%">
+                <tr>
+                    <td style="width: 2%">ID</td>
+                    <td style="width: 29%"><fmt:message bundle="${locale}" key="faculty.name"/></td>
+                    <td colspan="3" style="width: 39%"><fmt:message bundle="${locale}" key="faculty.subs"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="faculty.plan.free"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="faculty.plan.paid"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="delete"/></td>
+                </tr>
+            </table>
+            <div class="inner_edit">
+                <div id="experemental">
+                    <%-- JSON  with all correct faculties --%>
+                </div>
             </div>
         </div>
 
@@ -107,8 +119,20 @@
         </div>
 
         <div id="All_users" class="tabcontent2" style="display: block">
-            <div class="inner_edit" id="Search_users">
+            <table width="100%">
+                <tr>
+                    <td style="width: 3%;">ID</td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="user.role"/></td>
+                    <td style="width: 17%"><fmt:message bundle="${locale}" key="user.name"/></td>
+                    <td style="width: 17%"><fmt:message bundle="${locale}" key="user.surname"/></td>
+                    <td style="width: 33%"><fmt:message bundle="${locale}" key="user.email"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="user.login"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="delete"/></td>
+                </tr>
+            </table>
+            <div class="inner_edit">
                 <%--Here js will load list of users--%>
+                <div id="Search_users"></div>
             </div>
         </div>
 
@@ -174,8 +198,22 @@
         </div>
 
         <div id="allGr" class="tabcontent3" style="display: block">
-            <div id="all_grades" class="inner_edit">
-                <%--Here js will load list of grade reports--%>
+            <table width="100%">
+                <tr>
+                    <td style="width: 2%">ID</td>
+                    <td style="width: 28%"><fmt:message bundle="${locale}" key="faculty"/></td>
+                    <td style="width: 9%"><fmt:message bundle="${locale}" key="accept.status"/></td>
+                    <td style="width: 9%"><fmt:message bundle="${locale}" key="paid.status.free"/></td>
+                    <td style="width: 18%"><fmt:message bundle="${locale}" key="privilege"/></td>
+                    <td style="width: 12%"><fmt:message bundle="${locale}" key="grade.midmark"/></td>
+                    <td style="width: 12%"><fmt:message bundle="${locale}" key="grade.average"/></td>
+                    <td style="width: 10%"><fmt:message bundle="${locale}" key="delete"/></td>
+                </tr>
+            </table>
+            <div class="inner_edit">
+                <div id="all_grades">
+                    <%--Here js will load list of grade reports--%>
+                </div>
             </div>
         </div>
 

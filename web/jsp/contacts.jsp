@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" language="java"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" %>
 
 <html>
 <head>
@@ -27,20 +27,6 @@
         <tr></tr>
     </table>
 </div>
-
-<div id="googleMap" class="hm"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-<script>
-    window.onload = function () {
-        function myMap() {
-            var mapProp = {
-                center: new google.maps.LatLng(51.508742, -0.120850),
-                zoom: 5,
-            };
-            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        }
-    }
-</script>
 
 <jsp:include page="${pageContext.request.contextPath}/include/footer.jsp"/>
 </body>

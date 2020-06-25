@@ -53,7 +53,7 @@
         <div id="Add faculties" class="tabcontent1">
             <div class="add_faculty">
                 <form method="post" action="${pageContext.request.contextPath}/controller?command=add_faculty">
-                    <table width="60%">
+                    <table width="60%" style="margin: auto">
                         <tr>
                             <td colspan="2">
                                 <h2><fmt:message bundle="${locale}" key="faculty.add.title"/></h2>
@@ -154,7 +154,10 @@
 
         <div id="Edit_user" class="tabcontent2">
             <form method="post" action="${pageContext.request.contextPath}/controller?command=Add_user">
-                <table>
+                <table width="60%" style="margin: auto">
+                    <tr>
+                        <td colspan="2"><h2><fmt:message bundle="${locale}" key="user.add.title"/></h2></td>
+                    </tr>
                     <tr>
                         <td><fmt:message bundle="${locale}" key="user.role"/></td>
                         <td>
@@ -169,36 +172,46 @@
                         <td><fmt:message bundle="${locale}" key="user.name"/></td>
                         <td><input type="text" placeholder="Name" name="user_name" required
                                    pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
-                                   title="2-40 symbols. First in uppercase"></td>
+                                   title="2-40 symbols. First in uppercase"
+                                   style="width: 100%; height: 2rem;"></td>
                     </tr>
                     <tr>
                         <td><fmt:message bundle="${locale}" key="user.surname"/></td>
                         <td><input type="text" placeholder="Surname" name="user_surname" required
                                    pattern="([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$"
-                                   title="2-40 symbols. First in uppercase"></td>
+                                   title="2-40 symbols. First in uppercase"
+                                   style="width: 100%; height: 2rem;"></td>
                     </tr>
                     <tr>
                         <td><fmt:message bundle="${locale}" key="user.email"/></td>
                         <td><input type="email" placeholder="Email" name="user_email" required
                                    pattern="^((?!\\.)[\\w-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$"
-                                   title="someletters@letters.letters"></td>
+                                   title="someletters@letters.letters"
+                                   style="width: 100%; height: 2rem;"></td>
                     </tr>
                     <tr>
                         <td><fmt:message bundle="${locale}" key="user.login"/></td>
                         <td><input type="text" placeholder="Login" name="user_login" required
                                    pattern="([a-zA-Z\\d]{4,40})$"
-                                   title="4-40 latin symbols & digits"></td>
+                                   title="4-40 latin symbols & digits"
+                                   style="width: 100%; height: 2rem;"></td>
                     </tr>
                     <tr>
                         <td><fmt:message bundle="${locale}" key="user.password"/></td>
                         <td><input type="password" placeholder="Password" name="user_password" required
                                    pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
-                                   title="6-40 symbols"></td>
+                                   title="6-40 symbols"
+                                   style="width: 100%; height: 2rem;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p style="color: red">${message_add_user}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" style="margin-left: 30%"><fmt:message bundle="${locale}" key="user.add"/></button>
+                        </td>
                     </tr>
                 </table>
-                <p>
-                    <button type="submit"><fmt:message bundle="${locale}" key="user.add"/></button>
-                </p>
             </form>
         </div>
 

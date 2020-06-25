@@ -6,7 +6,7 @@
 
 .admin_block h2 {
     /*margin-top: 1rem;*/
-    /*text-align: center;*/
+    text-align: center;
     /*margin-bottom: 1rem;*/
     color: #fff;
 }
@@ -210,7 +210,7 @@
 /*scroll faculty edit*/
 .inner_edit {
     overflow: auto;
-    height: 370px;
+    height: 350px;
 }
 /*scroll faculty edit edn*/
 
@@ -234,34 +234,34 @@ img.displayed{
     width: 200px;
     height: 200px;
 }
-.red{
-    color: brown;
-}
-.blue{
-    color: darkslateblue;
-}
+/*.red{*/
+/*    color: brown;*/
+/*}*/
+/*.blue{*/
+/*    color: darkslateblue;*/
+/*}*/
 
 
-.but2 input{
-    position: relative;
-    display: inline-block;
-    font-family: Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif;
-    font-size: 1.5em;
-    font-weight: 700;
-    color: rgb(245,245,245);
-    text-shadow: 0 -1px rgba(0,0,0,.1);
-    text-decoration: none;
-    user-select: none;
-    padding: .3em 1em;
-    outline: none;
-    border: none;
-    background: #5e051a linear-gradient(#cd6b6b, #a30000);
-}
-.but2 input:hover {
-    -webkit-animation-play-state: paused;
-    animation-play-state: paused;
-    cursor: pointer;
-}
+/*.but2 input{*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    font-family: Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif;*/
+/*    font-size: 1.5em;*/
+/*    font-weight: 700;*/
+/*    color: rgb(245,245,245);*/
+/*    text-shadow: 0 -1px rgba(0,0,0,.1);*/
+/*    text-decoration: none;*/
+/*    user-select: none;*/
+/*    padding: .3em 1em;*/
+/*    outline: none;*/
+/*    border: none;*/
+/*    background: #5e051a linear-gradient(#cd6b6b, #a30000);*/
+/*}*/
+/*.but2 input:hover {*/
+/*    -webkit-animation-play-state: paused;*/
+/*    animation-play-state: paused;*/
+/*    cursor: pointer;*/
+/*}*/
 
 /*crazy accept tab end*/
 
@@ -274,4 +274,21 @@ img.displayed{
     border: none;
     background-color: rgb(119, 163, 119);
 }
+
+.tabcontent2 button {
+    height: 3rem;
+    width: 40%;
+    align-self: center;
+    color: #fff;
+    border: none;
+    background-color: rgb(119, 163, 119);
+}
 /*button green end*/
+
+table{
+    border: 1px solid white;
+}
+table a{
+    text-decoration: none;
+    color: #a30101;
+}

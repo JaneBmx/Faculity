@@ -53,20 +53,26 @@
         <div id="Add faculties" class="tabcontent1">
             <div class="add_faculty">
                 <form method="post" action="${pageContext.request.contextPath}/controller?command=add_faculty">
-                    <table width="100%">
+                    <table width="60%">
+                        <tr>
+                            <td colspan="2">
+                                <h2><fmt:message bundle="${locale}" key="faculty.add.title"/></h2>
+                            </td>
+                        </tr>
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.name"/></td>
-                            <td><input type="text" placeholder="Name of faculty" name="faculty_name" required></td>
+                            <td><input type="text" placeholder="Name of faculty" name="faculty_name" required
+                                       style="width: 100%; height: 2rem;"></td>
                         </tr>
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.plan.free"/></td>
                             <td><input type="number" placeholder="Free accept plan" min="0" max="100" name="free"
-                                       required></td>
+                                       required style="width: 100%; height: 2rem;"></td>
                         </tr>
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.plan.paid"/></td>
                             <td><input type="number" placeholder="Paid accept plan" min="0" max="100" name="paid"
-                                       required></td>
+                                       required style="width: 100%; height: 2rem;"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><fmt:message bundle="${locale}" key="faculty.choose.sub"/></td>
@@ -74,7 +80,7 @@
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.sub"/> 1:</td>
                             <td>
-                                <select name="sub_1_id">
+                                <select name="sub_1_id" style="width: 100%; height: 2rem;">
                                     <c:forEach items="${subjects}" var="sub">
                                         <option value="${sub.id}">${sub.name}</option>
                                     </c:forEach>
@@ -84,7 +90,7 @@
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.sub"/> 2:</td>
                             <td>
-                                <select name="sub_2_id">
+                                <select name="sub_2_id" style="width: 100%; height: 2rem;">
                                     <c:forEach items="${subjects}" var="sub">
                                         <option value="${sub.id}">${sub.name}</option>
                                     </c:forEach>
@@ -94,16 +100,26 @@
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.sub"/> 3:</td>
                             <td>
-                                <select name="sub_3_id">
+                                <select name="sub_3_id" style="width:100%; height: 2rem;">
                                     <c:forEach items="${subjects}" var="sub">
                                         <option value="${sub.id}">${sub.name}</option>
                                     </c:forEach>
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <p style="color: red">${message_add_faculty}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <button type="submit" style="position: center">
+                                    <fmt:message bundle="${locale}" key="faculty.add"/>
+                                </button>
+                            </td>
+                        </tr>
                     </table>
-                    <p style="color: red">${message_add_faculty}</p>
-                    <button type="submit"><fmt:message bundle="${locale}" key="faculty.add"/></button>
                 </form>
             </div>
         </div>

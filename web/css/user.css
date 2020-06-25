@@ -150,9 +150,10 @@ img.displayed{
 
 .login-form input {
     margin-bottom: 10px;
-    margin-left: 10%;
-    margin-right: 10%;
+    /*margin-left: 10%;*/
+    /*margin-right: 10%;*/
     height: 2.5rem;
+    width: 100%;
 }
 
 .login button {
@@ -177,4 +178,9 @@ img.displayed{
 table {
     color: white;
     border-spacing: 20px 5px;
+}
+
+table input{
+    padding: 0px;
+    margin: 0px;
 }

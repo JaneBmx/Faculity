@@ -69,7 +69,7 @@
                                        required></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><fmt:message bundle="${locale}" key="faculty.choose"/></td>
+                            <td colspan="2"><fmt:message bundle="${locale}" key="faculty.choose.sub"/></td>
                         </tr>
                         <tr>
                             <td><fmt:message bundle="${locale}" key="faculty.sub"/> 1:</td>

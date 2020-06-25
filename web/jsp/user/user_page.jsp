@@ -5,11 +5,11 @@
 <head>
     <title><fmt:message bundle="${locale}" key="profile"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user.css">
-    <%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">--%>
     <script src="${pageContext.request.contextPath}/js/user.js"></script>
     <meta charset="UTF-8">
 </head>
 <body>
+
 <jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
 
 <div class="main">
@@ -23,12 +23,15 @@
         </form>
     </div>
 
+    <%--  RIGHT TABS  --%>
     <div class="right">
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'Info')">
-                <fmt:message bundle="${locale}" key="tab.info"/></button>
+                <fmt:message bundle="${locale}" key="tab.info"/>
+            </button>
             <button class="tablinks" onclick="openTab(event, 'EditInfo')">
-                <fmt:message bundle="${locale}" key="tab.info.edit"/></button>
+                <fmt:message bundle="${locale}" key="tab.info.edit"/>
+            </button>
             <button class="tablinks" onclick="openTab(event, 'EditRequest')">
                 <c:if test="${grade_report == null}">
                     <fmt:message bundle="${locale}" key="tab.grade.create"/></c:if>
@@ -61,6 +64,7 @@
                         <td><fmt:message bundle="${locale}" key="user.login"/></td>
                         <td>${user.login}</td>
                     </tr>
+
                     <%-- Grade report info --%>
                     <tr>
                         <td colspan="2"><h2><fmt:message bundle="${locale}" key="profile.info.grade"/></h2></td>
@@ -109,11 +113,15 @@
         <%--EDIT INFO--%>
         <div id="EditInfo" class="tabcontent">
             <div class="info_block">
-                <h2><fmt:message bundle="${locale}" key="edit.info"/></h2>
                 <form class="login" method="POST"
                       action="${pageContext.request.contextPath}/controller?command=edit_user">
                     <div class="login-form">
                         <table width="70%">
+                            <tr>
+                                <td colspan="2">
+                                    <h2><fmt:message bundle="${locale}" key="edit.info"/></h2>
+                                </td>
+                            </tr>
                             <tr>
                                 <td><fmt:message bundle="${locale}" key="user.name"/></td>
                                 <td><input type="text" name="user_name" placeholder="${user.name}" required
@@ -139,10 +147,19 @@
                                            required pattern="((?=.*\d)(?=.*[a-z]).{6,40})$"
                                            title=<fmt:message bundle="${locale}" key="tip.password"/>></td>
                             </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <p style="color: red">${message_edit_info}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <button type="submit" style="position: center">
+                                        <fmt:message bundle="${locale}" key="edit.submit"/>
+                                    </button>
+                                </td>
+                            </tr>
                         </table>
-                        <p style="color: white">${message_edit_info}</p>
-                        <br>
-                        <button type="submit"><fmt:message bundle="${locale}" key="edit.submit"/></button>
                     </div>
                 </form>
             </div>
@@ -151,12 +168,6 @@
         <%--TAB WITH GRADE REPORT EDIT--%>
         <div id="EditRequest" class="tabcontent">
             <div class="info_block">
-                <c:if test="${grade_report == null}">
-                    <h2><fmt:message bundle="${locale}" key="edit.grade.create"/></h2>
-                </c:if>
-                <c:if test="${grade_report != null}">
-                    <h2><fmt:message bundle="${locale}" key="edit.grade"/></h2>
-                </c:if>
                 <form class="login" method="POST"
                       action="${pageContext.request.contextPath}/controller?command=edit_request">
                     <input type="hidden" name="user_id" value="${user.id}">
@@ -184,9 +195,22 @@
                             </script>
                             <table width="70%">
                                 <tr>
-                                    <%-- TODO add default faculty --%>
+                                    <td colspan="2">
+                                        <c:if test="${grade_report == null}">
+                                            <h2><fmt:message bundle="${locale}" key="edit.grade.create"/></h2>
+                                        </c:if>
+                                        <c:if test="${grade_report != null}">
+                                            <h2><fmt:message bundle="${locale}" key="edit.grade"/></h2>
+                                        </c:if>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td><fmt:message bundle="${locale}" key="grade.fac"/></td>
-                                    <td><select id="facultySelector" name="faculty_id" required>
+                                    <td><select id="facultySelector" name="faculty_id" required
+                                                style="width: 100%; height: 2.5rem;">
+                                        <option disabled selected="selected">
+                                            <fmt:message bundle="${locale}" key="faculty.choose"/>
+                                        </option>
                                         <c:forEach items="${faculties}" var="fac">
                                             <option value="${fac.id}"> ${fac.name}</option>
                                         </c:forEach>
@@ -194,13 +218,15 @@
                                 </tr>
                                 <tr>
                                     <td><fmt:message bundle="${locale}" key="grade.privilege"/></td>
-                                    <td><select name="privilege" required>
+                                    <td><select name="privilege" required style="width: 100%; height: 2.5rem;">
+                                        <option disabled selected="selected">
+                                            <fmt:message bundle="${locale}" key="grade.choose.priv"/>
+                                        </option>
                                         <c:forEach items="${privileges}" var="priv">
                                             <option value="${priv.id}">${priv.name} </option>
                                         </c:forEach>
                                     </select></td>
                                 </tr>
-
                                 <tr>
                                     <td><fmt:message bundle="${locale}" key="grade.mark"/></td>
                                     <td><input type="number" step="0.1" min="1" max="10" placeholder="0,0"
@@ -233,8 +259,19 @@
                                         <input type="number" min="1" max="10" value="1" name="mark_3" required>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <p style="color: red">${message_edit_grade}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <button type="submit">
+                                            <fmt:message bundle="${locale}" key="edit.submit"/>
+                                        </button>
+                                    </td>
+                                </tr>
                             </table>
-                            <button type="submit"><fmt:message bundle="${locale}" key="edit.submit"/></button>
                         </div>
                     </div>
                 </form>

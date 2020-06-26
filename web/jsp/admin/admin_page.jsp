@@ -256,10 +256,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h3 class="red" style="background-color: rgba(0,0,0,0.7)">
+                    <td width="50%"><h3 class="red">
                         <fmt:message bundle="${locale}" key="grade.accept.title"/></h3>
                     </td>
-                    <td><h3 class="blue" style="background-color: rgba(0,0,0,0.7)">
+                    <td width="50%"><h3 class="blue">
                         <fmt:message bundle="${locale}" key="grade.nullify.title"/></h3>
                     </td>
                 </tr>

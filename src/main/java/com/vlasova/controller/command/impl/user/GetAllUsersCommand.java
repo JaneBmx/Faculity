@@ -14,6 +14,7 @@ import static com.vlasova.controller.command.RequestParams.*;
 public class GetAllUsersCommand implements Command {
     private final UserService userService = UserService.getInstance();
 
+    @Deprecated
     @Override
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {

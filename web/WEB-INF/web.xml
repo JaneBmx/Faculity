@@ -94,4 +94,8 @@
     <listener>
         <listener-class>com.vlasova.web.listener.Listener</listener-class>
     </listener>
+
+    <error-page>
+        <location>/jsp/error_page.jsp</location>
+    </error-page>
 </web-app>

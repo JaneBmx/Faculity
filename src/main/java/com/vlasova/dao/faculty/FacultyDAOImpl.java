@@ -22,7 +22,7 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
     private final FacultyResultSetMapper mapper = new FacultyResultSetMapper();
 
     private static final String INSERT_FACULTY     = "INSERT INTO faculties(faculty_name, free_accept_plan, paid_accept_plan) " +
-            "VALUES(?,?,?)";
+                                                     "VALUES(?,?,?)";
     private static final String INSERT_SUBJECTS    = "INSERT INTO faculty2subject (faculty_id, subject_id) VALUES (?,?)";
     private static final String DELETE             = "DELETE FROM faculties WHERE faculty_id = ?";
     private static final String DELETE_MARKS       = "DELETE FROM faculty2subject WHERE faculty_id = ?";
@@ -34,7 +34,8 @@ public class FacultyDAOImpl extends AbstractDAO implements FacultyDAO {
                                                      "FROM faculties f RIGHT JOIN faculty2subject sf ON f.faculty_id = sf.faculty_id;";
     private static final String FIND_BY_ID         = "SELECT * FROM faculties WHERE faculty_id = ?";
     private static final String FIND_BY_NAME       = "SELECT * FROM faculties WHERE faculty_name = ?";
-    private static final String COMMON_STAT        = "SELECT COUNT(*) AS fac_count, SUM(free_accept_plan) AS free_plan, (SUM(paid_accept_plan) +SUM(free_accept_plan)) AS all_plan, " +
+    private static final String COMMON_STAT        = "SELECT COUNT(*) AS fac_count, SUM(free_accept_plan) AS free_plan, " +
+                                                     "(SUM(paid_accept_plan) +SUM(free_accept_plan)) AS all_plan, " +
                                                      "(SELECT COUNT(*) FROM grade_reports) AS enroles FROM faculties";
 
     @Override

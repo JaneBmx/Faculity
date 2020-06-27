@@ -208,7 +208,8 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="submit" style="margin-left: 30%"><fmt:message bundle="${locale}" key="user.add"/></button>
+                            <button type="submit" style="margin-left: 30%">
+                                <fmt:message bundle="${locale}" key="user.add"/></button>
                         </td>
                     </tr>
                 </table>
@@ -255,19 +256,19 @@
                              src="${pageContext.request.contextPath}/img/admin/accept.jpg" alt="photo">
                     </td>
                 </tr>
-                <tr>
-                    <td width="50%"><h3 class="red">
-                        <fmt:message bundle="${locale}" key="grade.accept.title"/></h3>
-                    </td>
-                    <td width="50%"><h3 class="blue">
-                        <fmt:message bundle="${locale}" key="grade.nullify.title"/></h3>
-                    </td>
+                <%--                <tr>--%>
+                <%--                    <td width="50%"><h3 class="red">--%>
+                <%--                        <fmt:message bundle="${locale}" key="grade.accept.title"/></h3>--%>
+                <%--                    </td>--%>
+                <%--                    <td width="50%"><h3 class="blue">--%>
+                <%--                        <fmt:message bundle="${locale}" key="grade.nullify.title"/></h3>--%>
+                <%--                    </td>--%>
+                <%--                </tr>--%>
+                <tr style="border: white">
+                    <td width="50%"><p><fmt:message bundle="${locale}" key="grade.accept.desc"/></p></td>
+                    <td width="50%"><p><fmt:message bundle="${locale}" key="grade.nullify.desc"/></p></td>
                 </tr>
-                <tr>
-                    <td><p><fmt:message bundle="${locale}" key="grade.accept.desc"/></p></td>
-                    <td><p><fmt:message bundle="${locale}" key="grade.nullify.desc"/></p></td>
-                </tr>
-                <tr>
+                <tr style="border: white">
                     <td><p><strike><fmt:message bundle="${locale}" key="grade.accept.desc.mtx"/></strike></p></td>
                     <td><p><strike><fmt:message bundle="${locale}" key="grade.nullify.desc.mtx"/></strike>
                     </p></td>

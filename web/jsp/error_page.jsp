@@ -11,6 +11,10 @@
 <div class="error">
     <h1>${pageContext.errorData.statusCode}</h1>
     <hr>
+    ${pageContext.errorData.throwable}
+    ${errorMessage}
+    <hr>
+    ${pageContext.exception}
     <p>
         Бесконечно можно смотреть на три вещи:<br>
         как горит огонь<br>

@@ -40,14 +40,21 @@ public enum CommandType {
     /*buttons*/
     ACCEPT                    (new EnrollGraderReportsCommand()),
     NULLIFY                   (new UnEnrollCommand()),
-
-    /*testing...*/
     SWITCH_LANG               (new SwitchLanguageCommand());
 
     private final Command command;
 
     CommandType(Command command) {
         this.command = command;
+    }
+
+    public static Command getCommandByString(String string){
+        for (CommandType ct : values()){
+            if(ct.toString().equalsIgnoreCase(string)){
+                return ct.getCommand();
+            }
+        }
+        return null;
     }
 
     public Command getCommand() {

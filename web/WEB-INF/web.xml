@@ -72,10 +72,8 @@
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>
-        <!--        <url-pattern>/*</url-pattern>-->
         <servlet-name>Controller</servlet-name>
         <url-pattern>/controller</url-pattern>
-        <!--        <dispatcher>FORWARD</dispatcher>-->
     </filter-mapping>
 
     <jsp-config>

@@ -15,10 +15,30 @@
 
 table{
     padding: 10px;
+    width: 40%;
+    margin: auto;
     color: white;
 }
 
 .news{
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+table h3{
+    margin: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+p{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+hr{
+    width: 90%;
+}
+h3{
+    text-align: center;
 }

@@ -50,8 +50,17 @@ public enum CommandType {
 
     public static Command getCommandByString(String string){
         for (CommandType ct : values()){
-            if(ct.toString().equalsIgnoreCase(string)){
+            if ( ct.toString().equalsIgnoreCase(string)){
                 return ct.getCommand();
+            }
+        }
+        return null;
+    }
+
+    public static CommandType getCommandTypeByString(String string){
+        for (CommandType ct : values()){
+            if(ct.toString().equalsIgnoreCase(string)){
+                return ct;
             }
         }
         return null;

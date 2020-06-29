@@ -65,17 +65,18 @@
         <url-pattern>/jsp/admin/*</url-pattern>
     </filter-mapping>
 
-    <!--    <filter>-->
-    <!--        <filter-name>CommandSecurityFilter</filter-name>-->
-    <!--        <filter-class>com.vlasova.web.filter.CommandSecurityFilter</filter-class>-->
-    <!--    </filter>-->
-    <!--    <filter-mapping>-->
-    <!--        <filter-name>CommandSecurityFilter</filter-name>-->
-    <!--&lt;!&ndash;        <url-pattern>/*</url-pattern>&ndash;&gt;-->
-    <!--                <servlet-name>Controller</servlet-name>-->
-    <!--        <url-pattern>/controller</url-pattern>-->
-    <!--&lt;!&ndash;        <dispatcher>FORWARD</dispatcher>&ndash;&gt;-->
-    <!--    </filter-mapping>-->
+    <!-- every time when its going to execute some command -->
+    <filter>
+        <filter-name>CommandFilter</filter-name>
+        <filter-class>com.vlasova.web.filter.CommandFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CommandFilter</filter-name>
+        <!--        <url-pattern>/*</url-pattern>-->
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller</url-pattern>
+        <!--        <dispatcher>FORWARD</dispatcher>-->
+    </filter-mapping>
 
     <jsp-config>
         <!-- IMPORT TAG  -->

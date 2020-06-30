@@ -2,26 +2,30 @@
 
 <html>
 <head>
-    <title>Contacts</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+    <title><fmt:message bundle="${locale}" key="contacts"/></title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/contacts.css">
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
 
 <div class="infa">
-    <h2>Contacts</h2>
     <table>
         <tr>
-            <td>email:</td>
+            <td colspan="2">
+                <h2><fmt:message bundle="${locale}" key="contacts"/></h2>
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message bundle="${locale}" key="user.email"/>:</td>
             <td>contact@examle.heh</td>
         </tr>
         <tr>
-            <td>phone:</td>
+            <td><fmt:message bundle="${locale}" key="phone"/>:</td>
             <td>8-800-555-35-35</td>
         </tr>
         <tr>
-            <td>address:</td>
-            <td>st. Hmmmmm, 45, Minsk, Belarus</td>
+            <td><fmt:message bundle="${locale}" key="address"/>:</td>
+            <td><fmt:message bundle="${locale}" key="address.curr"/></td>
         </tr>
         <tr></tr>
         <tr></tr>

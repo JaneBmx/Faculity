@@ -1,0 +1,40 @@
+/* error block */
+
+.infa{
+    width: 80%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 250px;
+    margin-top:60px;
+    /*border:3px solid white;*/
+}
+
+.infa h1{
+    font-size: 400%;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.infa hr{
+    width: 90%;
+}
+
+.infa p{
+    margin: 2rem;
+    color: white;
+    text-align: right;
+}
+table{
+    width: 60%;
+    color: white;
+    margin: auto;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+table h2{
+    text-align: center;
+}
+

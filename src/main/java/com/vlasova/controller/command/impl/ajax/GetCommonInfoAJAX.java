@@ -21,7 +21,7 @@ public class GetCommonInfoAJAX implements Command {
     public Answer execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, Integer> info = facultyService.getCommonInfo();
-            request.setAttribute("info", info);
+            request.setAttribute(COMMON_INFO, info);
         } catch (ServiceException e) {
             request.setAttribute(MSG, MSG_SERV_ERR);
             LOGGER.warn("Common info wasn't loaded.", e);

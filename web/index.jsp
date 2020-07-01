@@ -4,6 +4,7 @@
 <head>
     <title><fmt:message bundle="${locale}" key="main"/></title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
+    <script src="${pageContext.request.contextPath}/js/index.js"></script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/include/header.jsp"/>
@@ -18,22 +19,23 @@
         </tr>
         <tr>
             <td><fmt:message bundle="${simple}" key="index.count.faculties"/>:</td>
-            <td>77</td>
+            <td><div id="countFaculties"></div></td>
         </tr>
 
         <tr>
             <td><fmt:message bundle="${simple}" key="index.count.places"/>:</td>
-            <td>55</td>
+            <td><div id="countFree"></div></td>
+
         </tr>
 
         <tr>
             <td><fmt:message bundle="${simple}" key="index.count.free"/>:</td>
-            <td>777</td>
+            <td><div id="countPlaces"></div></td>
         </tr>
 
         <tr>
             <td><fmt:message bundle="${simple}" key="index.count.enrolls"/>:</td>
-            <td>77</td>
+            <td><div id="countEnroles"></div></td>
         </tr>
     </table>
     <hr>

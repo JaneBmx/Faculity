@@ -8,6 +8,7 @@ import com.vlasova.controller.utill.validator.FacultyValidator;
 import com.vlasova.controller.utill.validator.GradeReportValidator;
 import com.vlasova.controller.utill.validator.UserDataValidator;
 import java.util.List;
+import java.util.Map;
 
 public class JSONParser {
     private final FacultyValidator fValidator = new FacultyValidator();
@@ -72,6 +73,22 @@ public class JSONParser {
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("]");
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    public String parseGradeReportListToJSON(Map<String, Integer> info){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append("{");
+
+        for (Map.Entry<String, Integer> entry : info.entrySet()) {
+            sb.append("\"" +entry.getKey() +"\": \"" + entry.getValue() + "\",");
+        }
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        sb.append("}");
+        sb.append("]");
+        System.out.println(sb.toString());
         return sb.toString();
     }
 }

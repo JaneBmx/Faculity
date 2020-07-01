@@ -68,10 +68,10 @@ public class FacultyResultSetMapper {
     public Map<String, Integer> mapInfo(ResultSet resultSet) throws CreateObjectException {
         Map <String, Integer> info = new HashMap<>();
         try{
-            info.put("facultiesCount", resultSet.getInt(FAC_COUNT));
-            info.put("allFreePlan", resultSet.getInt(COMMON_FREE_PLAN));
-            info.put("allPlan", resultSet.getInt(COMMON_PLAN));
-            info.put("enrolCount", resultSet.getInt(ENROLS_COUNT));
+            info.put("countFaculties", resultSet.getInt(FAC_COUNT));
+            info.put("countPlaces", resultSet.getInt(COMMON_FREE_PLAN));
+            info.put("countFree", resultSet.getInt(COMMON_PLAN));
+            info.put("countEnroles", resultSet.getInt(ENROLS_COUNT));
         }catch (SQLException e){
             LOGGER.warn(e);
             throw new CreateObjectException(e);

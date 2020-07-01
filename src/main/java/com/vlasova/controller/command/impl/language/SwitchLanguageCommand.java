@@ -35,7 +35,6 @@ public class SwitchLanguageCommand implements Command {
         cookie.setMaxAge(COOKIE_AGE);
         cookie.setPath(request.getContextPath());
         response.addCookie(cookie);
-
         request.getSession().setAttribute(LANG, lang);
         return new Answer(PageAddress.HOME_PAGE, Answer.Type.REDIRECT);
     }

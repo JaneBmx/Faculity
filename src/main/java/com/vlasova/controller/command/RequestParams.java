@@ -39,6 +39,7 @@ public abstract class RequestParams {
     public static final String USER_LIST        = "user_list";
     public static final String FACULTY_LIST     = "faculty_list";
     public static final String GR_LIST          = "grade_report_list";
+    public static final String COMMON_INFO      = "common_info";
 
 
     /**Session params*/

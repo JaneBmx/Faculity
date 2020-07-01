@@ -14,13 +14,15 @@ public class CommandFilter implements Filter {
     private static final Set<CommandType> guest = EnumSet.of(
             SIGN_UP,
             LOGIN,
-            SWITCH_LANG);
+            SWITCH_LANG,
+            GET_COMMON_INFO);
     private static final Set<CommandType> user = EnumSet.of(
             EDIT_REQUEST,
             EDIT_USER,
             LOG_OUT,
             PROFILE,
-            SWITCH_LANG);
+            SWITCH_LANG,
+            GET_COMMON_INFO);
     private static final Set<CommandType> admin = EnumSet.of(
             EDIT_REQUEST,
             EDIT_USER,
@@ -35,7 +37,8 @@ public class CommandFilter implements Filter {
             GET_ALL_USERS_AJAX,
             ACCEPT,
             NULLIFY,
-            SWITCH_LANG);
+            SWITCH_LANG,
+            GET_COMMON_INFO);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

@@ -2,6 +2,7 @@ package com.vlasova.controller.command;
 
 import com.vlasova.controller.command.impl.ajax.GetAllFacultiesAJAX;
 import com.vlasova.controller.command.impl.ajax.GetAllGradeReportsAJAX;
+import com.vlasova.controller.command.impl.ajax.GetCommonInfoAJAX;
 import com.vlasova.controller.command.impl.faculty.AddFacultyCommand;
 import com.vlasova.controller.command.impl.faculty.DeleteFacultyCommand;
 import com.vlasova.controller.command.impl.gradereport.DeleteGradeReportCommand;
@@ -36,6 +37,7 @@ public enum CommandType {
     GET_ALL_USERS_AJAX        (new GetAllUserAJAX()),
     GET_ALL_FACULTIES_AJAX    (new GetAllFacultiesAJAX()),
     GET_ALL_GRADE_REPORTS_AJAX(new GetAllGradeReportsAJAX()),
+    GET_COMMON_INFO           (new GetCommonInfoAJAX()),
 
     /*buttons*/
     ACCEPT                    (new EnrollGraderReportsCommand()),

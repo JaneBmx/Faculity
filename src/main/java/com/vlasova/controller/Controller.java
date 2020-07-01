@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import static com.vlasova.controller.command.RequestParams.*;
 
@@ -97,6 +98,8 @@ public class Controller extends HttpServlet {
             case GRADE_REPORT:
                 json = parser.parseGradeReportListToJSON((List<GradeReport>) req.getAttribute("grade_report_list"));
                 break;
+            case COMMON_INFO:
+                json = parser.parseGradeReportListToJSON((Map<String, Integer>) req.getAttribute("common_info"));
         }
         PrintWriter p = resp.getWriter();
         p.write(json);

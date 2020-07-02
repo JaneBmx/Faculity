@@ -1,6 +1,6 @@
 package com.vlasova.web.filter;
 
-import com.vlasova.controller.command.CommandType;
+import com.vlasova.command.CommandType;
 import com.vlasova.entity.user.Role;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.Set;
-import static com.vlasova.controller.command.CommandType.*;
+import static com.vlasova.command.CommandType.*;
 
 public class CommandFilter implements Filter {
     private static final Set<CommandType> guest = EnumSet.of(

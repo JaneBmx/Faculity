@@ -1,14 +1,4 @@
 window.onload = function () {
-    // let content = "";
-    // fetch('http://localhost:8081/controller?command=GET_COMMON_INFO&type=common_info')
-    //     .then((response) => {
-    //         console.log((response.json()));
-    //         // return response.json();
-    //     })
-    //     .then((data) => {
-    //         showData(data);
-    //     });
-
     let contenf = "";
     fetch('http://localhost:8081/controller?command=GET_COMMON_INFO&type=common_info')
         .then((response) => {

@@ -73,7 +73,6 @@ public class JSONParser {
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("]");
-        System.out.println(sb.toString());
         return sb.toString();
     }
 
@@ -81,14 +80,12 @@ public class JSONParser {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         sb.append("{");
-
         for (Map.Entry<String, Integer> entry : info.entrySet()) {
             sb.append("\"" +entry.getKey() +"\": \"" + entry.getValue() + "\",");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         sb.append("}");
         sb.append("]");
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }

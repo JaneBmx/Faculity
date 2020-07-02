@@ -52,7 +52,6 @@ public enum ConnectionPool {
             connection = free.take();
             given.offer(connection);
         } catch (InterruptedException e) {
-            //TODO fix venerability with loosin' connection
             Thread.currentThread().interrupt();
             LOGGER.warn(e);
         }
@@ -86,7 +85,7 @@ public enum ConnectionPool {
 
     private void fillPool() throws SQLException {
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
-            free.add(new ProxyConnection(DriverManager.getConnection(dbUrl,properties)));
+            free.add(new ProxyConnection(DriverManager.getConnection(dbUrl, properties)));
         }
     }
 
@@ -98,8 +97,8 @@ public enum ConnectionPool {
             properties.put("password", "root");
             properties.put("serverTimezone", "GMT");
             properties.put("zeroDateTimeBehavior", "CONVERT_TO_NULL");
-            properties.put("autoReconnect","true");
-            properties.put("characterEncoding","UTF-8");
+            properties.put("autoReconnect", "true");
+            properties.put("characterEncoding", "UTF-8");
             dbUrl = "jdbc:mysql://localhost:3306/faculty";
         } catch (ClassNotFoundException e) {
             throw new InitiationPoolException("cant load db prop.", e);

@@ -8,7 +8,7 @@ import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.command.exception.InvalidRequestDataException;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.FacultyService;
-import com.vlasova.controller.utill.validator.FacultyValidator;
+import com.vlasova.utill.validator.FacultyValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;

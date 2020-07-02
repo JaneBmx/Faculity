@@ -26,7 +26,7 @@
     <!--Encoding-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>com.vlasova.web.filter.EncodingFilter</filter-class>
+        <filter-class>com.vlasova.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -40,7 +40,7 @@
     <!--access to user page. admin & user only-->
     <filter>
         <filter-name>UserFilter</filter-name>
-        <filter-class>com.vlasova.web.filter.UserFilter</filter-class>
+        <filter-class>com.vlasova.filter.UserFilter</filter-class>
         <init-param>
             <param-name>INDEX_PATH</param-name>
             <param-value>/index.jsp</param-value>
@@ -54,7 +54,7 @@
     <!--access to admin page. admin only-->
     <filter>
         <filter-name>AdminFilter</filter-name>
-        <filter-class>com.vlasova.web.filter.AdminFilter</filter-class>
+        <filter-class>com.vlasova.filter.AdminFilter</filter-class>
         <init-param>
             <param-name>INDEX_PATH</param-name>
             <param-value>/index.jsp</param-value>
@@ -68,7 +68,7 @@
     <!-- every time when its going to execute some command -->
     <filter>
         <filter-name>CommandFilter</filter-name>
-        <filter-class>com.vlasova.web.filter.CommandFilter</filter-class>
+        <filter-class>com.vlasova.filter.CommandFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CommandFilter</filter-name>
@@ -91,7 +91,7 @@
     </jsp-config>
 
     <listener>
-        <listener-class>com.vlasova.web.listener.Listener</listener-class>
+        <listener-class>com.vlasova.listener.Listener</listener-class>
     </listener>
 
     <error-page>

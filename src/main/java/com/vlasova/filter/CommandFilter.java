@@ -1,4 +1,4 @@
-package com.vlasova.web.filter;
+package com.vlasova.filter;
 
 import com.vlasova.command.CommandType;
 import com.vlasova.entity.user.Role;

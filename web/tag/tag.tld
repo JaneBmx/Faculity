@@ -11,7 +11,7 @@
     <uri>customtags</uri>
     <tag>
         <name>copyright</name>
-        <tag-class>com.vlasova.web.tag.CopyrightTag</tag-class>
+        <tag-class>com.vlasova.tag.CopyrightTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

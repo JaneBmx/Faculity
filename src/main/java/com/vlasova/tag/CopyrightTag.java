@@ -1,4 +1,4 @@
-package com.vlasova.web.tag;
+package com.vlasova.tag;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

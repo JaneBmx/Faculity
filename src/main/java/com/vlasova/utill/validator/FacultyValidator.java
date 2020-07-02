@@ -1,4 +1,4 @@
-package com.vlasova.controller.utill.validator;
+package com.vlasova.utill.validator;
 
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;

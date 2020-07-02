@@ -1,4 +1,4 @@
-package com.vlasova.controller.utill.validator;
+package com.vlasova.utill.validator;
 
 import com.vlasova.entity.user.User;
 import java.util.regex.Pattern;

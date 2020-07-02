@@ -2,7 +2,7 @@ package com.vlasova.controller;
 
 import com.vlasova.command.Answer;
 import com.vlasova.command.Command;
-import com.vlasova.controller.utill.JSONParser;
+import com.vlasova.utill.JSONParser;
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
@@ -88,18 +88,18 @@ public class Controller extends HttpServlet {
         resp.setContentType("application/json");
         String json = "";
         JSONParser parser = new JSONParser();
-        switch (req.getParameter("type")) {
+        switch (req.getParameter(TYPE)) {
             case USERS:
-                json = parser.parseUserListToJSON((List<User>) (req.getAttribute("user_list")));
+                json = parser.parseUserListToJSON((List<User>) (req.getAttribute(USER_LIST)));
                 break;
             case FACULTY:
-                json = parser.parseFacultyListToJSON((List<Faculty>) req.getAttribute("faculty_list"));
+                json = parser.parseFacultyListToJSON((List<Faculty>) req.getAttribute(FACULTY_LIST));
                 break;
             case GRADE_REPORT:
-                json = parser.parseGradeReportListToJSON((List<GradeReport>) req.getAttribute("grade_report_list"));
+                json = parser.parseGradeReportListToJSON((List<GradeReport>) req.getAttribute(GR_LIST));
                 break;
             case COMMON_INFO:
-                json = parser.parseGradeReportListToJSON((Map<String, Integer>) req.getAttribute("common_info"));
+                json = parser.parseGradeReportListToJSON((Map<String, Integer>) req.getAttribute(COMMON_INFO));
         }
         PrintWriter p = resp.getWriter();
         p.write(json);

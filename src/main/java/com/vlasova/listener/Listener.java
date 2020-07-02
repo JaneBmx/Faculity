@@ -1,4 +1,4 @@
-package com.vlasova.web.listener;
+package com.vlasova.listener;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

@@ -8,7 +8,7 @@ import com.vlasova.entity.user.GradeReport;
 import com.vlasova.command.exception.InvalidRequestDataException;
 import com.vlasova.service.exception.ServiceException;
 import com.vlasova.service.GradeReportService;
-import com.vlasova.controller.utill.validator.GradeReportValidator;
+import com.vlasova.utill.validator.GradeReportValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;

@@ -1,12 +1,12 @@
-package com.vlasova.controller.utill;
+package com.vlasova.utill;
 
 import com.vlasova.entity.faculity.Faculty;
 import com.vlasova.entity.faculity.Subject;
 import com.vlasova.entity.user.GradeReport;
 import com.vlasova.entity.user.User;
-import com.vlasova.controller.utill.validator.FacultyValidator;
-import com.vlasova.controller.utill.validator.GradeReportValidator;
-import com.vlasova.controller.utill.validator.UserDataValidator;
+import com.vlasova.utill.validator.FacultyValidator;
+import com.vlasova.utill.validator.GradeReportValidator;
+import com.vlasova.utill.validator.UserDataValidator;
 import java.util.List;
 import java.util.Map;
 

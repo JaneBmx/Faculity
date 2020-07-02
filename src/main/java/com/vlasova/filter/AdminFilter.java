@@ -1,14 +1,15 @@
-package com.vlasova.web.filter;
+package com.vlasova.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(UserFilter.class);
+public class AdminFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(AdminFilter.class);
     private static final String INDEX_PATH = "INDEX_PATH";
     private String indexPath;
 
@@ -16,7 +17,16 @@ public class UserFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         indexPath = filterConfig.getInitParameter(INDEX_PATH);
     }
-
+    /**
+     * Works when somebody trying to get access to admin page
+     * Redirecting to start page if role not admin
+     *
+     * @param request
+     * @param response
+     * @param chain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
@@ -24,16 +34,12 @@ public class UserFilter implements Filter {
 
         String role = (String) httpServletRequest.getSession().getAttribute("role");
 
-        if (role == null || role.equalsIgnoreCase("guest")) {
-            LOGGER.info("UserFilter: No role. Redirecting to index.jsp");
+        if (role == null || !role.equalsIgnoreCase("admin")) {
+            LOGGER.info("AdminFilter: No role. Redirecting to index.jsp");
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + indexPath);
             return;
         }
-        LOGGER.info("UserFilter: Role found. Continue...");
+        LOGGER.info("AdminFilter: Role is admin. Continue...");
         chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
     }
 }

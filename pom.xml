@@ -11,7 +11,7 @@
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
         <javax.servlet.jsp.version>2.3.3</javax.servlet.jsp.version>
         <servlet.version>4.0.1</servlet.version>
-        <log4j.version>2.13.0</log4j.version>
+        <log4j.version>2.13.2</log4j.version>
         <junit.version>4.13</junit.version>
         <jstl.version>1.2</jstl.version>
     </properties>
